@@ -1,17 +1,16 @@
 package main.com.cab302qut.java.Users;
 
 /**
- * Spesifies a spesific user type.
+ * Specifies a specific user type.
  */
 public enum UserType {
-
     /**
-     *
+     * The regular end user of the trading program.
      */
     Default,
 
     /**
-     * Spesifies a spesific user who can create new organisational units, users and / or items.
+     * Specifies a specific user who can create/modify organisational units, users and/or items.
      */
     Administrator
 }
