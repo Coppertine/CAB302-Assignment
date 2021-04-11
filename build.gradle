@@ -1,5 +1,11 @@
 plugins {
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+javafx {
+    version = '15'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 group 'com.cab302qut.java'
@@ -14,9 +20,16 @@ sourceSets {
             srcDirs = ['src/main']
         }
     }
+    test {
+        java {
+            srcDirs = ['src/test']
+        }
+    }
+
 }
+
 dependencies {
-
-
-compile 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
+    compile 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
+    testCompile "org.testfx:testfx-junit5:4.0.16-alpha"
+    testCompile "org.testfx:testfx-core:4.0.16-alpha"
 }
