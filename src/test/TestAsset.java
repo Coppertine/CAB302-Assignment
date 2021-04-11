@@ -10,4 +10,6 @@ public class TestAsset {
     // Get Id of newly created asset
     // remove asset by id
     // get asset from id
+    // Get asset's trade history.
+    // Get most recent trade history's price.
 }
