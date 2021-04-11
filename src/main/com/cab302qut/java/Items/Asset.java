@@ -1,6 +1,6 @@
-package main.com.cab302qut.java.Items;
+package com.cab302qut.java.Items;
 
-import main.com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Trades.Trade;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -11,6 +11,10 @@ public class Asset {
 
     public Asset(String assetName) {
         this.assetName = assetName;
+    }
+
+    public Asset() {
+
     }
 
     public ArrayList<Trade> getTradeHistory() {

@@ -1,6 +1,6 @@
-package main.com.cab302qut.java.Users;
+package com.cab302qut.java.Users;
 
-import main.com.cab302qut.java.Organisation.Organisation;
+import com.cab302qut.java.Organisation.Organisation;
 
 /**
  * The account of the program which can buy and/or sell items to other users in other organisations.
@@ -26,6 +26,10 @@ public class User {
         this.username = username;
         this.password = password;
         this.userType = userType;
+    }
+
+    public User() {
+
     }
 
     /**

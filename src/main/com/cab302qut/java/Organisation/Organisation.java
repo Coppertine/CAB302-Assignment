@@ -1,7 +1,7 @@
-package main.com.cab302qut.java.Organisation;
+package com.cab302qut.java.Organisation;
 
-import main.com.cab302qut.java.Items.Asset;
-import main.com.cab302qut.java.Users.User;
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Users.User;
 
 import java.util.ArrayList;
 import java.util.List;

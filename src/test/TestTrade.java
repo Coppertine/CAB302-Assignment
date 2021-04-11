@@ -1,76 +1,78 @@
-package test;
+package com.cab302qut.java.test;
 
-import main.com.cab302qut.java.Items.Asset;
+
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Organisation.Organisation;
+import com.cab302qut.java.Organisation.OrganisationAsset;
+import com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Trades.TradeException;
+import com.cab302qut.java.Trades.TradeType;
+import com.cab302qut.java.Users.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestTrade {
     private Asset testItem1;
+    private Trade testTrade1;
+    private User testUser1;
+    private User testUser2;
+    private Organisation testOrganisation1;
+    private Organisation testOrganisation2;
 
     @BeforeEach
     void init() {
-        //Example Trades
-
-    }
-
-   // Get trade
-    @Test
-    public void getTrade() {
-
+        testItem1 = new OrganisationAsset(); // TODO: Add additional constructors once they are implemented.
+        testUser1 = new User(); // TODO: Add additional constructors once they are implemented.
+        testUser2 = new User(); // TODO: Add additional constructors once they are implemented.
+        testOrganisation1 = new Organisation("organistaion1");
+        testOrganisation2 = new Organisation("organistaion2");
     }
 
     // Add open trade
     @Test
     public void addOpenTrade() {
+        // Trade type should be OPEN as default.
 
+        testTrade1 = new Trade(testItem1, testUser1);
+        assertEquals(testTrade1.getTradeType(), TradeType.OPEN);
     }
 
     // Add closed trade
     @Test
     public void addClosedTrade() {
-
+        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED);
+        assertEquals(testTrade1.getTradeDate(), Date.valueOf(LocalDate.now()));
+        assertEquals(testTrade1.getBuyingUser(), testUser1);
+        assertEquals(testTrade1.getSellingUser(), testUser2);
+        assertEquals(testTrade1.getTradeAsset(), testItem1);
+        assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
     }
 
     // Set trade as closed
     @Test
     public void setTradeClosed() {
 
+        testTrade1 = new Trade(testItem1, testUser1);
+        try {
+            testTrade1.setTradeType(TradeType.CLOSED);
+        } catch (TradeException e) {
+            e.printStackTrace();
+        }
+        assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
     }
 
     // Set trade as open
     @Test
     public void setTradeOpen() {
+        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED);
 
-    }
-
-    // Get buying user
-    @Test
-    public void getBuyingUser() {
-
-    }
-
-    // Get selling user
-    @Test
-    public void getSellingUser() {
-
-    }
-
-    // Get buying organisation
-    @Test
-    public void getBuyingOrganisation() {
-
-    }
-
-    // Get selling organisation
-    @Test
-    public void getSellingOrganisation() {
-
-    }
-
-    // Get asset from trade
-    @Test
-    public void getTradeAsset() {
-
+        assertThrows(TradeException.class, () -> testTrade1.setTradeType(TradeType.OPEN));
     }
 
     // Get price from trade
