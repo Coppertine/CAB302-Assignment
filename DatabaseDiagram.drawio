@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-04-11T04:07:21.966Z" agent="5.0 (Windows)" etag="ps_eAb75OIe4sj7xY01n" version="14.5.10" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-11T04:12:04.185Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36" etag="V3nRi_u2f863xGh7H4kG" version="14.5.10" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="1422" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1483" dy="829" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -133,9 +133,6 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="330" y="335" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="JpZiGnrSwx7IomFBTx23-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERzeroToMany;endFill=1;" parent="1" source="JpZiGnrSwx7IomFBTx23-74" target="JpZiGnrSwx7IomFBTx23-89" edge="1">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JpZiGnrSwx7IomFBTx23-74" value="Current Trades" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
           <mxGeometry x="330" y="380" width="230" height="310" as="geometry" />
