@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-04-11T04:25:25.468Z" agent="5.0 (Windows)" etag="BHc5cMGfi9mjIfvb2QRf" version="14.5.10" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-11T04:26:23.213Z" agent="5.0 (Windows)" etag="kiIRM8-m53Idq04rhmux" version="14.5.10" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1422" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -112,7 +112,7 @@
         <mxCell id="JpZiGnrSwx7IomFBTx23-133" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;" parent="JpZiGnrSwx7IomFBTx23-132" vertex="1">
           <mxGeometry width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JpZiGnrSwx7IomFBTx23-134" value="account_type char(50)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="JpZiGnrSwx7IomFBTx23-132" vertex="1">
+        <mxCell id="JpZiGnrSwx7IomFBTx23-134" value="account_type char(10)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="JpZiGnrSwx7IomFBTx23-132" vertex="1">
           <mxGeometry x="30" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="JpZiGnrSwx7IomFBTx23-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERzeroToMany;startFill=1;endArrow=ERmandOne;endFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="JpZiGnrSwx7IomFBTx23-84" target="JpZiGnrSwx7IomFBTx23-161" edge="1">
@@ -124,6 +124,9 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="330" y="335" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="ZdRfNjhgf1eibWSxZPTc-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=ERzeroToOne;endFill=1;startArrow=ERone;startFill=0;" edge="1" parent="1" source="JpZiGnrSwx7IomFBTx23-74" target="JpZiGnrSwx7IomFBTx23-89">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JpZiGnrSwx7IomFBTx23-74" value="Current Trades" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
           <mxGeometry x="330" y="380" width="230" height="280" as="geometry" />
