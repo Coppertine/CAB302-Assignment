@@ -64,9 +64,13 @@ public class User {
         return organisation;
     }
 
+    /**
+     * @param organisation The organisation of specified user.
+     */
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
     }
+
 
     public String getUsername() {
         return username;

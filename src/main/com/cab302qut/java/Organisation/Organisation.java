@@ -57,11 +57,9 @@ public class Organisation {
     }
 
     public void setName(String name) {
-
     }
 
-    public void setCredits()
-    {
+    public void setCredits() {
 
     }
 }
