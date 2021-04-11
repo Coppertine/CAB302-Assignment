@@ -4,10 +4,14 @@ import main.com.cab302qut.java.Items.Asset;
 import main.com.cab302qut.java.Organisation.OrganisationAsset;
 import main.com.cab302qut.java.Users.User;
 
+import java.util.Date;
+
 public class Trade {
     private Asset tradeAsset;
     private User sellingUser;
     private User buyingUser;
+    private Date tradeDate;
+    private TradeType tradeType;
 
     /**
      * Get's the current asset in this trade.
