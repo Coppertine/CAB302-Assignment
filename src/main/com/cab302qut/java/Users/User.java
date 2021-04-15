@@ -14,11 +14,12 @@ public class User {
 
     /**
      * Creates a new user which is to be placed into the Organisation's user list.
-     * @param name The user's display name.
+     *
+     * @param name         The user's display name.
      * @param organisation The organisation the user is a part of.
-     * @param username The username of the said user.
-     * @param password The password of the said user, hashed using ...
-     * @param userType The type of user assigned.
+     * @param username     The username of the said user.
+     * @param password     The password of the said user, hashed using ...
+     * @param userType     The type of user assigned.
      */
     public User(String name, Organisation organisation, String username, String password, UserType userType) {
         this.name = name;
@@ -51,6 +52,7 @@ public class User {
 
     /**
      * Sets the name of the user.
+     *
      * @param name The current display name of specified user.
      */
     public void setName(String name) {
@@ -78,5 +80,15 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public String HashPassword(String unhashed) {
+        //Needs to actually hash the password
+        String hashedPassword = unhashed;
+        return hashedPassword
     }
 }

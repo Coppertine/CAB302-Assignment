@@ -1,5 +1,6 @@
 package test;
 
+
 public class TestOrganisation {
     // Get name of organisation
     // Set name of organisation
@@ -21,4 +22,7 @@ public class TestOrganisation {
     // Get price of organisation asset (must be same as the Asset's most recent purchase)
     // Add organisation asset (must be one from Asset)
     // if new organisation asset not found in asset listings, add asset into listings
+
+
+
 }
