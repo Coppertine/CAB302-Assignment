@@ -5,7 +5,7 @@ import main.com.cab302qut.java.Items.Asset;
 public class OrganisationAsset extends Asset {
     private int quantity;
 
-    public OrganisationAsset(String assetName) {
-        super(assetName);
+    public OrganisationAsset(String assetName,Integer id,Integer price) {
+        super(assetName,id,price);
     }
 }
