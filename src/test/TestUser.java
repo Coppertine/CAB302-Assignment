@@ -103,7 +103,7 @@ public class TestUser {
 
     @Test
     public void GetOrganisation() {
-testUser1.getOrganisation();
+        testUser1.getOrganisation();
         assertEquals(testUser1.getOrganisation(), testOrganisation1);
     }
 
