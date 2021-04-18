@@ -36,16 +36,17 @@ public class Organisation {
     }
 
     public int getCredits() {
-        return 0;
+        return currentCredits;
     }
 
     public void addCredits(int credits) {
+        currentCredits += credits;
     }
 
     public void removeCredits(int credits) {}
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public ArrayList<User> getUsers() {
@@ -57,9 +58,10 @@ public class Organisation {
     }
 
     public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCredits() {
-
+    public void setCredits(int credits) {
+        currentCredits = credits;
     }
 }
