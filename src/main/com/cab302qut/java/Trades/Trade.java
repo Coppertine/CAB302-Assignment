@@ -6,6 +6,12 @@ import com.cab302qut.java.Users.User;
 
 import java.util.Date;
 
+/**
+ * A transaction between a single or multiple {@link User} objects
+ * across two {@link com.cab302qut.java.Organisation.Organisation}
+ * over a specific {@link Asset}
+ * @author Nicholas Bishop
+ */
 public class Trade {
     private Asset tradeAsset;
     private User sellingUser;
@@ -13,6 +19,13 @@ public class Trade {
     private Date tradeDate;
     private TradeType tradeType;
 
+    /**
+     * @param tradeAsset
+     * @param sellingUser
+     * @param buyingUser
+     * @param tradeDate
+     * @param tradeType
+     */
     public Trade(Asset tradeAsset, User sellingUser, User buyingUser, Date tradeDate, TradeType tradeType) {
         this.tradeAsset = tradeAsset;
         this.sellingUser = sellingUser;
@@ -66,9 +79,17 @@ public class Trade {
         return tradeType;
     }
 
+    /**
+     * Sets the status of the current trade.
+     * @param tradeType The status of the current trade.
+     * @throws TradeException If a closed trade is attempted to be opened.
+     */
     public void setTradeType(TradeType tradeType) throws TradeException {
         if(this.tradeType == TradeType.CLOSED && tradeType == TradeType.OPEN)
             throw new TradeException("Unable to open a closed trade.");
         this.tradeType = tradeType;
+    }
+
+    public Object getIndivualPrice() {
     }
 }

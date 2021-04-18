@@ -30,8 +30,8 @@ public class TestTrade {
         testItem1 = new OrganisationAsset(); // TODO: Add additional constructors once they are implemented.
         testUser1 = new User(); // TODO: Add additional constructors once they are implemented.
         testUser2 = new User(); // TODO: Add additional constructors once they are implemented.
-        testOrganisation1 = new Organisation("organistaion1");
-        testOrganisation2 = new Organisation("organistaion2");
+        testOrganisation1 = new Organisation("organisation1");
+        testOrganisation2 = new Organisation("organisation2");
     }
 
     // Add open trade
@@ -78,7 +78,8 @@ public class TestTrade {
     // Get price from trade
     @Test
     public void getTotalTradePrice() {
-
+        testTrade1 = new Trade(testItem1, testUser1);
+        assertEquals(testTrade1.getTotalPrice())
     }
 
     // Get quantity from trade
@@ -90,7 +91,8 @@ public class TestTrade {
     // Get price per asset from trade
     @Test
     public void getPricePerAsset() {
-
+        testTrade1 = new Trade(testItem1, testUser1);
+        assertEquals(testTrade1.getSinglePrice());
     }
 
     // Add date to trade
