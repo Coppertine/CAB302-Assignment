@@ -1,14 +1,14 @@
-package com.cab302qut.java.Trades;
+package main.com.cab302qut.java.Trades;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.OrganisationAsset;
-import com.cab302qut.java.Users.User;
+import main.com.cab302qut.java.Users.User;
 
 import java.util.Date;
 
 /**
  * A transaction between a single or multiple {@link User} objects
- * across two {@link com.cab302qut.java.Organisation.Organisation}
+ * across two {@link main.com.cab302qut.java.Organisation.Organisation}
  * over a specific {@link Asset}
  * @author Nicholas Bishop
  */

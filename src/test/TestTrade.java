@@ -7,7 +7,7 @@ import com.cab302qut.java.Organisation.OrganisationAsset;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Trades.TradeException;
 import com.cab302qut.java.Trades.TradeType;
-import com.cab302qut.java.Users.User;
+import main.com.cab302qut.java.Users.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

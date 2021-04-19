@@ -1,4 +1,4 @@
-package com.cab302qut.java.Users;
+package main.com.cab302qut.java.Users;
 
 import com.cab302qut.java.Organisation.Organisation;
 
@@ -32,9 +32,6 @@ public class User {
         this.userType = userType;
     }
 
-    public User() {
-
-    }
 
     /**
      * @return The hashed password of specified user.
@@ -92,6 +89,9 @@ public class User {
 
     public UserType getUserType() {
         return userType;
+    }
+    public UserType setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     /**

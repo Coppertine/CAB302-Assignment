@@ -1,7 +1,7 @@
 package test;
 
-import main.com.cab302qut.java.Items.Asset;
-import main.com.cab302qut.java.Organisation.Organisation;
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Organisation.Organisation;
 import main.com.cab302qut.java.Organisation.OrganisationException;
 import main.com.cab302qut.java.Users.User;
 import main.com.cab302qut.java.Users.UserType;

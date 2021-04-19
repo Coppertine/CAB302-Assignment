@@ -1,4 +1,4 @@
-package com.cab302qut.java.Users;
+package main.com.cab302qut.java.Users;
 
 /**
  * Specifies a specific user type.
