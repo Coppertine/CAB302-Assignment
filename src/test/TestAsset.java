@@ -1,7 +1,7 @@
 package test;
 
-import main.com.cab302qut.java.Items.Asset;
-import main.com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Trades.Trade;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,7 +49,7 @@ public class TestAsset {
         String findAsset = "CPU Hours";
         Asset theAssetFound = null;
         boolean assetFound = false;
-        for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+        for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
             if (arrayTestAssets.get(i).getAssetName().equals(findAsset)) {
                 theAssetFound = arrayTestAssets.get(i);
                 assetFound = true;
@@ -63,7 +63,7 @@ public class TestAsset {
     }
     // Get Id of newly created asset
     public void getAssetId() {
-        Integer theAssetId = testAsset.getAssetId();
+        int theAssetId = testAsset.getAssetId();
     }
     // Delete asset (after asset is created)
     public void deleteAsset() {
@@ -72,10 +72,10 @@ public class TestAsset {
 
     // remove asset by id
     public void removeAssetById() {
-        Integer assetId = 2;
+        int idOfAsset = 2;
         boolean assetFound = false;
-        for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-            if (arrayTestAssets.get(i).getAssetName().equals(assetId)) {
+        for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
                 arrayTestAssets.remove(i);
                 assetFound = true;
             }
@@ -84,11 +84,11 @@ public class TestAsset {
 
     // get asset from id
     public void getAssetById(){
-        Integer findAsset = 2;
+        int idOfAsset = 2;
         Asset theAssetFound = null;
         boolean assetFound = false;
-            for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-            if (arrayTestAssets.get(i).getAssetId().equals(findAsset)) {
+            for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
                 theAssetFound = arrayTestAssets.get(i);
                 assetFound = true;
             }
@@ -96,10 +96,11 @@ public class TestAsset {
     }
 
     // Get asset's trade history.
-    public void getAssetTradeHistory() {
-        ArrayList<Trade> theTradeHistory = testAsset.getTradeHistory();
-    }
+    //public void getAssetTradeHistory() {
+//        ArrayList<Trade> theTradeHistory = testAsset.getTradeHistory();
+//    }
     // Get most recent trade history's price.
+
     public void getRecentTradeHistoryPrice(){
         // Currently don't have access to Trade class implementation
         // but process would be
