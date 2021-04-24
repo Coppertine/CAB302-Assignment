@@ -2,6 +2,7 @@ package test;
 
 import main.com.cab302qut.java.Items.Asset;
 import main.com.cab302qut.java.Organisation.Organisation;
+import main.com.cab302qut.java.Organisation.OrganisationAsset;
 import main.com.cab302qut.java.Organisation.OrganisationException;
 import main.com.cab302qut.java.Users.User;
 import main.com.cab302qut.java.Users.UserType;
@@ -10,15 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TestOrganisation {
-    private Asset testAsset;
+    private Asset testAsset1;
+    private OrganisationAsset testOrgAsset1;
     private User testUser1;
     private User testUser2;
-    private User testUser3;
     private Organisation testOrg1;
     private Organisation testOrg2;
 
@@ -104,17 +104,17 @@ public class TestOrganisation {
     public void getUserByField() {
         testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
         testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
-        testUser3 = new User("newUser", testOrg1, "newUserName", "newPassword", UserType.Default);
+        User testUser3 = new User("newUser", testOrg1, "newUserName", "newPassword", UserType.Default);
         testOrg1.addUser(testUser1);
         testOrg1.addUser(testUser2);
         testOrg1.addUser(testUser3);
         ArrayList<User> orgDefaultUserList = new ArrayList<>();
         orgDefaultUserList.add(testUser1);
         orgDefaultUserList.add(testUser3);
-        assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name"); // TODO: implement getUserByName
-        assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID"); // TODO: implement getUserByID
-        assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name"); // TODO: implement getUserByUsername
-        assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type"); // TODO: implement getUserByUserType
+        assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name");
+        assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID");
+        assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name");
+        assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type");
     }
 
     // Get multiple users
@@ -146,15 +146,15 @@ public class TestOrganisation {
         assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user from organisation");
 
         testOrg1.addUser(testUser1);
-        testOrg1.removeUserByID(testUser2.ID); // TODO: implement removeUserByID
+        testOrg1.removeUserByID(testUser2.ID);
         assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by ID");
 
         testOrg1.addUser(testUser2);
-        testOrg1.removeUserByName("testUser"); // TODO: implement removeUserByName
+        testOrg1.removeUserByName("testUser");
         assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user by name");
 
         testOrg1.addUser(testUser1);
-        testOrg1.removeUserByUsername("adminUserName"); // TODO: implement removeUserByUsername
+        testOrg1.removeUserByUsername("adminUserName");
         assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by username");
     }
 
@@ -173,48 +173,87 @@ public class TestOrganisation {
     // Add organisation asset (must be one from Asset)
     @Test
     public void addExistingAsset() {
-
+        testAsset1 = new Asset("test");
+        testOrgAsset1 = new OrganisationAsset("test", testOrg1);
+        testOrg1.addAsset(testAsset1);
+        assertEquals(testOrgAsset1, testOrg1.getAsset("test"), "Failed to add asset to organisation.");
     }
 
     // if new organisation asset not found in asset listings, add asset into listings
     @Test
     public void addNewAsset() {
-
+        testOrg1.addNewAsset("test");
+        assertFalse(testOrg1.getAssetInventory().isEmpty(), "Failed to add new asset to organisation");
     }
 
     // Get list of organisation assets
     @Test
     public void getOrgAssetList() {
-
+        testAsset1 = new Asset("test");
+        testOrgAsset1 = new OrganisationAsset("test", testOrg1);
+        ArrayList<OrganisationAsset> orgAssets = new ArrayList<>();
+        orgAssets.add(testOrgAsset1);
+        testOrg1.addAsset(testAsset1);
+        assertEquals(orgAssets, testOrg1.getAssetInventory(), "Failed to retrieve asset inventory of organisation");
     }
 
     // Get organisation asset
     @Test
     public void getOrgAsset() {
-
+        testAsset1 = new Asset("test");
+        testOrgAsset1 = new OrganisationAsset("test", testOrg1);
+        testOrg1.addAsset(testAsset1);
+        assertEquals(testAsset1, testOrg1.getAsset("test"), "Failed to retrieve organisation asset");
     }
 
     // Get multiple organisation assets
     @Test
     public void getMultipleAssets() {
-
+        testAsset1 = new Asset("test1");
+        Asset testAsset2 = new Asset("test2");
+        testOrgAsset1 = new OrganisationAsset("test1", testOrg1);
+        OrganisationAsset testOrgAsset2 = new OrganisationAsset("test2", testOrg2);
+        ArrayList<OrganisationAsset> orgAssets = new ArrayList<>();
+        orgAssets.add(testOrgAsset1);
+        orgAssets.add(testOrgAsset2);
+        testOrg1.addAsset(testAsset1);
+        testOrg1.addAsset(testAsset2);
+        assertEquals(orgAssets, testOrg1.getAsset("test1", "test2"), "Failed to retrieve specified assets from organisation");
     }
 
     // Get quantity of organisation asset
     @Test
     public void getAssetQuantity() {
+        testAsset1 = new Asset("test");
+        testOrgAsset1 = new OrganisationAsset("test", testOrg1, 10);
+        testOrg1.addAsset(testAsset1, 10);
+        assertEquals(testOrgAsset1.getQuantity(), testOrg1.getAssetQuantity("test"), "Failed to retrieve asset quantity from organisation");
+    }
 
+    // Set quantity of organisation asset
+    @Test
+    public void setAssetQuantity() {
+        testAsset1 = new Asset("test");
+        testOrgAsset1 = new OrganisationAsset("test", testOrg1, 10);
+        testOrg1.addAsset(testAsset1, 5);
+        testOrg1.setAssetQuantity("test", 10);
+        assertEquals(testOrgAsset1.getQuantity(), testOrg1.getAssetQuantity("test"), "Failed to set new asset quantity");
     }
 
     // Remove specific organisation asset
     @Test
     public void removeOrgAsset() {
-
+        testAsset1 = new Asset("test");
+        testOrg1.addAsset(testAsset1);
+        assertFalse(testOrg1.getAssetInventory().isEmpty());
+        testOrg1.removeAsset("test");
+        assertTrue(testOrg1.getAssetInventory().isEmpty(), "Failed to remove asset from organisation inventory");
     }
 
     // Get price of organisation asset (must be same as the Asset's most recent purchase)
     @Test
     public void getOrgAssetPrice() {
-
+        // Is this function more relevant to the Asset class? the price of an organisation asset should be the same as
+        // the price of the actual asset.
     }
 }
