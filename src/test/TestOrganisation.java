@@ -112,7 +112,7 @@ public class TestOrganisation {
         orgDefaultUserList.add(testUser1);
         orgDefaultUserList.add(testUser3);
         assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name");
-        assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID");
+        assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID"); // user ID not implemented yet
         assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name");
         assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type");
     }
@@ -146,7 +146,7 @@ public class TestOrganisation {
         assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user from organisation");
 
         testOrg1.addUser(testUser1);
-        testOrg1.removeUserByID(testUser2.ID);
+        testOrg1.removeUserByID(testUser2.ID); // user ID not implemented yet
         assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by ID");
 
         testOrg1.addUser(testUser2);
@@ -174,7 +174,7 @@ public class TestOrganisation {
     @Test
     public void addExistingAsset() {
         testAsset1 = new Asset("test");
-        testOrgAsset1 = new OrganisationAsset("test", testOrg1);
+        testOrgAsset1 = new OrganisationAsset("test");
         testOrg1.addAsset(testAsset1);
         assertEquals(testOrgAsset1, testOrg1.getAsset("test"), "Failed to add asset to organisation.");
     }
@@ -190,7 +190,7 @@ public class TestOrganisation {
     @Test
     public void getOrgAssetList() {
         testAsset1 = new Asset("test");
-        testOrgAsset1 = new OrganisationAsset("test", testOrg1);
+        testOrgAsset1 = new OrganisationAsset("test");
         ArrayList<OrganisationAsset> orgAssets = new ArrayList<>();
         orgAssets.add(testOrgAsset1);
         testOrg1.addAsset(testAsset1);
@@ -201,7 +201,7 @@ public class TestOrganisation {
     @Test
     public void getOrgAsset() {
         testAsset1 = new Asset("test");
-        testOrgAsset1 = new OrganisationAsset("test", testOrg1);
+        testOrgAsset1 = new OrganisationAsset("test");
         testOrg1.addAsset(testAsset1);
         assertEquals(testAsset1, testOrg1.getAsset("test"), "Failed to retrieve organisation asset");
     }
@@ -211,8 +211,8 @@ public class TestOrganisation {
     public void getMultipleAssets() {
         testAsset1 = new Asset("test1");
         Asset testAsset2 = new Asset("test2");
-        testOrgAsset1 = new OrganisationAsset("test1", testOrg1);
-        OrganisationAsset testOrgAsset2 = new OrganisationAsset("test2", testOrg2);
+        testOrgAsset1 = new OrganisationAsset("test1");
+        OrganisationAsset testOrgAsset2 = new OrganisationAsset("test2");
         ArrayList<OrganisationAsset> orgAssets = new ArrayList<>();
         orgAssets.add(testOrgAsset1);
         orgAssets.add(testOrgAsset2);
@@ -225,7 +225,7 @@ public class TestOrganisation {
     @Test
     public void getAssetQuantity() {
         testAsset1 = new Asset("test");
-        testOrgAsset1 = new OrganisationAsset("test", testOrg1, 10);
+        testOrgAsset1 = new OrganisationAsset("test", 10);
         testOrg1.addAsset(testAsset1, 10);
         assertEquals(testOrgAsset1.getQuantity(), testOrg1.getAssetQuantity("test"), "Failed to retrieve asset quantity from organisation");
     }
@@ -234,7 +234,7 @@ public class TestOrganisation {
     @Test
     public void setAssetQuantity() {
         testAsset1 = new Asset("test");
-        testOrgAsset1 = new OrganisationAsset("test", testOrg1, 10);
+        testOrgAsset1 = new OrganisationAsset("test", 10);
         testOrg1.addAsset(testAsset1, 5);
         testOrg1.setAssetQuantity("test", 10);
         assertEquals(testOrgAsset1.getQuantity(), testOrg1.getAssetQuantity("test"), "Failed to set new asset quantity");
