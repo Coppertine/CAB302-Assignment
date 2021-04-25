@@ -1,4 +1,4 @@
-package main.com.cab302qut.java.Organisation;
+package com.cab302qut.java.Organisation;
 
 /**
  * A simple exception class for handling errors in organisation methods

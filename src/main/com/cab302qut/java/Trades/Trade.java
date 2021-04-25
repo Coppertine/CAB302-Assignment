@@ -1,8 +1,8 @@
-package main.com.cab302qut.java.Trades;
+package com.cab302qut.java.Trades;
 
-import main.com.cab302qut.java.Items.Asset;
-import main.com.cab302qut.java.Organisation.OrganisationAsset;
-import main.com.cab302qut.java.Users.User;
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Organisation.OrganisationAsset;
+import com.cab302qut.java.Users.User;
 
 import java.util.Date;
 

@@ -1,4 +1,3 @@
-package test;
 
 public class TestAsset {
     // Create new Asset

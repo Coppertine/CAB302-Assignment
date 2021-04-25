@@ -1,6 +1,6 @@
-package main.com.cab302qut.java.Organisation;
+package com.cab302qut.java.Organisation;
 
-import main.com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Items.Asset;
 
 /**
  * An asset that is currently owned/controlled by an organisation

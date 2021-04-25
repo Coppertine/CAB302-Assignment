@@ -1,6 +1,6 @@
-package main.com.cab302qut.java.Items;
+package com.cab302qut.java.Items;
 
-import main.com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Trades.Trade;
 
 import java.sql.Date;
 import java.util.ArrayList;

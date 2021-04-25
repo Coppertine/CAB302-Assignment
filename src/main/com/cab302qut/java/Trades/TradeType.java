@@ -1,4 +1,4 @@
-package main.com.cab302qut.java.Trades;
+package com.cab302qut.java.Trades;
 
 public enum TradeType {
     /**
