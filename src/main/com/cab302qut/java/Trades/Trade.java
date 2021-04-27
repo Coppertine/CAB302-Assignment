@@ -1,14 +1,14 @@
-package main.com.cab302qut.java.Trades;
+package com.cab302qut.java.Trades;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.OrganisationAsset;
-import main.com.cab302qut.java.Users.User;
+import com.cab302qut.java.Users.User;
 
 import java.util.Date;
 
 /**
  * A transaction between a single or multiple {@link User} objects
- * across two {@link main.com.cab302qut.java.Organisation.Organisation}
+ * across two {@link com.cab302qut.java.Organisation.Organisation}
  * over a specific {@link Asset}
  * @author Nicholas Bishop
  */
@@ -90,6 +90,7 @@ public class Trade {
         this.tradeType = tradeType;
     }
 
-    public Object getIndivualPrice() {
+    public Object getIndividualPrice() {
+        return null;
     }
 }

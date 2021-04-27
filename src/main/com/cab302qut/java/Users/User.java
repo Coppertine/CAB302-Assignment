@@ -1,6 +1,7 @@
-package main.com.cab302qut.java.Users;
+package com.cab302qut.java.Users;
 
 import com.cab302qut.java.Organisation.Organisation;
+import main.com.cab302qut.java.Users.UserType;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,6 +28,12 @@ public class User {
     public User(String name, Organisation organisation, String username, String password, UserType userType) {
         this.name = name;
         this.organisation = organisation;
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
+    }
+    public User(String name, String username, String password, UserType userType) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.userType = userType;
@@ -92,6 +99,7 @@ public class User {
     }
     public UserType setUserType(UserType userType) {
         this.userType = userType;
+        return null;
     }
 
     /**
