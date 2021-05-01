@@ -98,23 +98,23 @@ public class Trade {
         this.tradeType = tradeType;
     }
 
-    public Object GetIndividualPrice() {
+    public Object getIndividualPrice() {
         return null;
     }
 
-    public float GetPrice() {
+    public float getPrice() {
         return pricePerItem;
     }
 
-    public void SetPrice(float price) {
+    public void setPrice(float price) {
         this.pricePerItem = price;
     }
 
-    public int GetQuantityToTrade(){
+    public int getQuantityToTrade(){
 return quantityToTrade;
     }
 
-    public int SetQuantityToTrade(){
+    public void setQuantityToTrade(){
         this.quantityToTrade = quantityToTrade;
     }
 }
