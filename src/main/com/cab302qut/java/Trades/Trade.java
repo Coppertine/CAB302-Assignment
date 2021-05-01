@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class Trade {
     private Asset tradeAsset;
+    private float price;
     private User sellingUser;
     private User buyingUser;
     private Date tradeDate;
@@ -25,18 +26,20 @@ public class Trade {
      * @param buyingUser
      * @param tradeDate
      * @param tradeType
+     * @param price
      */
-    public Trade(Asset tradeAsset, User sellingUser, User buyingUser, Date tradeDate, TradeType tradeType) {
+    public Trade(Asset tradeAsset, User sellingUser, User buyingUser, Date tradeDate, TradeType tradeType, float price) {
         this.tradeAsset = tradeAsset;
         this.sellingUser = sellingUser;
         this.buyingUser = buyingUser;
         this.tradeDate = tradeDate;
         this.tradeType = tradeType;
+        this.price = price;
     }
 
     public Trade(Asset tradeAsset, User sellingUser)
     {
-        this(tradeAsset, sellingUser, null, null, TradeType.OPEN);
+        this(tradeAsset, sellingUser, null, null, TradeType.OPEN, 10);
     }
 
     /**
@@ -92,5 +95,13 @@ public class Trade {
 
     public Object getIndividualPrice() {
         return null;
+    }
+
+    public float getPrice(){
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

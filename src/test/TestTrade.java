@@ -70,7 +70,7 @@ public class TestTrade {
     // Set trade as open
     @Test
     public void setTradeOpen() {
-        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED);
+        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED,price);
 
         assertThrows(TradeException.class, () -> testTrade1.setTradeType(TradeType.OPEN));
     }
