@@ -11,11 +11,11 @@ import javafx.stage.Stage;
 import main.com.cab302qut.java.Users.UserType;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class CAB302Assignment { //extends Application {
-
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -25,12 +25,21 @@ public class CAB302Assignment { //extends Application {
         Asset asset1 = new Asset("emojis", 1, 10);
         Asset asset2 = new Asset("CPU", 2, 5);
 
+        ArrayList<Trade> trades = new ArrayList<Trade>();
 
-
-        Organisation organisation1 = new Organisation("main Organisation");
+        Organisation organisation1 = new Organisation("Organisation 1");
         organisation1.addUser(mainUser);
         mainUser.setOrganisation(organisation1);
-        organisation1.addCredits(1000);
+        organisation1.addCredits(100);
+
+        System.out.println(organisation1.getCredits() + organisation1.getName());
+
+        Organisation organisation2 = new Organisation("Organisation 2");
+        organisation2.addUser(mainUser);
+        mainUser.setOrganisation(organisation2);
+        organisation2.addCredits(200);
+        System.out.println(organisation2.getCredits() + organisation2.getName());
+
 
         System.out.println("create a new user");
 
@@ -46,12 +55,10 @@ public class CAB302Assignment { //extends Application {
 
         System.out.println(createUser.getName() + createUser.getUsername() + createUser.getPassword() + createUser.getUserType().toString());
 
-        System.out.println(organisation1.getCredits());
+        Trade trade = new Trade(asset1,100,10, createUser, tradeUser, null, TradeType.OPEN);
+        trades.add(trade);
 
-        new Trade(asset1, createUser,tradeUser, null, TradeType.OPEN, 100);
-
-
-
+        System.out.println(trades.get(0).getTradeAsset());
 
 
     }
