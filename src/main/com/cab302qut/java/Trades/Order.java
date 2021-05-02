@@ -8,14 +8,14 @@ public class Order {
         private Asset tradeAsset;
         private double pricePerItem;
         private int quantityToTrade;
-        private User sellingUser;
+        private User User;
         private Date tradeDate;
         private OrderType orderType;
 
-        public Order(Asset tradeAsset,OrderType orderType, int quantityToTrade, double pricePerItem, User sellingUser, Date tradeDate) {
+        public Order(Asset tradeAsset,OrderType orderType, int quantityToTrade, double pricePerItem, User User, Date tradeDate) {
             this.tradeAsset = tradeAsset;
             this.quantityToTrade = quantityToTrade;
-            this.sellingUser = sellingUser;
+            this.User = User;
             this.tradeDate = tradeDate;
             this.pricePerItem = pricePerItem;
             this.orderType = orderType;
@@ -29,12 +29,12 @@ public class Order {
             this.tradeAsset = tradeAsset;
         }
 
-        public User getSellingUser() {
-            return sellingUser;
+        public User getUser() {
+            return User;
         }
 
-        public void setSellingUser(User sellingUser) {
-            this.sellingUser = sellingUser;
+        public void setUser(User User) {
+            this.User =User;
         }
 
         public Date getTradeDate() {
