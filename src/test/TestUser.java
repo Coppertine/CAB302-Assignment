@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test cases concerning User class
+ *
+ * @author Stephen Markovics
+ */
 public class TestUser {
     // Add user
     // Get user
@@ -80,9 +85,9 @@ public class TestUser {
 
     @Test
     public void ModifyUsername() {
-        assertEquals(testUser.getUsername(),"johnSmith");
+        assertEquals(testUser.getUsername(), "johnSmith");
         testUser.setUsername("newUsername");
-        assertEquals(testUser.getUsername(), "newUsername","the username was not changed correctly");
+        assertEquals(testUser.getUsername(), "newUsername", "the username was not changed correctly");
     }
 
     @Test
@@ -131,7 +136,9 @@ public class TestUser {
 
     @Test
     public void SetUserType() {
-        assertEquals(testUser.setUserType(userType2), UserType.Default);
+        assertEquals(testUser.getUserType(), UserType.Administrator);
+        testUser.setUserType(userType2);
+        assertEquals(testUser.getUserType(), UserType.Default);
     }
 
     @Test

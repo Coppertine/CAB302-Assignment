@@ -16,32 +16,37 @@ import java.util.*;
 
 public class CAB302Assignment { //extends Application {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //launch(args);
-        User mainUser = new User("John", "JohnMainUser", "password", UserType.Administrator);
-        User tradeUser = new User("Ben", "BenTrade", "password2", UserType.Default);
+        //creates default users.
+        Organisation organisation1 = new Organisation("Organisation 1");
+        Organisation organisation2 = new Organisation("Organisation 2");
+        User mainUser = new User("John",organisation1, "JohnMainUser", "password", UserType.Administrator);
+        User tradeUser = new User("Ben",organisation2, "BenTrade", "password2", UserType.Default);
         Asset asset1 = new Asset("emojis", 1, 10);
         Asset asset2 = new Asset("CPU", 2, 5);
 
+        //arrays of different orders
         ArrayList<Order> sellOrders = new ArrayList<Order>();
         ArrayList<Order> orders = new ArrayList<Order>();
         ArrayList<Order> buyOrders = new ArrayList<Order>();
 
-        Organisation organisation1 = new Organisation("Organisation 1");
-        organisation1.addUser(mainUser);
-        mainUser.setOrganisation(organisation1);
+        //creates 2 different organisations.
+
+        organisation1.addUser(tradeUser);
+        tradeUser.setOrganisation(organisation1);
         organisation1.addCredits(10000);
-        organisation1.addAsset(asset1);
+        //organisation1.addAsset(asset1);
 
 
-        Organisation organisation2 = new Organisation("Organisation 2");
         organisation2.addUser(mainUser);
         mainUser.setOrganisation(organisation2);
         organisation2.addCredits(20000);
-        organisation2.addAsset(asset2);
+        //organisation2.addAsset(asset2);
 
         Random rnd = new Random();
 
+        //
         for (int i = 0; i < 6; i++) {
             int numberToSell = rnd.nextInt(1000);
             int numberToBuy = rnd.nextInt(1000);
@@ -49,26 +54,48 @@ public class CAB302Assignment { //extends Application {
             Order sellOrder = new Order(asset2, OrderType.SELL, numberToSell, price, tradeUser, null);
             sellOrders.add(sellOrder);
 
-            Order buyOrder = new Order(asset2, OrderType.BUY, numberToBuy, price, tradeUser, null);
+            Order buyOrder = new Order(asset2, OrderType.BUY, numberToBuy, price, mainUser, null);
             buyOrders.add(buyOrder);
         }
 
-        CheckOrders(sellOrders,buyOrders);
+        CheckOrders(sellOrders, buyOrders);
     }
 
-    public static void CheckOrders(ArrayList<Order> sellOrders,ArrayList<Order> buyOrders) {
+    public static void CheckOrders(ArrayList<Order> sellOrders, ArrayList<Order> buyOrders) {
         for (int i = 0; i < sellOrders.size(); i++) {
             for (int j = 0; j < buyOrders.size(); j++) {
                 if (sellOrders.get(i).getTradeAsset().getAssetName() == buyOrders.get(j).getTradeAsset().getAssetName() && sellOrders.get(i).getQuantityToTrade() >= buyOrders.get(j).getQuantityToTrade() && sellOrders.get(i).getPrice() == buyOrders.get(j).getPrice()) {
-                    System.out.println(sellOrders.get(i).getTradeAsset().getAssetName() + " " + sellOrders.get(i).getQuantityToTrade() + " " + sellOrders.get(i).getPrice());
-                    System.out.println(buyOrders.get(j).getTradeAsset().getAssetName() + " " + buyOrders.get(j).getQuantityToTrade() + " " + buyOrders.get(j).getPrice());
-                    int sellAmount = sellOrders.get(i).getQuantityToTrade() - buyOrders.get(j).getQuantityToTrade();
-                    System.out.println(sellAmount + "The sell amount");
-                    if (sellAmount < 0) {
-                        //throw error
-                    } else {
-                        sellOrders.get(i).setQuantityToTrade(sellAmount);
+
+                    //System.out.println(sellOrders.get(i).getTradeAsset().getAssetName() + " " + sellOrders.get(i).getQuantityToTrade() + " " + sellOrders.get(i).getPrice());
+                    //System.out.println(buyOrders.get(j).getTradeAsset().getAssetName() + " " + buyOrders.get(j).getQuantityToTrade() + " " + buyOrders.get(j).getPrice());
+
+                    int sellOrganisationCredits = sellOrders.get(i).getUser().getOrganisation().getCredits();
+                    int buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
+                    double tradePrice;
+
+                    tradePrice = buyOrders.get(j).getPrice() * buyOrders.get(j).getQuantityToTrade();
+                    System.out.println(tradePrice);
+                    if (buyOrganisationCredits >= tradePrice) {
+
+                        sellOrganisationCredits += tradePrice;
+                        buyOrganisationCredits -= tradePrice;
+
+                        sellOrders.get(i).getUser().getOrganisation().setCredits(sellOrganisationCredits);
+                        buyOrders.get(j).getUser().getOrganisation().setCredits(buyOrganisationCredits);
+
+                        int sellAmount = sellOrders.get(i).getQuantityToTrade() - buyOrders.get(j).getQuantityToTrade();
+
+                        //System.out.println(sellAmount + " The sell amount");
+                        System.out.println(sellOrders.get(i).getUser().getOrganisation().getCredits() + " Sellers credits");
+                        System.out.println(buyOrders.get(j).getUser().getOrganisation().getCredits() + " buyers credits");
+
+                        if (sellAmount < 0) {
+                            //throw error
+                        } else {
+                            sellOrders.get(i).setQuantityToTrade(sellAmount);
+                        }
                     }
+
                 }
             }
         }
@@ -81,25 +108,3 @@ public class CAB302Assignment { //extends Application {
     }
 */
 }
-
-/*
-
-//System.out.println(organisation2.getCredits() + organisation2.getName());
-        System.out.println("name");
-        String name = "john";//scanner.nextLine();
-        System.out.println("username");
-        String username = "smith";//scanner.nextLine();
-        System.out.println("password");
-        String password = "password";//scanner.nextLine();
-
-        User createUser = new User(name, username, password, UserType.Default);
-        createUser.setPassword(password);
-
-        System.out.println(createUser.getName() + createUser.getUsername() + createUser.getPassword() + createUser.getUserType().toString());
-
-        SellOrder sellOrder = new SellOrder(asset1, 100, 10, createUser, null);
-        orders.add(sellOrder);
-
-        SellOrder sellOrder3 = new SellOrder(asset2, 1000, 1, tradeUser, null);
-        sellOrders.add(sellOrder3);
-*/
