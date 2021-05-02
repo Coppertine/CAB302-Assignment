@@ -1,7 +1,8 @@
-package main.com.cab302qut.java.Users;
+package com.cab302qut.java.Users;
 
 /**
  * Specifies a specific user type.
+ * @author Stephen Markovics
  */
 public enum UserType {
     /**

@@ -13,6 +13,7 @@ import java.util.Date;
  *
  * @author Nicholas Bishop
  */
+
 public class Trade {
     private Asset tradeAsset;
     private float pricePerItem;

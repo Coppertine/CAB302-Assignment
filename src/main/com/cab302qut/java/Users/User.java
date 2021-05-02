@@ -1,7 +1,7 @@
 package com.cab302qut.java.Users;
 
 import com.cab302qut.java.Organisation.Organisation;
-import main.com.cab302qut.java.Users.UserType;
+import com.cab302qut.java.Users.UserType;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,24 +1,26 @@
 com/cab302qut/java/Trades/TradeType.java
  com.cab302qut.java.Trades.TradeType
-com/cab302qut/java/Items/Asset.java
- com.cab302qut.java.Items.Asset
-com/cab302qut/java/Trades/BuyOrder.java
- com.cab302qut.java.Trades.BuyOrder
-com/cab302qut/java/Trades/TradeException.java
- com.cab302qut.java.Trades.TradeException
-com/cab302qut/java/Trades/SellOrder.java
- com.cab302qut.java.Trades.SellOrder
-com/cab302qut/java/Users/User.java
- com.cab302qut.java.Users.User
+com/cab302qut/java/Users/UserType.java
+ main.com.cab302qut.java.Users.UserType
 com/cab302qut/java/Organisation/OrganisationException.java
  main.com.cab302qut.java.Organisation.OrganisationException
+com/cab302qut/java/Trades/TradeException.java
+ com.cab302qut.java.Trades.TradeException
+com/cab302qut/java/Items/Asset.java
+ com.cab302qut.java.Items.Asset
+com/cab302qut/java/Trades/Order.java
+ com.cab302qut.java.Trades.Order
+com/cab302qut/java/Users/User.java
+ com.cab302qut.java.Users.User
+com/cab302qut/java/Trades/SellOrder.java
+ com.cab302qut.java.Trades.SellOrder
+com/cab302qut/java/Trades/OrderType.java
+ com.cab302qut.java.Trades.OrderType
 com/cab302qut/java/Trades/Trade.java
  com.cab302qut.java.Trades.Trade
 com/cab302qut/java/Organisation/Organisation.java
  com.cab302qut.java.Organisation.Organisation
 com/cab302qut/java/Organisation/OrganisationAsset.java
  com.cab302qut.java.Organisation.OrganisationAsset
-com/cab302qut/java/Users/UserType.java
- main.com.cab302qut.java.Users.UserType
 com/cab302qut/java/CAB302Assignment.java
  com.cab302qut.java.CAB302Assignment

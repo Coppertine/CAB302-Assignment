@@ -2,7 +2,7 @@ package test;
 
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.User;
-import main.com.cab302qut.java.Users.UserType;
+import com.cab302qut.java.Users.UserType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
