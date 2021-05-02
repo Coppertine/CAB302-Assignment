@@ -28,6 +28,16 @@ public class OrganisationAsset extends Asset {
         this.quantity = quantity;
     }
 
+    public OrganisationAsset(Asset asset) {
+        super(asset.getAssetName());
+        this.quantity = 0;
+    }
+
+    public OrganisationAsset(Asset asset, int quantity) {
+        super(asset.getAssetName());
+        this.quantity = quantity;
+    }
+
     /**
      * Gets the quantity of this asset
      * @return quantity of this asset

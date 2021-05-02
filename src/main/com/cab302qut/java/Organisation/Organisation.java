@@ -140,17 +140,30 @@ public class Organisation {
     /**
      * Adds credits to this organisations current credits
      * @param credits the amount of credits to be added
+     * @throws OrganisationException if the amount of credits to be added is negative
      */
-    public void addCredits(int credits) {
-        currentCredits += credits;
+    public void addCredits(int credits) throws OrganisationException {
+        if(credits < 0) {
+            throw new OrganisationException("Cannot add negative credits");
+        }
+        else {
+            currentCredits += credits;
+        }
     }
 
     /**
      * Removes credits from this organisations current credits
      * @param credits the amount of credits to be removed
+     * @throws OrganisationException if the amount of credits to be removed exceeds the amount of credits this
+     * organisation has
      */
-    public void removeCredits(int credits) {
-        currentCredits -= credits;
+    public void removeCredits(int credits) throws OrganisationException {
+        if(currentCredits - credits < 0) {
+            throw new OrganisationException("Cannot remove more credits than the organisation has");
+        }
+        else {
+            currentCredits -= credits;
+        }
     }
 
     /**
@@ -192,36 +205,109 @@ public class Organisation {
         return assetInventory;
     }
 
-    public void addAsset(Asset asset) {
+    public void addAsset(Asset asset) throws OrganisationException {
+        if(getAsset(asset.getAssetName()) != null) {
+            throw new OrganisationException("Cannot add an asset that already exists");
+        }
+        else {
+            assetInventory.add(new OrganisationAsset(asset));
+        }
     }
 
-    public void addAsset(Asset asset, int quantity) {
+    /**
+     * Adds a new asset to this organisations inventory
+     * @param asset the asset to be added
+     * @param quantity the quantity of this asset
+     * @throws OrganisationException if the asset is already in this organisations inventory
+     */
+    public void addAsset(Asset asset, int quantity) throws OrganisationException {
+        if(getAsset(asset.getAssetName()) != null) {
+            throw new OrganisationException("Cannot add an asset that already exists");
+        }
+        else {
+            assetInventory.add(new OrganisationAsset(asset, quantity));
+        }
     }
 
-    public void addNewAsset(String assetName) {
+    /**
+     * Adds a new asset to this organisations inventory
+     * @param assetName the name of the asset to be added
+     * @throws OrganisationException if the asset is already in this organisations inventory
+     */
+    public void addNewAsset(String assetName) throws OrganisationException {
+        if(getAsset(assetName) != null) {
+            throw new OrganisationException("Cannot add an asset that already exists");
+        }
+        else {
+            assetInventory.add(new OrganisationAsset(assetName));
+        }
     }
 
-    public void addNewAsset(String assetName, int quantity) {
+    /**
+     * Adds a new asset to this organisations inventory
+     * @param assetName the name of the asset to be added
+     * @param quantity the quantity of this asset
+     * @throws OrganisationException if the asset is already in this organisations inventory
+     */
+    public void addNewAsset(String assetName, int quantity) throws OrganisationException {
+        if(getAsset(assetName) != null) {
+            throw new OrganisationException("Cannot add an asset that already exists");
+        }
+        else {
+            assetInventory.add(new OrganisationAsset(assetName, quantity));
+        }
     }
 
+    /**
+     * Gets the quantity of the asset held by this organisation
+     * @param asset the asset
+     * @return the quantity of this asset
+     */
     public int getAssetQuantity(OrganisationAsset asset) {
-        return 0;
+        return asset.getQuantity();
     }
 
+    /**
+     * Gets the quantity of the asset held by this organisation
+     * @param assetName the name of the asset
+     * @return the quantity of this asset
+     */
     public int getAssetQuantity(String assetName) {
-        return 0;
+        return getAsset(assetName).getQuantity();
     }
 
+    /**
+     * Sets the quantity of an asset held by this organisation
+     * @param asset the asset
+     * @param quantity the new quantity of this asset
+     */
+    public void setAssetQuantity(OrganisationAsset asset, int quantity) {
+        asset.setQuantity(quantity);
+    }
+
+    /**
+     * Sets the quantity of an asset held by this organisation
+     * @param assetName the name of the asset
+     * @param quantity the new quantity of this asset
+     */
     public void setAssetQuantity(String assetName, int quantity) {
-
+        getAsset(assetName).setQuantity(quantity);
     }
 
+    /**
+     * Removes an asset from the organisations inventory
+     * @param asset the asset to be removed
+     */
     public void removeAsset(OrganisationAsset asset) {
-
+        assetInventory.remove(asset);
     }
 
+    /**
+     * Removes an asset from the organisations inventory
+     * @param assetName the name of the asset
+     */
     public void removeAsset(String assetName) {
-
+        assetInventory.remove(getAsset(assetName));
     }
 
 }
