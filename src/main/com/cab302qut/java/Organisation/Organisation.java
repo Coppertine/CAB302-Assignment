@@ -90,15 +90,29 @@ public class Organisation {
      * @return list of users with this type, null if there are no users with this type
      */
     public ArrayList<User> getUserByUserType(UserType userType) {
-        return null;
+        ArrayList<User> usersOfType = new ArrayList<>();
+            /*for (User user:users) {
+                if(user.getUserType.equals(usertype)) { // TODO: currently no method in User class to get usertype
+                    usersOfType.add(user);
+                }
+            }*/
+        return usersOfType;
     }
 
     /**
      * Adds a new user to the list of users in this organisation
      * @param user the user to be added
      */
-    public void addUser(User user) {
-        users.add(user);
+    public void addUser(User user) throws OrganisationException {
+        if(users.contains(user)) {
+            throw new OrganisationException("Cannot add a user that is already a part of this organisation");
+        }
+        else if(getUserByName(user.getName()) != null && getUserByUsername(user.getUsername()) != null) {
+            throw new OrganisationException("Cannot add a user that has the same name and username as an existing user");
+        }
+        else {
+            users.add(user);
+        }
     }
 
     /**
@@ -160,6 +174,9 @@ public class Organisation {
     public void removeCredits(int credits) throws OrganisationException {
         if(currentCredits - credits < 0) {
             throw new OrganisationException("Cannot remove more credits than the organisation has");
+        }
+        else if(credits < 0) {
+            throw new OrganisationException("Cannot remove negative credits");
         }
         else {
             currentCredits -= credits;
