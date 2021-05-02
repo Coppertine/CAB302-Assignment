@@ -2,6 +2,7 @@ package com.cab302qut.java;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
+import com.cab302qut.java.Organisation.OrganisationException;
 import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Trades.SellOrder;
@@ -33,15 +34,31 @@ public class CAB302Assignment { //extends Application {
 
         //creates 2 different organisations.
 
-        organisation1.addUser(tradeUser);
+        try {
+            organisation1.addUser(tradeUser);
+        } catch (OrganisationException e) {
+            e.printStackTrace();
+        }
         tradeUser.setOrganisation(organisation1);
-        organisation1.addCredits(10000);
+        try {
+            organisation1.addCredits(10000);
+        } catch (OrganisationException e) {
+            e.printStackTrace();
+        }
         //organisation1.addAsset(asset1);
 
 
-        organisation2.addUser(mainUser);
+        try {
+            organisation2.addUser(mainUser);
+        } catch (OrganisationException e) {
+            e.printStackTrace();
+        }
         mainUser.setOrganisation(organisation2);
-        organisation2.addCredits(20000);
+        try {
+            organisation2.addCredits(20000);
+        } catch (OrganisationException e) {
+            e.printStackTrace();
+        }
         //organisation2.addAsset(asset2);
 
         Random rnd = new Random();
@@ -69,7 +86,6 @@ public class CAB302Assignment { //extends Application {
                     //System.out.println(sellOrders.get(i).getTradeAsset().getAssetName() + " " + sellOrders.get(i).getQuantityToTrade() + " " + sellOrders.get(i).getPrice());
                     //System.out.println(buyOrders.get(j).getTradeAsset().getAssetName() + " " + buyOrders.get(j).getQuantityToTrade() + " " + buyOrders.get(j).getPrice());
 
-                    int sellOrganisationCredits = sellOrders.get(i).getUser().getOrganisation().getCredits();
                     int buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
                     double tradePrice;
 
@@ -77,11 +93,17 @@ public class CAB302Assignment { //extends Application {
                     System.out.println(tradePrice);
                     if (buyOrganisationCredits >= tradePrice) {
 
-                        sellOrganisationCredits += tradePrice;
-                        buyOrganisationCredits -= tradePrice;
 
-                        sellOrders.get(i).getUser().getOrganisation().setCredits(sellOrganisationCredits);
-                        buyOrders.get(j).getUser().getOrganisation().setCredits(buyOrganisationCredits);
+                        try {
+                            sellOrders.get(i).getUser().getOrganisation().addCredits((int) tradePrice);
+                        } catch (OrganisationException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            buyOrders.get(j).getUser().getOrganisation().removeCredits((int) tradePrice);
+                        } catch (OrganisationException e) {
+                            e.printStackTrace();
+                        }
 
                         int sellAmount = sellOrders.get(i).getQuantityToTrade() - buyOrders.get(j).getQuantityToTrade();
 

@@ -104,6 +104,7 @@ public class Organisation {
      * @param user the user to be added
      */
     public void addUser(User user) throws OrganisationException {
+
         if(users.contains(user)) {
             throw new OrganisationException("Cannot add a user that is already a part of this organisation");
         }
