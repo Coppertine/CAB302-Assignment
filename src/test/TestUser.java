@@ -1,4 +1,3 @@
-package test;
 
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.User;
