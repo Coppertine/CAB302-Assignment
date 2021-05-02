@@ -15,7 +15,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/BuyOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/BuyOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/SellOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/SellOrder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

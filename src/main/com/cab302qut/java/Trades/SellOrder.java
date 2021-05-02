@@ -56,7 +56,7 @@ public class SellOrder{
         return quantityToTrade;
     }
 
-    public void setQuantityToTrade(){
+    public void setQuantityToTrade(int quantityToTrade){
         this.quantityToTrade = quantityToTrade;
     }
 }
