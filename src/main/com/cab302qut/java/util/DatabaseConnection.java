@@ -10,6 +10,9 @@ public class DatabaseConnection {
     private static Connection connection;
 
 
+    /**
+     * Attempts to establish the connection using the config file.
+     */
     public static void establishConnection() {
         try {
             ServerConfiguration serverConfig = CAB302Assignment.getConfig();
