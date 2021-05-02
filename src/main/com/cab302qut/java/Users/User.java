@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * The account of the program which can buy and/or sell items to other users in other organisations.
+ *
+ * @author Stephen Markovics
  */
 public class User {
     private String name;
@@ -22,7 +24,7 @@ public class User {
      * @param name         The user's display name.
      * @param organisation The organisation the user is a part of.
      * @param username     The username of the said user.
-     * @param password     The password of the said user, hashed using ...
+     * @param password     The password of the said user, hashed using MD5
      * @param userType     The type of user assigned.
      */
     public User(String name, Organisation organisation, String username, String password, UserType userType) {
@@ -32,6 +34,7 @@ public class User {
         this.password = password;
         this.userType = userType;
     }
+
     public User(String name, String username, String password, UserType userType) {
         this.name = name;
         this.username = username;
@@ -49,6 +52,7 @@ public class User {
 
     /**
      * @param password The hashed password of specified user.
+     *                 sets the password to be the hashed password
      */
     public void setPassword(String password) {
         String hashedPassword = HashPassword(password);
@@ -85,21 +89,32 @@ public class User {
         this.organisation = organisation;
     }
 
-
+    /**
+     * @return username of the user.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @param username sets the username of the user.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * @return the user type of the user.
+     */
     public UserType getUserType() {
         return userType;
     }
-    public UserType setUserType(UserType userType) {
+
+    /**
+     * @param userType Sets the usertype of the user
+     */
+    public void setUserType(UserType userType) {
         this.userType = userType;
-        return null;
     }
 
     /**

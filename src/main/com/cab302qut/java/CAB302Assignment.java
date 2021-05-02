@@ -18,30 +18,33 @@ public class CAB302Assignment { //extends Application {
 
     public static void main(String[] args){
         //launch(args);
+        //creates default users.
         User mainUser = new User("John", "JohnMainUser", "password", UserType.Administrator);
         User tradeUser = new User("Ben", "BenTrade", "password2", UserType.Default);
         Asset asset1 = new Asset("emojis", 1, 10);
         Asset asset2 = new Asset("CPU", 2, 5);
 
+        //arrays of different orders
         ArrayList<Order> sellOrders = new ArrayList<Order>();
         ArrayList<Order> orders = new ArrayList<Order>();
         ArrayList<Order> buyOrders = new ArrayList<Order>();
 
+        //creates 2 different organisations.
         Organisation organisation1 = new Organisation("Organisation 1");
         organisation1.addUser(mainUser);
         mainUser.setOrganisation(organisation1);
         organisation1.addCredits(10000);
-        organisation1.addAsset(asset1);
-
+        //organisation1.addAsset(asset1);
 
         Organisation organisation2 = new Organisation("Organisation 2");
         organisation2.addUser(mainUser);
         mainUser.setOrganisation(organisation2);
         organisation2.addCredits(20000);
-        organisation2.addAsset(asset2);
+        //organisation2.addAsset(asset2);
 
         Random rnd = new Random();
 
+        //
         for (int i = 0; i < 6; i++) {
             int numberToSell = rnd.nextInt(1000);
             int numberToBuy = rnd.nextInt(1000);
@@ -81,25 +84,3 @@ public class CAB302Assignment { //extends Application {
     }
 */
 }
-
-/*
-
-//System.out.println(organisation2.getCredits() + organisation2.getName());
-        System.out.println("name");
-        String name = "john";//scanner.nextLine();
-        System.out.println("username");
-        String username = "smith";//scanner.nextLine();
-        System.out.println("password");
-        String password = "password";//scanner.nextLine();
-
-        User createUser = new User(name, username, password, UserType.Default);
-        createUser.setPassword(password);
-
-        System.out.println(createUser.getName() + createUser.getUsername() + createUser.getPassword() + createUser.getUserType().toString());
-
-        SellOrder sellOrder = new SellOrder(asset1, 100, 10, createUser, null);
-        orders.add(sellOrder);
-
-        SellOrder sellOrder3 = new SellOrder(asset2, 1000, 1, tradeUser, null);
-        sellOrders.add(sellOrder3);
-*/
