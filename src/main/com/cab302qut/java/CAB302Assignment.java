@@ -1,5 +1,6 @@
 package com.cab302qut.java;
 
+import com.cab302qut.java.util.ServerConfiguration;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,8 +8,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class CAB302Assignment extends Application {
+    private static ServerConfiguration config;
+
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static ServerConfiguration getConfig() {
+        return config;
+    }
+
+    public static void setConfig(ServerConfiguration config) {
+        CAB302Assignment.config = config;
     }
 
     @Override

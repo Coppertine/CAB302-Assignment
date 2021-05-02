@@ -1,5 +1,6 @@
 package test;
 
+import com.cab302qut.java.Users.User;
 import main.com.cab302qut.java.Organisation.Organisation;
 import main.com.cab302qut.java.Users.User;
 import main.com.cab302qut.java.Users.UserType;
