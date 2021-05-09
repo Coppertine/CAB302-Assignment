@@ -24,7 +24,7 @@ public class ServerConfiguration {
             else if(line.startsWith("Username:"))
                 credentials.username = line.substring("Username:".length() + 1);
             else if(line.startsWith("Password:"))
-                credentials.username = line.substring("Password:".length() + 1);
+                credentials.password = line.substring("Password:".length() + 1);
             else if(line.startsWith("Schema:"))
                 credentials.defaultSchema = line.substring("Schema:".length() + 1);
         });

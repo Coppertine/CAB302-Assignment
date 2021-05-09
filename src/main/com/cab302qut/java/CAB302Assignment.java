@@ -24,7 +24,8 @@ public class CAB302Assignment extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        //System.out.println(getClass().getResource("main.fxml").getPath());
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());

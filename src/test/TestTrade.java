@@ -79,7 +79,7 @@ public class TestTrade {
     @Test
     public void getTotalTradePrice() {
         testTrade1 = new Trade(testItem1, testUser1);
-        assertEquals(testTrade1.getTotalPrice())
+        assertEquals(testTrade1.getTotalPrice());
     }
 
     // Get quantity from trade
