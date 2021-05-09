@@ -1,5 +1,6 @@
 package com.cab302qut.java;
 
+import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Organisation.OrganisationException;
@@ -12,19 +13,32 @@ import com.cab302qut.java.Users.UserType;
 import javafx.event.EventHandler;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
 
+
 public class CAB302Assignment extends Application {
+    private static ServerConfiguration config;
+
+    public static ServerConfiguration getConfig() {
+        return config;
+    }
+
+    public static void setConfig(ServerConfiguration config) {
+        CAB302Assignment.config = config;
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -134,14 +148,14 @@ public class CAB302Assignment extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("CAB302Assignment");
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        //System.out.println(getClass().getResource("main.fxml").getPath());
+        //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Test.fxml"));
 
-        Scene scene = new Scene(grid, 300, 275);
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());
+
+        primaryStage.setTitle("Assignment");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
