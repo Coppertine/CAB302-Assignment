@@ -32,5 +32,6 @@ sourceSets {
 
 dependencies {
     compile 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
+    compile files('lib/TrayNotification.jar')
 }
 

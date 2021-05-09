@@ -6,6 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
@@ -33,5 +37,9 @@ public class CAB302Assignment extends Application {
         primaryStage.setTitle("Assignment");
         primaryStage.setScene(scene);
         primaryStage.show();
+        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
+        tray.setAnimationType(AnimationType.POPUP);
+        tray.showAndDismiss(Duration.seconds(2));
+
     }
 }
