@@ -7,23 +7,32 @@ import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Trades.SellOrder;
 import com.cab302qut.java.Users.User;
-
 import com.cab302qut.java.Users.UserType;
+
+import javafx.event.EventHandler;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
 
-public class CAB302Assignment { //extends Application {
+public class CAB302Assignment extends Application {
 
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
         //creates default users.
         Organisation organisation1 = new Organisation("Organisation 1");
         Organisation organisation2 = new Organisation("Organisation 2");
-        User mainUser = new User("John",organisation1, "JohnMainUser", "password", UserType.Administrator);
-        User tradeUser = new User("Ben",organisation2, "BenTrade", "password2", UserType.Default);
+        User mainUser = new User("John", organisation1, "JohnMainUser", "password", UserType.Administrator);
+        User tradeUser = new User("Ben", organisation2, "BenTrade", "password2", UserType.Default);
         Asset asset1 = new Asset("emojis", 1, 10);
         Asset asset2 = new Asset("CPU", 2, 5);
 
@@ -123,10 +132,17 @@ public class CAB302Assignment { //extends Application {
         }
     }
 
-/*
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("CAB302Assignment");
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
 
+        Scene scene = new Scene(grid, 300, 275);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-*/
 }
