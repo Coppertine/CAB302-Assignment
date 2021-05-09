@@ -1,8 +1,8 @@
-package test;
+package com.cab302qut.java.test;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
-import com.cab302qut.java.Organisation.OrganisationException;
+import main.com.cab302qut.java.Organisation.OrganisationException;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
 import org.junit.jupiter.api.BeforeEach;

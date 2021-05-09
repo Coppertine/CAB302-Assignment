@@ -40,18 +40,18 @@ public class TestTrade {
         // Trade type should be OPEN as default.
 
         testTrade1 = new Trade(testItem1, testUser1);
-        assertEquals(testTrade1.getTradeType(), TradeType.OPEN);
+        assertEquals((testTrade1.getTradeType()), TradeType.OPEN.toString());
     }
 
     // Add closed trade
     @Test
     public void addClosedTrade() {
         testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED);
-        assertEquals(testTrade1.getTradeDate(), Date.valueOf(LocalDate.now()));
-        assertEquals(testTrade1.getBuyingUser(), testUser1);
-        assertEquals(testTrade1.getSellingUser(), testUser2);
-        assertEquals(testTrade1.getTradeAsset(), testItem1);
-        assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
+        assertEquals(Date.valueOf(LocalDate.now()),testTrade1.getTradeDate());
+        assertEquals(testUser1,testTrade1.getBuyingUser());
+        assertEquals( testUser2,testTrade1.getSellingUser());
+        assertEquals(testItem1,testTrade1.getTradeAsset());
+        assertEquals(TradeType.CLOSED,testTrade1.getTradeType());
     }
 
     // Set trade as closed
@@ -64,7 +64,7 @@ public class TestTrade {
         } catch (TradeException e) {
             e.printStackTrace();
         }
-        assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
+        assertEquals(TradeType.CLOSED,testTrade1.getTradeType());
     }
 
     // Set trade as open
@@ -79,7 +79,7 @@ public class TestTrade {
     @Test
     public void getTotalTradePrice() {
         testTrade1 = new Trade(testItem1, testUser1);
-        assertEquals(testTrade1.getTotalPrice())
+        assertEquals(testTrade1.getTotalPrice());
     }
 
     // Get quantity from trade

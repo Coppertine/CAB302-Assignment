@@ -90,6 +90,5 @@ public class Trade {
         this.tradeType = tradeType;
     }
 
-    public Object getIndivualPrice() {
-    }
+
 }
