@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adda1b8a-2bf5-4c8e-b995-ff2ba0aa586c" name="Default Changelist" comment="Local commit -Giane">
+      <change afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/OrganisationTradeHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/organisationTradeHistory.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Organisation/OrganisationAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Organisation/OrganisationAsset.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +47,17 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/main" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -67,12 +83,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.152439" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
-  <component name="RunManager" selected="Application.TestAsset">
+  <component name="RunManager" selected="Application.CAB302Assignment">
     <configuration name="CAB302Assignment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.cab302qut.java.CAB302Assignment" />
       <module name="CAB302-Assignment.main" />
@@ -154,6 +171,14 @@
       <option name="presentableId" value="Default" />
       <updated>1618457301036</updated>
     </task>
+    <task id="LOCAL-00001" summary="Local commit -Giane">
+      <created>1620537475755</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620537475755</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,6 +196,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Local commit -Giane" />
     <option name="LAST_COMMIT_MESSAGE" value="Local commit -Giane" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CAB302_Assignment$TestAsset.ic" NAME="TestAsset Coverage Results" MODIFIED="1619616323967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
