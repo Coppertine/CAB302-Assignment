@@ -40,10 +40,10 @@ public class LoginController {
         username = usernameField.getText().toString();
         password = passwordField.getText().toString();
         System.out.println(password+ " "+ username);
-        User test = new User(username,password);
-        test.setPassword(password);
+        User checkUser = new User(username,password);
+        checkUser.setPassword(password);
 
-        System.out.println(test.getUsername()+ " "+ test.getPassword());
+        System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
 
     }
 
