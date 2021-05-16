@@ -118,4 +118,5 @@ return quantityToTrade;
     public void setQuantityToTrade(){
         this.quantityToTrade = quantityToTrade;
     }
+
 }
