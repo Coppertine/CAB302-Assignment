@@ -2,12 +2,27 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.TestController">
    <children>
-      <Button id="submitButton" layoutX="300.0" layoutY="126.0" mnemonicParsing="false" onAction="#userLogin" text="Submit" />
-      <TextField fx:id="usernameField" layoutX="113.0" layoutY="101.0" promptText="Username" />
-      <PasswordField fx:id="passwordField" layoutX="113.0" layoutY="148.0" promptText="Password" />
-      <Label id="helperLabel" layoutX="119.0" layoutY="71.0" />
+      <VBox alignment="CENTER" layoutX="229.0" prefHeight="400.0" prefWidth="143.0">
+         <children>
+            <Label layoutX="82.0" layoutY="149.0" text="Login">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="30.0" prefWidth="143.0" />
+            <Label fx:id="helperLabel" />
+            <Pane prefHeight="10.0" prefWidth="143.0" />
+            <TextField fx:id="usernameField" promptText="Username" />
+            <Pane prefHeight="10.0" prefWidth="143.0" />
+            <PasswordField fx:id="passwordField" promptText="Password" />
+            <Pane prefHeight="10.0" prefWidth="143.0" />
+            <Button id="submitButton" mnemonicParsing="false" onAction="#userLogin" text="Submit" />
+         </children>
+      </VBox>
+      <Button fx:id="passwordReset" layoutX="477.0" layoutY="361.0" mnemonicParsing="false" text="Password Reset" textAlignment="CENTER" />
    </children>
 </AnchorPane>
