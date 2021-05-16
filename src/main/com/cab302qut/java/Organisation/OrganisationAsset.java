@@ -9,7 +9,7 @@ public class OrganisationAsset extends Asset {
         super(assetName,id,price);
     }
 
-    public OrganisationAsset() {
-
-    }
+    //public OrganisationAsset() {
+//
+    //}
 }
