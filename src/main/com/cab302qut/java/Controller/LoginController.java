@@ -30,11 +30,20 @@ public class LoginController {
 
     private String password;
     private String username;
+    private boolean correctUser = false;
 
+    /**
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void userLogin(ActionEvent actionEvent) throws IOException {
         checkLogin();
     }
 
+    /**
+     * checks user login is correct and submits to server
+     */
     private void checkLogin(){
 
         username = usernameField.getText().toString();
@@ -44,6 +53,10 @@ public class LoginController {
         checkUser.setPassword(password);
 
         System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
+
+        if (!correctUser){
+            helperLabel.setText("The Username or Password was incorrect");
+        }
 
     }
 

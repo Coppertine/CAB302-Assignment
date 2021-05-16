@@ -7,22 +7,28 @@
 <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.LoginController">
    <children>
       <Button fx:id="passwordReset" layoutX="477.0" layoutY="361.0" mnemonicParsing="false" text="Password Reset" textAlignment="CENTER" />
-      <VBox alignment="CENTER" layoutX="200.0" layoutY="64.0" prefHeight="272.0" prefWidth="200.0">
+      <HBox prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label layoutX="82.0" layoutY="149.0" text="Login">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="0.0" prefWidth="200.0" />
-            <Label fx:id="helperLabel" />
-            <Pane prefHeight="10.0" prefWidth="143.0" />
-            <TextField fx:id="usernameField" promptText="Username" />
-            <Pane prefHeight="10.0" prefWidth="143.0" />
-            <PasswordField fx:id="passwordField" promptText="Password" />
-            <Pane prefHeight="10.0" prefWidth="143.0" />
-            <Button id="submitButton" mnemonicParsing="false" onAction="#userLogin" text="Submit" />
+            <Pane prefHeight="400.0" prefWidth="300.0" />
+            <VBox alignment="CENTER" prefHeight="359.0" prefWidth="400.0">
+               <children>
+                  <Label layoutX="82.0" layoutY="149.0" text="Login">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="0.0" prefWidth="200.0" />
+                  <Label fx:id="helperLabel" />
+                  <Pane prefHeight="10.0" prefWidth="143.0" />
+                  <TextField fx:id="usernameField" promptText="Username" />
+                  <Pane prefHeight="10.0" prefWidth="143.0" />
+                  <PasswordField fx:id="passwordField" promptText="Password" />
+                  <Pane prefHeight="10.0" prefWidth="143.0" />
+                  <Button id="submitButton" mnemonicParsing="false" onAction="#userLogin" text="Submit" />
+               </children>
+            </VBox>
+            <Pane prefHeight="400.0" prefWidth="300.0" />
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

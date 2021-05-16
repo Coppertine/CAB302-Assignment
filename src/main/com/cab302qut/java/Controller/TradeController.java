@@ -44,10 +44,18 @@ public class TradeController {
 //need to add different assets to choice box
 //then when clicked they are displayed to the user
 
+    /**
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void sendOrder(ActionEvent actionEvent) throws IOException {
         checkOrder();
     }
 
+    /**
+     * checks order and then submits order to server
+     */
     private void checkOrder() {
         asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
 
