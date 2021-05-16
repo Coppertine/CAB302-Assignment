@@ -50,6 +50,10 @@ public class CAB302Assignment extends Application {
         Asset asset1 = new Asset("emojis", 1, 10);
         Asset asset2 = new Asset("CPU", 2, 5);
 
+
+        User test = new User("t", "Username","password", UserType.Default);
+        test.setPassword(test.getPassword().toString());
+        //System.out.println(test.getName() + test.getUsername() + test.getPassword() + test.getUserType().toString());
         //arrays of different orders
         ArrayList<Order> sellOrders = new ArrayList<Order>();
         ArrayList<Order> orders = new ArrayList<Order>();

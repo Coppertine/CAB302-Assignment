@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.TestController">
    <children>
-      <Button id="submitButton" layoutX="300.0" layoutY="126.0" mnemonicParsing="false" text="Submit" />
-      <TextField id="usernameField" layoutX="113.0" layoutY="101.0" promptText="Username" />
-      <PasswordField id="passwordField" layoutX="113.0" layoutY="148.0" promptText="Password" />
+      <Button id="submitButton" layoutX="300.0" layoutY="126.0" mnemonicParsing="false" onAction="#userLogin" text="Submit" />
+      <TextField fx:id="usernameField" layoutX="113.0" layoutY="101.0" promptText="Username" />
+      <PasswordField fx:id="passwordField" layoutX="113.0" layoutY="148.0" promptText="Password" />
+      <Label id="helperLabel" layoutX="119.0" layoutY="71.0" />
    </children>
 </AnchorPane>
