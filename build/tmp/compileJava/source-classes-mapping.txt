@@ -16,10 +16,10 @@ com/cab302qut/java/Organisation/Organisation.java
  com.cab302qut.java.Organisation.Organisation
 com/cab302qut/java/Organisation/OrganisationAsset.java
  com.cab302qut.java.Organisation.OrganisationAsset
-com/cab302qut/java/util/DatabaseConnection.java
- com.cab302qut.java.util.DatabaseConnection
-com/cab302qut/java/CAB302Assignment.java
- com.cab302qut.java.CAB302Assignment
+com/cab302qut/java/Controller/LoginController.java
+ com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/Controller/TradeController.java
+ com.cab302qut.java.Controller.TradeController
 com/cab302qut/java/Users/UserType.java
  com.cab302qut.java.Users.UserType
 com/cab302qut/java/Trades/TradeType.java
@@ -33,5 +33,7 @@ com/cab302qut/java/Organisation/OrganisationException.java
  com.cab302qut.java.Organisation.OrganisationException
 com/cab302qut/java/Trades/SellOrder.java
  com.cab302qut.java.Trades.SellOrder
-com/cab302qut/java/Controller/TestController.java
- com.cab302qut.java.Controller.TestController
+com/cab302qut/java/util/DatabaseConnection.java
+ com.cab302qut.java.util.DatabaseConnection
+com/cab302qut/java/CAB302Assignment.java
+ com.cab302qut.java.CAB302Assignment
