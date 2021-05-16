@@ -1,4 +1,4 @@
-package com.cab302qut.java.Controller;
+package com.cab302qut.java.Server.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
