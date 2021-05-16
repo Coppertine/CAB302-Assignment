@@ -1,5 +1,7 @@
 plugins {
     id 'application'
+
+
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
@@ -7,6 +9,7 @@ javafx {
     version = '16'
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
+mainClassName = "com.cab302qut.java.CAB302Assignment"
 
 mainClassName = "com.cab302qut.java.CAB302Assignment"
 
@@ -32,6 +35,8 @@ sourceSets {
 
 dependencies {
     compile 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
+
     compile files('lib/TrayNotification.jar')
+
 }
 

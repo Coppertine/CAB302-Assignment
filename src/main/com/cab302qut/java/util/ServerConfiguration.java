@@ -1,13 +1,17 @@
 package com.cab302qut.java.util;
 
 import java.io.*;
+
 import java.net.Socket;
+
 import java.nio.file.Files;
 import java.util.stream.Stream;
 
 public class ServerConfiguration {
     private DatabaseCredentials credentials;
+
     private Socket socket;
+
 
     public void reloadConfiguration(String filePath) throws IOException {
         File configFile = new File(filePath);
@@ -60,7 +64,6 @@ public class ServerConfiguration {
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
-
     private static class DatabaseCredentials
     {
         private String address;
@@ -70,4 +73,6 @@ public class ServerConfiguration {
         private String defaultSchema;
     }
 
+
 }
+
