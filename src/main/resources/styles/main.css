@@ -1,0 +1,5 @@
+.pagetab .active {
+    -fx-background-color: #006666;
+    -fx-foreground-color: #fff;
+}
+
