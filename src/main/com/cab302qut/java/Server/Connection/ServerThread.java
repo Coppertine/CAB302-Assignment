@@ -53,7 +53,7 @@ public class ServerThread extends Thread {
 
     @Override
     public final void run() {
-        while (!stopped) { // Why? just, why?
+       while (!stopped) { // Why? just, why?
             try {
                 client.handle(clientID, streamIn.readUTF());
                 System.out.println(streamIn.readUTF());

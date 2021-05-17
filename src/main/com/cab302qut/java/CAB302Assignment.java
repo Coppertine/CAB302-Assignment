@@ -29,9 +29,9 @@ import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import tray.animations.AnimationType;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
+//import tray.animations.AnimationType;
+//import tray.notification.NotificationType;
+//import tray.notification.TrayNotification;
 
 
 import java.io.IOException;
@@ -161,23 +161,16 @@ public class CAB302Assignment extends Application {
         }
     }
 
-    public static ServerConfiguration getConfig() {
-        return config;
-    }
-
-    public static void setConfig(ServerConfiguration config) {
-        CAB302Assignment.config = config;
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         //System.out.println(getClass().getResource("main.fxml").getPath());
-        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
-        tray.setAnimationType(AnimationType.POPUP);
-        tray.showAndDismiss(Duration.seconds(2));
+//        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
+//        tray.setAnimationType(AnimationType.POPUP);
+//        tray.showAndDismiss(Duration.seconds(2));
 
         //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Trade.fxml"));
 
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());

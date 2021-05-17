@@ -1,27 +1,41 @@
+com/cab302qut/java/Controller/TradeController.java
+ com.cab302qut.java.Controller.TradeController
 com/cab302qut/java/Items/Asset.java
  com.cab302qut.java.Items.Asset
 com/cab302qut/java/Trades/Order.java
  com.cab302qut.java.Trades.Order
-com/cab302qut/java/Trades/Trade.java
- com.cab302qut.java.Trades.Trade
 com/cab302qut/java/Controller/ServerController.java
  com.cab302qut.java.Controller.ServerController
+com/cab302qut/java/Trades/OrderType.java
+ com.cab302qut.java.Trades.OrderType
+com/cab302qut/java/Organisation/OrganisationAsset.java
+ com.cab302qut.java.Organisation.OrganisationAsset
+com/cab302qut/java/Controller/LoginController.java
+ com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/Client/Connection/ClientThread.java
+ com.cab302qut.java.Client.Connection.ClientThread
+com/cab302qut/java/Server/Connection/ServerThread.java
+ com.cab302qut.java.Server.Connection.ServerThread
+com/cab302qut/java/Client/Connection/TradeClient.java
+ com.cab302qut.java.Client.Connection.TradeClient
+com/cab302qut/java/Users/UserType.java
+ com.cab302qut.java.Users.UserType
+com/cab302qut/java/Client/Controller/MainController.java
+ com.cab302qut.java.Client.Controller.MainController
+com/cab302qut/java/Trades/SellOrder.java
+ com.cab302qut.java.Trades.SellOrder
+com/cab302qut/java/Server/Controller/ServerController.java
+ com.cab302qut.java.Server.Controller.ServerController
+com/cab302qut/java/Server/Connection/TradeServer.java
+ com.cab302qut.java.Server.Connection.TradeServer
 com/cab302qut/java/Trades/TradeException.java
  com.cab302qut.java.Trades.TradeException
 com/cab302qut/java/Controller/MainController.java
  com.cab302qut.java.Controller.MainController
-com/cab302qut/java/Trades/OrderType.java
- com.cab302qut.java.Trades.OrderType
 com/cab302qut/java/Organisation/Organisation.java
  com.cab302qut.java.Organisation.Organisation
-com/cab302qut/java/Organisation/OrganisationAsset.java
- com.cab302qut.java.Organisation.OrganisationAsset
-com/cab302qut/java/util/DatabaseConnection.java
- com.cab302qut.java.util.DatabaseConnection
-com/cab302qut/java/CAB302Assignment.java
- com.cab302qut.java.CAB302Assignment
-com/cab302qut/java/Users/UserType.java
- com.cab302qut.java.Users.UserType
+com/cab302qut/java/Trades/Trade.java
+ com.cab302qut.java.Trades.Trade
 com/cab302qut/java/Trades/TradeType.java
  com.cab302qut.java.Trades.TradeType
 com/cab302qut/java/util/ServerConfiguration.java
@@ -31,9 +45,7 @@ com/cab302qut/java/Users/User.java
  com.cab302qut.java.Users.User
 com/cab302qut/java/Organisation/OrganisationException.java
  com.cab302qut.java.Organisation.OrganisationException
-com/cab302qut/java/Trades/SellOrder.java
- com.cab302qut.java.Trades.SellOrder
-com/cab302qut/java/Controller/TradeController.java
- com.cab302qut.java.Controller.TradeController
-com/cab302qut/java/Controller/LoginController.java
- com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/util/DatabaseConnection.java
+ com.cab302qut.java.util.DatabaseConnection
+com/cab302qut/java/CAB302Assignment.java
+ com.cab302qut.java.CAB302Assignment

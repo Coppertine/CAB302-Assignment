@@ -89,7 +89,7 @@ public class TradeServer implements Runnable {
 
             }
         }
-        Debug.log("Server is stopped.");
+        //Debug.log("Server is stopped.");
     }
 
     /**
