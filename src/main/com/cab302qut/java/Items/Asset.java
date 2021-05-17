@@ -22,6 +22,10 @@ public class Asset {
 
     }
 
+    public Asset(String assetName) {
+        this.assetName = assetName;
+    }
+
     public ArrayList<Trade> getTradeHistory() {
         return tradeHistory;
     }
