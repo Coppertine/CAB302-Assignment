@@ -15,6 +15,6 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //organisationLabel = new TextFlow(new Text("Testing"));
+       // organisationLabel = new TextFlow(new Text("Testing"));
     }
 }
