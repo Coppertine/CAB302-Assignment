@@ -21,11 +21,11 @@ public class TestAsset {
     @BeforeEach
     // Create new Asset
     public void createNewAsset() {
-        testAsset = new Asset("Widgets",0,10);
+        testAsset = new Asset("Widgets");
         arrayTestAssets = new ArrayList<>() {{
             add(testAsset);
-            add(new Asset("CPU Hours",1,35));
-            add(new Asset("GPU Hours",2,45));
+            add(new Asset("CPU Hours"));
+            add(new Asset("GPU Hours"));
         }};
     }
 
@@ -62,7 +62,7 @@ public class TestAsset {
     }
     // Get Id of newly created asset
     public void getAssetId() {
-        int theAssetId = testAsset.getAssetId();
+        //int theAssetId = testAsset.getAssetId();
     }
     // Delete asset (after asset is created)
     public void deleteAsset() {
@@ -70,29 +70,29 @@ public class TestAsset {
     }
 
     // remove asset by id
-    public void removeAssetById() {
-        int idOfAsset = 2;
-        boolean assetFound = false;
-        for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
-                arrayTestAssets.remove(i);
-                assetFound = true;
-            }
-        }
-    }
+//    public void removeAssetById() {
+//        int idOfAsset = 2;
+//        boolean assetFound = false;
+//        for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+//            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
+//                arrayTestAssets.remove(i);
+//                assetFound = true;
+//            }
+//        }
+//    }
 
-    // get asset from id
-    public void getAssetById(){
-        int idOfAsset = 2;
-        Asset theAssetFound = null;
-        boolean assetFound = false;
-            for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
-                theAssetFound = arrayTestAssets.get(i);
-                assetFound = true;
-            }
-        }
-    }
+//    // get asset from id
+//    public void getAssetById(){
+//        int idOfAsset = 2;
+//        Asset theAssetFound = null;
+//        boolean assetFound = false;
+//            for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+//            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
+//                theAssetFound = arrayTestAssets.get(i);
+//                assetFound = true;
+//            }
+//        }
+//    }
 
     // Get asset's trade history.
     //public void getAssetTradeHistory() {

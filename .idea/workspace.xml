@@ -4,13 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adda1b8a-2bf5-4c8e-b995-ff2ba0aa586c" name="Default Changelist" comment="Local commit -Giane">
-      <change afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/OrganisationTradeHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/organisationTradeHistory.fxml" afterDir="false" />
+    <list default="true" id="adda1b8a-2bf5-4c8e-b995-ff2ba0aa586c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/Database/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Database/DatabaseStatements.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/TestDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Client/Connection/ClientThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Client/Connection/TradeClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Items/Asset.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Items/Asset.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/ServerThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/TestAsset$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/TestAsset$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/TestAsset.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/TestAsset.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/TestOrganisation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/source-classes-mapping.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Organisation/OrganisationAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Organisation/OrganisationAsset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/TradeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/TradeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Items/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Items/Asset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/ServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAsset.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,11 +64,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="CAB302-Assignment" type="f1a62948:ProjectNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CAB302-Assignment" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -50,21 +74,22 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/main" />
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Nicholas" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/com/cab302qut/java/Organisation/OrganisationAsset.java" root0="FORCE_HIGHLIGHTING" />
@@ -74,6 +99,11 @@
     <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/com/cab302qut/java/Items/Asset.java" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="200" />
+    </hideBySeverity>
+  </component>
   <component name="ProjectId" id="1rBlKFSNGYqgWk6DPNDOSwuiuVe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -81,19 +111,43 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/TrayNotification.jar" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.152439" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="project.structure.side.proportion" value="0.36785713" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager" selected="Application.CAB302Assignment">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Uni 2021\CAB302\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Uni 2021\CAB302\src\main\com\cab302qut\java" />
+      <recent name="E:\Uni 2021\CAB302\src\main\com\cab302qut\java\util" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle run" />
+      <command value="gradle check" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.TestDatabase">
     <configuration name="CAB302Assignment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="--module-path javafx-sdk-16\lib --add-mo" value="==es=javafx.controls" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.cab302qut.java.CAB302Assignment" />
-      <module name="CAB302-Assignment.main" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/../openjfx-16_windows-x64_bin-sdk/javafx-sdk-16/lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <module name="CAB302.main" />
+      <option name="VM_PARAMETERS" value="--add-modules javafx.controls,javafx.fxml --module-path &quot;E:\Uni 2021\CAB302\lib\javafx-sdk-16\lib&quot;" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.cab302qut.java.*" />
@@ -104,12 +158,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestAsset" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.TestAsset" />
-      <module name="CAB302-Assignment.test" />
+    <configuration name="DatabaseConnection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Database.DatabaseConnection" />
+      <module name="CAB302-Assignment.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value="Database.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -117,47 +171,87 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestAsset" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestDatabase" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestDatabase" />
+      <module name="CAB302-Assignment.test" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CAB302 [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;test.TestAsset&quot;" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
+            <option value="check" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="TestAsset" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Assignment.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestAsset" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="CAB302 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
     </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.CAB302Assignment" />
+      <item itemvalue="Application.DatabaseConnection" />
+      <item itemvalue="Application.TestDatabase" />
+      <item itemvalue="Gradle.CAB302 [check]" />
+      <item itemvalue="Gradle.CAB302 [run]" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestAsset" />
-        <item itemvalue="Gradle.TestAsset" />
-        <item itemvalue="Application.TestAsset" />
+        <item itemvalue="Application.TestDatabase" />
+        <item itemvalue="Application.DatabaseConnection" />
+        <item itemvalue="Gradle.CAB302 [check]" />
+        <item itemvalue="Gradle.CAB302 [run]" />
         <item itemvalue="Application.CAB302Assignment" />
       </list>
     </recent_temporary>
@@ -171,14 +265,6 @@
       <option name="presentableId" value="Default" />
       <updated>1618457301036</updated>
     </task>
-    <task id="LOCAL-00001" summary="Local commit -Giane">
-      <created>1620537475755</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1620537475755</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,14 +278,6 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Local commit -Giane" />
-    <option name="LAST_COMMIT_MESSAGE" value="Local commit -Giane" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CAB302_Assignment$TestAsset.ic" NAME="TestAsset Coverage Results" MODIFIED="1619616323967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
