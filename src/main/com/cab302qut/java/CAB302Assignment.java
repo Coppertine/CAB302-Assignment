@@ -58,8 +58,8 @@ public class CAB302Assignment extends Application {
         Organisation organisation2 = new Organisation("Organisation 2");
         User mainUser = new User("John", organisation1, "JohnMainUser", "password", UserType.Administrator);
         User tradeUser = new User("Ben", organisation2, "BenTrade", "password2", UserType.Default);
-        Asset asset1 = new Asset("emojis", 1, 10);
-        Asset asset2 = new Asset("CPU", 2, 5);
+        Asset asset1 = new Asset("emojis");
+        Asset asset2 = new Asset("CPU");
 
 
         User test = new User("t", "Username","password", UserType.Default);
