@@ -117,23 +117,23 @@
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <Pane prefHeight="45.0" prefWidth="228.0" />
-                  <Label fx:id="AssetBuyName" alignment="CENTER" prefHeight="17.0" prefWidth="237.0" text="Current Buy Price" textAlignment="CENTER">
+                  <Label fx:id="assetBuyName" alignment="CENTER" prefHeight="17.0" prefWidth="237.0" text="Current Buy Price" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="SalePrice" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Buy Price" textAlignment="CENTER">
+                  <Label fx:id="buyPrice" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <Pane prefHeight="20.0" prefWidth="228.0" />
-                  <Label fx:id="AssetSaleName" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Current Sale Price" textAlignment="CENTER">
+                  <Label fx:id="assetSaleName" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Current Sale Price" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="SalePrice" alignment="CENTER" layoutX="10.0" layoutY="82.0" prefHeight="17.0" prefWidth="237.0" text="Sale Price" textAlignment="CENTER">
+                  <Label fx:id="salePrice" alignment="CENTER" layoutX="10.0" layoutY="82.0" prefHeight="17.0" prefWidth="237.0" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

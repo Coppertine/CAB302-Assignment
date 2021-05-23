@@ -15,4 +15,7 @@ public class ServerController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    public void printToMessageScreen(String s) {
+    }
 }

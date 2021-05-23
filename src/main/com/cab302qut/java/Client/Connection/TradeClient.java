@@ -28,9 +28,9 @@ public class TradeClient implements Runnable {
             open();
             thread = new ClientThread(this, socket, socket.getPort());
         }catch (UnknownHostException uhe) {
-            Debug.log("Host unknown: " + uhe.getMessage());
+            //Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {
-            Debug.log("Unexpected exception: " + ioe.getMessage());
+            //Debug.log("Unexpected exception: " + ioe.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class TradeClient implements Runnable {
             outputStream.writeUTF(msg);
             outputStream.flush();
         } catch (IOException e) {
-            Debug.log(e.toString());
+            //Debug.log(e.toString());
         }
     }
 

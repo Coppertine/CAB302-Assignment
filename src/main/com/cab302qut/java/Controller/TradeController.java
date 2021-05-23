@@ -5,6 +5,7 @@ import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Users.User;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,21 +37,43 @@ public class TradeController {
     @FXML
     private Button sendOrder;
 
+
+    @FXML
+    private Label assetBuyName;
+    @FXML
+    private Label assetSellName;
+    @FXML
+    private Label salePrice;
+    @FXML
+    private Label buyPrice;
+
     private Asset asset;
     private int quantity;
     private double price;
     private User testUser;
 
+    private String[] assetList = new String[]{
+            "test1", "test2", "test3"
+    };
+
 //need to add different assets to choice box
 //then when clicked they are displayed to the user
 
     /**
-     *
      * @param actionEvent
      * @throws IOException
      */
     public void sendOrder(ActionEvent actionEvent) throws IOException {
         checkOrder();
+    }
+
+
+    public void Check() {
+        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue ov, Number old_val, Number new_val){
+            assetBuyName.setText(assetList[new_val.intValue()] + " Buy Price");
+            assetSellName.setText(assetList[new_val.intValue()] + " Sale Price");}
+        });
     }
 
     /**
@@ -61,14 +84,12 @@ public class TradeController {
 
         try {
             quantity = Integer.parseInt(assetQuantity.getText().toString());
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
         try {
             price = Double.parseDouble(assetPrice.getText().toString());
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
 
@@ -78,7 +99,7 @@ public class TradeController {
             System.out.println(buyOrder.getPrice() + " " + buyOrder.getTradeAsset() + buyOrder.getQuantityToTrade() + OrderType.BUY);
         } else if (sellButton.isSelected()) {
             Order sellOrder = new Order(asset, OrderType.SELL, quantity, price, testUser, date);
-            System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade()+ OrderType.SELL);
+            System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade() + OrderType.SELL);
         } else {
             //throw error
         }

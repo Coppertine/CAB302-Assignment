@@ -49,7 +49,7 @@ public class TradeServer implements Runnable {
             this.controller = controllerInput;
             server = new ServerSocket(config.getPort());
         } catch (IOException e) {
-            Debug.log(e.toString());
+            //Debug.log(e.toString());
 
         }
     }
@@ -67,7 +67,7 @@ public class TradeServer implements Runnable {
      * @param socket The client socket that connects to the server.
      */
     public final void addThread(final Socket socket) {
-        Debug.log("Client Accepted: " + socket);
+        //Debug.log("Client Accepted: " + socket);
         ServerThread client
                 = new ServerThread(this, socket, clients.size() + 1);
         clients.add(client);
@@ -76,7 +76,7 @@ public class TradeServer implements Runnable {
             client.start();
             client.send("id: " + clients.indexOf(client));
         } catch (IOException e) {
-            Debug.log(e.toString());
+            //Debug.log(e.toString());
         }
     }
 
@@ -115,25 +115,28 @@ public class TradeServer implements Runnable {
         }
     }
 
+    private void handleCommands(int id, String input) {
+    }
+
     /**
      * Parses the traffic information to the controller.
      * @param ID The location number of the client.
      * @param input  The string input in CSV format starting with
      * {@code Traffic: }
      */
-    private void handleCommands(final int ID, final String input) {
-        try {
-            //TODO: Change to handle Trades from clients and save to database.
-            if (input.startsWith("Traffic: ")) {
-
-                Traffic importTraffic
-                        = new Traffic(input.substring("Traffic: ".length()));
-                controller.trafficImport(importTraffic);
-            }
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    private void handleCommands(final int ID, final String input) {
+//        try {
+//            //TODO: Change to handle Trades from clients and save to database.
+//            if (input.startsWith("Traffic: ")) {
+//
+//                Traffic importTraffic
+//                        = new Traffic(input.substring("Traffic: ".length()));
+//                controller.trafficImport(importTraffic);
+//            }
+//        } catch (NoSuchElementException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     /**
      * Returns the client with the same port as the ID.
