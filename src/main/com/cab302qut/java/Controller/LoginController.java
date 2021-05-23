@@ -53,11 +53,25 @@ public class LoginController {
 
         username = usernameField.getText().toString();
         password = passwordField.getText().toString();
-        System.out.println(password+ " "+ username);
-        User checkUser = new User(username,password);
-        checkUser.setPassword(password);
+        if (username == ""&& password != ""){
+            helperLabel.setText("Please enter a Username");
+        }
+        else if (password == "" && username !=""){
+            helperLabel.setText("Please enter a password");
+        }
+        else if (password == "" && username ==""){
+            helperLabel.setText("Please enter a username and password");
+        }
+        else{
+            System.out.println(password+ " "+ username);
+            User checkUser = new User(username,password);
+            checkUser.setPassword(password);
+            System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
+            correctUser = true;
+        }
 
-        System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
+
+
 
         if (!correctUser){
             helperLabel.setText("The Username or Password was incorrect");
