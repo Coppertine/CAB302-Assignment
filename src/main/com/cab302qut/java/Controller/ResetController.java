@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 public class ResetController {
-    
+
     @FXML
     private TextField usernameField;
     @FXML
@@ -34,7 +34,6 @@ public class ResetController {
     private boolean correctUser = false;
 
     /**
-     *
      * @param actionEvent
      * @throws IOException
      */
@@ -45,20 +44,25 @@ public class ResetController {
     /**
      * checks user login is correct and submits to server
      */
-    private void checkLogin(){
+    private void checkLogin() {
 
-        username = usernameField.getText().toString();
-        password = passwordField.getText().toString();
-        System.out.println(password+ " "+ username);
-        User checkUser = new User(username,password);
-        checkUser.setPassword(password);
-
-        System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
-
-        if (!correctUser){
-            helperLabel.setText("The Username or Password was incorrect");
+        if (username == "" && password != "") {
+            helperLabel.setText("Please enter a Username");
+        } else if (password == "" && username != "") {
+            helperLabel.setText("Please enter a password");
+        } else if (password == "" && username == "") {
+            helperLabel.setText("Please enter a username and password");
+        } else {
+            System.out.println(password + " " + username);
+            User checkUser = new User(username, password);
+            checkUser.setPassword(password);
+            System.out.println(checkUser.getUsername() + " " + checkUser.getPassword());
+            correctUser = true;
         }
 
+        if (!correctUser) {
+            helperLabel.setText("The Username or Password was incorrect");
+        }
     }
 
     public void back(ActionEvent actionEvent) throws IOException {
@@ -68,7 +72,7 @@ public class ResetController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

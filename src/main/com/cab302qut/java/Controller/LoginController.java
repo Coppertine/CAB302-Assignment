@@ -71,9 +71,7 @@ public class LoginController {
         }
 
 
-
-
-        if (!correctUser){
+        if (!correctUser) {
             helperLabel.setText("The Username or Password was incorrect");
         }
 
