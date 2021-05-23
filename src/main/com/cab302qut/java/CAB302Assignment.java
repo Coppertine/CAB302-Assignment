@@ -11,8 +11,11 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
+import java.io.IOException;
+
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
+    private static String configFile = "/config.ini";
 
     public static void main(String[] args) {
         launch(args);
@@ -24,6 +27,11 @@ public class CAB302Assignment extends Application {
 
     public static void setConfig(ServerConfiguration config) {
         CAB302Assignment.config = config;
+        try {
+            config.reloadConfiguration(configFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -37,7 +45,8 @@ public class CAB302Assignment extends Application {
         primaryStage.setTitle("Assignment");
         primaryStage.setScene(scene);
         primaryStage.show();
-        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
+        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!",
+                NotificationType.INFORMATION);
         tray.setAnimationType(AnimationType.POPUP);
         tray.showAndDismiss(Duration.seconds(2));
 

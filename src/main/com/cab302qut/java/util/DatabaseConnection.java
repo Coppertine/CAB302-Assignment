@@ -4,6 +4,7 @@ import com.cab302qut.java.CAB302Assignment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
@@ -29,5 +30,14 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
+
+    public ResultSet executeStatement(String statement) throws SQLException {
+        return connection.createStatement().executeQuery(statement);
+    }
+
+    public void CloseConnection() throws SQLException {
+        connection.close();
+    }
+
 
 }

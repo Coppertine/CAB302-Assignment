@@ -1,7 +1,7 @@
-package test;
+package com.cab302qut.java.test;
 
-import main.com.cab302qut.java.Items.Asset;
-import main.com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Trades.Trade;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

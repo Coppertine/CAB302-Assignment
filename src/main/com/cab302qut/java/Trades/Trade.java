@@ -14,29 +14,35 @@ import java.util.Date;
  */
 public class Trade {
     private Asset tradeAsset;
+    private int assetQuantity;
     private User sellingUser;
     private User buyingUser;
     private Date tradeDate;
     private TradeType tradeType;
+    private final Integer tradeID;
 
     /**
+     * @param tradeID
      * @param tradeAsset
      * @param sellingUser
      * @param buyingUser
      * @param tradeDate
      * @param tradeType
      */
-    public Trade(Asset tradeAsset, User sellingUser, User buyingUser, Date tradeDate, TradeType tradeType) {
+    public Trade(Integer tradeID, Asset tradeAsset, User sellingUser, User buyingUser,
+                 Date tradeDate,
+                 TradeType tradeType) {
         this.tradeAsset = tradeAsset;
         this.sellingUser = sellingUser;
         this.buyingUser = buyingUser;
         this.tradeDate = tradeDate;
         this.tradeType = tradeType;
+        this.tradeID = tradeID;
     }
 
     public Trade(Asset tradeAsset, User sellingUser)
     {
-        this(tradeAsset, sellingUser, null, null, TradeType.OPEN);
+        this(null, tradeAsset, sellingUser, null, null, TradeType.OPEN);
     }
 
     /**
@@ -90,5 +96,15 @@ public class Trade {
         this.tradeType = tradeType;
     }
 
-
+    @Override
+    public String toString() {
+        // Trade: 0,1,1.99,
+        return "Trade: " +
+                tradeID+","+
+                tradeAsset+","+
+                tradeType+","+
+                tradeDate+","+
+                buyingUser+","+
+                sellingUser;
+    }
 }
