@@ -20,7 +20,7 @@
                   <Pane prefHeight="0.0" prefWidth="200.0" />
                   <Label fx:id="helperLabel" />
                   <Pane prefHeight="10.0" prefWidth="143.0" />
-                  <TextField fx:id="usernameField" promptText="Username" />
+                  <TextField fx:id="usernameField" prefHeight="25.0" prefWidth="200.0" promptText="Username" />
                   <Pane prefHeight="10.0" prefWidth="143.0" />
                   <PasswordField fx:id="passwordField" promptText="Password" />
                   <Pane prefHeight="10.0" prefWidth="143.0" />

@@ -8,9 +8,9 @@
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="183.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="220.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="123.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="249.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="228.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="84.0" vgrow="SOMETIMES" />
@@ -112,6 +112,32 @@
                         <Pane prefHeight="80.0" prefWidth="60.0" />
                      </children>
                   </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Pane prefHeight="45.0" prefWidth="228.0" />
+                  <Label fx:id="AssetBuyName" alignment="CENTER" prefHeight="17.0" prefWidth="237.0" text="Current Buy Price" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="SalePrice" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Buy Price" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="20.0" prefWidth="228.0" />
+                  <Label fx:id="AssetSaleName" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Current Sale Price" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="SalePrice" alignment="CENTER" layoutX="10.0" layoutY="82.0" prefHeight="17.0" prefWidth="237.0" text="Sale Price" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
          </children>
