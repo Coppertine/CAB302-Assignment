@@ -34,3 +34,11 @@ dependencies {
     compile 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.cab302qut.java.CAB302Assignment'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
