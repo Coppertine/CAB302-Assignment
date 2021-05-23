@@ -2,4 +2,4 @@ TestAsset.java
  TestAsset
  TestAsset$1
 TestOrganisation.java
- TestOrganisation
+ com.cab302qut.java.test.TestOrganisation

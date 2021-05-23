@@ -170,7 +170,7 @@ public class CAB302Assignment extends Application {
 //        tray.showAndDismiss(Duration.seconds(2));
 
         //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Trade.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());

@@ -1,9 +1,9 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.Users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,25 +11,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-
-import com.cab302qut.java.Users.User;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 
-public class LoginController {
+public class ResetController {
     
     @FXML
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
     @FXML
-    private Button submitButton;
+    private Button resetButton;
     @FXML
-    private Button passwordResetButton;
+    private Button backButton;
     @FXML
     private Label helperLabel;
 
@@ -42,7 +38,7 @@ public class LoginController {
      * @param actionEvent
      * @throws IOException
      */
-    public void userLogin(ActionEvent actionEvent) throws IOException {
+    public void resetPassword(ActionEvent actionEvent) throws IOException {
         checkLogin();
     }
 
@@ -65,9 +61,9 @@ public class LoginController {
 
     }
 
-    public void passwordReset(ActionEvent actionEvent) throws IOException {
+    public void back(ActionEvent actionEvent) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ResetPassword.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

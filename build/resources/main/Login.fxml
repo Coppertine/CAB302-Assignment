@@ -6,7 +6,6 @@
 
 <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.LoginController">
    <children>
-      <Button fx:id="passwordReset" layoutX="477.0" layoutY="361.0" mnemonicParsing="false" text="Password Reset" textAlignment="CENTER" />
       <HBox prefHeight="400.0" prefWidth="600.0">
          <children>
             <Pane prefHeight="400.0" prefWidth="300.0" />
@@ -30,5 +29,6 @@
             <Pane prefHeight="400.0" prefWidth="300.0" />
          </children>
       </HBox>
+      <Button fx:id="passwordReset" layoutX="477.0" layoutY="361.0" mnemonicParsing="false" onAction="#passwordReset" text="Password Reset" textAlignment="CENTER" />
    </children>
 </AnchorPane>
