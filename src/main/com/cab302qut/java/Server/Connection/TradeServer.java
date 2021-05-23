@@ -103,8 +103,8 @@ public class TradeServer implements Runnable {
                 findClient(Id).send("exit");
                 remove(Id);
             }
-            case "status ready" -> controller.printToMessageScreen("Client "
-                    + Id + "Ready");
+            //case "status ready" -> controller.printToMessageScreen("Client "
+              //      + Id + "Ready");
             default -> {
                 System.out.println(Id + ": " + input);
                 clients.forEach((client) -> {
@@ -126,9 +126,9 @@ public class TradeServer implements Runnable {
             //TODO: Change to handle Trades from clients and save to database.
             if (input.startsWith("Traffic: ")) {
 
-                Traffic importTraffic
-                        = new Traffic(input.substring("Traffic: ".length()));
-                controller.trafficImport(importTraffic);
+                //Traffic importTraffic
+                  //      = new Traffic(input.substring("Traffic: ".length()));
+                //controller.trafficImport(importTraffic);
             }
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
