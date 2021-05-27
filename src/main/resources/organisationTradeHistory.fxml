@@ -5,9 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane>
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.OrganisationTradeHistory">
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-<left>
+
+    <left>
     <VBox prefHeight="400.0" prefWidth="131.0" BorderPane.alignment="CENTER">
         <children>
             <GridPane>
@@ -34,21 +35,24 @@
     </VBox>
 </left>
 <center>
-    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
-        <content>
+<!--    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">-->
+<!--        <content>-->
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="254.0">
-               <children>
-                  <LineChart layoutY="117.0" prefHeight="282.0" prefWidth="456.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </LineChart>
-               </children></AnchorPane>
-        </content>
-    </ScrollPane>
+                  <children>
+                      <LineChart fx:id="priceChart" animated="false" layoutX="44.0" layoutY="27.0" prefHeight="317.0" prefWidth="364.0" title="Asset Price History">
+                          <xAxis>
+                              <NumberAxis fx:id="xAxis" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis fx:id="yAxis" side="LEFT" />
+                          </yAxis>
+                      </LineChart>
+               <Button layoutX="44.0" layoutY="344.0" mnemonicParsing="false" text="Past month" onAction="#showPastMonth"/>
+               <Button layoutX="133.0" layoutY="344.0" mnemonicParsing="false" text="Past Year" onAction="#showPastYear"/>
+                  </children>
+            </AnchorPane>
+<!--        </content>-->
+<!--    //</ScrollPane>-->
 </center>
 </BorderPane>
 </AnchorPane>

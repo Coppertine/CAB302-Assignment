@@ -1,3 +1,4 @@
+package com.cab302qut.java.test;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Trade;
@@ -48,7 +49,7 @@ public class TestAsset {
         String findAsset = "CPU Hours";
         Asset theAssetFound = null;
         boolean assetFound = false;
-        for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+        for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
             if (arrayTestAssets.get(i).getAssetName().equals(findAsset)) {
                 theAssetFound = arrayTestAssets.get(i);
                 assetFound = true;
@@ -62,7 +63,7 @@ public class TestAsset {
     }
     // Get Id of newly created asset
     public void getAssetId() {
-        //int theAssetId = testAsset.getAssetId();
+        //Integer theAssetId = testAsset.getAssetId();
     }
     // Delete asset (after asset is created)
     public void deleteAsset() {
@@ -70,24 +71,24 @@ public class TestAsset {
     }
 
     // remove asset by id
-//    public void removeAssetById() {
-//        int idOfAsset = 2;
-//        boolean assetFound = false;
-//        for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-//            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
-//                arrayTestAssets.remove(i);
-//                assetFound = true;
-//            }
-//        }
-//    }
+    public void removeAssetById() {
+        Integer assetId = 2;
+        boolean assetFound = false;
+        for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+            if (arrayTestAssets.get(i).getAssetName().equals(assetId)) {
+                arrayTestAssets.remove(i);
+                assetFound = true;
+            }
+        }
+    }
 
 //    // get asset from id
 //    public void getAssetById(){
-//        int idOfAsset = 2;
+//        Integer findAsset = 2;
 //        Asset theAssetFound = null;
 //        boolean assetFound = false;
-//            for (int i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-//            if (arrayTestAssets.get(i).getAssetId() == idOfAsset) {
+//            for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+//            if (arrayTestAssets.get(i).getAssetId().equals(findAsset)) {
 //                theAssetFound = arrayTestAssets.get(i);
 //                assetFound = true;
 //            }
@@ -95,16 +96,15 @@ public class TestAsset {
 //    }
 
     // Get asset's trade history.
-    //public void getAssetTradeHistory() {
+//    public void getAssetTradeHistory() {
 //        ArrayList<Trade> theTradeHistory = testAsset.getTradeHistory();
 //    }
-    // Get most recent trade history's price.
-
-    public void getRecentTradeHistoryPrice(){
-        // Currently don't have access to Trade class implementation
-        // but process would be
-        //  Double recentTradePrice = <assetName>.getTradeHistory().get(0).getPrice()
-        //
-
-    }
+//    // Get most recent trade history's price.
+//    public void getRecentTradeHistoryPrice(){
+//        // Currently don't have access to Trade class implementation
+//        // but process would be
+//        //  Double recentTradePrice = <assetName>.getTradeHistory().get(0).getPrice()
+//        //
+//
+//    }
 }

@@ -45,4 +45,7 @@ public class DatabaseStatements {
         String statement = String.format("INSERT INTO `%s` (assetName) VALUES (%s);", Tables.assets.toString(), assetName);
         db.executeStatement(statement);
     }
+
+
+
 }

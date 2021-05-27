@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"fx:controller="com.cab302qut.java.Controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.MainController">
    <left>
       <VBox prefHeight="400.0" prefWidth="131.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,14 +23,14 @@
                 <RowConstraints maxHeight="25.39999999999999" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fx:id="orgnisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation Name" wrappingWidth="131.13671684265137">
+                  <Text fx:id="orginisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation Name" wrappingWidth="131.13671684265137">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Italic" size="17.0" />
                      </font></Text>
-                  <Text fx:id="orgnisationLabel1" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" wrappingWidth="131.13671684265137" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Text fx:id="orginisationLabel1" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" wrappingWidth="131.13671684265137" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
@@ -96,7 +96,7 @@
                <children>
                   <ScrollPane layoutX="22.0" prefHeight="167.0" prefWidth="413.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="397.0" />
                     </content>
                   </ScrollPane>
                </children>
