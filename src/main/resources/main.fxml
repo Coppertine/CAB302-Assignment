@@ -22,14 +22,14 @@
                 <RowConstraints maxHeight="25.39999999999999" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fx:id="orginisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation Name" wrappingWidth="131.13671684265137">
+                  <Text fx:id="orgLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation Name" wrappingWidth="131.13671684265137">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Italic" size="17.0" />
                      </font></Text>
-                  <Text fx:id="orginisationLabel1" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" wrappingWidth="131.13671684265137" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Text fx:id="userLabel" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" wrappingWidth="131.13671684265137" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
@@ -103,10 +103,13 @@
                      </children>
                   </VBox>
                </children></HBox>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <Pane prefHeight="167.0" prefWidth="224.0">
+               <children>
+                  <Button fx:id="tradeButton" layoutX="209.0" layoutY="60.0" mnemonicParsing="false" onAction="#createTrade" text="Trade" />
+               </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ScrollPane layoutX="22.0" prefHeight="167.0" prefWidth="413.0">
+                  <ScrollPane fx:id="currentTrades" layoutX="22.0" prefHeight="167.0" prefWidth="413.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="397.0" />
                     </content>

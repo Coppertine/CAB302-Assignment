@@ -35,10 +35,10 @@ public class LoginController {
 
     private String password;
     private String username;
+    private String userOrganisation = "testOrganisation";
     private boolean correctUser = false;
 
     /**
-     *
      * @param actionEvent
      * @throws IOException
      */
@@ -49,33 +49,34 @@ public class LoginController {
     /**
      * checks user login is correct and submits to server
      */
-    private void checkLogin(ActionEvent actionEvent){
+    private void checkLogin(ActionEvent actionEvent) {
 
         username = usernameField.getText().toString();
         password = passwordField.getText().toString();
-        if (username == ""&& password != ""){
+        if (username == "" && password != "") {
             helperLabel.setText("Please enter a Username");
-        }
-        else if (password == "" && username !=""){
+        } else if (password == "" && username != "") {
             helperLabel.setText("Please enter a password");
-        }
-        else if (password == "" && username ==""){
+        } else if (password == "" && username == "") {
             helperLabel.setText("Please enter a username and password");
-        }
-        else{
-            System.out.println(password+ " "+ username);
-            User checkUser = new User(username,password);
+        } else {
+            System.out.println(password + " " + username);
+            User checkUser = new User(username, password);
             checkUser.setPassword(password);
-            System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
+            System.out.println(checkUser.getUsername() + " " + checkUser.getPassword());
             correctUser = true;
 
             try {
-                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
-
+                // Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("main.fxml"));
+                Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                MainController mainController = loader.getController();
+                mainController.setOrganisationLabel(userOrganisation);
+                mainController.setUserLabel(username);
                 stage.setScene(new Scene(root));
                 stage.show();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -94,7 +95,7 @@ public class LoginController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

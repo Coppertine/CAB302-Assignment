@@ -164,9 +164,9 @@ public class CAB302Assignment extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //System.out.println(getClass().getResource("main.fxml").getPath());
-        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
-        tray.setAnimationType(AnimationType.POPUP);
-        tray.showAndDismiss(Duration.seconds(2));
+//        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
+//        tray.setAnimationType(AnimationType.POPUP);
+//        tray.showAndDismiss(Duration.seconds(2));
 
         //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));

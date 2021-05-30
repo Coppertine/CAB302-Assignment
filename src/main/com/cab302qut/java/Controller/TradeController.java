@@ -92,6 +92,19 @@ public class TradeController {
         });
     }
 
+    public void setBuyPrice(String assetName, int assetPrice){
+
+    }
+    public void setSalePrice(String assetName, int assetPrice){
+
+    }
+
+    public void setChoiceBox(Asset[] assets){
+        for (Asset asset : assets) {
+            assetChoice.getItems().add(asset.getAssetName());
+        }
+    }
+
     /**
      * checks order and then submits order to server
      */
