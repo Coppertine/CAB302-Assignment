@@ -46,9 +46,9 @@ com/cab302qut/java/Users/User.java
  com.cab302qut.java.Users.User
 com/cab302qut/java/Organisation/OrganisationException.java
  com.cab302qut.java.Organisation.OrganisationException
-com/cab302qut/java/util/DatabaseConnection.java
- com.cab302qut.java.util.DatabaseConnection
 com/cab302qut/java/Controller/ResetController.java
  com.cab302qut.java.Controller.ResetController
+com/cab302qut/java/util/DatabaseConnection.java
+ com.cab302qut.java.util.DatabaseConnection
 com/cab302qut/java/Controller/LoginController.java
  com.cab302qut.java.Controller.LoginController
