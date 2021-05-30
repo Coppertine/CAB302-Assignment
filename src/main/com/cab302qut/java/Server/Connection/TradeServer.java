@@ -2,16 +2,11 @@ package com.cab302qut.java.Server.Connection;
 
 import com.cab302qut.java.Client.Connection.ClientThread;
 import com.cab302qut.java.Server.Controller.ServerController;
-import com.cab302qut.java.util.DatabaseConnection;
-import com.cab302qut.java.util.DatabaseStatements;
-import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -39,11 +34,6 @@ public class TradeServer implements Runnable {
     private ServerController controller;
 
     /**
-     * Database connection used to keep track of all database input and output.
-     */
-    private DatabaseConnection connection;
-
-    /**
      * The Constructor of the Trade Server.
      *
      * @param inputConfig The server configuration.
@@ -58,15 +48,14 @@ public class TradeServer implements Runnable {
             this.config = inputConfig;
             this.controller = controllerInput;
             server = new ServerSocket(config.getPort());
-            System.out.println("Attempting to connect to database");
-            this.connection = new DatabaseConnection();
         } catch (IOException e) {
             Debug.log(e.toString());
+
         }
     }
 
     /**
-     * Attempts to stop the Trade Server.
+     * Attempts to stop the Office Server.
      */
     public final void stop() {
         exited = true;
@@ -118,9 +107,9 @@ public class TradeServer implements Runnable {
                     + Id + "Ready");
             default -> {
                 System.out.println(Id + ": " + input);
-//                clients.forEach((client) -> {
-//                    client.send(Id + ": " + input);
-//                });
+                clients.forEach((client) -> {
+                    client.send(Id + ": " + input);
+                });
                 handleCommands(Id, input);
             }
         }
@@ -135,27 +124,13 @@ public class TradeServer implements Runnable {
     private void handleCommands(final int ID, final String input) {
         try {
             //TODO: Change to handle Trades from clients and save to database.
-            if (input.startsWith("Trade: ")) {
-                //Receive Trade Update, could be new trade or updated
+            if (input.startsWith("Traffic: ")) {
 
+                Traffic importTraffic
+                        = new Traffic(input.substring("Traffic: ".length()));
+                controller.trafficImport(importTraffic);
             }
-            if (input.startsWith("SellOrder: ")) {
-                //Receive Trade Update, could be new trade or updated
-
-            }
-            if (input.startsWith("Order: ")) {
-                //Receive Trade Update, could be new trade or updated
-
-            }
-
-            if (input.equals("GetTrades"))
-            {
-                ResultSet set = connection.executeStatement(DatabaseStatements.GetAllTrades());
-
-                // Get all trades from database and send to client who asked.
-                //findClient(ID).send();
-            }
-        } catch (NoSuchElementException | SQLException e) {
+        } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
         }
     }

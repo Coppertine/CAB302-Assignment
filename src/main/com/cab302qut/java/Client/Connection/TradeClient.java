@@ -1,7 +1,6 @@
 package com.cab302qut.java.Client.Connection;
 
 import com.cab302qut.java.Client.Controller.MainController;
-import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 
 import java.io.*;
