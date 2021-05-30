@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CAB302Assignment - Server" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.cab302qut.java.CAB302Assignment" />
+    <module name="CAB302-Assignment.main" />
+    <option name="PROGRAM_PARAMETERS" value="-server" />
+    <option name="VM_PARAMETERS" value="--add-modules javafx.controls,javafx.fxml --module-path &quot;S:\OpenJFX\javafx-sdk-16\lib&quot;" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.cab302qut.java.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
