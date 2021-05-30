@@ -1,13 +1,22 @@
-import Database.DatabaseConnection;
+package com.cab302qut.java.test;
 
-import java.io.Console;
+import com.cab302qut.java.util.DatabaseConnection;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+
 import java.sql.SQLException;
 
 public class TestDatabase {
+
+    @BeforeAll
+    public void init() {
+
+    }
+
     public  static  void  main(String[] args) throws SQLException {
         DatabaseConnection db = new DatabaseConnection();
         try {
-            db.Connect();
+
             // NOTE: this sequence of statements can only be done properly
             // if the database does not already have ALL the tables,
             // rerunning the statements will conflict with foreign key constraints etc.
@@ -18,26 +27,26 @@ public class TestDatabase {
             //
             // fixable issues experienced: make sure foreign key constraint names are unique
 
-            db.ExecuteStatement("CREATE OR REPLACE TABLE `organisations` " +
+            db.executeStatement("CREATE OR REPLACE TABLE `organisations` " +
                     "( `organisationID` int NOT NULL AUTO_INCREMENT, `organisationName` char(50), `credits` double, " +
                     "PRIMARY KEY (`organisationID`) );");
 
-            db.ExecuteStatement("CREATE OR REPLACE TABLE `assets` " +
+            db.executeStatement("CREATE OR REPLACE TABLE `assets` " +
                     "( `assetID` int NOT NULL, `assetType` char(50), PRIMARY KEY (`assetID`) );");
 
             // rest of tables with foreign key constraints
-            db.ExecuteStatement("CREATE OR REPLACE TABLE `users` " +
+            db.executeStatement("CREATE OR REPLACE TABLE `users` " +
                     "( `userID` int NOT NULL AUTO_INCREMENT, `userName` char(50) NOT NULL, `password` char(50) NOT NULL, " +
                     "`accountType` char(10), `organisationID` int NOT NULL, " +
                     "PRIMARY KEY (`userID`), " +
                     "CONSTRAINT `fk_userOrgID` FOREIGN KEY (`organisationID`) REFERENCES `organisations` (`organisationID`) );");
 
-            db.ExecuteStatement("CREATE OR REPLACE TABLE `currentAssets` " +
+            db.executeStatement("CREATE OR REPLACE TABLE `currentAssets` " +
                     "( `organisationID` int NOT NULL, `assetID` int NOT NULL, `quantity` int, PRIMARY KEY (`organisationID`, `assetID`), " +
                     "CONSTRAINT `fk_currAssOrgID` FOREIGN KEY (`organisationID`) REFERENCES `organisations` (`organisationID`), " +
                     "CONSTRAINT `fk_currAssAssetID` FOREIGN KEY (`assetID`) REFERENCES `assets` (`assetID`) );");
 
-            db.ExecuteStatement("CREATE OR REPLACE TABLE `currentTrades` " +
+            db.executeStatement("CREATE OR REPLACE TABLE `currentTrades` " +
                     "( `tradeID` int NOT NULL, `userID` int NOT NULL, `organisationID` int NOT NULL, " +
                     "`assetID` int NOT NULL, `quantity` int, `price` double, `tradeType` char(5), `date` date, " +
                     "PRIMARY KEY (`tradeID`), " +
@@ -45,7 +54,7 @@ public class TestDatabase {
                     "CONSTRAINT `fk_currTradeOrganisationID` FOREIGN KEY (`organisationID`) REFERENCES `organisations` (`organisationID`), " +
                     "CONSTRAINT `fk_currTradeAssetID` FOREIGN KEY (`assetID`) REFERENCES `assets` (`assetID`));");
 
-            db.ExecuteStatement("CREATE OR REPLACE TABLE `tradeHistory` " +
+            db.executeStatement("CREATE OR REPLACE TABLE `tradeHistory` " +
                     "( `tradeID` int NOT NULL, `buyerID` int NOT NULL, `sellerID` int NOT NULL, " +
                     "`assetID` int NOT NULL, `quantity` int, `price` double, `tradeType` char(5), `date` date, " +
                     "PRIMARY KEY (`tradeID`), " +

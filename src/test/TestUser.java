@@ -1,4 +1,6 @@
+package com.cab302qut.java.test;
 
+import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
@@ -7,11 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test cases concerning User class
- *
- * @author Stephen Markovics
- */
 public class TestUser {
     // Add user
     // Get user
@@ -43,18 +40,14 @@ public class TestUser {
     private Organisation testOrganisation1;
     private Organisation testOrganisation2;
     private UserType userType1;
-    private UserType userType2;
-    private User currentUser;
 
     @BeforeEach
     void init() {
         testOrganisation1 = new Organisation("organisation1");
         testOrganisation2 = new Organisation("organisation2");
         userType1 = UserType.Administrator;
-        userType2 = UserType.Default;
         testUser = new User(name, testOrganisation1, username, password, userType1);
-        testUser1 = new User("John1", testOrganisation1, "JohnSmith1", "", userType2);
-        currentUser = testUser1;
+        testUser1 = new User("John1", testOrganisation1, "JohnSmith1", "", userType1);
     }
 
     @Test
@@ -80,14 +73,13 @@ public class TestUser {
 
     @Test
     public void GetUsername() {
-        assertEquals(testUser.getUsername(), "johnSmith", "the username that was retrieved was wrong");
+        assertEquals(testUser.getUsername(), "johnSmith");
     }
 
     @Test
     public void ModifyUsername() {
-        assertEquals(testUser.getUsername(), "johnSmith");
         testUser.setUsername("newUsername");
-        assertEquals(testUser.getUsername(), "newUsername", "the username was not changed correctly");
+        assertEquals(testUser.getUsername(), "newUsername");
     }
 
     @Test
@@ -126,7 +118,6 @@ public class TestUser {
     @Test
     public void RemoveOrganisation() {
 //will throw exception as user must have organisation
-
     }
 
     @Test
@@ -136,19 +127,8 @@ public class TestUser {
 
     @Test
     public void SetUserType() {
-        assertEquals(testUser.getUserType(), UserType.Administrator);
-        testUser.setUserType(userType2);
-        assertEquals(testUser.getUserType(), UserType.Default);
+
     }
 
-    @Test
-    public void PermissionForNewUser() {
 
-        if (currentUser.getUserType() == UserType.Administrator) {
-            User newUser = new User("created user", testOrganisation1, "created username", "created password", UserType.Default);
-        } else {
-
-
-        }
-    }
 }
