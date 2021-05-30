@@ -3,5 +3,9 @@ TestAsset.java
  com.cab302qut.java.test.TestAsset$1
 TestDatabase.java
  TestDatabase
+TestTrade.java
+ com.cab302qut.java.test.TestTrade
+TestUser.java
+ TestUser
 TestOrganisation.java
  test.TestOrganisation

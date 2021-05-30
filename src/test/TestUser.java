@@ -1,9 +1,3 @@
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> parent of ba43252 (Merge branch 'Nicholas' of https://github.com/Coppertine/CAB302-Assignment into Nicholas)
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
@@ -153,13 +147,7 @@ public class TestUser {
         if (currentUser.getUserType() == UserType.Administrator) {
             User newUser = new User("created user", testOrganisation1, "created username", "created password", UserType.Default);
         } else {
-<<<<<<< HEAD
 
-
-=======
-
-
->>>>>>> parent of ba43252 (Merge branch 'Nicholas' of https://github.com/Coppertine/CAB302-Assignment into Nicholas)
         }
     }
 }

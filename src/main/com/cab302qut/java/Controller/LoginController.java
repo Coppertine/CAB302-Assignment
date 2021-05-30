@@ -43,13 +43,13 @@ public class LoginController {
      * @throws IOException
      */
     public void userLogin(ActionEvent actionEvent) throws IOException {
-        checkLogin();
+        checkLogin(actionEvent);
     }
 
     /**
      * checks user login is correct and submits to server
      */
-    private void checkLogin(){
+    private void checkLogin(ActionEvent actionEvent){
 
         username = usernameField.getText().toString();
         password = passwordField.getText().toString();
@@ -68,6 +68,16 @@ public class LoginController {
             checkUser.setPassword(password);
             System.out.println(checkUser.getUsername()+ " "+ checkUser.getPassword());
             correctUser = true;
+
+            try {
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

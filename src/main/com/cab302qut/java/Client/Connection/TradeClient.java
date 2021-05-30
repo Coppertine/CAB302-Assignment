@@ -15,7 +15,7 @@ public class TradeClient implements Runnable {
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private Socket socket;
-    private ClientThread thread;
+    //private ClientThread thread;
     private MainController controller;
 
     public final void run(final ServerConfiguration inputConfig)
@@ -46,7 +46,7 @@ public class TradeClient implements Runnable {
         if (msg.startsWith("id: ")) {
             clientID = Integer.parseInt(msg.substring("id: ".length()));
         } else if (msg.startsWith("exit")) {
-            thread.stopped = true;
+            //thread.stopped = true;
         } else if (msg.startsWith("status")) {
             System.out.println("Status found");
             send("status ready");

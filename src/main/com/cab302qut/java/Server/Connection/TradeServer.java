@@ -1,6 +1,6 @@
 package com.cab302qut.java.Server.Connection;
 
-import com.cab302qut.java.Client.Connection.ClientThread;
+//import com.cab302qut.java.Client.Connection.ClientThread;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.util.DatabaseConnection;
 import com.cab302qut.java.util.DatabaseStatements;
