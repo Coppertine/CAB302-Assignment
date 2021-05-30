@@ -17,16 +17,14 @@ public class DatabaseConnection {
     public void establishConnection() {
         try {
             ServerConfiguration serverConfig = CAB302Assignment.getConfig();
-            Class.forName("org.mariadb.jdbc.Driver");
-            System.out.println("MariaDB JDBC Driver Registered!");
             connection = DriverManager.getConnection(
-                    "jdbc:mariadb://"+ serverConfig.getAddress()
+                    "jdbc:mysql://"+ serverConfig.getAddress()
                             + ":" + serverConfig.getPort() +
                             "/" + serverConfig.getSchema(),
                     serverConfig.getUsername(),
                     serverConfig.getPassword());
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

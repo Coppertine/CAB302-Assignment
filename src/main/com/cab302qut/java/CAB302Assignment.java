@@ -17,7 +17,7 @@ import java.net.URL;
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
     private static String[] Args;
-    private static final String configFile = "/config.ini";
+    private static final String configFile = "./config.ini";
 
     public static void main(String[] args) {
         Args = args;
