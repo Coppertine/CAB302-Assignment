@@ -61,7 +61,7 @@ public class ServerThread extends Thread {
                 client.handle(clientID, streamIn.readUTF());
                 System.out.println(streamIn.readUTF());
             } catch (IOException e) {
-                //Debug.log(e.getMessage());
+                Debug.log(e.getMessage());
             }
         }
     }
@@ -77,7 +77,7 @@ public class ServerThread extends Thread {
             streamOut.writeUTF(msg);
             streamOut.flush();
         } catch (IOException e) {
-            //Debug.log(e.toString());
+            Debug.log(e.toString());
             client.remove(clientID);
             this.interrupt();
         }

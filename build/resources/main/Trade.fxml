@@ -140,6 +140,11 @@
                   </Label>
                </children>
             </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+               <children>
+                  <Pane prefHeight="20.0" prefWidth="228.0" />
+               </children>
+            </VBox>
          </children>
       </GridPane>
    </children>

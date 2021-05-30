@@ -15,7 +15,7 @@ public class TradeClient implements Runnable {
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private Socket socket;
-    //private ClientThread thread;
+    private ClientThread thread;
     private MainController controller;
 
     public final void run(final ServerConfiguration inputConfig)
@@ -28,11 +28,11 @@ public class TradeClient implements Runnable {
             // TODO: Tell user that client is connected to server. Don't tell port or address.
             System.out.println("Connected: " + config.getSocket());
             open();
-            //thread = new ClientThread(this, socket, socket.getPort());
+            thread = new ClientThread(this, socket, socket.getPort());
         }catch (UnknownHostException uhe) {
-            //Debug.log("Host unknown: " + uhe.getMessage());
+            Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {
-            //Debug.log("Unexpected exception: " + ioe.getMessage());
+            Debug.log("Unexpected exception: " + ioe.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ public class TradeClient implements Runnable {
         if (msg.startsWith("id: ")) {
             clientID = Integer.parseInt(msg.substring("id: ".length()));
         } else if (msg.startsWith("exit")) {
-            //thread.stopped = true;
+            thread.stopped = true;
         } else if (msg.startsWith("status")) {
             System.out.println("Status found");
             send("status ready");
@@ -73,7 +73,7 @@ public class TradeClient implements Runnable {
             outputStream.writeUTF(msg);
             outputStream.flush();
         } catch (IOException e) {
-            //Debug.log(e.toString());
+            Debug.log(e.toString());
         }
     }
 

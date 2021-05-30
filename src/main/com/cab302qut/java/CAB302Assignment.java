@@ -1,5 +1,6 @@
 package com.cab302qut.java;
 
+import com.cab302qut.java.Client.Connection.TradeClient;
 import com.cab302qut.java.util.ServerConfiguration;
 
 import javafx.application.Application;
@@ -51,12 +52,19 @@ public class CAB302Assignment extends Application {
         CAB302Assignment.config = config;
     }
 
+    public static TradeClient tradeClient;
+
+    private static String[] Args;
+
     public static void main(String[] args) {
         launch(args);
+        Args = args;
+
+        PopulateUsers();
         //creates default users.
-        Organisation organisation1 = new Organisation("Organisation 1");
+
         Organisation organisation2 = new Organisation("Organisation 2");
-        User mainUser = new User("John", organisation1, "JohnMainUser", "password", UserType.Administrator);
+
         User tradeUser = new User("Ben", organisation2, "BenTrade", "password2", UserType.Default);
         Asset asset1 = new Asset("emojis", 1);
         Asset asset2 = new Asset("CPU", 2);
@@ -70,37 +78,7 @@ public class CAB302Assignment extends Application {
         ArrayList<Order> orders = new ArrayList<Order>();
         ArrayList<Order> buyOrders = new ArrayList<Order>();
 
-        //creates 2 different organisations.
-
-        try {
-            organisation1.addUser(tradeUser);
-        } catch (OrganisationException e) {
-            e.printStackTrace();
-        }
-        tradeUser.setOrganisation(organisation1);
-        try {
-            organisation1.addCredits(10000);
-        } catch (OrganisationException e) {
-            e.printStackTrace();
-        }
-        //organisation1.addAsset(asset1);
-
-
-        try {
-            organisation2.addUser(mainUser);
-        } catch (OrganisationException e) {
-            e.printStackTrace();
-        }
-        mainUser.setOrganisation(organisation2);
-        try {
-            organisation2.addCredits(20000);
-        } catch (OrganisationException e) {
-            e.printStackTrace();
-        }
-        //organisation2.addAsset(asset2);
-
         Random rnd = new Random();
-
         //
         for (int i = 0; i < 6; i++) {
             int numberToSell = rnd.nextInt(1000);
@@ -114,6 +92,11 @@ public class CAB302Assignment extends Application {
         }
 
         CheckOrders(sellOrders, buyOrders);
+    }
+
+    private static void PopulateUsers() {
+        Organisation organisation1 = new Organisation("DefaultOrg");
+        User mainUser = new User("John", organisation1, "JohnMainUser", "password", UserType.Administrator);
     }
 
     public static void CheckOrders(ArrayList<Order> sellOrders, ArrayList<Order> buyOrders) {
@@ -167,7 +150,7 @@ public class CAB302Assignment extends Application {
 //        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
 //        tray.setAnimationType(AnimationType.POPUP);
 //        tray.showAndDismiss(Duration.seconds(2));
-
+        Parent root = Args.length >= 1 && Args[0].startsWith("-server") ? FXMLLoader.load(getClass().getClassLoader().getResource("server.fxml")) : FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
         //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 

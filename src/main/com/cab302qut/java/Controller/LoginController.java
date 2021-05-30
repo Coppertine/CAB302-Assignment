@@ -1,5 +1,6 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.Client.Connection.TradeClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +61,8 @@ public class LoginController {
         } else if (password == "" && username == "") {
             helperLabel.setText("Please enter a username and password");
         } else {
+
+
             System.out.println(password + " " + username);
             User checkUser = new User(username, password);
             checkUser.setPassword(password);
@@ -67,7 +70,6 @@ public class LoginController {
             correctUser = true;
 
             try {
-                // Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("main.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -81,11 +83,9 @@ public class LoginController {
             }
         }
 
-
         if (!correctUser) {
             helperLabel.setText("The Username or Password was incorrect");
         }
-
     }
 
     public void passwordReset(ActionEvent actionEvent) throws IOException {
@@ -99,5 +99,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
 }
