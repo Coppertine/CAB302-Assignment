@@ -16,6 +16,7 @@ public class ServerController implements Initializable {
 
     }
 
-    public void printToMessageScreen(String s) {
+    public void printToMessageScreen(String msg) {
+
     }
 }

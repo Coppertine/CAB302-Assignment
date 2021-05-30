@@ -18,6 +18,8 @@ public class User {
     private String password;
     private UserType userType;
 
+    private int id;
+
     /**
      * Creates a new user which is to be placed into the Organisation's user list.
      *
@@ -46,6 +48,9 @@ public class User {
         this.password = password;
     }
 
+    public User(int id){
+        this.id = id;
+    }
 
     /**
      * @return The hashed password of specified user.

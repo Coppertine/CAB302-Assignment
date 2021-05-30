@@ -1,7 +1,9 @@
 package com.cab302qut.java.Client.Connection;
 
 import com.cab302qut.java.Client.Controller.MainController;
+import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
+import com.cab302qut.java.util.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -94,6 +96,7 @@ public class TradeClient implements Runnable {
      * @param clientID The Location Id.
      * @deprecated Unimplemented
      */
+    @Deprecated
     void remove(final int clientID) {
     }
 

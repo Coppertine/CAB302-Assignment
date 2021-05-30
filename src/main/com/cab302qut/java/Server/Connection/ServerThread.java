@@ -1,7 +1,10 @@
 package com.cab302qut.java.Server.Connection;
 
+import com.cab302qut.java.util.Debug;
+
 import java.io.*;
 import java.net.Socket;
+import com.cab302qut.java.util.*;
 
 public class ServerThread extends Thread {
 

@@ -1,5 +1,7 @@
 TestAsset.java
- TestAsset
- TestAsset$1
+ com.cab302qut.java.test.TestAsset
+ com.cab302qut.java.test.TestAsset$1
+TestDatabase.java
+ TestDatabase
 TestOrganisation.java
- com.cab302qut.java.test.TestOrganisation
+ test.TestOrganisation

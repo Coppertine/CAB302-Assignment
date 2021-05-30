@@ -44,15 +44,15 @@ public class TestTrade {
     }
 
     // Add closed trade
-    @Test
-    public void addClosedTrade() {
-        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED);
-        assertEquals(testTrade1.getTradeDate(), Date.valueOf(LocalDate.now()));
-        assertEquals(testTrade1.getBuyingUser(), testUser1);
-        assertEquals(testTrade1.getSellingUser(), testUser2);
-        assertEquals(testTrade1.getTradeAsset(), testItem1);
-        assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
-    }
+//    @Test
+//    public void addClosedTrade() {
+//        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED);
+//        assertEquals(testTrade1.getTradeDate(), Date.valueOf(LocalDate.now()));
+//        assertEquals(testTrade1.getBuyingUser(), testUser1);
+//        assertEquals(testTrade1.getSellingUser(), testUser2);
+//        assertEquals(testTrade1.getTradeAsset(), testItem1);
+//        assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
+//    }
 
     // Set trade as closed
     @Test
@@ -67,13 +67,13 @@ public class TestTrade {
         assertEquals(testTrade1.getTradeType(), TradeType.CLOSED);
     }
 
-    // Set trade as open
-    @Test
-    public void setTradeOpen() {
-        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED,price);
-
-        assertThrows(TradeException.class, () -> testTrade1.setTradeType(TradeType.OPEN));
-    }
+//    // Set trade as open
+//    @Test
+//    public void setTradeOpen() {
+//        testTrade1 = new Trade(testItem1, testUser1, testUser2, Date.valueOf(LocalDate.now()), TradeType.CLOSED,price);
+//
+//        assertThrows(TradeException.class, () -> testTrade1.setTradeType(TradeType.OPEN));
+//    }
 
     // Get price from trade
     @Test

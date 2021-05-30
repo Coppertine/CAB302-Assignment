@@ -3,7 +3,7 @@ package com.cab302qut.java.Server.Connection;
 import com.cab302qut.java.Client.Connection.ClientThread;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.util.ServerConfiguration;
-
+import com.cab302qut.java.util.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -103,8 +103,8 @@ public class TradeServer implements Runnable {
                 findClient(Id).send("exit");
                 remove(Id);
             }
-            case "status ready" -> controller.printToMessageScreen("Client "
-                    + Id + "Ready");
+            //case "status ready" -> controller.printToMessageScreen("Client "
+              //      + Id + "Ready");
             default -> {
                 System.out.println(Id + ": " + input);
                 clients.forEach((client) -> {
@@ -126,9 +126,9 @@ public class TradeServer implements Runnable {
             //TODO: Change to handle Trades from clients and save to database.
             if (input.startsWith("Traffic: ")) {
 
-                Traffic importTraffic
-                        = new Traffic(input.substring("Traffic: ".length()));
-                controller.trafficImport(importTraffic);
+                //Traffic importTraffic
+                  //      = new Traffic(input.substring("Traffic: ".length()));
+                //controller.trafficImport(importTraffic);
             }
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());

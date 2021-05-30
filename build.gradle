@@ -31,7 +31,16 @@ sourceSets {
 }
 
 dependencies {
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
     compile 'org.junit.jupiter:junit-jupiter:5.8.0-M1'
     compile files('lib/TrayNotification.jar')
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.cab302qut.java.CAB302Assignment'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

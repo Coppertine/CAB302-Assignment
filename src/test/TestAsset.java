@@ -1,3 +1,4 @@
+package com.cab302qut.java.test;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Trade;
@@ -21,11 +22,11 @@ public class TestAsset {
     @BeforeEach
     // Create new Asset
     public void createNewAsset() {
-        testAsset = new Asset("Widgets",0,10);
+        testAsset = new Asset("Widgets",1);
         arrayTestAssets = new ArrayList<>() {{
             add(testAsset);
-            add(new Asset("CPU Hours",1,35));
-            add(new Asset("GPU Hours",2,45));
+            add(new Asset("CPU Hours",2));
+            add(new Asset("GPU Hours",2));
         }};
     }
 
@@ -62,7 +63,7 @@ public class TestAsset {
     }
     // Get Id of newly created asset
     public void getAssetId() {
-        Integer theAssetId = testAsset.getAssetId();
+        //Integer theAssetId = testAsset.getAssetId();
     }
     // Delete asset (after asset is created)
     public void deleteAsset() {
@@ -81,29 +82,29 @@ public class TestAsset {
         }
     }
 
-    // get asset from id
-    public void getAssetById(){
-        Integer findAsset = 2;
-        Asset theAssetFound = null;
-        boolean assetFound = false;
-            for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
-            if (arrayTestAssets.get(i).getAssetId().equals(findAsset)) {
-                theAssetFound = arrayTestAssets.get(i);
-                assetFound = true;
-            }
-        }
-    }
+//    // get asset from id
+//    public void getAssetById(){
+//        Integer findAsset = 2;
+//        Asset theAssetFound = null;
+//        boolean assetFound = false;
+//            for (Integer i = 0; assetFound == false && i < arrayTestAssets.size(); i++) {
+//            if (arrayTestAssets.get(i).getAssetId().equals(findAsset)) {
+//                theAssetFound = arrayTestAssets.get(i);
+//                assetFound = true;
+//            }
+//        }
+//    }
 
     // Get asset's trade history.
-    public void getAssetTradeHistory() {
-        ArrayList<Trade> theTradeHistory = testAsset.getTradeHistory();
-    }
-    // Get most recent trade history's price.
-    public void getRecentTradeHistoryPrice(){
-        // Currently don't have access to Trade class implementation
-        // but process would be
-        //  Double recentTradePrice = <assetName>.getTradeHistory().get(0).getPrice()
-        //
-
-    }
+//    public void getAssetTradeHistory() {
+//        ArrayList<Trade> theTradeHistory = testAsset.getTradeHistory();
+//    }
+//    // Get most recent trade history's price.
+//    public void getRecentTradeHistoryPrice(){
+//        // Currently don't have access to Trade class implementation
+//        // but process would be
+//        //  Double recentTradePrice = <assetName>.getTradeHistory().get(0).getPrice()
+//        //
+//
+//    }
 }
