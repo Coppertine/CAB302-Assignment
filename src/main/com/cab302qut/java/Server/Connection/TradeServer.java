@@ -114,8 +114,8 @@ public class TradeServer implements Runnable {
                 findClient(Id).send("exit");
                 remove(Id);
             }
-            case "status ready" -> controller.printToMessageScreen("Client "
-                    + Id + "Ready");
+            //case "status ready" -> controller.printToMessageScreen("Client "
+            //        + Id + "Ready");
             default -> {
                 System.out.println(Id + ": " + input);
 //                clients.forEach((client) -> {

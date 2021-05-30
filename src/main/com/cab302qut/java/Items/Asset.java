@@ -15,9 +15,12 @@ public class Asset {
     private String assetName;
     private int id;
 
-    public Asset(String assetName, int id) {
+    private int price;
+
+    public Asset(String assetName, int id,int price) {
         this.assetName = assetName;
         this.id = id;
+        this.price = price;
     }
 
     public String getAssetName() {

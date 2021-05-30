@@ -22,11 +22,11 @@ public class ServerController implements Initializable {
         thread.start();
     }
 
-    public void printToMessageScreen(String msg) {
-        consoleField.setText(consoleField.getText() + "\n" + msg);
-    }
+//    public void printToMessageScreen(String msg) {
+//        consoleField.setText(consoleField.getText() + "\n" + msg);
+//    }
 
-    public void printToMessageScreen(String msg) {
+    //public void printToMessageScreen(String msg) {
 
-    }
+    //}
 }
