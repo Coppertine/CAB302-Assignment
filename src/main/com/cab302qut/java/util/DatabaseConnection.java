@@ -14,7 +14,7 @@ public class DatabaseConnection {
     /**
      * Attempts to establish the connection using the config file.
      */
-    public static void establishConnection() {
+    public void establishConnection() {
         try {
             ServerConfiguration serverConfig = CAB302Assignment.getConfig();
             Class.forName("org.mariadb.jdbc.Driver");

@@ -60,6 +60,7 @@ public class TradeServer implements Runnable {
             server = new ServerSocket(config.getPort());
             System.out.println("Attempting to connect to database");
             this.connection = new DatabaseConnection();
+            connection.establishConnection();
         } catch (IOException e) {
             Debug.log(e.toString());
         }
