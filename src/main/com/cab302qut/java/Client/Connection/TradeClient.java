@@ -28,7 +28,7 @@ public class TradeClient implements Runnable {
             // TODO: Tell user that client is connected to server. Don't tell port or address.
             System.out.println("Connected: " + config.getSocket());
             open();
-            thread = new ClientThread(this, socket, socket.getPort());
+            //thread = new ClientThread(this, socket, socket.getPort());
         }catch (UnknownHostException uhe) {
             //Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {

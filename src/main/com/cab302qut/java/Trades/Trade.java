@@ -109,18 +109,8 @@ public class Trade {
 
     public void setPrice(float price) {
         this.pricePerItem = price;
-<<<<<<< HEAD
     }
 
-    public int getQuantityToTrade(){
-return quantityToTrade;
-    }
-
-    public void setQuantityToTrade(){
-        this.quantityToTrade = quantityToTrade;
-=======
->>>>>>> parent of ba43252 (Merge branch 'Nicholas' of https://github.com/Coppertine/CAB302-Assignment into Nicholas)
-    }
 
     public int getQuantityToTrade(){
 return quantityToTrade;
