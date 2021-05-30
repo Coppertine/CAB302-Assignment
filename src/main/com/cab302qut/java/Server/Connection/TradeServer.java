@@ -153,7 +153,7 @@ public class TradeServer implements Runnable {
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetAllTrades());
 
                 // Get all trades from database and send to client who asked.
-                findClient(ID).send();
+                //findClient(ID).send();
             }
         } catch (NoSuchElementException | SQLException e) {
             System.out.println(e.getMessage());
