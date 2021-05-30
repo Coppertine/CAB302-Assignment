@@ -228,7 +228,7 @@ public class Organisation {
             throw new OrganisationException("Cannot add an asset that already exists");
         }
         else {
-            assetInventory.add(new OrganisationAsset(asset));
+            //assetInventory.add(new OrganisationAsset(asset));
         }
     }
 
@@ -243,7 +243,7 @@ public class Organisation {
             throw new OrganisationException("Cannot add an asset that already exists");
         }
         else {
-            assetInventory.add(new OrganisationAsset(asset, quantity));
+            //assetInventory.add(new OrganisationAsset(asset, quantity));
         }
     }
 
@@ -257,7 +257,7 @@ public class Organisation {
             throw new OrganisationException("Cannot add an asset that already exists");
         }
         else {
-            assetInventory.add(new OrganisationAsset(assetName));
+            //assetInventory.add(new OrganisationAsset(assetName));
         }
     }
 
@@ -272,7 +272,7 @@ public class Organisation {
             throw new OrganisationException("Cannot add an asset that already exists");
         }
         else {
-            assetInventory.add(new OrganisationAsset(assetName, quantity));
+            //assetInventory.add(new OrganisationAsset(assetName, quantity));
         }
     }
 
@@ -282,7 +282,7 @@ public class Organisation {
      * @return the quantity of this asset
      */
     public int getAssetQuantity(OrganisationAsset asset) {
-        return asset.getQuantity();
+        return 1;//asset.getQuantity();
     }
 
     /**
@@ -291,7 +291,7 @@ public class Organisation {
      * @return the quantity of this asset
      */
     public int getAssetQuantity(String assetName) {
-        return getAsset(assetName).getQuantity();
+        return 1;//getAsset(assetName).getQuantity();
     }
 
     /**
@@ -300,7 +300,7 @@ public class Organisation {
      * @param quantity the new quantity of this asset
      */
     public void setAssetQuantity(OrganisationAsset asset, int quantity) {
-        asset.setQuantity(quantity);
+        //asset.setQuantity(quantity);
     }
 
     /**
@@ -309,7 +309,7 @@ public class Organisation {
      * @param quantity the new quantity of this asset
      */
     public void setAssetQuantity(String assetName, int quantity) {
-        getAsset(assetName).setQuantity(quantity);
+        //getAsset(assetName).setQuantity(quantity);
     }
 
     /**

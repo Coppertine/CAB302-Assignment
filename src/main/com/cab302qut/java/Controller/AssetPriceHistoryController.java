@@ -20,10 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.w3c.dom.Text;
 import javafx.scene.Scene;
@@ -40,17 +37,17 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.sql.Date;
 
-public class OrganisationTradeHistory implements Initializable{
+public class AssetPriceHistoryController implements Initializable{
     @FXML
     private TableView<AssetPriceHistoryObj> table_assetPriceHistory;
     @FXML
     private TableColumn<AssetPriceHistoryObj,Date> col_date;
     @FXML
     private TableColumn<AssetPriceHistoryObj,Double> col_price;
+    @FXML
+    private Text organisationLabel;
 
     ObservableList<AssetPriceHistoryObj> listTrade;
-
-    int index = -1;
 
     @FXML
     NumberAxis xAxis;
@@ -61,92 +58,95 @@ public class OrganisationTradeHistory implements Initializable{
     XYChart.Series<Number,Number> series1;
 
     @FXML
-    Button buttonToMain;
+    Button btn_logout;
 
-    //private Stage stage;
-    //private Scene scene;
-    //private Parent root;
+    @FXML
+    Button btn_viewGraph;
 
-//    public void switchToMain(ActionEvent event) throws IOException {
-//        root = FXMLLoader.load(getClass().getResource("main.fxml"));
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//
-//    }
+    @FXML
+    ChoiceBox<String> choiceBox;
 
-    public void switchToMain(ActionEvent event) throws IOException {
+    public void Logout() throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
-        Stage window = (Stage) buttonToMain.getScene().getWindow();
+        Stage window = (Stage) btn_logout.getScene().getWindow();
         Scene scene = new Scene(root);
         window.setScene(scene);
     }
 
-    @FXML
     public void showPastMonth(ActionEvent event){
         try {
-            //event.consume();
-            pastMonth();
+            event.consume();
+            pastMonthTable();
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    public void  pastMonthh() throws SQLException {
+    public void  pastMonthTable() throws SQLException {
         listTrade = FXCollections.observableArrayList();
         try {
             DatabaseConnection.establishConnection();
             ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM tradeHistory WHERE `assetID`=1;");
 
-            int i = 0;
             while (rs.next()){
 
                 listTrade.add(new AssetPriceHistoryObj(rs.getDate("date"),rs.getDouble("price")));
-                //System.out.println(listTrade.get(i).price);
-                i++;
             }
 
         } catch (Exception e){
-
         }
         finally {
             DatabaseConnection.CloseConnection();
         }
     }
 
-    public void pastMonth() throws SQLException {
-        priceChart.getData().clear();
-        Calendar calendar = Calendar.getInstance();
-        DatabaseConnection.establishConnection();
-        ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM `tradeHistory`;");
-        series1 = new XYChart.Series<>();
-        while (rs.next()){
-            Number price = Integer.parseInt(rs.getString("price"));
-            calendar.setTime(rs.getDate("date"));
-            Number date = calendar.get(Calendar.DAY_OF_MONTH);
-            series1.getData().add(new XYChart.Data<>(date,price));
+    public void SwitchGraph() throws SQLException {
+        if (priceChart.isVisible()) {
+            priceChart.setVisible(false);
+            table_assetPriceHistory.setVisible(true);
+            btn_viewGraph.setText("Graph view");
         }
-        DatabaseConnection.CloseConnection();
-
-        this.series1.setName("Past Month");
-        this.priceChart.getData().add(series1);
+        else {
+            priceChart.setVisible(true);
+            table_assetPriceHistory.setVisible(false);
+            btn_viewGraph.setText("Table view");
+        }
     }
 
 
-    @FXML
-    private Text organisationLabel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            xAxis.setLabel("Past year");
+            yAxis.setLabel("Price per unit");
+
+            priceChart.getXAxis().setAutoRanging(true);
+            priceChart.getYAxis().setAutoRanging(true);
+
+            priceChart.getData().clear();
+            Calendar calendar = Calendar.getInstance();
+            DatabaseConnection.establishConnection();
+            ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
+            series1 = new XYChart.Series<>();
+            while (rs.next()){
+                Number price = Integer.parseInt(rs.getString("price"));
+                calendar.setTime(rs.getDate("date"));
+                Number date = calendar.get(Calendar.DAY_OF_MONTH);
+                series1.getData().add(new XYChart.Data<>(date,price));
+            }
+            DatabaseConnection.CloseConnection();
+
+            this.series1.setName("Past Month");
+            this.priceChart.getData().add(series1);
+
+
+
             col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
             col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
-            pastMonthh();
+            pastMonthTable();
             table_assetPriceHistory.setItems(listTrade);
         } catch (Exception throwables) {
             throwables.printStackTrace();

@@ -17,25 +17,26 @@ public class DatabaseConnection {
     public static void establishConnection() {
         try {
             ServerConfiguration serverConfig = CAB302Assignment.getConfig();
-            Class.forName("org.mariadb.jdbc.Driver");
-            System.out.println("MariaDB JDBC Driver Registered!");
-            connection = DriverManager.getConnection(
-                    "jdbc:mariadb://"+ serverConfig.getAddress()
-                            + ":" + serverConfig.getPort() +
-                            "/" + serverConfig.getSchema(),
-                    serverConfig.getUsername(),
-                    serverConfig.getPassword());
+            //Class.forName("org.mariadb.jdbc.Driver");
+            //System.out.println("MariaDB JDBC Driver Registered!");
+            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeservice","root","passwordCAB302");
+//            DriverManager.getConnection(
+//                    "jdbc:mariadb://"+ serverConfig.getAddress()
+//                            + ":" + serverConfig.getPort() +
+//                            "/" + serverConfig.getSchema(),
+//                    serverConfig.getUsername(),
+//                    serverConfig.getPassword());
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch ( SQLException e) { //ClassNotFoundException |
             e.printStackTrace();
         }
     }
 
-    public ResultSet executeStatement(String statement) throws SQLException {
+    public static ResultSet executeStatement(String statement) throws SQLException {
         return connection.createStatement().executeQuery(statement);
     }
 
-    public void CloseConnection() throws SQLException {
+    public static void CloseConnection() throws SQLException {
         connection.close();
     }
 

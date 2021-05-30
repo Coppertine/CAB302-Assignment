@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 public class LoginController {
-    
+
     @FXML
     private TextField usernameField;
     @FXML

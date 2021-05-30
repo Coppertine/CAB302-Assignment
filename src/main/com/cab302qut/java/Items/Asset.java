@@ -13,9 +13,11 @@ import java.util.HashSet;
  * */
 public class Asset {
     private String assetName;
+    private int id;
 
-    public Asset(String assetName) {
+    public Asset(String assetName, int id) {
         this.assetName = assetName;
+        this.id = id;
     }
 
     public String getAssetName() {

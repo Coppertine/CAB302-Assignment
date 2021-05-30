@@ -22,8 +22,9 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-                    <Text fx:id="orginisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation" wrappingWidth="72.13671684265137" />
-                    <Text fx:id="organisationLabel1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" wrappingWidth="72.13671684265137" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Text fx:id="orginisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation" wrappingWidth="72.13671684265137" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                     <Text fx:id="orginisationLabel1" layoutX="39.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation" wrappingWidth="72.13671684265137" GridPane.rowIndex="2" />
+                     <ChoiceBox prefWidth="20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                 </children>
             </GridPane>
             <ScrollPane hbarPolicy="NEVER" prefHeight="374.0" prefWidth="146.0" vbarPolicy="ALWAYS">
@@ -41,14 +42,14 @@
                   <children>
                       <LineChart fx:id="priceChart" animated="false" layoutX="44.0" layoutY="27.0" prefHeight="317.0" prefWidth="364.0" title="Asset Price History">
                           <xAxis>
-                              <NumberAxis fx:id="xAxis" side="BOTTOM" />
+                              <NumberAxis side="BOTTOM" fx:id="xAxis" />
                           </xAxis>
                           <yAxis>
                               <NumberAxis fx:id="yAxis" side="LEFT" />
                           </yAxis>
                       </LineChart>
-               <Button layoutX="44.0" layoutY="344.0" mnemonicParsing="false" text="Past month" onAction="#showPastMonth"/>
-               <Button layoutX="133.0" layoutY="344.0" mnemonicParsing="false" text="Past Year" onAction="#showPastYear"/>
+               <Button layoutX="44.0" layoutY="344.0" mnemonicParsing="false" onAction="#showPastMonth" text="Past month" />
+               <Button layoutX="133.0" layoutY="344.0" mnemonicParsing="false" onAction="#showPastYear" text="Past Year" />
                   </children>
             </AnchorPane>
 <!--        </content>-->

@@ -22,11 +22,11 @@ public class TestAsset {
     @BeforeEach
     // Create new Asset
     public void createNewAsset() {
-        testAsset = new Asset("Widgets");
+        testAsset = new Asset("Widgets",1);
         arrayTestAssets = new ArrayList<>() {{
             add(testAsset);
-            add(new Asset("CPU Hours"));
-            add(new Asset("GPU Hours"));
+            add(new Asset("CPU Hours",2));
+            add(new Asset("GPU Hours",2));
         }};
     }
 

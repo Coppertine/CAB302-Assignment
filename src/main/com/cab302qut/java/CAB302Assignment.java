@@ -43,6 +43,12 @@ import java.util.*;
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
 
+    // added by Giane for scenes' text fields
+    // dependent on current logged in org and user
+    private static String signedInOrg;
+    // added by Giane
+    private static String signedInUser;
+
     public static ServerConfiguration getConfig() {
         return config;
     }
@@ -51,6 +57,7 @@ public class CAB302Assignment extends Application {
         CAB302Assignment.config = config;
     }
 
+
     public static void main(String[] args) {
         launch(args);
         //creates default users.
@@ -58,8 +65,8 @@ public class CAB302Assignment extends Application {
         Organisation organisation2 = new Organisation("Organisation 2");
         User mainUser = new User("John", organisation1, "JohnMainUser", "password", UserType.Administrator);
         User tradeUser = new User("Ben", organisation2, "BenTrade", "password2", UserType.Default);
-        Asset asset1 = new Asset("emojis");
-        Asset asset2 = new Asset("CPU");
+        Asset asset1 = new Asset("emojis",1);
+        Asset asset2 = new Asset("CPU",1);
 
 
         User test = new User("t", "Username","password", UserType.Default);
@@ -164,19 +171,23 @@ public class CAB302Assignment extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //System.out.println(getClass().getResource("main.fxml").getPath());
+        try {
+            //System.out.println(getClass().getResource("main.fxml").getPath());
 //        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
 //        tray.setAnimationType(AnimationType.POPUP);
 //        tray.showAndDismiss(Duration.seconds(2));
 
-        //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Trade.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assetTradeHistory.fxml"));
 
-        Scene scene = new Scene(root);
-        //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());
+            Scene scene = new Scene(root);
+            //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());
 
-        primaryStage.setTitle("Assignment");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            primaryStage.setTitle("Assignment");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
