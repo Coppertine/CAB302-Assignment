@@ -95,6 +95,7 @@ public class TradeClient implements Runnable {
      * @param clientID The Location Id.
      * @deprecated Unimplemented
      */
+    @Deprecated
     void remove(final int clientID) {
     }
 
