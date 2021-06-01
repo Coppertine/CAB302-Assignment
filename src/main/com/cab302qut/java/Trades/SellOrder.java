@@ -59,14 +59,4 @@ public class SellOrder{
     public void setQuantityToTrade(int quantityToTrade){
         this.quantityToTrade = quantityToTrade;
     }
-
-    @Override
-    public String toString() {
-        return "SellOrder: " +
-                tradeAsset+"," +
-                pricePerItem +"," +
-                quantityToTrade +"," +
-                sellingUser +"," +
-                tradeDate;
-    }
 }

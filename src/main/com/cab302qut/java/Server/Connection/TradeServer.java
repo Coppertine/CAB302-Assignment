@@ -1,7 +1,9 @@
 package com.cab302qut.java.Server.Connection;
 
-import com.cab302qut.java.Client.Connection.ClientThread;
+//import com.cab302qut.java.Client.Connection.ClientThread;
+import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Server.Controller.ServerController;
+import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.util.DatabaseConnection;
 import com.cab302qut.java.util.DatabaseStatements;
 import com.cab302qut.java.util.Debug;
@@ -60,6 +62,7 @@ public class TradeServer implements Runnable {
             server = new ServerSocket(config.getPort());
             System.out.println("Attempting to connect to database");
             this.connection = new DatabaseConnection();
+            connection.establishConnection();
         } catch (IOException e) {
             Debug.log(e.toString());
         }
@@ -114,8 +117,8 @@ public class TradeServer implements Runnable {
                 findClient(Id).send("exit");
                 remove(Id);
             }
-            //case "status ready" -> controller.printToMessageScreen("Client "
-            //        + Id + "Ready");
+            case "status ready" -> controller.printToMessageScreen("Client "
+                    + Id + "Ready");
             default -> {
                 System.out.println(Id + ": " + input);
 //                clients.forEach((client) -> {
@@ -134,9 +137,15 @@ public class TradeServer implements Runnable {
      */
     private void handleCommands(final int ID, final String input) {
         try {
+
+            if (input.startsWith("Login: ")){
+                //receive userlogin
+                //username,password
+            }
             //TODO: Change to handle Trades from clients and save to database.
             if (input.startsWith("Trade: ")) {
                 //Receive Trade Update, could be new trade or updated
+
 
             }
             if (input.startsWith("SellOrder: ")) {

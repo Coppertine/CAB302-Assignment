@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
- * Class to define an Asset object and the
+ * Class to define an Asset object and the id
  *
  * @author Giane
  * */

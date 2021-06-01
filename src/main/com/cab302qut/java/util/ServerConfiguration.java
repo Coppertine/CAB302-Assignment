@@ -74,7 +74,7 @@ public class ServerConfiguration {
     {
         private String address = "localhost";
         private int port = 5522;
-        private int databasePort = 3306;
+        private static int databasePort = 3306;
         private String username = "";
         private String password = "";
         private String defaultSchema = "tradedatabase";

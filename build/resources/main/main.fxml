@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -23,14 +22,14 @@
                 <RowConstraints maxHeight="25.39999999999999" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fx:id="orginisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation Name" wrappingWidth="131.13671684265137">
+                  <Text fx:id="orgLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Organisation Name" wrappingWidth="131.13671684265137">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Italic" size="17.0" />
                      </font></Text>
-                  <Text fx:id="orginisationLabel1" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" wrappingWidth="131.13671684265137" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Text fx:id="userLabel" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name" wrappingWidth="131.13671684265137" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
@@ -90,11 +89,27 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="67.0" prefWidth="387.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Pane prefHeight="20.0" prefWidth="91.0" />
+                        <Button fx:id="logoutButton" alignment="CENTER" mnemonicParsing="false" onAction="#logout" text="Logout" textAlignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children></HBox>
+            <Pane prefHeight="167.0" prefWidth="224.0">
+               <children>
+                  <Button fx:id="tradeButton" layoutX="209.0" layoutY="60.0" mnemonicParsing="false" onAction="#createTrade" text="Trade" />
+               </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ScrollPane layoutX="22.0" prefHeight="167.0" prefWidth="413.0">
+                  <ScrollPane fx:id="currentTrades" layoutX="22.0" prefHeight="167.0" prefWidth="413.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="397.0" />
                     </content>
@@ -104,44 +119,4 @@
          </children>
       </VBox>
    </center>
-</BorderPane>
-=======
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <left>
-        <VBox prefHeight="400.0" prefWidth="131.0" BorderPane.alignment="CENTER">
-            <children>
-                <GridPane>
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Text fx:id="orgnisationLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="72.13671684265137" />
-                        <Text fx:id="orgnisationLabel1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" wrappingWidth="72.13671684265137" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    </children>
-                </GridPane>
-                <ScrollPane hbarPolicy="NEVER" prefHeight="374.0" prefWidth="146.0" vbarPolicy="ALWAYS">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                    </content>
-                </ScrollPane>
-            </children>
-        </VBox>
-    </left>
-    <center>
-        <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="254.0" />
-            </content>
-        </ScrollPane>
-    </center>
 </BorderPane>
