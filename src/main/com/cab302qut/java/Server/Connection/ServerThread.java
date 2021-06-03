@@ -33,6 +33,11 @@ public class ServerThread extends Thread {
      */
     private DataOutputStream streamOut;
 
+
+    private ObjectOutputStream objectOutputStream;
+
+    private ObjectInputStream objectInputStream;
+
     /**
      * A volatile boolean to prevent exceptions from thread closure.
      */
@@ -60,7 +65,7 @@ public class ServerThread extends Thread {
             try {
                 client.handle(clientID, streamIn.readUTF());
                 System.out.println(streamIn.readUTF());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Debug.log(e.getMessage());
             }
         }
@@ -83,6 +88,17 @@ public class ServerThread extends Thread {
         }
     }
 
+    public final void sendObj(Object obj) {
+        try {
+            System.out.println("OBJ-Sending: " + obj.getClass());
+            objectOutputStream.writeObject(obj);
+            objectOutputStream.close();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     /**
      * Opens the thread with streams loaded.
      *
@@ -93,6 +109,10 @@ public class ServerThread extends Thread {
                 new BufferedInputStream(socket.getInputStream()));
         streamOut = new DataOutputStream(
                 new BufferedOutputStream(socket.getOutputStream()));
+
+        objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+
+        objectOutputStream = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
     }
 
     /**

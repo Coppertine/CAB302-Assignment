@@ -1,5 +1,6 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Trades.TradeType;
 import com.cab302qut.java.Users.User;
@@ -73,6 +74,10 @@ public class AssetPriceHistoryController implements Initializable{
         window.setScene(scene);
     }
 
+    public void GetMessage(){
+        CAB302Assignment.tradeClient.send("GetTrades");
+    }
+
     public void showPastMonth(ActionEvent event){
         try {
             event.consume();
@@ -120,34 +125,34 @@ public class AssetPriceHistoryController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            xAxis.setLabel("Past year");
-            yAxis.setLabel("Price per unit");
-
-            priceChart.getXAxis().setAutoRanging(true);
-            priceChart.getYAxis().setAutoRanging(true);
-
-            priceChart.getData().clear();
-            Calendar calendar = Calendar.getInstance();
-            DatabaseConnection.establishConnection();
-            ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
-            series1 = new XYChart.Series<>();
-            while (rs.next()){
-                Number price = Integer.parseInt(rs.getString("price"));
-                calendar.setTime(rs.getDate("date"));
-                Number date = calendar.get(Calendar.DAY_OF_MONTH);
-                series1.getData().add(new XYChart.Data<>(date,price));
-            }
-            DatabaseConnection.CloseConnection();
-
-            this.series1.setName("Past Month");
-            this.priceChart.getData().add(series1);
-
-
-
-            col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
-            col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
-            pastMonthTable();
-            table_assetPriceHistory.setItems(listTrade);
+//            xAxis.setLabel("Past year");
+//            yAxis.setLabel("Price per unit");
+//
+//            priceChart.getXAxis().setAutoRanging(true);
+//            priceChart.getYAxis().setAutoRanging(true);
+//
+//            priceChart.getData().clear();
+//            Calendar calendar = Calendar.getInstance();
+//            DatabaseConnection.establishConnection();
+//            ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
+//            series1 = new XYChart.Series<>();
+//            while (rs.next()){
+//                Number price = Integer.parseInt(rs.getString("price"));
+//                calendar.setTime(rs.getDate("date"));
+//                Number date = calendar.get(Calendar.DAY_OF_MONTH);
+//                series1.getData().add(new XYChart.Data<>(date,price));
+//            }
+//            DatabaseConnection.CloseConnection();
+//
+//            this.series1.setName("Past Month");
+//            this.priceChart.getData().add(series1);
+//
+//
+//
+//            col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
+//            col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
+//            pastMonthTable();
+//            table_assetPriceHistory.setItems(listTrade);
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }

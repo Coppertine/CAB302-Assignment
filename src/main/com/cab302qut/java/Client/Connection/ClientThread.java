@@ -36,7 +36,7 @@ public class ClientThread extends Thread {
     @Override
     public final void run() {
         System.out.println("Start Running");
-        while (!stopped) { // Why? just, why?
+        while (!stopped) {
             try {
                 client.handle(client.getStreamIn().readUTF());
 //                System.out.println(client.getStreamIn().readUTF());
@@ -47,9 +47,9 @@ public class ClientThread extends Thread {
     }
 
     /**
-     * Returns the Traffic Client
+     * Returns the Trade Client
      *
-     * @return The traffic client instance.
+     * @return The trade client instance.
      */
     public TradeClient getClient() {
         return client;

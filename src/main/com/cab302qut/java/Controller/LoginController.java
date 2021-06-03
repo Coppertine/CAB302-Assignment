@@ -1,6 +1,8 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Connection.TradeClient;
+import com.cab302qut.java.util.ServerConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +63,16 @@ public class LoginController {
         } else if (password == "" && username == "") {
             helperLabel.setText("Please enter a username and password");
         } else {
+            try {
+                ServerConfiguration serverConfig = CAB302Assignment.getConfig();
+                CAB302Assignment.tradeClient = new TradeClient();
+                CAB302Assignment.tradeClient.run(serverConfig);
 
+                CAB302Assignment.tradeClient.send("Login: " + username + "-" + password);
+
+            } catch (Exception e){
+
+            }
 
             System.out.println(password + " " + username);
             User checkUser = new User(username, password);
@@ -70,7 +81,8 @@ public class LoginController {
             correctUser = true;
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("main.fxml"));
+
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("assetTradeHistory.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 MainController mainController = loader.getController();

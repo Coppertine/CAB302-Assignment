@@ -4,20 +4,23 @@ package com.cab302qut.java.Server.Connection;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
-import com.cab302qut.java.util.DatabaseConnection;
-import com.cab302qut.java.util.DatabaseStatements;
-import com.cab302qut.java.util.Debug;
-import com.cab302qut.java.util.ServerConfiguration;
+import com.cab302qut.java.util.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.NoSuchElementException;
 
 public class TradeServer implements Runnable {
+
+    Date date = new Date();
 
     /**
      * Exited boolean to prevent thread exceptions when shutting down a server.
@@ -60,6 +63,7 @@ public class TradeServer implements Runnable {
             this.config = inputConfig;
             this.controller = controllerInput;
             server = new ServerSocket(config.getPort());
+            System.out.println(server);
             System.out.println("Attempting to connect to database");
             this.connection = new DatabaseConnection();
             connection.establishConnection();
@@ -82,8 +86,7 @@ public class TradeServer implements Runnable {
      */
     public final void addThread(final Socket socket) {
         Debug.log("Client Accepted: " + socket);
-        ServerThread client
-                = new ServerThread(this, socket, clients.size() + 1);
+        ServerThread client = new ServerThread(this, socket, clients.size() + 1);
         clients.add(client);
         try {
             client.open();
@@ -98,7 +101,9 @@ public class TradeServer implements Runnable {
     public final void run() {
         while (!exited) {
             try {
+                System.out.println(date.getTime());
                 addThread(server.accept());
+                //Thread.sleep(1000);
             } catch (IOException ignored) {
 
             }
@@ -137,6 +142,8 @@ public class TradeServer implements Runnable {
      */
     private void handleCommands(final int ID, final String input) {
         try {
+            // Get the client
+            ServerThread theClientThread = findClient(ID);
 
             if (input.startsWith("Login: ")){
                 //receive userlogin
@@ -159,7 +166,12 @@ public class TradeServer implements Runnable {
 
             if (input.equals("GetTrades"))
             {
-                ResultSet set = connection.executeStatement(DatabaseStatements.GetAllTrades());
+                ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
+                ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
+                while (set.next()){
+                    listTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
+                }
+                theClientThread.sendObj(listTrades);
 
                 // Get all trades from database and send to client who asked.
                 //findClient(ID).send();
@@ -176,8 +188,7 @@ public class TradeServer implements Runnable {
      * @return The OfficeThread of the Client, if present.
      * @throws NoSuchElementException When no element is found of the same ID.
      */
-    public final ServerThread findClient(final int clientID)
-            throws NoSuchElementException {
+    public final ServerThread findClient(final int clientID) throws NoSuchElementException {
         return clients.stream()
                 .filter(c -> c.getClientPort() == clientID)
                 .findFirst()
