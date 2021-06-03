@@ -54,12 +54,13 @@ public class CAB302Assignment extends Application {
 
     public static TradeClient tradeClient;
 
-    private static String[] Args;
+    //private static String[] Args;
 
     public static void main(String[] args) {
         launch(args);
-        Args = args;
-
+        if (args.length >=1) {
+            //Args = args;
+        }
         PopulateUsers();
         //creates default users.
 
@@ -87,7 +88,7 @@ public class CAB302Assignment extends Application {
             Order sellOrder = new Order(asset2, OrderType.SELL, numberToSell, price, tradeUser, null);
             sellOrders.add(sellOrder);
 
-            Order buyOrder = new Order(asset2, OrderType.BUY, numberToBuy, price, mainUser, null);
+            Order buyOrder = new Order(asset2, OrderType.BUY, numberToBuy, price, tradeUser, null);
             buyOrders.add(buyOrder);
         }
 
@@ -150,9 +151,15 @@ public class CAB302Assignment extends Application {
 //        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
 //        tray.setAnimationType(AnimationType.POPUP);
 //        tray.showAndDismiss(Duration.seconds(2));
-        Parent root = Args.length >= 1 && Args[0].startsWith("-server") ? FXMLLoader.load(getClass().getClassLoader().getResource("server.fxml")) : FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
-        //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+        Parent root;
+        //if (Args.length >= 1) {
+          //  root = Args.length >= 1 && Args[0].startsWith("-server") ? FXMLLoader.load(getClass().getClassLoader().getResource("server.fxml")) : FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+       // }
+        //else{
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+       // }
+
+
 
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());
