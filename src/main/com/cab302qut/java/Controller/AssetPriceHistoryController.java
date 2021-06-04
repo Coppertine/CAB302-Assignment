@@ -6,6 +6,7 @@ import com.cab302qut.java.Trades.TradeType;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.AssetPriceHistoryObj;
 import com.cab302qut.java.util.DatabaseConnection;
+import com.cab302qut.java.util.Message;
 import com.sun.source.tree.NewArrayTree;
 import javafx.application.Application;
 import javafx.beans.Observable;
@@ -75,7 +76,16 @@ public class AssetPriceHistoryController implements Initializable{
     }
 
     public void GetMessage(){
-        CAB302Assignment.tradeClient.send("GetTrades");
+
+        try {
+            Message msg = new Message("GetTrades",null);
+            CAB302Assignment.tradeClient.sendMessage(msg);
+            Object obj = CAB302Assignment.receivedMsg;
+            System.out.println(obj.getClass());
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void showPastMonth(ActionEvent event){

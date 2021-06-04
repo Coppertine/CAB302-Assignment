@@ -2,6 +2,7 @@ package com.cab302qut.java;
 
 import com.cab302qut.java.Client.Connection.TradeClient;
 import com.cab302qut.java.Users.UserType;
+import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.ServerConfiguration;
 
 import javafx.application.Application;
@@ -45,6 +46,8 @@ public class CAB302Assignment extends Application {
     private static User mainUser;
 
     public static TradeClient tradeClient;
+
+    public static Message receivedMsg;
 
     public static ServerConfiguration getConfig() {
         return config;

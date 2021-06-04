@@ -2,6 +2,7 @@ package com.cab302qut.java.Controller;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Connection.TradeClient;
+import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.ServerConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,8 @@ import com.cab302qut.java.Users.User;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class LoginController {
@@ -68,10 +71,17 @@ public class LoginController {
                 CAB302Assignment.tradeClient = new TradeClient();
                 CAB302Assignment.tradeClient.run(serverConfig);
 
-                CAB302Assignment.tradeClient.send("Login: " + username + "-" + password);
+                ArrayList<String> credentials = new ArrayList<>();
+                credentials.add(username);
+                credentials.add(password);
+                Message msg = new Message("Login",credentials);
+                CAB302Assignment.tradeClient.sendMessage(msg);
 
-            } catch (Exception e){
+                //CAB302Assignment.tradeClient.send("Login: " + username + "-" + password);
 
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println(password + " " + username);
@@ -85,9 +95,9 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("assetTradeHistory.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                MainController mainController = loader.getController();
-                mainController.setOrganisationLabel(userOrganisation);
-                mainController.setUserLabel(username);
+//                MainController mainController = loader.getController();
+//                mainController.setOrganisationLabel(userOrganisation);
+//                mainController.setUserLabel(username);
                 stage.setScene(new Scene(root));
                 stage.show();
             } catch (Exception e) {

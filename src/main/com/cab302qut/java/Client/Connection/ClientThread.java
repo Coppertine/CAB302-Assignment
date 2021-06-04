@@ -1,5 +1,7 @@
 package com.cab302qut.java.Client.Connection;
 
+import com.cab302qut.java.util.Message;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -38,10 +40,11 @@ public class ClientThread extends Thread {
         System.out.println("Start Running");
         while (!stopped) {
             try {
-                client.handle(client.getStreamIn().readUTF());
+                //client.handle(client.getStreamIn().readUTF());
+                client.handleMsg((Message) client.getObjectInputStream().readObject());
 //                System.out.println(client.getStreamIn().readUTF());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

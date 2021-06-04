@@ -5,11 +5,14 @@ import com.cab302qut.java.Client.Controller.MainController;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.util.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.Socket;
 import java.io.Serializable;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class TradeClient implements Runnable {
     private int clientID;
@@ -33,6 +36,7 @@ public class TradeClient implements Runnable {
             System.out.println("TradeClient--Connected: " + config.getSocket());
             open();
             thread = new ClientThread(this, socket, socket.getPort());
+
         }catch (UnknownHostException uhe) {
             Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {
@@ -59,10 +63,23 @@ public class TradeClient implements Runnable {
         }
     }
 
-    public final void handleObj(Object obj) {
-
+    public final void handleMsg(Message msg){
+        if (msg instanceof Message) {
+            Message theMsg = (Message) msg;
+            if (theMsg.getMessageType().equals("id")) {
+                clientID = (Integer) theMsg.getMessageObject();
+            } else if (theMsg.getMessageType().equals("exit")) {
+                thread.stopped = true;
+            } else if (theMsg.getMessageType().equals("status")) {
+                System.out.println("Status found");
+                send("status ready");
+            } else {
+                CAB302Assignment.receivedMsg = theMsg; // the static field
+                                                       // is available for controllers to access
+                System.out.println("RC Server MSG " + theMsg.getMessageType() + theMsg.getMessageObject().getClass());
+            }
+        }
     }
-
 
     @Override
     public final void run() {
@@ -79,15 +96,16 @@ public class TradeClient implements Runnable {
         try {
             System.out.println("Sending: " + msg);
             outputStream.writeUTF(msg);
-            outputStream.flush();
+            outputStream.close();
         } catch (IOException e) {
             Debug.log(e.toString());
         }
     }
-    public final void sendObj(Object obj){
+    public final void sendMessage(Message obj){
         try {
             System.out.println("OBJ-Sending: " + obj.getClass());
             objectOutputStream.writeObject(obj);
+            objectOutputStream.flush();
         } catch (Exception e){
             Debug.log(e.getMessage());
         }
@@ -99,14 +117,16 @@ public class TradeClient implements Runnable {
      * @throws IOException if DataInputStreams can not be created.
      */
     public final void open() throws IOException {
-        inputStream = new DataInputStream(
-                new BufferedInputStream(socket.getInputStream()));
-        outputStream = new DataOutputStream(
-                new BufferedOutputStream(socket.getOutputStream()));
-
-        objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+//        inputStream = new DataInputStream(
+//                new BufferedInputStream(socket.getInputStream()));
+//        outputStream = new DataOutputStream(
+//                new BufferedOutputStream(socket.getOutputStream()));
 
         objectOutputStream = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
+        objectOutputStream.flush();
+        objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+
+
     }
 
     /**

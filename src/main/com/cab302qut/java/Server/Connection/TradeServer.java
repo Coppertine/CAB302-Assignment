@@ -91,7 +91,9 @@ public class TradeServer implements Runnable {
         try {
             client.open();
             client.start();
-            client.send("id: " + clients.indexOf(client));
+            //client.send("id: " + clients.indexOf(client));
+            Message msg = new Message("id",clients.indexOf(client));
+            client.sendMessage(msg);
         } catch (IOException e) {
             Debug.log(e.toString());
         }
@@ -116,8 +118,9 @@ public class TradeServer implements Runnable {
      * @param Id The location ID of the client.
      * @param input The message from the client.
      */
-    public final synchronized void handle(final int Id, final String input) {
-        switch (input) {
+    public final synchronized void handle(final int Id, final Object input) {
+        Message clientMsg = (Message) input;
+        switch (clientMsg.getMessageType()) {
             case "exit" -> {
                 findClient(Id).send("exit");
                 remove(Id);
@@ -140,38 +143,40 @@ public class TradeServer implements Runnable {
      * @param input  The string input in CSV format starting with
      * {@code Traffic: }
      */
-    private void handleCommands(final int ID, final String input) {
+    private void handleCommands(final int ID, final Object input) {
         try {
             // Get the client
             ServerThread theClientThread = findClient(ID);
-
-            if (input.startsWith("Login: ")){
+            Message theClientMsg = (Message) input;
+            if (theClientMsg.getMessageType().equals("Login")){
                 //receive userlogin
                 //username,password
+                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
             }
             //TODO: Change to handle Trades from clients and save to database.
-            if (input.startsWith("Trade: ")) {
+            if (theClientMsg.getMessageType().equals("Trade")) {
                 //Receive Trade Update, could be new trade or updated
 
 
             }
-            if (input.startsWith("SellOrder: ")) {
+            if (theClientMsg.getMessageType().equals("SellOrder")) {
                 //Receive Trade Update, could be new trade or updated
 
             }
-            if (input.startsWith("Order: ")) {
+            if (theClientMsg.getMessageType().equals("Order")) {
                 //Receive Trade Update, could be new trade or updated
 
             }
 
-            if (input.equals("GetTrades"))
+            if (theClientMsg.getMessageType().equals("GetTrades"))
             {
                 ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
                 while (set.next()){
                     listTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
                 }
-                theClientThread.sendObj(listTrades);
+                Message theMsg = new Message("Trades",listTrades);
+                theClientThread.sendMessage(theMsg);
 
                 // Get all trades from database and send to client who asked.
                 //findClient(ID).send();
