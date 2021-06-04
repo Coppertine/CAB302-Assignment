@@ -48,9 +48,8 @@ com/cab302qut/java/Controller/ResetController.java
  com.cab302qut.java.Controller.ResetController
 com/cab302qut/java/Organisation/Organisation.java
  com.cab302qut.java.Organisation.Organisation
-Database/DatabaseStatements.java
- Database.DatabaseStatements
- Database.DatabaseStatements$Tables
+com/cab302qut/java/Server/DatabaseData.java
+ com.cab302qut.java.Server.DatabaseData
 Database/DatabaseConnection.java
  Database.DatabaseConnection
 com/cab302qut/java/Trades/TradeType.java
@@ -64,6 +63,11 @@ com/cab302qut/java/Organisation/OrganisationException.java
  com.cab302qut.java.Organisation.OrganisationException
 com/cab302qut/java/Server/Connection/ServerThread.java
  com.cab302qut.java.Server.Connection.ServerThread
+com/cab302qut/java/Server/DatabaseSource.java
+ com.cab302qut.java.Server.DatabaseSource
+Database/DatabaseStatements.java
+ Database.DatabaseStatements
+ Database.DatabaseStatements$Tables
 com/cab302qut/java/util/DatabaseConnection.java
  com.cab302qut.java.util.DatabaseConnection
 com/cab302qut/java/CAB302Assignment.java

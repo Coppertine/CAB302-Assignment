@@ -54,13 +54,13 @@ public class CAB302Assignment extends Application {
 
     public static TradeClient tradeClient;
 
-    //private static String[] Args;
+    private static String[] Args;
 
     public static void main(String[] args) {
+        Args = args;
         launch(args);
-        if (args.length >=1) {
-            //Args = args;
-        }
+
+
         PopulateUsers();
         //creates default users.
 
@@ -71,7 +71,7 @@ public class CAB302Assignment extends Application {
         Asset asset2 = new Asset("CPU", 2);
 
 
-        User test = new User("t", "Username","password", UserType.Default);
+        User test = new User("t", "Username", "password", UserType.Default);
         test.setPassword(test.getPassword().toString());
         //System.out.println(test.getName() + test.getUsername() + test.getPassword() + test.getUserType().toString());
         //arrays of different orders
@@ -96,8 +96,8 @@ public class CAB302Assignment extends Application {
     }
 
     private static void PopulateUsers() {
-        Organisation organisation1 = new Organisation("DefaultOrg");
-        User mainUser = new User("John", organisation1, "JohnMainUser", "password", UserType.Administrator);
+        Organisation organisation = new Organisation("DefaultOrg");
+        User mainUser = new User("John", organisation, "JohnMainUser", "password", UserType.Administrator);
     }
 
     public static void CheckOrders(ArrayList<Order> sellOrders, ArrayList<Order> buyOrders) {
@@ -105,8 +105,6 @@ public class CAB302Assignment extends Application {
             for (int j = 0; j < buyOrders.size(); j++) {
                 if (sellOrders.get(i).getTradeAsset().getAssetName() == buyOrders.get(j).getTradeAsset().getAssetName() && sellOrders.get(i).getQuantityToTrade() >= buyOrders.get(j).getQuantityToTrade() && sellOrders.get(i).getPrice() == buyOrders.get(j).getPrice()) {
 
-                    //System.out.println(sellOrders.get(i).getTradeAsset().getAssetName() + " " + sellOrders.get(i).getQuantityToTrade() + " " + sellOrders.get(i).getPrice());
-                    //System.out.println(buyOrders.get(j).getTradeAsset().getAssetName() + " " + buyOrders.get(j).getQuantityToTrade() + " " + buyOrders.get(j).getPrice());
 
                     int buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
                     double tradePrice;
@@ -129,10 +127,6 @@ public class CAB302Assignment extends Application {
 
                         int sellAmount = sellOrders.get(i).getQuantityToTrade() - buyOrders.get(j).getQuantityToTrade();
 
-                        //System.out.println(sellAmount + " The sell amount");
-                        System.out.println(sellOrders.get(i).getUser().getOrganisation().getCredits() + " Sellers credits");
-                        System.out.println(buyOrders.get(j).getUser().getOrganisation().getCredits() + " buyers credits");
-
                         if (sellAmount < 0) {
                             //throw error
                         } else {
@@ -152,13 +146,8 @@ public class CAB302Assignment extends Application {
 //        tray.setAnimationType(AnimationType.POPUP);
 //        tray.showAndDismiss(Duration.seconds(2));
         Parent root;
-        //if (Args.length >= 1) {
-          //  root = Args.length >= 1 && Args[0].startsWith("-server") ? FXMLLoader.load(getClass().getClassLoader().getResource("server.fxml")) : FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
-       // }
-        //else{
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
-       // }
 
+        root = Args.length >= 1 && Args[0].startsWith("-server") ? FXMLLoader.load(getClass().getClassLoader().getResource("server.fxml")) : FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 
 
         Scene scene = new Scene(root);

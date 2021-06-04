@@ -45,6 +45,11 @@ public class DatabaseStatements {
         db.ExecuteStatement(theStatement);
     }
 
+    public void InsertIntoUsers(String username)throws SQLException{
+        String theStatement = String.format("INSERT INTO `%s` (username) VALUES (%s);", Tables.users.toString(),username);
+        db.ExecuteStatement(theStatement);
+    }
+
 
 
 

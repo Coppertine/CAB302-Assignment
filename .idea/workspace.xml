@@ -12,13 +12,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/CAB302Assignment___Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/CAB302Assignment___Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Database/DatabaseStatements.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Database/DatabaseStatements.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Database/DatabaseStatements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Database/DatabaseStatements.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +132,7 @@
       <command value="gradle check" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.CAB302Assignment">
+  <component name="RunManager" selected="Application.CAB302Assignment - Server">
     <configuration name="CAB302Assignment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="MAIN_CLASS_NAME" value="com.cab302qut.java.CAB302Assignment" />
@@ -255,6 +255,11 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
