@@ -69,9 +69,11 @@
                   </font>
                </Text>
                <Button layoutX="369.0" layoutY="169.0" mnemonicParsing="false" onAction="#GetMessage" prefHeight="62.0" prefWidth="87.0" text="Contact Server" />
+                <Button layoutX="369.0" layoutY="270.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="62.0" prefWidth="87.0" text="Refresh" />
             </children></AnchorPane>
             <!--        </content>-->
             <!--    //</ScrollPane>-->
         </center>
     </BorderPane>
+   <Button layoutX="-246.0" layoutY="33.0" mnemonicParsing="false" text="Button" />
 </AnchorPane>

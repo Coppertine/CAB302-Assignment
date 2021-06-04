@@ -92,14 +92,13 @@ public class ServerThread extends Thread {
 
     public final void sendMessage(Message msg) {
         try {
-            System.out.println("OBJ-Sending: " + msg.getMessageType());
+            System.out.println("Send to client: " + msg.getMessageType());
             objectOutputStream.writeObject(msg);
             objectOutputStream.flush();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
-
 
     /**
      * Opens the thread with streams loaded.
@@ -112,7 +111,7 @@ public class ServerThread extends Thread {
 //        streamOut = new DataOutputStream(
 //                new BufferedOutputStream(socket.getOutputStream()));
 
-        objectOutputStream = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
+        objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
         objectOutputStream.flush();
         objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
     }
