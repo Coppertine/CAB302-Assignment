@@ -68,11 +68,7 @@
                      <Font size="28.0" />
                   </font>
                </Text>
-<<<<<<< HEAD
-               <Button layoutX="369.0" layoutY="169.0" mnemonicParsing="false" onAction="#GetMessage" prefHeight="62.0" prefWidth="87.0" text="Contact Server" />
-=======
                <Button layoutX="369.0" layoutY="169.0" mnemonicParsing="false" onAction="#GetPriceData" prefHeight="62.0" prefWidth="87.0" text="Contact Server" />
->>>>>>> Stephen2
                 <Button layoutX="369.0" layoutY="270.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="62.0" prefWidth="87.0" text="Refresh" />
             </children></AnchorPane>
             <!--        </content>-->

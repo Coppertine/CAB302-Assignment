@@ -14,10 +14,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TradeServer implements Runnable {
@@ -156,15 +154,19 @@ public class TradeServer implements Runnable {
                 ArrayList<User> users = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
                 System.out.println("executed statement");
+
                 while(set.next()){
-                    users.add((User) set);
+                    users.add(new User(set.getString("userName"),set.getString("password")));
                 }
-
                 for (User user: users) {
-                    System.out.println(user.getUsername()+"username");
-                    if (user.getUsername() == theClientMsg.getMessageObject()){
-
+                    System.out.println(((ArrayList<?>) theClientMsg.getMessageObject()).get(0) +"below if the info that is being processed ");
+                    if (user.getUsername() == ((ArrayList<?>) theClientMsg.getMessageObject()).get(0)){
+                        System.out.println("This is awesome and grug is happy");
                     }
+                    System.out.println(user.getUsername() + " user username");
+                    System.out.println(user.getPassword() + " user password");
+                    System.out.println(user.getOrganisation() + " user getOrganisation");
+
                 }
                 Message theMsg = new Message("Users",users);
                 theClientThread.sendMessage(theMsg);

@@ -3,6 +3,7 @@ package com.cab302qut.java.Users;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.UserType;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Stephen Markovics
  */
-public class User {
+public class User implements Serializable {
     private String name;
     private Organisation organisation;
     private String username;
