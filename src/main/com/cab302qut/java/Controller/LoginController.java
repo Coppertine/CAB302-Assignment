@@ -97,13 +97,8 @@ public class LoginController {
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 MainController mainController = loader.getController();
-<<<<<<< HEAD
                 mainController.setOrganisationLabel(userOrganisation);
                 mainController.setUserLabel(username);
-=======
-//                mainController.setOrganisationLabel(userOrganisation);
-//                mainController.setUserLabel(username);
->>>>>>> Stephen2
                 stage.setScene(new Scene(root));
                 stage.show();
             } catch (Exception e) {
