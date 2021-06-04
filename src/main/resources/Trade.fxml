@@ -46,7 +46,7 @@
                               <Font size="18.0" />
                            </font></Label>
                         <Pane prefHeight="45.0" prefWidth="48.0" />
-                        <ChoiceBox fx:id="assetChoice" prefHeight="25.0" prefWidth="125.0" />
+                        <ChoiceBox fx:id="assetChoice" onAction="#selectAsset" prefHeight="25.0" prefWidth="125.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="45.0" prefWidth="220.0">
@@ -128,7 +128,7 @@
                      </font>
                   </Label>
                   <Pane prefHeight="20.0" prefWidth="228.0" />
-                  <Label fx:id="assetSaleName" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Current Sale Price" textAlignment="CENTER">
+                  <Label fx:id="assetSellName" alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="17.0" prefWidth="237.0" text="Current Sale Price" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -154,7 +154,16 @@
                         <Pane prefHeight="69.0" prefWidth="32.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox prefHeight="60.0" prefWidth="189.0">
+                     <children>
+                        <Pane prefHeight="40.0" prefWidth="87.0" />
+                        <Label fx:id="creditAmount" prefHeight="27.0" prefWidth="60.0" text="credits" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="60.0" prefWidth="80.0" />
+                     </children></HBox>
                </children>
             </VBox>
          </children>

@@ -111,10 +111,10 @@ public class TestOrganisation {
         ArrayList<User> orgDefaultUserList = new ArrayList<>();
         orgDefaultUserList.add(testUser1);
         orgDefaultUserList.add(testUser3);
-        assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name"); // TODO: implement getUserByName
-        //assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID"); // TODO: implement getUserByID
-        assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name"); // TODO: implement getUserByUsername
-        assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type"); // TODO: implement getUserByUserType
+        assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name");
+        //assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID");
+        assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name");
+        assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type");
     }
 
     // Get multiple users

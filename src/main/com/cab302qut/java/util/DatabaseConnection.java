@@ -19,7 +19,7 @@ public class DatabaseConnection {
             ServerConfiguration serverConfig = CAB302Assignment.getConfig();
             //Class.forName("org.mariadb.jdbc.Driver");
             //System.out.println("MariaDB JDBC Driver Registered!");
-            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeservice","root","passwordCAB302");
+            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeserver","root","passwordCAB302");
 //            DriverManager.getConnection(
 //                    "jdbc:mariadb://"+ serverConfig.getAddress()
 //                            + ":" + serverConfig.getPort() +

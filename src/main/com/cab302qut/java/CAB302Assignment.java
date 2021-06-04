@@ -43,7 +43,7 @@ import java.util.*;
 
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
-
+    private static final String configFile = "C:\\Users\\Giane\\Desktop\\CAB302-Assignment\\src\\main\\resources\\defaultconfig.ini";
     public static ServerConfiguration getConfig() {
         return config;
     }
@@ -60,9 +60,15 @@ public class CAB302Assignment extends Application {
         Args = args;
         launch(args);
 
+        ServerConfiguration configTemp = new ServerConfiguration();
+        try {
+            configTemp.reloadConfiguration(configFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        config=configTemp;
 
-        PopulateUsers();
-        //creates default users.
+        //PopulateUsers();
 
         Organisation organisation2 = new Organisation("Organisation 2");
 

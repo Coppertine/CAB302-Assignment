@@ -74,7 +74,7 @@ public class TradeClient implements Runnable {
                 System.out.println("Status found");
                 send("status ready");
             } else {
-                CAB302Assignment.receivedMsg = theMsg; // the static field
+                //CAB302Assignment.receivedMsg = theMsg; // the static field
                                                        // is available for controllers to access
                 System.out.println("RC Server MSG " + theMsg.getMessageType() + theMsg.getMessageObject().getClass());
             }

@@ -84,6 +84,7 @@ public class LoginController {
                 System.out.println(e.getMessage());
             }
 
+            //check with database for correct username and password.
             System.out.println(password + " " + username);
             User checkUser = new User(username, password);
             checkUser.setPassword(password);
@@ -92,7 +93,7 @@ public class LoginController {
 
             try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("assetTradeHistory.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Main.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 //                MainController mainController = loader.getController();
@@ -112,8 +113,8 @@ public class LoginController {
 
     public void passwordReset(ActionEvent actionEvent) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ResetPassword.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ResetPassword.fxml"));
+            Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

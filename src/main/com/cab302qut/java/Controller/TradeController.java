@@ -51,6 +51,8 @@ public class TradeController {
     private Label salePrice;
     @FXML
     private Label buyPrice;
+    @FXML
+    private Label creditAmount;
 
     private Asset asset;
     private int quantity;
@@ -72,6 +74,15 @@ public class TradeController {
         checkOrder();
     }
 
+    public void selectAsset(ActionEvent actionEvent) throws IOException {
+        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue ov, Number old_val, Number new_val) {
+                assetBuyName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Buy Price");
+                assetSellName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Sale Price");
+            }
+        });
+    }
+
     public void back(ActionEvent actionEvent) throws IOException {
         try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
@@ -79,27 +90,24 @@ public class TradeController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void Check() {
-        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue ov, Number old_val, Number new_val){
-            assetBuyName.setText(assetList[new_val.intValue()] + " Buy Price");
-            assetSellName.setText(assetList[new_val.intValue()] + " Sale Price");}
-        });
-    }
-
-    public void setBuyPrice(String assetName, int assetPrice){
-
-    }
-    public void setSalePrice(String assetName, int assetPrice){
+    public void setBuyPrice(String assetName, int assetPrice) {
 
     }
 
-    public void setChoiceBox(Asset[] assets){
+    public void setSalePrice(String assetName, int assetPrice) {
+
+    }
+
+    public void setCreditAmount(String creditAmountInput) {
+        creditAmount.setText(creditAmountInput);
+    }
+
+    public void setChoiceBox(Asset[] assets) {
         for (Asset asset : assets) {
             assetChoice.getItems().add(asset.getAssetName());
         }

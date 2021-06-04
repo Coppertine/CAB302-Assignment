@@ -17,7 +17,7 @@ public class DatabaseConnection {
 
     public void Connect() throws SQLException {
         // for now,assumes local machine running server has already created the database
-        this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeservice","root","passwordCAB302");
+        this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeserver","root","passwordCAB302");
         this.statement = connection.createStatement();
     }
 

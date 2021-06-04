@@ -80,8 +80,8 @@ public class AssetPriceHistoryController implements Initializable{
         try {
             Message msg = new Message("GetTrades",null);
             CAB302Assignment.tradeClient.sendMessage(msg);
-            Object obj = CAB302Assignment.receivedMsg;
-            System.out.println(obj.getClass());
+            //Object obj = CAB302Assignment.receivedMsg;
+            //System.out.println(obj.getClass());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
