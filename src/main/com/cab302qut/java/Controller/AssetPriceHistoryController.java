@@ -5,6 +5,7 @@ import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Trades.TradeType;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.AssetPriceHistoryObj;
+import com.cab302qut.java.util.AssetTableObj;
 import com.cab302qut.java.util.DatabaseConnection;
 import com.cab302qut.java.util.Message;
 import com.sun.source.tree.NewArrayTree;
@@ -82,26 +83,26 @@ public class AssetPriceHistoryController implements Initializable{
             ArrayList<Integer> blank = new ArrayList<>();
             Message msg = new Message("GetTrades",blank);
             CAB302Assignment.tradeClient.sendMessage(msg);
-            //Message obj = CAB302Assignment.receivedMsg;
-            //ObservableList theTrades = FXCollections.observableArrayList(obj.getMessageObject());
-            //table_assetPriceHistory.setItems(theTrades);
-            //System.out.println(obj.getClass());
-
+            Message obj = CAB302Assignment.receivedMsg;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void Refresh() {
         try {
             //Message theMsg = CAB302Assignment.receivedMsg;
             Message obj = CAB302Assignment.receivedMsg;
-            ObservableList theTrades = FXCollections.observableArrayList(obj.getMessageObject());
-            table_assetPriceHistory.setItems(theTrades);
-            System.out.println(obj.getMessageObject());
+            listTrade = FXCollections.observableArrayList();
+            ArrayList<AssetTableObj> data = (ArrayList<AssetTableObj>) obj.getMessageObject();
+            data.forEach((row) -> listTrade.add(new AssetPriceHistoryObj(row.getDate(),row.getPrice())));
+
+            table_assetPriceHistory.setItems(listTrade);
+            //System.out.println(obj.getMessageObject());
             //System.out.println(theMsg.getMessageObject());
         } catch (Exception e)   {
-
+            System.out.println(e.getMessage());
         }
     }
     public void showPastMonth(ActionEvent event){

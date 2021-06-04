@@ -62,6 +62,8 @@ com/cab302qut/java/Client/Connection/TradeClient.java
  com.cab302qut.java.Client.Connection.TradeClient
 com/cab302qut/java/Controller/LoginController.java
  com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/util/AssetTableObj.java
+ com.cab302qut.java.util.AssetTableObj
 com/cab302qut/java/Controller/AssetPriceHistoryController.java
  com.cab302qut.java.Controller.AssetPriceHistoryController
 com/cab302qut/java/Server/Connection/TradeServer.java

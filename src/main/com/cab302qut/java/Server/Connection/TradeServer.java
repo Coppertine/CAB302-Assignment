@@ -169,13 +169,15 @@ public class TradeServer implements Runnable {
 
             else if (theClientMsg.getMessageType().equals("GetTrades"))
             {
-                ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
+                //ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
+                ArrayList<AssetTableObj> tradeData = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
                 while (set.next()){
-                    listTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
+                    tradeData.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
+                    //istTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
                 }
-                ArrayList<AssetPriceHistoryObj> theTrades = new ArrayList<>(listTrades);
-                Message theMsg = new Message("Trades",theTrades);
+                //ArrayList<AssetPriceHistoryObj> theTrades = new ArrayList<>(listTrades);
+                Message theMsg = new Message("Trades",tradeData);
 
                 theClientThread.sendMessage(theMsg);
 
@@ -220,7 +222,8 @@ public class TradeServer implements Runnable {
      */
     public final void statusCheck() {
         clients.forEach((thread) -> {
-            thread.send("status check");
+            Message msg = new Message("StatusCheck");
+            thread.sendMessage(msg);
         });
     }
 }

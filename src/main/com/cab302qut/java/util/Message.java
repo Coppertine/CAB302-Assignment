@@ -13,6 +13,19 @@ public class Message implements Serializable {
     private String messageType;
     private Object messageObject;
 
+    /***
+     * Constructor for simple messages like status check
+     * @param msgtype The message type operation
+     */
+    public Message(String msgtype) {
+        this.messageType = msgtype;
+    }
+
+    /**
+     * Constructor for message with an associated object
+     * @param msgType The message type operation
+     * @param msgObj The object to send
+     */
     public Message(String msgType, Object msgObj) {
         this.messageType = msgType;
         this.messageObject = msgObj;

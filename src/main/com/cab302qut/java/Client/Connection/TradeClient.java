@@ -72,7 +72,7 @@ public class TradeClient implements Runnable {
                 System.out.println("ClientID: " + clientID);
             } else if (theMsg.getMessageType().equals("exit")) {
                 thread.stopped = true;
-            } else if (theMsg.getMessageType().equals("status")) {
+            } else if (theMsg.getMessageType().equals("StatusCheck")) {
                 System.out.println("Status found");
                 send("status ready");
             } else {
