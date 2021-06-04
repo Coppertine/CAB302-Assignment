@@ -157,7 +157,7 @@
                   <HBox prefHeight="60.0" prefWidth="189.0">
                      <children>
                         <Pane prefHeight="40.0" prefWidth="87.0" />
-                        <Label fx:id="creditAmount" prefHeight="27.0" prefWidth="60.0" text="credits" textAlignment="CENTER">
+                        <Label fx:id="creditAmount" prefHeight="27.0" prefWidth="60.0" text="Credits" textAlignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>

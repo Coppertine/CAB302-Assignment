@@ -75,13 +75,16 @@ public class TradeController {
     }
 
     public void selectAsset(ActionEvent actionEvent) throws IOException {
-        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue ov, Number old_val, Number new_val) {
+//        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+//            public void changed(ObservableValue ov, Number old_val, Number new_val) {
                 assetBuyName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Buy Price");
                 assetSellName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Sale Price");
+
+                buyPrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
+                salePrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
             }
-        });
-    }
+//        });
+
 
     public void back(ActionEvent actionEvent) throws IOException {
         try {
@@ -117,8 +120,22 @@ public class TradeController {
      * checks order and then submits order to server
      */
     private void checkOrder() {
-        asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
 
+        asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
+        if (asset == null){
+            //throw error
+        }
+        Date date = new Date();
+
+        if (buyButton.isSelected()) {
+            Order buyOrder = new Order(asset, OrderType.BUY, quantity, price, testUser, date);
+            System.out.println(buyOrder.getPrice() + " " + buyOrder.getTradeAsset() + buyOrder.getQuantityToTrade() + OrderType.BUY);
+        } else if (sellButton.isSelected()) {
+            Order sellOrder = new Order(asset, OrderType.SELL, quantity, price, testUser, date);
+            System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade() + OrderType.SELL);
+        } else {
+            //throw error
+        }
         try {
             quantity = Integer.parseInt(assetQuantity.getText().toString());
         } catch (NumberFormatException ex) {
@@ -130,16 +147,7 @@ public class TradeController {
             ex.printStackTrace();
         }
 
-        Date date = new Date();
-        if (buyButton.isSelected()) {
-            Order buyOrder = new Order(asset, OrderType.BUY, quantity, price, testUser, date);
-            System.out.println(buyOrder.getPrice() + " " + buyOrder.getTradeAsset() + buyOrder.getQuantityToTrade() + OrderType.BUY);
-        } else if (sellButton.isSelected()) {
-            Order sellOrder = new Order(asset, OrderType.SELL, quantity, price, testUser, date);
-            System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade() + OrderType.SELL);
-        } else {
-            //throw error
-        }
+
 
     }
 

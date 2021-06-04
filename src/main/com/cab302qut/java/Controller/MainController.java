@@ -40,6 +40,7 @@ public class MainController implements Initializable {
 
     public void logout(ActionEvent actionEvent) throws IOException {
         try {
+
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

@@ -1,6 +1,7 @@
 package com.cab302qut.java;
 
 import com.cab302qut.java.Client.Connection.TradeClient;
+import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.ServerConfiguration;
 
 import javafx.application.Application;
@@ -39,26 +40,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
-
-
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
-    private static final String configFile = "C:\\Users\\Giane\\Desktop\\CAB302-Assignment\\src\\main\\resources\\defaultconfig.ini";
+    private static String[] Args;
+    private static final String configFile = "E:\\Uni 2021\\CAB302\\src\\main\\resources\\defaultconfig.ini";
+    private static User mainUser;
+
+    public static TradeClient tradeClient;
+
+    public static Message receivedMsg;
+
     public static ServerConfiguration getConfig() {
         return config;
     }
 
     public static void setConfig(ServerConfiguration config) {
         CAB302Assignment.config = config;
+        try {
+            config.reloadConfiguration(configFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-    public static TradeClient tradeClient;
-
-    private static String[] Args;
-
     public static void main(String[] args) {
         Args = args;
-        launch(args);
+
 
         ServerConfiguration configTemp = new ServerConfiguration();
         try {
@@ -99,6 +105,8 @@ public class CAB302Assignment extends Application {
         }
 
         CheckOrders(sellOrders, buyOrders);
+
+        launch(args);
     }
 
     private static void PopulateUsers() {
