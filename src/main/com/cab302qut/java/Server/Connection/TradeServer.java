@@ -149,33 +149,34 @@ public class TradeServer implements Runnable {
             ServerThread theClientThread = findClient(ID);
             Message theClientMsg = (Message) input;
             if (theClientMsg.getMessageType().equals("Login")){
-                //receive userlogin
-                //username,password
-                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
-            }
-            //TODO: Change to handle Trades from clients and save to database.
-            if (theClientMsg.getMessageType().equals("Trade")) {
-                //Receive Trade Update, could be new trade or updated
-
+                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
+                //TODO: validate database records of details
 
             }
-            if (theClientMsg.getMessageType().equals("SellOrder")) {
+
+            else if (theClientMsg.getMessageType().equals("Trade")) {
                 //Receive Trade Update, could be new trade or updated
 
             }
-            if (theClientMsg.getMessageType().equals("Order")) {
+            else if (theClientMsg.getMessageType().equals("SellOrder")) {
+                //Receive Trade Update, could be new trade or updated
+
+            }
+            else if (theClientMsg.getMessageType().equals("Order")) {
                 //Receive Trade Update, could be new trade or updated
 
             }
 
-            if (theClientMsg.getMessageType().equals("GetTrades"))
+            else if (theClientMsg.getMessageType().equals("GetTrades"))
             {
                 ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
                 while (set.next()){
                     listTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
                 }
-                Message theMsg = new Message("Trades",listTrades);
+                ArrayList<AssetPriceHistoryObj> theTrades = new ArrayList<>(listTrades);
+                Message theMsg = new Message("Trades",theTrades);
+
                 theClientThread.sendMessage(theMsg);
 
                 // Get all trades from database and send to client who asked.
@@ -195,7 +196,7 @@ public class TradeServer implements Runnable {
      */
     public final ServerThread findClient(final int clientID) throws NoSuchElementException {
         return clients.stream()
-                .filter(c -> c.getClientPort() == clientID)
+                .filter(c -> c.getClientID() == clientID)
                 .findFirst()
                 .get();
     }

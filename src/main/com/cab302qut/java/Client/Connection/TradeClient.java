@@ -66,8 +66,10 @@ public class TradeClient implements Runnable {
     public final void handleMsg(Message msg){
         if (msg instanceof Message) {
             Message theMsg = (Message) msg;
+            System.out.println("REC from Server: " + theMsg.getMessageType());
             if (theMsg.getMessageType().equals("id")) {
                 clientID = (Integer) theMsg.getMessageObject();
+                System.out.println("ClientID: " + clientID);
             } else if (theMsg.getMessageType().equals("exit")) {
                 thread.stopped = true;
             } else if (theMsg.getMessageType().equals("status")) {
@@ -76,7 +78,7 @@ public class TradeClient implements Runnable {
             } else {
                 CAB302Assignment.receivedMsg = theMsg; // the static field
                                                        // is available for controllers to access
-                System.out.println("RC Server MSG " + theMsg.getMessageType() + theMsg.getMessageObject().getClass());
+                System.out.println(theMsg.getMessageObject().getClass());
             }
         }
     }
@@ -94,7 +96,7 @@ public class TradeClient implements Runnable {
      */
     public final void send(final String msg) {
         try {
-            System.out.println("Sending: " + msg);
+            System.out.println("Sending to server: " + msg);
             outputStream.writeUTF(msg);
             outputStream.close();
         } catch (IOException e) {
@@ -103,7 +105,7 @@ public class TradeClient implements Runnable {
     }
     public final void sendMessage(Message obj){
         try {
-            System.out.println("OBJ-Sending: " + obj.getClass());
+            System.out.println("Send to server: " + obj.getClass());
             objectOutputStream.writeObject(obj);
             objectOutputStream.flush();
         } catch (Exception e){
@@ -122,10 +124,9 @@ public class TradeClient implements Runnable {
 //        outputStream = new DataOutputStream(
 //                new BufferedOutputStream(socket.getOutputStream()));
 
-        objectOutputStream = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
+        objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
         objectOutputStream.flush();
         objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-
 
     }
 

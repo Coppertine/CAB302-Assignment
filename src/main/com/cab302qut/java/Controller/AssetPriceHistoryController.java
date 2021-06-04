@@ -35,6 +35,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.sql.Date;
@@ -78,16 +79,31 @@ public class AssetPriceHistoryController implements Initializable{
     public void GetMessage(){
 
         try {
-            Message msg = new Message("GetTrades",null);
+            ArrayList<Integer> blank = new ArrayList<>();
+            Message msg = new Message("GetTrades",blank);
             CAB302Assignment.tradeClient.sendMessage(msg);
-            Object obj = CAB302Assignment.receivedMsg;
-            System.out.println(obj.getClass());
+            //Message obj = CAB302Assignment.receivedMsg;
+            //ObservableList theTrades = FXCollections.observableArrayList(obj.getMessageObject());
+            //table_assetPriceHistory.setItems(theTrades);
+            //System.out.println(obj.getClass());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public void Refresh() {
+        try {
+            //Message theMsg = CAB302Assignment.receivedMsg;
+            Message obj = CAB302Assignment.receivedMsg;
+            ObservableList theTrades = FXCollections.observableArrayList(obj.getMessageObject());
+            table_assetPriceHistory.setItems(theTrades);
+            System.out.println(obj.getMessageObject());
+            //System.out.println(theMsg.getMessageObject());
+        } catch (Exception e)   {
+
+        }
+    }
     public void showPastMonth(ActionEvent event){
         try {
             event.consume();
@@ -159,8 +175,8 @@ public class AssetPriceHistoryController implements Initializable{
 //
 //
 //
-//            col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
-//            col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
+            col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
+            col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
 //            pastMonthTable();
 //            table_assetPriceHistory.setItems(listTrade);
         } catch (Exception throwables) {
