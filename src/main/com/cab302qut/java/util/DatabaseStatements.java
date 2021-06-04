@@ -18,6 +18,9 @@ public class DatabaseStatements {
     public static String GetYearTrades(){
         return("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
     }
+    public static String GetUsers(){
+        return("SELECT * FROM `users` ;");
+    }
 
     // helps to ensure correct table name is referenced down the code
     // table names in db currently require no spaces
@@ -48,6 +51,10 @@ public class DatabaseStatements {
         //statement.execute("INSERT INTO organisations (name, credits) VALUES('Organisation XYZ','5123');");
         String statement = String.format("INSERT INTO `%s` (assetName) VALUES (%s);", Tables.assets.toString(), assetName);
         db.executeStatement(statement);
+    }
+
+    public void InsertIntoUsers(String userName) throws SQLException{
+
     }
 
 

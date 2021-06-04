@@ -4,6 +4,7 @@ package com.cab302qut.java.Server.Connection;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TradeServer implements Runnable {
@@ -151,6 +153,21 @@ public class TradeServer implements Runnable {
             if (theClientMsg.getMessageType().equals("Login")){
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
                 //TODO: validate database records of details
+                ArrayList<User> users = new ArrayList<>();
+                ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
+                System.out.println("executed statement");
+                while(set.next()){
+                    users.add((User) set);
+                }
+
+                for (User user: users) {
+                    System.out.println(user.getUsername()+"username");
+                    if (user.getUsername() == theClientMsg.getMessageObject()){
+
+                    }
+                }
+                Message theMsg = new Message("Users",users);
+                theClientThread.sendMessage(theMsg);
 
             }
 

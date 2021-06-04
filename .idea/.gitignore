@@ -2,6 +2,9 @@
 /shelf/
 /workspace.xml
 
+bin/
+build/
 .gradle
-**/build/
-!src/**/build/
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
