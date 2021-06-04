@@ -96,6 +96,9 @@ public class ServerThread extends Thread {
             objectOutputStream.writeObject(msg);
             objectOutputStream.flush();
         } catch (Exception e){
+            if (e instanceof IOException) {
+                e.printStackTrace();
+            }
             System.out.println(e.getMessage());
         }
     }

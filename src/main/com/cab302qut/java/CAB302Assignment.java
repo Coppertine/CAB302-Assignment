@@ -50,6 +50,8 @@ public class CAB302Assignment extends Application {
 
     public static Message receivedMsg;
 
+    public static Message assetData;
+
     public static ServerConfiguration getConfig() {
         return config;
     }

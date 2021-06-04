@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com/cab302qut/java/Controller/OrganisationTradeHistory.java
  com.cab302qut.java.Controller.OrganisationTradeHistory
 com/cab302qut/java/Client/Connection/TradeClient.java
@@ -73,3 +74,5 @@ com/cab302qut/java/Server/Connection/ServerThread.java
  com.cab302qut.java.Server.Connection.ServerThread
 com/cab302qut/java/Server/Controller/ServerController.java
  com.cab302qut.java.Server.Controller.ServerController
+=======
+>>>>>>> Stephen2

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.CreateOrgController">
+   <children>
+      <Button layoutX="200.0" layoutY="236.0" mnemonicParsing="false" onAction="#CheckDetails" text="Create" />
+      <TextField layoutX="200.0" layoutY="151.0" promptText="Organisation Name" />
+      <TextField layoutX="200.0" layoutY="194.0" promptText="Initial credits" />
+      <Label layoutX="149.0" layoutY="72.0" text="Create Organisation">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="helperLabel" layoutX="230.0" layoutY="300.0" text="Message">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
