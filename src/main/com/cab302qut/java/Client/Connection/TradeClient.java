@@ -78,6 +78,7 @@ public class TradeClient implements Runnable {
             } else {
                 CAB302Assignment.receivedMsg = theMsg; // the static field
                                                        // is available for controllers to access
+                CAB302Assignment.assetData = theMsg;
                 System.out.println(theMsg.getMessageObject().getClass());
             }
         }

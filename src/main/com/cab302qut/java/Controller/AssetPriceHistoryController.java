@@ -58,8 +58,8 @@ public class AssetPriceHistoryController implements Initializable{
     @FXML
     NumberAxis yAxis;
     @FXML
-    LineChart<Number,Number> priceChart;
-    XYChart.Series<Number,Number> series1;
+    LineChart<Number,Double> priceChart;
+    XYChart.Series<Number,Double> series1;
 
     @FXML
     Button btn_logout;
@@ -77,63 +77,40 @@ public class AssetPriceHistoryController implements Initializable{
         window.setScene(scene);
     }
 
-    public void GetMessage(){
+    /**
+     * Gets an asset's price history from server.
+     */
+    public void GetPriceData(){
 
         try {
             ArrayList<Integer> blank = new ArrayList<>();
             Message msg = new Message("GetTrades",blank);
             CAB302Assignment.tradeClient.sendMessage(msg);
-            Message obj = CAB302Assignment.receivedMsg;
+            Refresh();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Updates price data
+     */
     @SuppressWarnings("unchecked")
     public void Refresh() {
         try {
-            //Message theMsg = CAB302Assignment.receivedMsg;
-            Message obj = CAB302Assignment.receivedMsg;
+            Message obj = CAB302Assignment.assetData;
             listTrade = FXCollections.observableArrayList();
             ArrayList<AssetTableObj> data = (ArrayList<AssetTableObj>) obj.getMessageObject();
             data.forEach((row) -> listTrade.add(new AssetPriceHistoryObj(row.getDate(),row.getPrice())));
-
             table_assetPriceHistory.setItems(listTrade);
-            //System.out.println(obj.getMessageObject());
-            //System.out.println(theMsg.getMessageObject());
+            SetGraph();
+
         } catch (Exception e)   {
             System.out.println(e.getMessage());
         }
     }
-    public void showPastMonth(ActionEvent event){
-        try {
-            event.consume();
-            pastMonthTable();
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
 
-    public void  pastMonthTable() throws SQLException {
-        listTrade = FXCollections.observableArrayList();
-        try {
-            DatabaseConnection.establishConnection();
-            ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM tradeHistory WHERE `assetID`=1;");
-
-            while (rs.next()){
-
-                listTrade.add(new AssetPriceHistoryObj(rs.getDate("date"),rs.getDouble("price")));
-            }
-
-        } catch (Exception e){
-        }
-        finally {
-            DatabaseConnection.CloseConnection();
-        }
-    }
-
-    public void SwitchGraph() throws SQLException {
+    public void SwitchView() throws SQLException {
         if (priceChart.isVisible()) {
             priceChart.setVisible(false);
             table_assetPriceHistory.setVisible(true);
@@ -146,56 +123,40 @@ public class AssetPriceHistoryController implements Initializable{
         }
     }
 
+    public void SetGraph() {
+        Message obj = CAB302Assignment.assetData;
+        Calendar calendar = Calendar.getInstance();
+        this.series1 = new XYChart.Series<>();
+        ArrayList<AssetTableObj> data = (ArrayList<AssetTableObj>) obj.getMessageObject();
 
+        for (int i = 0; i < data.size(); i++) {
+            AssetTableObj row = data.get(i);
+            calendar.setTime(row.getDate());
+            Number date = calendar.get(Calendar.DAY_OF_MONTH);
+            this.series1.getData().add(new XYChart.Data<>(date, row.getPrice()));
+        }
 
+        this.series1.setName("Past Year");
+        this.priceChart.getData().add(series1);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-//            xAxis.setLabel("Past year");
-//            yAxis.setLabel("Price per unit");
-//
-//            priceChart.getXAxis().setAutoRanging(true);
-//            priceChart.getYAxis().setAutoRanging(true);
-//
-//            priceChart.getData().clear();
-//            Calendar calendar = Calendar.getInstance();
-//            DatabaseConnection.establishConnection();
-//            ResultSet rs = DatabaseConnection.executeStatement("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
-//            series1 = new XYChart.Series<>();
-//            while (rs.next()){
-//                Number price = Integer.parseInt(rs.getString("price"));
-//                calendar.setTime(rs.getDate("date"));
-//                Number date = calendar.get(Calendar.DAY_OF_MONTH);
-//                series1.getData().add(new XYChart.Data<>(date,price));
-//            }
-//            DatabaseConnection.CloseConnection();
-//
-//            this.series1.setName("Past Month");
-//            this.priceChart.getData().add(series1);
-//
-//
-//
-            col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
-            col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
-//            pastMonthTable();
-//            table_assetPriceHistory.setItems(listTrade);
+            this.xAxis.setLabel("Past year");
+            this.yAxis.setLabel("Price per unit");
+
+            this.priceChart.setAnimated(false);
+            this.priceChart.getXAxis().setAutoRanging(true);
+            this.priceChart.getYAxis().setAutoRanging(true);
+            this.priceChart.getData().clear();
+
+            this.col_date.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Date>("date"));
+            this.col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
+
+            table_assetPriceHistory.setItems(listTrade);
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
-        //xAxis.setLabel("Dates");
-        //yAxis.setLabel("Price per unit");
-
-        //series1 = new XYChart.Series<>();
-//        series1.setName("Past 60 days");
-//        for(int i = 0; i < 60;i++){
-//            series1.getData().add(new XYChart.Data<>(i,i+1));
-//
-//        }
-        //priceChart.getXAxis().setAutoRanging(true);
-        //priceChart.getYAxis().setAutoRanging(true);
-//
-//        //priceChart.setAnimated(true);
-//        priceChart.getData().add(series1);
     }
 }
