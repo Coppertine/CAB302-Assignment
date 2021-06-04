@@ -6,9 +6,10 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class AssetPriceHistoryObj {
+public class AssetPriceHistoryObj implements Serializable {
     private ObjectProperty<Date> date;
     private DoubleProperty price;
 

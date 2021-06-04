@@ -12,7 +12,11 @@ public class DatabaseStatements {
     DatabaseConnection db;
 
     public static String GetAllTrades() {
-        return "SELECT * FROM '" + Tables.currentTrades.toString().toLowerCase() + "' ;";
+        return("SELECT * FROM '" + Tables.currentTrades.toString().toLowerCase() + "' ;");
+    }
+
+    public static String GetYearTrades(){
+        return("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
     }
 
     // helps to ensure correct table name is referenced down the code

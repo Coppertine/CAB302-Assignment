@@ -17,6 +17,7 @@ public class ServerConfiguration {
     public void reloadConfiguration(String filePath) throws IOException, URISyntaxException {
         File configFile = new File(filePath);
         if (!configFile.exists()) {
+
             configFile.createNewFile();
             Files.copy(Path.of(getClass().getClassLoader().getResource("defaultconfig.ini").toURI()),
                     new FileOutputStream(configFile));
@@ -72,7 +73,7 @@ public class ServerConfiguration {
 
     private static class DatabaseCredentials
     {
-        private String address = "localhost";
+        private String address = "127.0.0.1";
         private int port = 5522;
         private static int databasePort = 3306;
         private String username = "";

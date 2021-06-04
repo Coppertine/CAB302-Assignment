@@ -106,6 +106,7 @@
             <Pane prefHeight="111.0" prefWidth="469.0">
                <children>
                   <Button fx:id="tradeButton" layoutX="209.0" layoutY="60.0" mnemonicParsing="false" onAction="#createTrade" text="Trade" />
+                  <Button layoutX="307.0" layoutY="60.0" mnemonicParsing="false" text="Send Server Message" />
                </children></Pane>
             <Pane prefHeight="235.0" prefWidth="469.0">
                <children>

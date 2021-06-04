@@ -15,6 +15,8 @@ public class Asset {
     private String assetName;
     private int id;
 
+    private int price;
+
     public Asset(String assetName, int id) {
         this.assetName = assetName;
         this.id = id;

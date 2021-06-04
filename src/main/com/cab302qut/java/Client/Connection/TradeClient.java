@@ -1,34 +1,42 @@
 package com.cab302qut.java.Client.Connection;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Controller.MainController;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.util.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.Socket;
+import java.io.Serializable;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class TradeClient implements Runnable {
     private int clientID;
     private ServerConfiguration config = new ServerConfiguration();
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
     private Socket socket;
     private ClientThread thread;
+
     private MainController controller;
 
     public final void run(final ServerConfiguration inputConfig)
     {
         try {
             config = inputConfig;
-            config.setSocket(
-                    new Socket(config.getAddress(), config.getPort()));
+            config.setSocket(new Socket(config.getAddress(), config.getPort()));
             socket = config.getSocket();
             // TODO: Tell user that client is connected to server. Don't tell port or address.
-            System.out.println("Connected: " + config.getSocket());
+            System.out.println("TradeClient--Connected: " + config.getSocket());
             open();
             thread = new ClientThread(this, socket, socket.getPort());
+
         }catch (UnknownHostException uhe) {
             Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {
@@ -55,10 +63,27 @@ public class TradeClient implements Runnable {
         }
     }
 
+    public final void handleMsg(Message msg){
+        if (msg instanceof Message) {
+            Message theMsg = (Message) msg;
+            if (theMsg.getMessageType().equals("id")) {
+                clientID = (Integer) theMsg.getMessageObject();
+            } else if (theMsg.getMessageType().equals("exit")) {
+                thread.stopped = true;
+            } else if (theMsg.getMessageType().equals("status")) {
+                System.out.println("Status found");
+                send("status ready");
+            } else {
+                CAB302Assignment.receivedMsg = theMsg; // the static field
+                                                       // is available for controllers to access
+                System.out.println("RC Server MSG " + theMsg.getMessageType() + theMsg.getMessageObject().getClass());
+            }
+        }
+    }
 
     @Override
     public final void run() {
-        config = new ServerConfiguration();
+        config = CAB302Assignment.getConfig();
         run(config);
     }
 
@@ -71,9 +96,18 @@ public class TradeClient implements Runnable {
         try {
             System.out.println("Sending: " + msg);
             outputStream.writeUTF(msg);
-            outputStream.flush();
+            outputStream.close();
         } catch (IOException e) {
             Debug.log(e.toString());
+        }
+    }
+    public final void sendMessage(Message obj){
+        try {
+            System.out.println("OBJ-Sending: " + obj.getClass());
+            objectOutputStream.writeObject(obj);
+            objectOutputStream.flush();
+        } catch (Exception e){
+            Debug.log(e.getMessage());
         }
     }
 
@@ -83,10 +117,16 @@ public class TradeClient implements Runnable {
      * @throws IOException if DataInputStreams can not be created.
      */
     public final void open() throws IOException {
-        inputStream = new DataInputStream(
-                new BufferedInputStream(socket.getInputStream()));
-        outputStream = new DataOutputStream(
-                new BufferedOutputStream(socket.getOutputStream()));
+//        inputStream = new DataInputStream(
+//                new BufferedInputStream(socket.getInputStream()));
+//        outputStream = new DataOutputStream(
+//                new BufferedOutputStream(socket.getOutputStream()));
+
+        objectOutputStream = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
+        objectOutputStream.flush();
+        objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+
+
     }
 
     /**
@@ -170,5 +210,13 @@ public class TradeClient implements Runnable {
      */
     public final void setStreamOut(final DataOutputStream streamOutInput) {
         this.outputStream = streamOutInput;
+    }
+
+    public final ObjectInputStream getObjectInputStream(){
+        return objectInputStream;
+    }
+
+    public final ObjectOutputStream getObjectOutputStream(){
+        return objectOutputStream;
     }
 }

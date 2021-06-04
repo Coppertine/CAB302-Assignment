@@ -1,11 +1,11 @@
 TestAsset.java
  com.cab302qut.java.test.TestAsset
  com.cab302qut.java.test.TestAsset$1
-TestDatabase.java
- TestDatabase
+TestOrganisation.java
+ test.TestOrganisation
 TestTrade.java
  com.cab302qut.java.test.TestTrade
 TestUser.java
  TestUser
-TestOrganisation.java
- test.TestOrganisation
+TestDatabase.java
+ com.cab302qut.java.test.TestDatabase

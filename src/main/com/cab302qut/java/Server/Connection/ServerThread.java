@@ -33,6 +33,11 @@ public class ServerThread extends Thread {
      */
     private DataOutputStream streamOut;
 
+
+    private ObjectOutputStream objectOutputStream;
+
+    private ObjectInputStream objectInputStream;
+
     /**
      * A volatile boolean to prevent exceptions from thread closure.
      */
@@ -58,10 +63,12 @@ public class ServerThread extends Thread {
     public final void run() {
        while (!stopped) { // Why? just, why?
             try {
-                client.handle(clientID, streamIn.readUTF());
-                System.out.println(streamIn.readUTF());
-            } catch (IOException e) {
-                Debug.log(e.getMessage());
+                //client.handle(clientID, streamIn.readUTF());
+                client.handle(clientID,objectInputStream.readObject());
+                //System.out.println(streamIn.readUTF());
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                //Debug.log(e.getMessage());
             }
         }
     }
@@ -83,16 +90,31 @@ public class ServerThread extends Thread {
         }
     }
 
+    public final void sendMessage(Message msg) {
+        try {
+            System.out.println("OBJ-Sending: " + msg.getMessageType());
+            objectOutputStream.writeObject(msg);
+            objectOutputStream.flush();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     /**
      * Opens the thread with streams loaded.
      *
      * @throws IOException if DataInputStreams can not be created.
      */
     public final void open() throws IOException {
-        streamIn = new DataInputStream(
-                new BufferedInputStream(socket.getInputStream()));
-        streamOut = new DataOutputStream(
-                new BufferedOutputStream(socket.getOutputStream()));
+//        streamIn = new DataInputStream(
+//                new BufferedInputStream(socket.getInputStream()));
+//        streamOut = new DataOutputStream(
+//                new BufferedOutputStream(socket.getOutputStream()));
+
+        objectOutputStream = new ObjectOutputStream(new ObjectOutputStream(socket.getOutputStream()));
+        objectOutputStream.flush();
+        objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
     }
 
     /**

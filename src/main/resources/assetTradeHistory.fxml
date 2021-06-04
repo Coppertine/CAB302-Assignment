@@ -68,6 +68,7 @@
                      <Font size="28.0" />
                   </font>
                </Text>
+               <Button layoutX="369.0" layoutY="169.0" mnemonicParsing="false" onAction="#GetMessage" prefHeight="62.0" prefWidth="87.0" text="Contact Server" />
             </children></AnchorPane>
             <!--        </content>-->
             <!--    //</ScrollPane>-->
