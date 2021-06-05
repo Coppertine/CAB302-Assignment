@@ -18,16 +18,20 @@ public class ServerController implements Initializable {
     @FXML
     private TextArea consoleField;
 
-    public void StartServer(){
-        try{
+    public void StartServer() {
+        try {
             ServerConfiguration theServerConfig = CAB302Assignment.getConfig();
-            tradeSystemServer = new TradeServer(theServerConfig,this);
-            Thread thread = new Thread(tradeSystemServer,"serverThread");
+            tradeSystemServer = new TradeServer(theServerConfig, this);
+            Thread thread = new Thread(tradeSystemServer, "serverThread");
             thread.start();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             printToMessageScreen(e.getMessage());
         }
+    }
+
+    public void StopServer() {
+        tradeSystemServer.stop();
     }
 
     @Override
@@ -36,7 +40,7 @@ public class ServerController implements Initializable {
 
     public void printToMessageScreen(String msg) {
         String currentMessages = consoleField.getText();
-        currentMessages = currentMessages.concat("\n"+msg);
+        currentMessages = currentMessages.concat("\n" + msg);
         consoleField.setText(currentMessages);
     }
 }

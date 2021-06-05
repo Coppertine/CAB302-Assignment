@@ -4,6 +4,7 @@ import com.cab302qut.java.util.Debug;
 
 import java.io.*;
 import java.net.Socket;
+
 import com.cab302qut.java.util.*;
 
 public class ServerThread extends Thread {
@@ -46,8 +47,8 @@ public class ServerThread extends Thread {
     /**
      * The constructor of the Office Thread.
      *
-     * @param aThis The office Server instance.
-     * @param socketInput The socket for the server.
+     * @param aThis         The office Server instance.
+     * @param socketInput   The socket for the server.
      * @param clientIdInput The client location ID.
      */
     public ServerThread(final TradeServer aThis, final Socket socketInput,
@@ -61,9 +62,9 @@ public class ServerThread extends Thread {
 
     @Override
     public final void run() {
-       while (!stopped) { // Why? just, why?
+        while (!stopped) { // Why? just, why?
             try {
-                client.handle(clientID,objectInputStream.readObject());
+                client.handle(clientID, objectInputStream.readObject());
                 System.out.println(objectInputStream.readObject());
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -93,7 +94,7 @@ public class ServerThread extends Thread {
             System.out.println("Send to client: " + msg.getMessageType());
             objectOutputStream.writeObject(msg);
             objectOutputStream.flush();
-        } catch (Exception e){
+        } catch (Exception e) {
             if (e instanceof IOException) {
                 e.printStackTrace();
             }

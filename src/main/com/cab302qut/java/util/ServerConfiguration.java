@@ -76,9 +76,9 @@ public class ServerConfiguration {
         private String address = "127.0.0.1";
         private int port = 5522;
         private static int databasePort = 3306;
-        private String username = "";
-        private String password = "";
-        private String defaultSchema = "tradedatabase";
+        private String username = "root";
+        private String password = "passwordCAB302";
+        private String defaultSchema = "tradeservice";
     }
 
 }

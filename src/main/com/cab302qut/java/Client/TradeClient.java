@@ -2,6 +2,7 @@ package com.cab302qut.java.Client;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Controller.MainController;
+import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
@@ -10,6 +11,10 @@ import com.cab302qut.java.util.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TradeClient implements Runnable {
     private int clientID;
@@ -24,6 +29,7 @@ public class TradeClient implements Runnable {
     private MainController controller;
 
     public final void run(final ServerConfiguration inputConfig) {
+        RefreshData();
         try {
             config = inputConfig;
             config.setSocket(new Socket(config.getAddress(), config.getPort()));
@@ -40,23 +46,18 @@ public class TradeClient implements Runnable {
         }
     }
 
-    /**
-     * Handles the message coming from the server thread.
-     *
-     * @param msg The message from the server.
-     */
-    public final void handle(final String msg) {
-        //TODO:  Handle other commands other than the usual, like Trades and such.
-        if (msg.startsWith("id: ")) {
-            clientID = Integer.parseInt(msg.substring("id: ".length()));
-        } else if (msg.startsWith("exit")) {
-            thread.stopped = true;
-        } else if (msg.startsWith("status")) {
-            System.out.println("Status found");
-            send("status ready");
-        } else {
-            System.out.println(msg);
-        }
+    public void RefreshData() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                System.out.println("Task performed on: " + new Date() + " in" +
+                        "Thread's name: " + Thread.currentThread().getName());
+
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 20000L;
+        timer.schedule(task, delay, delay);
     }
 
     public final void handleMsg(Message msg) {
@@ -84,6 +85,24 @@ public class TradeClient implements Runnable {
                 StaticVariables.loginSuccessful = false;
                 StaticVariables.login = true;
                 System.out.println("user Agree");
+                send("status ready");
+                //TODO add all of the different trade server commands to allow for each return to assign static variables correctly.
+            } else if (theMsg.getMessageType().equals("Trades")) {
+
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("OrgsCurrentAssets")) {
+                StaticVariables.organisationsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("OrgsList")) {
+                StaticVariables.organisations = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("Assets")) {
+StaticVariables.assets = (Asset[]) theMsg.getMessageObject();
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("UserOrg")) {
+                //StaticVariables.organisationsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+
                 send("status ready");
             } else {
                 //CAB302Assignment.receivedMsg = theMsg; // the static field

@@ -23,12 +23,18 @@ public class DatabaseStatements {
         return ("SELECT * FROM `users` ;");
     }
 
-    public static String GetOrganisations(String usersOrg) {
+    public static String GetAssets() {
+        return ("SELECT * FROM `assets` ;");
+    }
+
+    public static String GetUserOrganisation(String usersOrg) {
         return ("SELECT * FROM `organisations` WHERE organisationName = '" + usersOrg + "';");
     }
     public static String GetOrganisationAssets(String usersOrg) {
         return ("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
     }
+
+
 
     // helps to ensure correct table name is referenced down the code
     // table names in db currently require no spaces

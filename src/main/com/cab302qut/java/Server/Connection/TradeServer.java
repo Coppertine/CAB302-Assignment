@@ -2,25 +2,18 @@ package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
 
-import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
-import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
 import com.cab302qut.java.util.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.Timer;
+import java.util.*;
 
 public class TradeServer implements Runnable {
 
@@ -109,11 +102,12 @@ public class TradeServer implements Runnable {
 
     @Override
     public final void run() {
+
         try {
             while (!exited) {
 
-                    addThread(server.accept());
-                    //Thread.sleep(1000);
+                addThread(server.accept());
+                //Thread.sleep(1000);
 
             }
         } catch (IOException ignored) {
@@ -147,6 +141,7 @@ public class TradeServer implements Runnable {
         }
     }
 
+
     /**
      * Parses the traffic information to the controller.
      *
@@ -159,113 +154,238 @@ public class TradeServer implements Runnable {
             // Get the client
             ServerThread theClientThread = findClient(ID);
             Message theClientMsg = (Message) input;
+            switch (theClientMsg.getMessageType()) {
+                case "Login":
 
-            //login Messaging
-            if (theClientMsg.getMessageType().equals("Login")) {
-                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
-                //TODO: validate database records of details
-                ArrayList<User> users = new ArrayList<>();
-                ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
+                    LoginRequest(theClientThread, theClientMsg);
 
-                System.out.println("executed statement");
-                boolean finish = false;
-                while (set.next()) {
-                    UserType userType;
-                    Organisation organisation = null;
-                    if (set.getString("accountType").equals("Default")) {
-                        userType = UserType.Default;
-                    } else if (set.getString("accountType").equals("Administrator")) {
-                        userType = UserType.Administrator;
-                    } else {
-                        userType = UserType.Default;
-                    }
-                    ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
-                    while (orgSet.next()) {
-                        organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
-                        break;
-                    }
-                    users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
+                    break;
+                case "CreateTrade":
+
+                    CreateTradeRequest(theClientThread, theClientMsg);
+
+                    break;
+                case "Trade":
+                    //Receive Trade Update, could be new trade or updated
+
+                    break;
+                case "SellOrder":
+                    //Receive Trade Update, could be new trade or updated
+
+                    break;
+                case "Order":
+                    //Receive Trade Update, could be new trade or updated
+
+                    break;
+                case "GetOrgsList": {
+
+                    GetOrgsList(theClientThread, theClientMsg);
+
+                    break;
                 }
-                for (User user : users) {
-                    String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
-                    User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0), inputPassword);
-                    test.setPassword(test.getPassword());
-                    if (user.getUsername().equals(test.getUsername())) {
-                        if (user.getPassword().equals(test.getPassword())) {
-                            Message theMsg = new Message("UserAccepted", user);
-                            finish = true;
-                            theClientThread.sendMessage(theMsg);
-                            break;
-                        }
-                    }
+                case "GetOrgsAsset": {
+
+                    GetOrgsAsset(theClientThread, theClientMsg);
+
+                    break;
                 }
-                if (!finish) {
-                    Message theMsg = new Message("UserDenied");
-                    StaticVariables.loginSuccessful = false;
-                    StaticVariables.login = true;
-                    theClientThread.sendMessage(theMsg);
+                case "GetUserOrg": {
+
+                    GetUserOrg(theClientThread, theClientMsg);
+
+                    break;
                 }
+                case "GetTrades": {
+                    GetTrades(theClientThread, theClientMsg);
 
-            } else if (theClientMsg.getMessageType().equals("CreateTrade")) {
-                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
-
-                ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
-                while (orgSet.next()) {
-                    System.out.println(orgSet.getString("assetType"));
-                    System.out.println(orgSet.getString("quantity"));
+                    break;
                 }
-                System.out.println("asset refresh complete");
-                StaticVariables.assetRefresh = true;
-            } else if (theClientMsg.getMessageType().equals("Trade")) {
-                //Receive Trade Update, could be new trade or updated
-
-            } else if (theClientMsg.getMessageType().equals("SellOrder")) {
-                //Receive Trade Update, could be new trade or updated
-
-            } else if (theClientMsg.getMessageType().equals("Order")) {
-                //Receive Trade Update, could be new trade or updated
-
+                case "RefreshData": {
+                    RefreshData(theClientThread, theClientMsg);
+                    break;
+                }
+                case "GetAssets": {
+                    GetAssets();
+                    break;
+                }
             }
-            else if (theClientMsg.getMessageType().equals("GetOrgsList")) {
-                ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
-                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
-                while (set.next()) {
-                    ArrayList<String> row = new ArrayList<>();
-                    row.add(set.getString("organisationName"));
-                    row.add(set.getString("credits"));
-                    organisationsData.add(row);
-                }
-                Message theMsg = new Message("OrgsList",organisationsData);
-                theClientThread.sendMessage(theMsg);
+
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private ArrayList<String> GetAssets() {
+        try {
+
+            ArrayList<String> assets = new ArrayList<>();
+            ResultSet assetsSet = DatabaseConnection.executeStatement(DatabaseStatements.GetAssets());
+
+            while (assetsSet.next()) {
+                assets.add(assetsSet.getString("assetType"));
             }
-            else if (theClientMsg.getMessageType().equals("GetOrgsAsset")) {
-                String theOrg = (String) theClientMsg.getMessageObject();
-                ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
-                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + theOrg + "';");
-                while (set.next()) {
-                    ArrayList<String> row = new ArrayList<>();
-                    row.add(set.getString("assetType"));
-                    row.add(set.getString("quantity"));
-                    organisationsAssets.add(row);
-                }
-                Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
-                theClientThread.sendMessage(theMsg);
+            return assets;
+        } catch (NoSuchElementException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    //TODO fix to create and give a organisation object
+    private void GetUserOrg(ServerThread theClientThread, Message theClientMsg) {
+        try {
+            String theOrg = (String) theClientMsg.getMessageObject();
+            ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+            ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetUserOrganisation(theOrg));
+            while (set.next()) {
+                ArrayList<String> row = new ArrayList<>();
+                row.add(set.getString("organisationName"));
+                row.add(set.getString("credits"));
+                organisationsData.add(row);
             }
-            else if (theClientMsg.getMessageType().equals("GetTrades"))
-            {
-                ArrayList<AssetTableObj> tradeData = new ArrayList<>();
-                ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
-                while (set.next()){
-                    tradeData.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
-                }
-                Message theMsg = new Message("Trades",tradeData);
-                theClientThread.sendMessage(theMsg);
+            Message theMsg = new Message("UserOrg", organisationsData);
+            theClientThread.sendMessage(theMsg);
+        } catch (NoSuchElementException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void RefreshData(ServerThread theClientThread, Message theClientMsg) {
+            ArrayList<String> assets = new ArrayList<>();
+            GetOrgsList(theClientThread, theClientMsg);
+            GetUserOrg(theClientThread, theClientMsg);
+            GetOrgsAsset(theClientThread, theClientMsg);
+            assets = GetAssets();
+
+            Message theMsg = new Message("Assets", assets);
+            theClientThread.sendMessage(theMsg);
+
+            //user organisation info
+            //user organisation assets
+            //list of assets
+    }
+
+    private void GetOrgsList(ServerThread theClientThread, Message theClientMsg) {
+        try {
+            ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+            ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
+            while (set.next()) {
+                ArrayList<String> row = new ArrayList<>();
+                row.add(set.getString("organisationName"));
+                row.add(set.getString("credits"));
+                organisationsData.add(row);
             }
+            Message theMsg = new Message("OrgsList", organisationsData);
+            theClientThread.sendMessage(theMsg);
+        } catch (NoSuchElementException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void GetOrgsAsset(ServerThread theClientThread, Message theClientMsg) {
+        try {
+            String theOrg = (String) theClientMsg.getMessageObject();
+            ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
+            ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrganisationAssets(theOrg));
+            while (set.next()) {
+                ArrayList<String> row = new ArrayList<>();
+                row.add(set.getString("assetType"));
+                row.add(set.getString("quantity"));
+                organisationsAssets.add(row);
+            }
+            StaticVariables.organisationsAssets = organisationsAssets;
+            Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
+            theClientThread.sendMessage(theMsg);
 
         } catch (NoSuchElementException | SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    private void GetTrades(ServerThread theClientThread, Message theClientMsg) {
+        try {
+            ArrayList<AssetTableObj> tradeData = new ArrayList<>();
+            ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
+            while (set.next()) {
+                tradeData.add(new AssetTableObj(set.getDate("date"), set.getDouble("price")));
+            }
+            Message theMsg = new Message("Trades", tradeData);
+            theClientThread.sendMessage(theMsg);
+        } catch (NoSuchElementException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void CreateTradeRequest(ServerThread theClientThread, Message theClientMsg) {
+
+        try {
+            System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) +
+                    " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
+
+
+            ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
+            while (orgSet.next()) {
+                System.out.println(orgSet.getString("assetType"));
+                System.out.println(orgSet.getString("quantity"));
+            }
+            System.out.println("asset refresh complete");
+            StaticVariables.assetRefresh = true;
+        } catch (NoSuchElementException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void LoginRequest(ServerThread theClientThread, Message theClientMsg) {
+        //login Messaging
+        try {
+            System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) +
+                    " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
+            ArrayList<User> users = new ArrayList<>();
+            ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
+
+            System.out.println("executed statement");
+            boolean finish = false;
+            while (set.next()) {
+                UserType userType;
+                Organisation organisation = null;
+                if (set.getString("accountType").equals("Default")) {
+                    userType = UserType.Default;
+                } else if (set.getString("accountType").equals("Administrator")) {
+                    userType = UserType.Administrator;
+                } else {
+                    userType = UserType.Default;
+                }
+                ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetUserOrganisation(set.getString("organisationName")));
+                while (orgSet.next()) {
+                    organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
+                    break;
+                }
+                users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
+            }
+            for (User user : users) {
+                String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
+                User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0), inputPassword);
+                test.setPassword(test.getPassword());
+                if (user.getUsername().equals(test.getUsername())) {
+                    if (user.getPassword().equals(test.getPassword())) {
+                        Message theMsg = new Message("UserAccepted", user);
+                        finish = true;
+                        theClientThread.sendMessage(theMsg);
+                        break;
+                    }
+                }
+            }
+            if (!finish) {
+                Message theMsg = new Message("UserDenied");
+                StaticVariables.loginSuccessful = false;
+                StaticVariables.login = true;
+                theClientThread.sendMessage(theMsg);
+            }
+        } catch (NoSuchElementException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     /**
      * Returns the client with the same port as the ID.
