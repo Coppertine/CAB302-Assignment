@@ -20,11 +20,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Timer;
 
 public class TradeServer implements Runnable {
 
     Date date = new Date();
-
+    Timer timer = new Timer();
     /**
      * Exited boolean to prevent thread exceptions when shutting down a server.
      */
