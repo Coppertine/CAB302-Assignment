@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adda1b8a-2bf5-4c8e-b995-ff2ba0aa586c" name="Default Changelist" comment="IT Admin GUI menus">
-      <change afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/CreateOrgController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/MainITAdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/CreateOrg.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mainITAdmin.fxml" afterDir="false" />
+    <list default="true" id="adda1b8a-2bf5-4c8e-b995-ff2ba0aa586c" name="Default Changelist" comment="IT Admin GUI menus, initial">
+      <change afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/EditOrgController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/EditOrg.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -19,17 +17,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Client/Connection/TradeClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Client/Connection/TradeClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/AssetPriceHistoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/AssetPriceHistoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/LoginController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/ServerThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/assetTradeHistory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/assetTradeHistory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Controller/ServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Controller/ServerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/TradeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/TradeClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/AssetPriceHistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/AssetPriceHistoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/CreateOrgController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/CreateOrgController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assetTradeHistory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assetTradeHistory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/TradeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/ServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CreateOrg.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CreateOrg.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +147,7 @@
       <command value="gradle check" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.CAB302-Assignment [assembleDist]">
+  <component name="RunManager" selected="Application.CAB302Assignment">
     <configuration name="CAB302Assignment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -321,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622790070606</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="IT Admin GUI menus, initial">
+      <created>1622810139926</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1622810139926</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -355,7 +362,8 @@
     <MESSAGE value="Updated networking functionality." />
     <MESSAGE value="Updated retrieving asset price history data from server for client, added new AssetTableObj class to encapsulate data for transmission." />
     <MESSAGE value="IT Admin GUI menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="IT Admin GUI menus" />
+    <MESSAGE value="IT Admin GUI menus, initial" />
+    <option name="LAST_COMMIT_MESSAGE" value="IT Admin GUI menus, initial" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -364,15 +372,19 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.net.SocketException" package="java.net" />
+          <option name="timeStamp" value="34" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/TradeClient.java</url>
-          <line>108</line>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Client/Connection/TradeClient.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

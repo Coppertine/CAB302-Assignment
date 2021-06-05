@@ -66,16 +66,24 @@ public class TradeClient implements Runnable {
     public final void handleMsg(Message msg){
         if (msg instanceof Message) {
             Message theMsg = (Message) msg;
-            System.out.println("REC from Server: " + theMsg.getMessageType());
-            if (theMsg.getMessageType().equals("id")) {
+            String msgType = theMsg.getMessageType();
+            System.out.println("REC from Server: " + msgType);
+            if (msgType.equals("id")) {
                 clientID = (Integer) theMsg.getMessageObject();
                 System.out.println("ClientID: " + clientID);
-            } else if (theMsg.getMessageType().equals("exit")) {
+            } else if (msgType.equals("exit")) {
                 thread.stopped = true;
-            } else if (theMsg.getMessageType().equals("StatusCheck")) {
+            } else if (msgType.equals("StatusCheck")) {
                 System.out.println("Status found");
-                send("status ready");
-            } else {
+                //send("status ready");
+            }
+            else if (msgType.equals("OrgsList")){
+                CAB302Assignment.currentOrganisations = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+            }
+            else if (msgType.equals("OrgsCurrentAssets")) {
+                CAB302Assignment.currentOrgsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+            }
+            else {
                 CAB302Assignment.receivedMsg = theMsg; // the static field
                                                        // is available for controllers to access
                 CAB302Assignment.assetData = theMsg;
@@ -128,7 +136,6 @@ public class TradeClient implements Runnable {
         objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
         objectOutputStream.flush();
         objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-
     }
 
     /**

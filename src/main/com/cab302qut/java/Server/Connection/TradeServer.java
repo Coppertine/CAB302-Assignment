@@ -1,6 +1,7 @@
 package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
@@ -166,24 +167,42 @@ public class TradeServer implements Runnable {
                 //Receive Trade Update, could be new trade or updated
 
             }
-
+            else if (theClientMsg.getMessageType().equals("GetOrgsList")) {
+                ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
+                while (set.next()) {
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(set.getString("organisationName"));
+                    row.add(set.getString("credits"));
+                    organisationsData.add(row);
+                }
+                Message theMsg = new Message("OrgsList",organisationsData);
+                theClientThread.sendMessage(theMsg);
+            }
+            else if (theClientMsg.getMessageType().equals("GetOrgsAsset")) {
+                String theOrg = (String) theClientMsg.getMessageObject();
+                ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
+                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + theOrg + "';");
+                while (set.next()) {
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(set.getString("assetType"));
+                    row.add(set.getString("quantity"));
+                    organisationsAssets.add(row);
+                }
+                Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
+                theClientThread.sendMessage(theMsg);
+            }
             else if (theClientMsg.getMessageType().equals("GetTrades"))
             {
-                //ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
                 ArrayList<AssetTableObj> tradeData = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
                 while (set.next()){
                     tradeData.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
-                    //istTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
                 }
-                //ArrayList<AssetPriceHistoryObj> theTrades = new ArrayList<>(listTrades);
                 Message theMsg = new Message("Trades",tradeData);
-
                 theClientThread.sendMessage(theMsg);
-
-                // Get all trades from database and send to client who asked.
-                //findClient(ID).send();
             }
+
         } catch (NoSuchElementException | SQLException e) {
             System.out.println(e.getMessage());
         }

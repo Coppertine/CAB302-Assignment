@@ -63,12 +63,9 @@ public class ServerThread extends Thread {
     public final void run() {
        while (!stopped) { // Why? just, why?
             try {
-                //client.handle(clientID, streamIn.readUTF());
                 client.handle(clientID,objectInputStream.readObject());
-                //System.out.println(streamIn.readUTF());
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
-                //Debug.log(e.getMessage());
             }
         }
     }
@@ -109,11 +106,6 @@ public class ServerThread extends Thread {
      * @throws IOException if DataInputStreams can not be created.
      */
     public final void open() throws IOException {
-//        streamIn = new DataInputStream(
-//                new BufferedInputStream(socket.getInputStream()));
-//        streamOut = new DataOutputStream(
-//                new BufferedOutputStream(socket.getOutputStream()));
-
         objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
         objectOutputStream.flush();
         objectInputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));

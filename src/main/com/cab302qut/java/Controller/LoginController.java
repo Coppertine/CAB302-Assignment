@@ -92,10 +92,10 @@ public class LoginController {
 
             try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("assetTradeHistory.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("mainITAdmin.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                MainController mainController = loader.getController();
+                //MainController mainController = loader.getController();
 //                mainController.setOrganisationLabel(userOrganisation);
 //                mainController.setUserLabel(username);
                 stage.setScene(new Scene(root));

@@ -19,18 +19,19 @@ public class ServerController implements Initializable {
     private TextArea consoleField;
 
     public void StartServer(){
-        tradeSystemServer.run();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         try{
             ServerConfiguration theServerConfig = CAB302Assignment.getConfig();
             tradeSystemServer = new TradeServer(theServerConfig,this);
+            Thread thread = new Thread(tradeSystemServer,"serverThread");
+            thread.start();
 
         } catch (Exception e){
             printToMessageScreen(e.getMessage());
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 
     public void printToMessageScreen(String msg) {

@@ -49,6 +49,12 @@ public class CAB302Assignment extends Application {
 
     public static Message receivedMsg;
 
+    // For IT Admin to have a single collection for entire program duration
+    // instead of repeated server requests
+    public static ArrayList<ArrayList<String>> currentOrganisations;
+
+    public static ArrayList<ArrayList<String>> currentOrgsAssets;
+
     public static Message assetData;
 
     public static ServerConfiguration getConfig() {
