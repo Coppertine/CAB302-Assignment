@@ -26,8 +26,7 @@ public class TradeClient implements Runnable {
 
     private MainController controller;
 
-    public final void run(final ServerConfiguration inputConfig)
-    {
+    public final void run(final ServerConfiguration inputConfig) {
         try {
             config = inputConfig;
             config.setSocket(new Socket(config.getAddress(), config.getPort()));
@@ -37,7 +36,7 @@ public class TradeClient implements Runnable {
             open();
             thread = new ClientThread(this, socket, socket.getPort());
 
-        }catch (UnknownHostException uhe) {
+        } catch (UnknownHostException uhe) {
             Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {
             Debug.log("Unexpected exception: " + ioe.getMessage());
@@ -63,7 +62,7 @@ public class TradeClient implements Runnable {
         }
     }
 
-    public final void handleMsg(Message msg){
+    public final void handleMsg(Message msg) {
         if (msg instanceof Message) {
             Message theMsg = (Message) msg;
             System.out.println("REC from Server: " + theMsg.getMessageType());
@@ -75,9 +74,14 @@ public class TradeClient implements Runnable {
             } else if (theMsg.getMessageType().equals("StatusCheck")) {
                 System.out.println("Status found");
                 send("status ready");
+            } else if (theMsg.getMessageType().equals("UserAccepted")) {
+                CAB302Assignment.assetData = theMsg;
+//StaticVariables.user = theMsg.getMessageObject();
+                System.out.println("user Agree");
+                send("status ready");
             } else {
                 //CAB302Assignment.receivedMsg = theMsg; // the static field
-                                                       // is available for controllers to access
+                // is available for controllers to access
                 CAB302Assignment.assetData = theMsg;
                 System.out.println(theMsg.getMessageObject().getClass());
             }
@@ -104,12 +108,13 @@ public class TradeClient implements Runnable {
             Debug.log(e.toString());
         }
     }
-    public final void sendMessage(Message obj){
+
+    public final void sendMessage(Message obj) {
         try {
             System.out.println("Send to server: " + obj.getClass());
             objectOutputStream.writeObject(obj);
             objectOutputStream.flush();
-        } catch (Exception e){
+        } catch (Exception e) {
             Debug.log(e.getMessage());
         }
     }
@@ -132,7 +137,6 @@ public class TradeClient implements Runnable {
     }
 
     /**
-     *
      * Attempts to remove the client from the server.
      *
      * @param clientID The Location Id.
@@ -214,11 +218,11 @@ public class TradeClient implements Runnable {
         this.outputStream = streamOutInput;
     }
 
-    public final ObjectInputStream getObjectInputStream(){
+    public final ObjectInputStream getObjectInputStream() {
         return objectInputStream;
     }
 
-    public final ObjectOutputStream getObjectOutputStream(){
+    public final ObjectOutputStream getObjectOutputStream() {
         return objectOutputStream;
     }
 }
