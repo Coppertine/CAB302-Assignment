@@ -1,6 +1,6 @@
 package com.cab302qut.java;
 
-import com.cab302qut.java.Client.Connection.TradeClient;
+import com.cab302qut.java.Client.TradeClient;
 import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.ServerConfiguration;
 
@@ -9,41 +9,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import com.cab302qut.java.Items.Asset;
-import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Organisation.OrganisationException;
 import com.cab302qut.java.Trades.Order;
-import com.cab302qut.java.Trades.OrderType;
-import com.cab302qut.java.Trades.SellOrder;
 import com.cab302qut.java.Users.User;
-import com.cab302qut.java.Users.UserType;
-
-import javafx.event.EventHandler;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import tray.animations.AnimationType;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.*;
+
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
     private static String[] Args;
-    private static final String configFile = String.valueOf(CAB302Assignment.class.getClassLoader().getResource("defaultconfig.ini"));
+    private static final String configFile =  "C:\\Users\\Giane\\Desktop\\CAB302-Assignment\\src\\main\\resources\\defaultconfig.ini";//String.valueOf(CAB302Assignment.class.getClassLoader().getResource("defaultconfig.ini"));
     private static User mainUser;
 
     public static TradeClient tradeClient;
@@ -90,7 +68,7 @@ public class CAB302Assignment extends Application {
             for (int j = 0; j < buyOrders.size(); j++) {
                 if (sellOrders.get(i).getTradeAsset().getAssetName() == buyOrders.get(j).getTradeAsset().getAssetName() && sellOrders.get(i).getQuantityToTrade() >= buyOrders.get(j).getQuantityToTrade() && sellOrders.get(i).getPrice() == buyOrders.get(j).getPrice()) {
 
-                    int buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
+                    Double buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
                     double tradePrice;
 
                     tradePrice = buyOrders.get(j).getPrice() * buyOrders.get(j).getQuantityToTrade();

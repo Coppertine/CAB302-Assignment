@@ -1,8 +1,7 @@
-package com.cab302qut.java.Client.Connection;
+package com.cab302qut.java.Client;
 
 import com.cab302qut.java.util.Message;
 
-import java.io.IOException;
 import java.net.Socket;
 
 public class ClientThread extends Thread {

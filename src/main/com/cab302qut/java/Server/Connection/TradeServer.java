@@ -182,7 +182,7 @@ public class TradeServer implements Runnable {
                     }
                     ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
                     while (orgSet.next()) {
-                        organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
+                        organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getDouble("credits"));
                         break;
                     }
                     users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
@@ -207,7 +207,8 @@ public class TradeServer implements Runnable {
                     theClientThread.sendMessage(theMsg);
                 }
 
-            } else if (theClientMsg.getMessageType().equals("CreateTrade")) {
+            }
+            else if (theClientMsg.getMessageType().equals("CreateTrade")) {
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
 
                 ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
@@ -217,13 +218,22 @@ public class TradeServer implements Runnable {
                 }
                 System.out.println("asset refresh complete");
                 StaticVariables.assetRefresh = true;
-            } else if (theClientMsg.getMessageType().equals("Trade")) {
+            }
+            else if (theClientMsg.getMessageType().equals("Trade")) {
                 //Receive Trade Update, could be new trade or updated
 
-            } else if (theClientMsg.getMessageType().equals("SellOrder")) {
+            }
+            else if (theClientMsg.getMessageType().equals("EditOrgCreditsNum")) {
+                EditOrgCredits(theClientMsg,theClientThread);
+            }
+            else if (theClientMsg.getMessageType().equals("EditOrgAssetNum")) {
+                EditOrgAssetNum(theClientMsg,theClientThread);
+            }
+            else if (theClientMsg.getMessageType().equals("SellOrder")) {
                 //Receive Trade Update, could be new trade or updated
 
-            } else if (theClientMsg.getMessageType().equals("Order")) {
+            }
+            else if (theClientMsg.getMessageType().equals("Order")) {
                 //Receive Trade Update, could be new trade or updated
 
             }
@@ -236,7 +246,7 @@ public class TradeServer implements Runnable {
                     row.add(set.getString("credits"));
                     organisationsData.add(row);
                 }
-                Message theMsg = new Message("OrgsList",organisationsData);
+                Message theMsg = new Message("OrgsList", organisationsData);
                 theClientThread.sendMessage(theMsg);
             }
             else if (theClientMsg.getMessageType().equals("GetOrgsAsset")) {
@@ -252,28 +262,97 @@ public class TradeServer implements Runnable {
                 Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
                 theClientThread.sendMessage(theMsg);
             }
-            else if (theClientMsg.getMessageType().equals("GetTrades"))
-            {
-            } else if (theClientMsg.getMessageType().equals("GetTrades")) {
-                //ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
+            else if (theClientMsg.getMessageType().equals("GetTrades")) {
                 ArrayList<AssetTableObj> tradeData = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
-                while (set.next()){
-                    tradeData.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
                 while (set.next()) {
                     tradeData.add(new AssetTableObj(set.getDate("date"), set.getDouble("price")));
-                    //istTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
                 }
-                Message theMsg = new Message("Trades",tradeData);
-                //ArrayList<AssetPriceHistoryObj> theTrades = new ArrayList<>(listTrades);
                 Message theMsg = new Message("Trades", tradeData);
-
                 theClientThread.sendMessage(theMsg);
             }
-
         } catch (NoSuchElementException | SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Updates an org's credits and calls the SendUpdatedCredits
+     * @param msg
+     * @param client
+     * @throws SQLException
+     */
+    public void EditOrgCredits(Message msg, ServerThread client) throws SQLException {
+        String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String newCreditAmount =((ArrayList<String>) msg.getMessageObject()).get(1);
+        Double newCreditsAmountDouble = Double.parseDouble(newCreditAmount);
+        Double currentCredits = 0.0;
+        Double updatedCredits = 0.0;
+        try {
+//            ResultSet set = DatabaseConnection.executeStatement("SELECT `credits` FROM `organisations` WHERE `organisationName` = '" + theOrg + "';");
+//            while (set.next()) {
+//                currentCredits = set.getDouble("credits");
+//            }
+//            updatedCredits = currentCredits + newCredits;
+            DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='" + newCreditAmount + "' WHERE `organisationName` = '" + theOrg +"';");
+        } catch (Exception e) {
+            System.out.println("Update org ERROR");
+            System.out.println(e.getMessage());
+        }
+        SendUpdatedCredits(client,theOrg,newCreditsAmountDouble);
+    }
+
+    /**
+     * Given an org send the org's updated client back to client.
+     * @param client
+     * @param org
+     * @param credits
+     * @throws SQLException
+     */
+    public void SendUpdatedCredits(ServerThread client, String org, Double credits) throws SQLException {
+        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations` WHERE `organisationName` = '" + org + "';");
+        ArrayList<String> orgDetails = new ArrayList<>();
+        while (set.next()) {
+            orgDetails.add(set.getString("organisationName"));
+            orgDetails.add(set.getString("credits"));
+        }
+        Organisation updatedOrg = new Organisation(org,credits);
+        Message msg = new Message("UpdateOrgsCredits", updatedOrg);
+        client.sendMessage(msg);
+    }
+
+
+    public void EditOrgAssetNum(Message msg, ServerThread client) throws SQLException {
+        String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String theAssetType =((ArrayList<String>) msg.getMessageObject()).get(1);
+        String newAssetQuantity = ((ArrayList<String>) msg.getMessageObject()).get(2);
+        Integer newAssetQuantityInt = Integer.parseInt(newAssetQuantity);
+        Integer currentAssetQuantity = 0;
+        Integer updatedQuantity = 0;
+        try {
+            DatabaseConnection.executeStatement("UPDATE `currentAssets` SET `quantity`= '" + newAssetQuantity + "' WHERE `organisationName` = '" + theOrg + "' AND `assetType` = '" + theAssetType +"';");
+        } catch (Exception e) {
+            System.out.println("Update org asset num ERROR");
+            System.out.println(e.getMessage());
+        }
+        SendUpdatedAssetNum(client,theOrg,theAssetType,newAssetQuantityInt);
+    }
+
+    public void SendUpdatedAssetNum(ServerThread client, String org, String assetType, Integer assetQuantity) throws SQLException {
+        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + org + "AND `assetType` = '" + assetType + "';");
+        ArrayList<String> orgDetails = new ArrayList<>();
+        while (set.next()) {
+            orgDetails.add(set.getString("organisationName"));
+            orgDetails.add(set.getString("assetType"));
+            orgDetails.add(set.getString("quantity"));
+        }
+        ArrayList<String> updatedOrgAssetNum = new ArrayList<>();
+        updatedOrgAssetNum.add(org);
+        updatedOrgAssetNum.add(assetType);
+        updatedOrgAssetNum.add(assetQuantity.toString());
+
+        Message msg = new Message("UpdateOrgsAssetNum", updatedOrgAssetNum);
+        client.sendMessage(msg);
     }
 
     /**

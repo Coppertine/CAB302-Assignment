@@ -1,12 +1,9 @@
 package com.cab302qut.java.Controller;
 
-import com.cab302qut.java.CAB302Assignment;
-import com.cab302qut.java.Client.Connection.TradeClient;
 import com.cab302qut.java.util.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

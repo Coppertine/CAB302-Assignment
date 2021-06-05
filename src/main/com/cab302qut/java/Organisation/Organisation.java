@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Organisation implements Serializable {
     private String name;
-    private int currentCredits;
+    private Double currentCredits;
 
     /**
      * Creates a new organisation
@@ -23,9 +23,9 @@ public class Organisation implements Serializable {
      */
     public Organisation(String name) {
         this.name = name;
-        this.currentCredits = 0;
+        this.currentCredits = 0.0;
     }
-    public Organisation(String name, int credits) {
+    public Organisation(String name, Double credits) {
         this.name = name;
         this.currentCredits = credits;
     }
@@ -79,7 +79,7 @@ public class Organisation implements Serializable {
      * Gets the current amount of credits this organisation has
      * @return this organisations current credits
      */
-    public int getCredits() {
+    public Double getCredits() {
         return currentCredits;
     }
 

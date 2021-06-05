@@ -30,6 +30,7 @@ public class DatabaseStatements {
         return ("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
     }
 
+
     // helps to ensure correct table name is referenced down the code
     // table names in db currently require no spaces
     public enum Tables {

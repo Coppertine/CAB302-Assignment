@@ -2,6 +2,7 @@ package com.cab302qut.java.Controller;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.util.Message;
+import com.cab302qut.java.util.StaticVariables;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -55,29 +56,15 @@ public class EditOrgController implements Initializable {
 
     private ObservableList<String> existingOrgAssets;
 
+
     public void setOrgChoiceBox() {
         try {
             existingOrgs = FXCollections.observableArrayList();
-            for (ArrayList<String> row: CAB302Assignment.currentOrganisations) {
+            for (ArrayList<String> row: StaticVariables.organisationList) {
                 existingOrgs.add(row.get(0)); // get orgName
             }
             orgChoice.setItems(FXCollections.observableArrayList(existingOrgs));
-            orgChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    if (!btn_updateCredits.isVisible()) {
-                        btn_updateCredits.setVisible(true);
-                    }
-                    if (!orgAssets.isVisible()) {
-                        orgAssets.setVisible(true);
-                    }
-                    //orgAssets = new ChoiceBox<>();
-                    chosenOrg = existingOrgs.get(newValue.intValue());
-                    helperLabel.setText(chosenOrg);
-                    getOrgAssets();
-                    setAssetChoiceBox();
-                }
-            });
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -85,13 +72,13 @@ public class EditOrgController implements Initializable {
 
     public void setAssetChoiceBox() {
         try {
-            while (CAB302Assignment.currentOrgsAssets == null) {
+            while (StaticVariables.orgsAssets == null) {
                 System.out.println("Waiting for orgs assets");
             }
             orgAssets.getItems().clear();
 
             existingOrgAssets = FXCollections.observableArrayList();
-            for (ArrayList<String> row: CAB302Assignment.currentOrgsAssets) {
+            for (ArrayList<String> row: StaticVariables.orgsAssets) {
                 existingOrgAssets.add(row.get(0)); // get orgName
             }
             orgAssets.setItems(FXCollections.observableArrayList(existingOrgAssets));
@@ -100,6 +87,10 @@ public class EditOrgController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Initialise the asset choice box change behaviour
+     */
     public void initAssetChoiceBox() {
         try {
             orgAssets.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -117,36 +108,24 @@ public class EditOrgController implements Initializable {
         }
     }
 
-    public void SendCreditsUpdate() {
-        try {
-            if (CheckCreditsInput()) {
-                ArrayList<String> orgCreditsUpdate = new ArrayList<>();
-                orgCreditsUpdate.add(chosenOrg);
-                orgCreditsUpdate.add(editCredits.getText());
-                Message msg = new Message("EditOrgCreditsNum",orgCreditsUpdate);
-                //CAB302Assignment.tradeClient.sendMessage(msg);
-                System.out.println("Send org credit update");
+    public void initOrgChoiceBox() {
+        orgChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (!btn_updateCredits.isVisible()) {
+                    btn_updateCredits.setVisible(true);
+                }
+                if (!orgAssets.isVisible()) {
+                    orgAssets.setVisible(true);
+                }
+                chosenOrg = existingOrgs.get(newValue.intValue());
+                helperLabel.setText(chosenOrg);
+                getOrgAssets();
+                setAssetChoiceBox();
             }
-        } catch (Exception e) {
-
-        }
+        });
     }
 
-    public void SendAssetUpdate() {
-        try {
-            if (CheckAssetNumInput()) {
-                ArrayList<String> orgAssetUpdate = new ArrayList<>();
-                orgAssetUpdate.add(chosenOrg);
-                orgAssetUpdate.add(chosenAsset);
-                orgAssetUpdate.add(editAssetNum.getText());
-                Message msg = new Message("EditOrgAssetNum",orgAssetUpdate);
-                //CAB302Assignment.tradeClient.sendMessage(msg);
-                System.out.println("Send asset num update");
-            }
-        } catch (Exception e) {
-
-        }
-    }
 
     public boolean CheckCreditsInput() {
         try {
@@ -200,17 +179,21 @@ public class EditOrgController implements Initializable {
      * Request list of existing organisations from server.
      */
     public void getOrgsList() {
-        if (CAB302Assignment.currentOrganisations == null || CAB302Assignment.currentOrganisations.isEmpty()) {
+        if (StaticVariables.organisationList == null || StaticVariables.organisationList.isEmpty()) {
             Message msg = new Message("GetOrgsList");
             CAB302Assignment.tradeClient.sendMessage(msg);
         }
     }
 
+    /**
+     * Request list of assets of the chosen organisation from server.
+     */
     public void getOrgAssets() {
-        CAB302Assignment.currentOrgsAssets = null; //reset for new org selected
-        Message msg = new Message("GetOrgsAsset", chosenOrg);
-        CAB302Assignment.tradeClient.sendMessage(msg);
-
+        if (StaticVariables.orgsAssets == null || StaticVariables.organisationList.isEmpty()) {
+            StaticVariables.orgsAssets = null; //reset for new org selected
+            Message msg = new Message("GetOrgsAsset", chosenOrg);
+            CAB302Assignment.tradeClient.sendMessage(msg);
+        }
     }
 
     public void Back() {
@@ -224,6 +207,39 @@ public class EditOrgController implements Initializable {
         }
     }
 
+    public void SendCreditsUpdate() {
+        try {
+            // Check if input empty
+            if (CheckCreditsInput()) {
+                ArrayList<String> orgCreditsUpdate = new ArrayList<>();
+                orgCreditsUpdate.add(chosenOrg);
+                orgCreditsUpdate.add(editCredits.getText());
+                Message msg = new Message("EditOrgCreditsNum",orgCreditsUpdate);
+                CAB302Assignment.tradeClient.sendMessage(msg);
+                System.out.println("Sent edit org credits num");
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void SendAssetUpdate() {
+        try {
+            // Check if input empty
+            if (CheckAssetNumInput()) {
+                ArrayList<String> orgAssetUpdate = new ArrayList<>();
+                orgAssetUpdate.add(chosenOrg);
+                orgAssetUpdate.add(chosenAsset);
+                orgAssetUpdate.add(editAssetNum.getText());
+                Message msg = new Message("EditOrgAssetNum",orgAssetUpdate);
+                CAB302Assignment.tradeClient.sendMessage(msg);
+                System.out.println("Send asset num update");
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getOrgsList();
@@ -232,9 +248,11 @@ public class EditOrgController implements Initializable {
         orgAssets.setVisible(false);
         editCredits.setText("");
         editAssetNum.setText("");
-        while (CAB302Assignment.currentOrganisations == null) {
+        // wait till we get list of orgs from server before showing window
+        while (StaticVariables.organisationList == null) {
             System.out.println("Waiting");
         }
+        initOrgChoiceBox();
         setOrgChoiceBox();
         initAssetChoiceBox();
     }

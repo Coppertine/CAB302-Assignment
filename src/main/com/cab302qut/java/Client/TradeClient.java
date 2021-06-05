@@ -1,17 +1,13 @@
-package com.cab302qut.java.Client.Connection;
+package com.cab302qut.java.Client;
 
 import com.cab302qut.java.CAB302Assignment;
-import com.cab302qut.java.Client.Controller.MainController;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.util.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.Socket;
-import java.io.Serializable;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -24,8 +20,6 @@ public class TradeClient implements Runnable {
     private ObjectInputStream objectInputStream;
     private Socket socket;
     private ClientThread thread;
-
-    private MainController controller;
 
     public final void run(final ServerConfiguration inputConfig) {
         try {
@@ -57,7 +51,7 @@ public class TradeClient implements Runnable {
             thread.stopped = true;
         } else if (msg.startsWith("status")) {
             System.out.println("Status found");
-            send("status ready");
+            //send("status ready");
         } else {
             System.out.println(msg);
         }
@@ -78,15 +72,15 @@ public class TradeClient implements Runnable {
                 //send("status ready");
             }
             else if (msgType.equals("OrgsList")){
-                CAB302Assignment.currentOrganisations = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+                StaticVariables.organisationList = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
             }
             else if (msgType.equals("OrgsCurrentAssets")) {
-                CAB302Assignment.currentOrgsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+                StaticVariables.orgsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
             }
-            else {
+            else if (msgType.equals("")){
                 CAB302Assignment.receivedMsg = theMsg; // the static field
                                                        // is available for controllers to access
-                send("status ready");
+                //send("status ready");
             } else if (theMsg.getMessageType().equals("UserAccepted")) {
                 CAB302Assignment.assetData = theMsg;
                 StaticVariables.user = (User) theMsg.getMessageObject();
@@ -95,12 +89,12 @@ public class TradeClient implements Runnable {
                 StaticVariables.login = true;
                 StaticVariables.userOrganisation = ((User) theMsg.getMessageObject()).getOrganisation();
                 System.out.println("user Agree");
-                send("status ready");
+                //send("status ready");
             } else if (theMsg.getMessageType().equals("UserDenied")) {
                 StaticVariables.loginSuccessful = false;
                 StaticVariables.login = true;
                 System.out.println("user Agree");
-                send("status ready");
+                //send("status ready");
             } else {
                 //CAB302Assignment.receivedMsg = theMsg; // the static field
                 // is available for controllers to access
@@ -115,21 +109,21 @@ public class TradeClient implements Runnable {
         config = CAB302Assignment.getConfig();
         run(config);
     }
-
-    /**
-     * Sends a specific message to the thread in question.
-     *
-     * @param msg The string representation of the message from the client
-     */
-    public final void send(final String msg) {
-        try {
-            System.out.println("Sending to server: " + msg);
-            outputStream.writeUTF(msg);
-            outputStream.close();
-        } catch (IOException e) {
-            Debug.log(e.toString());
-        }
-    }
+//
+//    /**
+//     * Sends a specific message to the thread in question.
+//     *
+//     * @param msg The string representation of the message from the client
+//     */
+//    public final void send(final String msg) {
+//        try {
+//            System.out.println("Sending to server: " + msg);
+//            outputStream.writeUTF(msg);
+//            outputStream.close();
+//        } catch (IOException e) {
+//            Debug.log(e.toString());
+//        }
+//    }
 
     public final void sendMessage(Message obj) {
         try {
