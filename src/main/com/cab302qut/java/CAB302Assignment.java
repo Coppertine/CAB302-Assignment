@@ -43,7 +43,7 @@ import java.util.*;
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
     private static String[] Args;
-    private static final String configFile = "E:\\Uni 2021\\CAB302\\src\\main\\resources\\defaultconfig.ini";
+    private static final String configFile = String.valueOf(CAB302Assignment.class.getClassLoader().getResource("defaultconfig.ini"));
     private static User mainUser;
 
     public static TradeClient tradeClient;

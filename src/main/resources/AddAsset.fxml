@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.CreateOrgController">
+   <children>
+      <MenuBar maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="600.0" styleClass="menuBar">
+         <menus>
+            <Menu mnemonicParsing="false" styleClass="menuDropDown" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" styleClass="menuDropDown" text="Server">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Connect" />
+                  <MenuItem fx:id="settingsMenuItem" mnemonicParsing="false" text="Settings" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button layoutX="275.0" layoutY="238.0" mnemonicParsing="false" onAction="#CheckDetails" text="Create" />
+      <TextField layoutX="226.0" layoutY="174.0" promptText="Item Name" />
+      <Label layoutX="201.0" layoutY="93.0" text="Create Asset">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="helperLabel" layoutX="230.0" layoutY="300.0" text="Message">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

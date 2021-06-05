@@ -2,6 +2,7 @@ package com.cab302qut.java.Controller;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Connection.TradeClient;
+import com.cab302qut.java.Users.UserType;
 import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.ServerConfiguration;
 import javafx.event.ActionEvent;
@@ -92,15 +93,26 @@ public class LoginController {
             correctUser = true;
 
             try {
+                //if(checkUser.getUserType() == UserType.Administrator)
+                if(username.equals("admin"))
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("mainITAdmin.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    MainITAdminController mainController = loader.getController();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Main.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                MainController mainController = loader.getController();
-                mainController.setOrganisationLabel(userOrganisation);
-                mainController.setUserLabel(username);
-                stage.setScene(new Scene(root));
-                stage.show();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } else {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Main.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    MainController mainController = loader.getController();
+                    mainController.setOrganisationLabel(userOrganisation);
+                    mainController.setUserLabel(username);
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
