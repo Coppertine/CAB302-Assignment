@@ -2,6 +2,7 @@ package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
 import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Users.User;
@@ -156,17 +157,15 @@ public class TradeServer implements Runnable {
                 System.out.println("executed statement");
 
                 while(set.next()){
-                    users.add(new User(set.getString("userName"),set.getString("password")));
+                    users.add(new User(set.getString("userName"),set.getString("password")));// (Organisation) set.getObject("organisations")));
                 }
                 for (User user: users) {
-                    System.out.println(((ArrayList<?>) theClientMsg.getMessageObject()).get(0) +"below if the info that is being processed ");
-                    if (user.getUsername() == ((ArrayList<?>) theClientMsg.getMessageObject()).get(0)){
-                        System.out.println("This is awesome and grug is happy");
+                    user.setPassword(user.getPassword());
+                    if (user.getUsername().equals(((ArrayList<String>) theClientMsg.getMessageObject()).get(0))){
+                        if (user.getPassword().equals(((ArrayList<String>) theClientMsg.getMessageObject()).get(0))){
+                            System.out.println("This is awesome and grug is happy");
+                        }
                     }
-                    System.out.println(user.getUsername() + " user username");
-                    System.out.println(user.getPassword() + " user password");
-                    System.out.println(user.getOrganisation() + " user getOrganisation");
-
                 }
                 Message theMsg = new Message("Users",users);
                 theClientThread.sendMessage(theMsg);

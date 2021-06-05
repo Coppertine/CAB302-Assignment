@@ -76,44 +76,7 @@ public class CAB302Assignment extends Application {
         }
         config=configTemp;
 
-        //PopulateUsers();
-
-        Organisation organisation2 = new Organisation("Organisation 2");
-
-        User tradeUser = new User("Ben", organisation2, "BenTrade", "password2", UserType.Default);
-        Asset asset1 = new Asset("emojis", 1);
-        Asset asset2 = new Asset("CPU", 2);
-
-
-        User test = new User("t", "Username", "password", UserType.Default);
-        test.setPassword(test.getPassword().toString());
-        //System.out.println(test.getName() + test.getUsername() + test.getPassword() + test.getUserType().toString());
-        //arrays of different orders
-        ArrayList<Order> sellOrders = new ArrayList<Order>();
-        ArrayList<Order> orders = new ArrayList<Order>();
-        ArrayList<Order> buyOrders = new ArrayList<Order>();
-
-        Random rnd = new Random();
-        //
-        for (int i = 0; i < 6; i++) {
-            int numberToSell = rnd.nextInt(1000);
-            int numberToBuy = rnd.nextInt(1000);
-            int price = rnd.nextInt(10);
-            Order sellOrder = new Order(asset2, OrderType.SELL, numberToSell, price, tradeUser, null);
-            sellOrders.add(sellOrder);
-
-            Order buyOrder = new Order(asset2, OrderType.BUY, numberToBuy, price, tradeUser, null);
-            buyOrders.add(buyOrder);
-        }
-
-        CheckOrders(sellOrders, buyOrders);
-
         launch(args);
-    }
-
-    private static void PopulateUsers() {
-        Organisation organisation = new Organisation("DefaultOrg");
-        User mainUser = new User("John", organisation, "JohnMainUser", "password", UserType.Administrator);
     }
 
     public static void CheckOrders(ArrayList<Order> sellOrders, ArrayList<Order> buyOrders) {
@@ -121,14 +84,12 @@ public class CAB302Assignment extends Application {
             for (int j = 0; j < buyOrders.size(); j++) {
                 if (sellOrders.get(i).getTradeAsset().getAssetName() == buyOrders.get(j).getTradeAsset().getAssetName() && sellOrders.get(i).getQuantityToTrade() >= buyOrders.get(j).getQuantityToTrade() && sellOrders.get(i).getPrice() == buyOrders.get(j).getPrice()) {
 
-
                     int buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
                     double tradePrice;
 
                     tradePrice = buyOrders.get(j).getPrice() * buyOrders.get(j).getQuantityToTrade();
                     System.out.println(tradePrice);
                     if (buyOrganisationCredits >= tradePrice) {
-
 
                         try {
                             sellOrders.get(i).getUser().getOrganisation().addCredits((int) tradePrice);
@@ -158,8 +119,8 @@ public class CAB302Assignment extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //System.out.println(getClass().getResource("main.fxml").getPath());
-//        TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
-//        tray.setAnimationType(AnimationType.POPUP);
+  //      TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
+//       tray.setAnimationType(AnimationType.POPUP);
 //        tray.showAndDismiss(Duration.seconds(2));
         Parent root;
 
