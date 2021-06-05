@@ -49,7 +49,7 @@ public class TradeServer implements Runnable {
     /**
      * Database connection used to keep track of all database input and output.
      */
-    private DatabaseConnection connection;
+    private DatabaseConnection connection = new DatabaseConnection();
 
     /**
      * The Constructor of the Trade Server.
@@ -68,7 +68,6 @@ public class TradeServer implements Runnable {
             server = new ServerSocket(config.getPort());
             System.out.println(server);
             System.out.println("Attempting to connect to database");
-            this.connection = new DatabaseConnection();
             connection.establishConnection();
         } catch (IOException e) {
             Debug.log(e.toString());
@@ -80,6 +79,11 @@ public class TradeServer implements Runnable {
      */
     public final void stop() {
         exited = true;
+        try {
+            connection.CloseConnection();
+        } catch (SQLException throwables) {
+            Debug.log(throwables.toString());
+        }
     }
 
     /**
@@ -104,14 +108,15 @@ public class TradeServer implements Runnable {
 
     @Override
     public final void run() {
-        while (!exited) {
-            try {
-                System.out.println(date.getTime());
-                addThread(server.accept());
-                //Thread.sleep(1000);
-            } catch (IOException ignored) {
+        try {
+            while (!exited) {
+
+                    addThread(server.accept());
+                    //Thread.sleep(1000);
 
             }
+        } catch (IOException ignored) {
+
         }
         Debug.log("Server is stopped.");
     }

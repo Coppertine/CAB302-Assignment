@@ -65,7 +65,7 @@ public class ServerThread extends Thread {
             try {
                 //client.handle(clientID, streamIn.readUTF());
                 client.handle(clientID,objectInputStream.readObject());
-                //System.out.println(streamIn.readUTF());
+                System.out.println(objectInputStream.readObject());
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 //Debug.log(e.getMessage());

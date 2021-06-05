@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.CreateUserController">
+   <children>
+      <VBox alignment="CENTER" layoutX="180.0" layoutY="78.0" prefHeight="279.0" prefWidth="240.0" spacing="12.0">
+         <children>
+
+            <TextField promptText="Username" />
+            <TextField layoutX="10.0" layoutY="10.0" promptText="Password">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
+            <TextField layoutX="10.0" layoutY="88.0" promptText="Confirm Password" />
+            <ChoiceBox fx:id="organisationDropDown" prefWidth="240.0" />
+            <ChoiceBox fx:id="userTypeDropdown" layoutX="10.0" layoutY="172.0" prefWidth="240.0" />
+            <Button mnemonicParsing="false" onAction="#CreateUser" prefHeight="31.0" prefWidth="116.0" text="Create" />
+         </children>
+      </VBox>
+      <Label layoutX="141.0" layoutY="24.0" text="Create Organisation">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
