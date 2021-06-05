@@ -22,16 +22,20 @@ public class ServerController implements Initializable {
         try{
             ServerConfiguration theServerConfig = CAB302Assignment.getConfig();
             tradeSystemServer = new TradeServer(theServerConfig,this);
-            Thread thread = new Thread(tradeSystemServer,"serverThread");
+            Thread thread = new Thread(tradeSystemServer, "serverThread");
             thread.start();
-
         } catch (Exception e){
             printToMessageScreen(e.getMessage());
         }
     }
 
+    public void StopServer(){
+        tradeSystemServer.stop();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     public void printToMessageScreen(String msg) {

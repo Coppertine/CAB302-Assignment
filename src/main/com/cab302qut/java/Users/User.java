@@ -3,6 +3,7 @@ package com.cab302qut.java.Users;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.UserType;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Stephen Markovics
  */
-public class User {
+public class User implements Serializable {
     private String name;
     private Organisation organisation;
     private String username;
@@ -23,22 +24,19 @@ public class User {
     /**
      * Creates a new user which is to be placed into the Organisation's user list.
      *
-     * @param name         The user's display name.
      * @param organisation The organisation the user is a part of.
      * @param username     The username of the said user.
      * @param password     The password of the said user, hashed using MD5
      * @param userType     The type of user assigned.
      */
-    public User(String name, Organisation organisation, String username, String password, UserType userType) {
-        this.name = name;
+    public User(String username, String password, UserType userType,Organisation organisation) {
         this.organisation = organisation;
         this.username = username;
         this.password = password;
         this.userType = userType;
     }
 
-    public User(String name, String username, String password, UserType userType) {
-        this.name = name;
+    public User(String username, String password, UserType userType) {
         this.username = username;
         this.password = password;
         this.userType = userType;

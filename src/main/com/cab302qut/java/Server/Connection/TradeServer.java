@@ -2,9 +2,13 @@ package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
 import com.cab302qut.java.CAB302Assignment;
+
 import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Users.User;
+import com.cab302qut.java.Users.UserType;
 import com.cab302qut.java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +18,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.NoSuchElementException;
@@ -52,10 +55,10 @@ public class TradeServer implements Runnable {
     /**
      * The Constructor of the Trade Server.
      *
-     * @param inputConfig The server configuration.
+     * @param inputConfig     The server configuration.
      * @param controllerInput The FXML controller.
      */
-    public TradeServer (
+    public TradeServer(
             final ServerConfiguration inputConfig,
             final ServerController controllerInput) {
         try {
@@ -78,6 +81,11 @@ public class TradeServer implements Runnable {
      */
     public final void stop() {
         exited = true;
+        try {
+            connection.CloseConnection();
+        } catch (SQLException throwables) {
+            Debug.log(throwables.toString());
+        }
     }
 
     /**
@@ -93,7 +101,7 @@ public class TradeServer implements Runnable {
             client.open();
             client.start();
             //client.send("id: " + clients.indexOf(client));
-            Message msg = new Message("id",clients.indexOf(client));
+            Message msg = new Message("id", clients.indexOf(client));
             client.sendMessage(msg);
         } catch (IOException e) {
             Debug.log(e.toString());
@@ -102,21 +110,23 @@ public class TradeServer implements Runnable {
 
     @Override
     public final void run() {
-        while (!exited) {
-            try {
-                System.out.println(date.getTime());
-                addThread(server.accept());
-                //Thread.sleep(1000);
-            } catch (IOException ignored) {
+        try {
+            while (!exited) {
+
+                    addThread(server.accept());
+                    //Thread.sleep(1000);
 
             }
+        } catch (IOException ignored) {
+
         }
         Debug.log("Server is stopped.");
     }
 
     /**
      * Handles the message coming from the client thread.
-     * @param Id The location ID of the client.
+     *
+     * @param Id    The location ID of the client.
      * @param input The message from the client.
      */
     public final synchronized void handle(final int Id, final Object input) {
@@ -140,30 +150,80 @@ public class TradeServer implements Runnable {
 
     /**
      * Parses the traffic information to the controller.
-     * @param ID The location number of the client.
-     * @param input  The string input in CSV format starting with
-     * {@code Traffic: }
+     *
+     * @param ID    The location number of the client.
+     * @param input The string input in CSV format starting with
+     *              {@code Traffic: }
      */
     private void handleCommands(final int ID, final Object input) {
         try {
             // Get the client
             ServerThread theClientThread = findClient(ID);
             Message theClientMsg = (Message) input;
-            if (theClientMsg.getMessageType().equals("Login")){
+
+            //login Messaging
+            if (theClientMsg.getMessageType().equals("Login")) {
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
                 //TODO: validate database records of details
+                ArrayList<User> users = new ArrayList<>();
+                ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
 
-            }
+                System.out.println("executed statement");
+                boolean finish = false;
+                while (set.next()) {
+                    UserType userType;
+                    Organisation organisation = null;
+                    if (set.getString("accountType").equals("Default")) {
+                        userType = UserType.Default;
+                    } else if (set.getString("accountType").equals("Administrator")) {
+                        userType = UserType.Administrator;
+                    } else {
+                        userType = UserType.Default;
+                    }
+                    ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
+                    while (orgSet.next()) {
+                        organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
+                        break;
+                    }
+                    users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
+                }
+                for (User user : users) {
+                    String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
+                    User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0), inputPassword);
+                    test.setPassword(test.getPassword());
+                    if (user.getUsername().equals(test.getUsername())) {
+                        if (user.getPassword().equals(test.getPassword())) {
+                            Message theMsg = new Message("UserAccepted", user);
+                            finish = true;
+                            theClientThread.sendMessage(theMsg);
+                            break;
+                        }
+                    }
+                }
+                if (!finish) {
+                    Message theMsg = new Message("UserDenied");
+                    StaticVariables.loginSuccessful = false;
+                    StaticVariables.login = true;
+                    theClientThread.sendMessage(theMsg);
+                }
 
-            else if (theClientMsg.getMessageType().equals("Trade")) {
+            } else if (theClientMsg.getMessageType().equals("CreateTrade")) {
+                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
+
+                ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
+                while (orgSet.next()) {
+                    System.out.println(orgSet.getString("assetType"));
+                    System.out.println(orgSet.getString("quantity"));
+                }
+                System.out.println("asset refresh complete");
+                StaticVariables.assetRefresh = true;
+            } else if (theClientMsg.getMessageType().equals("Trade")) {
                 //Receive Trade Update, could be new trade or updated
 
-            }
-            else if (theClientMsg.getMessageType().equals("SellOrder")) {
+            } else if (theClientMsg.getMessageType().equals("SellOrder")) {
                 //Receive Trade Update, could be new trade or updated
 
-            }
-            else if (theClientMsg.getMessageType().equals("Order")) {
+            } else if (theClientMsg.getMessageType().equals("Order")) {
                 //Receive Trade Update, could be new trade or updated
 
             }
@@ -194,12 +254,20 @@ public class TradeServer implements Runnable {
             }
             else if (theClientMsg.getMessageType().equals("GetTrades"))
             {
+            } else if (theClientMsg.getMessageType().equals("GetTrades")) {
+                //ObservableList<AssetPriceHistoryObj> listTrades = FXCollections.observableArrayList();
                 ArrayList<AssetTableObj> tradeData = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
                 while (set.next()){
                     tradeData.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
+                while (set.next()) {
+                    tradeData.add(new AssetTableObj(set.getDate("date"), set.getDouble("price")));
+                    //istTrades.add(new AssetPriceHistoryObj(set.getDate("date"),set.getDouble("price")));
                 }
                 Message theMsg = new Message("Trades",tradeData);
+                //ArrayList<AssetPriceHistoryObj> theTrades = new ArrayList<>(listTrades);
+                Message theMsg = new Message("Trades", tradeData);
+
                 theClientThread.sendMessage(theMsg);
             }
 
@@ -224,6 +292,7 @@ public class TradeServer implements Runnable {
 
     /**
      * Attempts to remove the client thread from the server.
+     *
      * @param clientID The client location id.
      */
     public final void remove(final int clientID) {

@@ -103,16 +103,16 @@
                      </children>
                   </VBox>
                </children></HBox>
-            <Pane prefHeight="167.0" prefWidth="224.0">
+            <Pane prefHeight="111.0" prefWidth="469.0">
                <children>
                   <Button fx:id="tradeButton" layoutX="209.0" layoutY="60.0" mnemonicParsing="false" onAction="#createTrade" text="Trade" />
                   <Button layoutX="307.0" layoutY="60.0" mnemonicParsing="false" text="Send Server Message" />
                </children></Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <Pane prefHeight="235.0" prefWidth="469.0">
                <children>
-                  <ScrollPane fx:id="currentTrades" layoutX="22.0" prefHeight="167.0" prefWidth="413.0">
+                  <ScrollPane fx:id="currentTrades" layoutX="22.0" prefHeight="204.0" prefWidth="413.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="397.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="268.0" prefWidth="397.0" />
                     </content>
                   </ScrollPane>
                </children>

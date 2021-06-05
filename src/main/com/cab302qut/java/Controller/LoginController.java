@@ -2,8 +2,10 @@ package com.cab302qut.java.Controller;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Connection.TradeClient;
+import com.cab302qut.java.Users.UserType;
 import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.ServerConfiguration;
+import com.cab302qut.java.util.StaticVariables;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,8 +43,8 @@ public class LoginController {
 
     private String password;
     private String username;
-    private String userOrganisation = "testOrganisation";
     private boolean correctUser = false;
+    private boolean login = false;
 
     /**
      * @param actionEvent
@@ -74,46 +76,50 @@ public class LoginController {
                 ArrayList<String> credentials = new ArrayList<>();
                 credentials.add(username);
                 credentials.add(password);
-                Message msg = new Message("Login",credentials);
+                Message msg = new Message("Login", credentials);
                 CAB302Assignment.tradeClient.sendMessage(msg);
 
+                while (!StaticVariables.login) {
+                    System.out.println("waiting");
+                }
                 //CAB302Assignment.tradeClient.send("Login: " + username + "-" + password);
-
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
-            System.out.println(password + " " + username);
-            User checkUser = new User(username, password);
-            checkUser.setPassword(password);
-            System.out.println(checkUser.getUsername() + " " + checkUser.getPassword());
-            correctUser = true;
-
-            try {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("mainITAdmin.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                //MainController mainController = loader.getController();
-//                mainController.setOrganisationLabel(userOrganisation);
-//                mainController.setUserLabel(username);
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (StaticVariables.loginSuccessful) {
+                try {
+                    if (StaticVariables.user.getUserType().equals(UserType.Default)) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Main.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                        MainController mainController = loader.getController();
+                        mainController.setOrganisationLabel(StaticVariables.userOrganisation.getName());
+                        mainController.setUserLabel(username);
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    } else if (StaticVariables.user.getUserType().equals(UserType.Administrator)) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MainITAdmin.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                        MainITAdminController mainController = loader.getController();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                helperLabel.setText("The Username or Password was incorrect");
             }
-        }
-
-        if (!correctUser) {
-            helperLabel.setText("The Username or Password was incorrect");
         }
     }
 
     public void passwordReset(ActionEvent actionEvent) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ResetPassword.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ResetPassword.fxml"));
+            Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

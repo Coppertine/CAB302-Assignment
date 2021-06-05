@@ -18,9 +18,9 @@ public class ServerConfiguration {
         File configFile = new File(filePath);
         if (!configFile.exists()) {
 
-            configFile.createNewFile();
-            Files.copy(Path.of(getClass().getClassLoader().getResource("defaultconfig.ini").toURI()),
-                    new FileOutputStream(configFile));
+//            configFile.createNewFile();
+//            Files.copy(Path.of(getClass().getClassLoader().getResource("defaultconfig.ini").toURI()),
+//                    new FileOutputStream(configFile));
         }
         credentials = new DatabaseCredentials();
         // Read Config File

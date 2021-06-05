@@ -1,6 +1,9 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.util.Message;
+import com.cab302qut.java.util.StaticVariables;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +43,7 @@ public class MainController implements Initializable {
 
     public void logout(ActionEvent actionEvent) throws IOException {
         try {
+
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -51,12 +55,19 @@ public class MainController implements Initializable {
     }
     public void createTrade(ActionEvent actionEvent) throws IOException {
         try {
+            Message msg = new Message("CreateTrade");
+            CAB302Assignment.tradeClient.sendMessage(msg);
+            while(!StaticVariables.assetRefresh){
 
-            assetList[0] = new Asset("test1",1);
-            assetList[1] = new Asset("test2",2);
-            assetList[2] = new Asset("test3",3);
-            assetList[3] = new Asset("test4",4);
-            assetList[4] = new Asset("test5",5);
+            }
+            for ( int i = 0; i < StaticVariables.assets.length-1;i++) {
+                assetList[i] = StaticVariables.assets[i];
+            }
+//            assetList[0] = new Asset("test1",1);
+//            assetList[1] = new Asset("test2",2);
+//            assetList[2] = new Asset("test3",3);
+//            assetList[3] = new Asset("test4",4);
+//            assetList[4] = new Asset("test5",5);
 
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Trade.fxml"));
             Parent root = loader.load();

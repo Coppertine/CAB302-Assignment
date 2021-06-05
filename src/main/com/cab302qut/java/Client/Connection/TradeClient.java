@@ -2,6 +2,7 @@ package com.cab302qut.java.Client.Connection;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Controller.MainController;
+import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.util.*;
@@ -26,8 +27,7 @@ public class TradeClient implements Runnable {
 
     private MainController controller;
 
-    public final void run(final ServerConfiguration inputConfig)
-    {
+    public final void run(final ServerConfiguration inputConfig) {
         try {
             config = inputConfig;
             config.setSocket(new Socket(config.getAddress(), config.getPort()));
@@ -37,7 +37,7 @@ public class TradeClient implements Runnable {
             open();
             thread = new ClientThread(this, socket, socket.getPort());
 
-        }catch (UnknownHostException uhe) {
+        } catch (UnknownHostException uhe) {
             Debug.log("Host unknown: " + uhe.getMessage());
         } catch (IOException ioe) {
             Debug.log("Unexpected exception: " + ioe.getMessage());
@@ -63,7 +63,7 @@ public class TradeClient implements Runnable {
         }
     }
 
-    public final void handleMsg(Message msg){
+    public final void handleMsg(Message msg) {
         if (msg instanceof Message) {
             Message theMsg = (Message) msg;
             String msgType = theMsg.getMessageType();
@@ -86,6 +86,24 @@ public class TradeClient implements Runnable {
             else {
                 CAB302Assignment.receivedMsg = theMsg; // the static field
                                                        // is available for controllers to access
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("UserAccepted")) {
+                CAB302Assignment.assetData = theMsg;
+                StaticVariables.user = (User) theMsg.getMessageObject();
+                System.out.println(StaticVariables.user.getOrganisation() + "User Organisation");
+                StaticVariables.loginSuccessful = true;
+                StaticVariables.login = true;
+                StaticVariables.userOrganisation = ((User) theMsg.getMessageObject()).getOrganisation();
+                System.out.println("user Agree");
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("UserDenied")) {
+                StaticVariables.loginSuccessful = false;
+                StaticVariables.login = true;
+                System.out.println("user Agree");
+                send("status ready");
+            } else {
+                //CAB302Assignment.receivedMsg = theMsg; // the static field
+                // is available for controllers to access
                 CAB302Assignment.assetData = theMsg;
                 System.out.println(theMsg.getMessageObject().getClass());
             }
@@ -112,12 +130,13 @@ public class TradeClient implements Runnable {
             Debug.log(e.toString());
         }
     }
-    public final void sendMessage(Message obj){
+
+    public final void sendMessage(Message obj) {
         try {
             System.out.println("Send to server: " + obj.getClass());
             objectOutputStream.writeObject(obj);
             objectOutputStream.flush();
-        } catch (Exception e){
+        } catch (Exception e) {
             Debug.log(e.getMessage());
         }
     }
@@ -139,7 +158,6 @@ public class TradeClient implements Runnable {
     }
 
     /**
-     *
      * Attempts to remove the client from the server.
      *
      * @param clientID The Location Id.
@@ -221,11 +239,11 @@ public class TradeClient implements Runnable {
         this.outputStream = streamOutInput;
     }
 
-    public final ObjectInputStream getObjectInputStream(){
+    public final ObjectInputStream getObjectInputStream() {
         return objectInputStream;
     }
 
-    public final ObjectOutputStream getObjectOutputStream(){
+    public final ObjectOutputStream getObjectOutputStream() {
         return objectOutputStream;
     }
 }
