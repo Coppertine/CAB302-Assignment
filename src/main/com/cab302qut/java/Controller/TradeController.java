@@ -59,10 +59,6 @@ public class TradeController {
     private double price;
     private User testUser;
 
-    private String[] assetList = new String[]{
-            "test1", "test2", "test3"
-    };
-
 //need to add different assets to choice box
 //then when clicked they are displayed to the user
 

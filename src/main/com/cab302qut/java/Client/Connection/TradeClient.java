@@ -2,6 +2,7 @@ package com.cab302qut.java.Client.Connection;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Client.Controller.MainController;
+import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.util.*;
@@ -76,7 +77,16 @@ public class TradeClient implements Runnable {
                 send("status ready");
             } else if (theMsg.getMessageType().equals("UserAccepted")) {
                 CAB302Assignment.assetData = theMsg;
-//StaticVariables.user = theMsg.getMessageObject();
+                StaticVariables.user = (User) theMsg.getMessageObject();
+                System.out.println(StaticVariables.user.getOrganisation() + "User Organisation");
+                StaticVariables.loginSuccessful = true;
+                StaticVariables.login = true;
+                StaticVariables.userOrganisation = ((User) theMsg.getMessageObject()).getOrganisation();
+                System.out.println("user Agree");
+                send("status ready");
+            } else if (theMsg.getMessageType().equals("UserDenied")) {
+                StaticVariables.loginSuccessful = false;
+                StaticVariables.login = true;
                 System.out.println("user Agree");
                 send("status ready");
             } else {
