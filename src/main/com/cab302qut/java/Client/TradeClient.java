@@ -1,18 +1,15 @@
-package com.cab302qut.java.Client.Connection;
+package com.cab302qut.java.Client;
 
 import com.cab302qut.java.CAB302Assignment;
-import com.cab302qut.java.Client.Controller.MainController;
+import com.cab302qut.java.Controller.MainController;
+import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
 import com.cab302qut.java.util.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.Socket;
-import java.io.Serializable;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 public class TradeClient implements Runnable {
     private int clientID;
