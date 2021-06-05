@@ -12,14 +12,19 @@ public class DatabaseStatements {
     DatabaseConnection db;
 
     public static String GetAllTrades() {
-        return("SELECT * FROM '" + Tables.currentTrades.toString().toLowerCase() + "' ;");
+        return ("SELECT * FROM '" + Tables.currentTrades.toString().toLowerCase() + "' ;");
     }
 
-    public static String GetYearTrades(){
-        return("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
+    public static String GetYearTrades() {
+        return ("SELECT * FROM `tradeHistory` WHERE YEAR(`date`) = 2020;");
     }
-    public static String GetUsers(){
-        return("SELECT * FROM `users` ;");
+
+    public static String GetUsers() {
+        return ("SELECT * FROM `users` ;");
+    }
+
+    public static String GetOrganisations(String usersOrg) {
+        return ("SELECT * FROM `organisations` WHERE organisationName = '" + usersOrg + "';");
     }
 
     // helps to ensure correct table name is referenced down the code
@@ -38,13 +43,13 @@ public class DatabaseStatements {
         this.db = new DatabaseConnection();
     }
 
-    public void InsertIntoOrganisations(String organisationName) throws SQLException{
+    public void InsertIntoOrganisations(String organisationName) throws SQLException {
         //statement.execute("INSERT INTO organisations (name, credits) VALUES('Organisation XYZ','5123');");
-        String statement = String.format("INSERT INTO `%s` (organisationID) VALUES (%s);", Tables.organisations.toString(),organisationName);
+        String statement = String.format("INSERT INTO `%s` (organisationID) VALUES (%s);", Tables.organisations.toString(), organisationName);
         db.executeStatement(statement);
     }
 
-    public void InsertIntoAssets(String assetName) throws SQLException{
+    public void InsertIntoAssets(String assetName) throws SQLException {
 
         //TODO: allow DB to auto assign asset ID or the organisation to provide
 
@@ -53,10 +58,9 @@ public class DatabaseStatements {
         db.executeStatement(statement);
     }
 
-    public void InsertIntoUsers(String userName) throws SQLException{
+    public void InsertIntoUsers(String userName) throws SQLException {
 
     }
-
 
 
 }

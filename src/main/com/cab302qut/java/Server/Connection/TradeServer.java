@@ -6,6 +6,7 @@ import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Users.User;
+import com.cab302qut.java.Users.UserType;
 import com.cab302qut.java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -154,21 +155,49 @@ public class TradeServer implements Runnable {
                 //TODO: validate database records of details
                 ArrayList<User> users = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
+
                 System.out.println("executed statement");
 
+
                 while(set.next()){
-                    users.add(new User(set.getString("userName"),set.getString("password")));// (Organisation) set.getObject("organisations")));
+                    UserType userType;
+                    Organisation organisation = null;
+                    System.out.println(set.getString("accountType"));
+                    if (set.getString("accountType").equals("Default")){
+                        userType = UserType.Default ;
+                    }
+                    else if (set.getString("accountType").equals("Administrator"))
+                    {
+                        userType = UserType.Administrator;
+                    }
+                    else{
+                        userType = UserType.Default;
+                    }
+                    System.out.println(set.getString("organisationName"));
+                    ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
+                    while(orgSet.next()) {
+                        organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
+                        break;
+                    }
+                    users.add(new User(set.getString("userName"),set.getString("password"),userType,organisation));
+
                 }
                 for (User user: users) {
-                    user.setPassword(user.getPassword());
-                    if (user.getUsername().equals(((ArrayList<String>) theClientMsg.getMessageObject()).get(0))){
-                        if (user.getPassword().equals(((ArrayList<String>) theClientMsg.getMessageObject()).get(0))){
+                    String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
+                    User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0),inputPassword);
+                    test.setPassword(test.getPassword());
+                    if (user.getUsername().equals(test.getUsername())){
+                        if (user.getPassword().equals(test.getPassword())){
+                            //User sendUser = new User(user.getUsername(), user.getPassword(),userType,organisation);
                             System.out.println("This is awesome and grug is happy");
+                            System.out.println(user.getUsername() + user.getPassword() + user.getUserType() + user.getOrganisation().getCredits());
+                            Message theMsg = new Message("UserAccepted",user);
+                            theClientThread.sendMessage(theMsg);
+                            break;
                         }
                     }
                 }
-                Message theMsg = new Message("Users",users);
-                theClientThread.sendMessage(theMsg);
+
 
             }
 
