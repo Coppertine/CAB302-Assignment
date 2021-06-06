@@ -10,6 +10,7 @@ import com.cab302qut.java.util.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class TradeClient implements Runnable {
     private int clientID;
@@ -40,56 +41,51 @@ public class TradeClient implements Runnable {
         }
     }
 
-    /**
-     * Handles the message coming from the server thread.
-     *
-     * @param msg The message from the server.
-     */
-    public final void handle(final String msg) {
-        //TODO:  Handle other commands other than the usual, like Trades and such.
-        if (msg.startsWith("id: ")) {
-            clientID = Integer.parseInt(msg.substring("id: ".length()));
-        } else if (msg.startsWith("exit")) {
-            thread.stopped = true;
-        } else if (msg.startsWith("status")) {
-            System.out.println("Status found");
-            send("status ready");
-        } else {
-            System.out.println(msg);
-        }
-    }
 
+    /**
+     * Handles all incoming messages from the server instance.
+     * @param msg The type of message as well as the object payload.
+     */
     public final void handleMsg(Message msg) {
-        if (msg instanceof Message) {
-            Message theMsg = (Message) msg;
-            System.out.println("REC from Server: " + theMsg.getMessageType());
-            if (theMsg.getMessageType().equals("id")) {
-                clientID = (Integer) theMsg.getMessageObject();
-                System.out.println("ClientID: " + clientID);
-            } else if (theMsg.getMessageType().equals("exit")) {
-                thread.stopped = true;
-            } else if (theMsg.getMessageType().equals("StatusCheck")) {
-                System.out.println("Status found");
-                send("status ready");
-            } else if (theMsg.getMessageType().equals("UserAccepted")) {
-                CAB302Assignment.assetData = theMsg;
-                StaticVariables.user = (User) theMsg.getMessageObject();
-                System.out.println(StaticVariables.user.getOrganisation() + "User Organisation");
-                StaticVariables.loginSuccessful = true;
-                StaticVariables.login = true;
-                StaticVariables.userOrganisation = ((User) theMsg.getMessageObject()).getOrganisation();
-                System.out.println("user Agree");
-                send("status ready");
-            } else if (theMsg.getMessageType().equals("UserDenied")) {
-                StaticVariables.loginSuccessful = false;
-                StaticVariables.login = true;
-                System.out.println("user Agree");
-                send("status ready");
-            } else {
-                //CAB302Assignment.receivedMsg = theMsg; // the static field
-                // is available for controllers to access
-                CAB302Assignment.assetData = theMsg;
-                System.out.println(theMsg.getMessageObject().getClass());
+        if (msg != null) {
+            System.out.println("REC from Server: " + msg.getMessageType());
+            //CAB302Assignment.receivedMsg = theMsg; // the static field
+            // is available for controllers to access
+            switch (msg.getMessageType()) {
+                case "id" -> {
+                    clientID = (Integer) msg.getMessageObject();
+                    System.out.println("ClientID: " + clientID);
+                }
+                case "exit" -> thread.stopped = true;
+                case "StatusCheck" -> {
+                    System.out.println("Status found");
+                    send("status ready");
+                }
+                case "UserAccepted" -> {
+                    CAB302Assignment.assetData = msg;
+                    StaticVariables.user = (User) msg.getMessageObject();
+                    System.out.println(StaticVariables.user.getOrganisation() + "User Organisation");
+                    StaticVariables.loginSuccessful = true;
+                    StaticVariables.login = true;
+                    StaticVariables.userOrganisation = ((User) msg.getMessageObject()).getOrganisation();
+                    System.out.println("user Agree");
+                    send("status ready");
+                }
+                case "UserDenied" -> {
+                    StaticVariables.loginSuccessful = false;
+                    StaticVariables.login = true;
+                    System.out.println("user Agree");
+                    send("status ready");
+                }
+                case "OrgsList" -> {
+                    //noinspection unchecked
+                    StaticVariables.organisationList = (ArrayList<ArrayList<String>>)msg.getMessageObject();
+                }
+
+                default -> {
+                    CAB302Assignment.assetData = msg;
+                    System.out.println(msg.getMessageObject().getClass());
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
@@ -161,105 +162,118 @@ public class TradeServer implements Runnable {
             Message theClientMsg = (Message) input;
 
             //login Messaging
-            if (theClientMsg.getMessageType().equals("Login")) {
-                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
-                //TODO: validate database records of details
-                ArrayList<User> users = new ArrayList<>();
-                ResultSet set = connection.executeStatement(DatabaseStatements.GetUsers());
+            switch (theClientMsg.getMessageType()) {
+                case "Login": {
+                    System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
+                    //TODO: validate database records of details
+                    ArrayList<User> users = new ArrayList<>();
+                    ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetUsers());
 
-                System.out.println("executed statement");
-                boolean finish = false;
-                while (set.next()) {
-                    UserType userType;
-                    Organisation organisation = null;
-                    if (set.getString("accountType").equals("Default")) {
-                        userType = UserType.Default;
-                    } else if (set.getString("accountType").equals("Administrator")) {
-                        userType = UserType.Administrator;
-                    } else {
-                        userType = UserType.Default;
+                    System.out.println("executed statement");
+                    boolean finish = false;
+                    while (set.next()) {
+                        UserType userType;
+                        Organisation organisation = null;
+                        if (set.getString("accountType").equals("Default")) {
+                            userType = UserType.Default;
+                        } else if (set.getString("accountType").equals("Administrator")) {
+                            userType = UserType.Administrator;
+                        } else {
+                            userType = UserType.Default;
+                        }
+                        ResultSet orgSet = DatabaseConnection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
+                        while (orgSet.next()) {
+                            organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
+                        }
+
+                        users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
                     }
-                    ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
-                    while (orgSet.next()) {
-                        organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
-                        break;
-                    }
-                    users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
-                }
-                for (User user : users) {
-                    String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
-                    User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0), inputPassword);
-                    test.setPassword(test.getPassword());
-                    if (user.getUsername().equals(test.getUsername())) {
-                        if (user.getPassword().equals(test.getPassword())) {
-                            Message theMsg = new Message("UserAccepted", user);
-                            finish = true;
-                            theClientThread.sendMessage(theMsg);
-                            break;
+                    for (User user : users) {
+                        String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
+                        User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0), inputPassword);
+                        test.setPassword(test.getPassword());
+                        if (user.getUsername().equals(test.getUsername())) {
+                            if (user.getPassword().equals(test.getPassword())) {
+                                Message theMsg = new Message("UserAccepted", user);
+                                finish = true;
+                                theClientThread.sendMessage(theMsg);
+                                break;
+                            }
                         }
                     }
+                    if (!finish) {
+                        Message theMsg = new Message("UserDenied");
+                        StaticVariables.loginSuccessful = false;
+                        StaticVariables.login = true;
+                        theClientThread.sendMessage(theMsg);
+                    }
+
+                    break;
                 }
-                if (!finish) {
-                    Message theMsg = new Message("UserDenied");
-                    StaticVariables.loginSuccessful = false;
-                    StaticVariables.login = true;
+                case "CreateTrade":
+                    System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
+
+                    ResultSet orgSet = DatabaseConnection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
+                    while (orgSet.next()) {
+                        System.out.println(orgSet.getString("assetType"));
+                        System.out.println(orgSet.getString("quantity"));
+                    }
+                    System.out.println("asset refresh complete");
+                    StaticVariables.assetRefresh = true;
+                    break;
+                case "Trade":
+                    //Receive Trade Update, could be new trade or updated
+
+                    break;
+                case "SellOrder":
+                    //Receive Trade Update, could be new trade or updated
+
+                    break;
+                case "Order":
+                    //Receive Trade Update, could be new trade or updated
+
+                    break;
+                case "GetOrgsList": {
+                    ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+                    ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
+                    while (set.next()) {
+                        ArrayList<String> row = new ArrayList<>();
+                        row.add(set.getString("organisationName"));
+                        row.add(set.getString("credits"));
+                        organisationsData.add(row);
+                    }
+                    Message theMsg = new Message("OrgsList", organisationsData);
                     theClientThread.sendMessage(theMsg);
+                    break;
                 }
-
-            } else if (theClientMsg.getMessageType().equals("CreateTrade")) {
-                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
-
-                ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
-                while (orgSet.next()) {
-                    System.out.println(orgSet.getString("assetType"));
-                    System.out.println(orgSet.getString("quantity"));
+                case "GetOrgsAsset": {
+                    String theOrg = (String) theClientMsg.getMessageObject();
+                    ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
+                    ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + theOrg + "';");
+                    while (set.next()) {
+                        ArrayList<String> row = new ArrayList<>();
+                        row.add(set.getString("assetType"));
+                        row.add(set.getString("quantity"));
+                        organisationsAssets.add(row);
+                    }
+                    Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
+                    theClientThread.sendMessage(theMsg);
+                    break;
                 }
-                System.out.println("asset refresh complete");
-                StaticVariables.assetRefresh = true;
-            } else if (theClientMsg.getMessageType().equals("Trade")) {
-                //Receive Trade Update, could be new trade or updated
-
-            } else if (theClientMsg.getMessageType().equals("SellOrder")) {
-                //Receive Trade Update, could be new trade or updated
-
-            } else if (theClientMsg.getMessageType().equals("Order")) {
-                //Receive Trade Update, could be new trade or updated
-
-            }
-            else if (theClientMsg.getMessageType().equals("GetOrgsList")) {
-                ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
-                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
-                while (set.next()) {
-                    ArrayList<String> row = new ArrayList<>();
-                    row.add(set.getString("organisationName"));
-                    row.add(set.getString("credits"));
-                    organisationsData.add(row);
+                case "GetTrades": {
+                    ArrayList<AssetTableObj> tradeData = new ArrayList<>();
+                    ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetYearTrades());
+                    while (set.next()) {
+                        tradeData.add(new AssetTableObj(set.getDate("date"), set.getDouble("price")));
+                    }
+                    Message theMsg = new Message("Trades", tradeData);
+                    theClientThread.sendMessage(theMsg);
+                    break;
                 }
-                Message theMsg = new Message("OrgsList",organisationsData);
-                theClientThread.sendMessage(theMsg);
-            }
-            else if (theClientMsg.getMessageType().equals("GetOrgsAsset")) {
-                String theOrg = (String) theClientMsg.getMessageObject();
-                ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
-                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + theOrg + "';");
-                while (set.next()) {
-                    ArrayList<String> row = new ArrayList<>();
-                    row.add(set.getString("assetType"));
-                    row.add(set.getString("quantity"));
-                    organisationsAssets.add(row);
+                case "CreateUser": {
+                    DatabaseConnection.executeStatement(DatabaseStatements.CreateUser((User) theClientMsg.getMessageObject()));
+                    break;
                 }
-                Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
-                theClientThread.sendMessage(theMsg);
-            }
-            else if (theClientMsg.getMessageType().equals("GetTrades"))
-            {
-                ArrayList<AssetTableObj> tradeData = new ArrayList<>();
-                ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
-                while (set.next()){
-                    tradeData.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
-                }
-                Message theMsg = new Message("Trades",tradeData);
-                theClientThread.sendMessage(theMsg);
             }
 
         } catch (NoSuchElementException | SQLException e) {

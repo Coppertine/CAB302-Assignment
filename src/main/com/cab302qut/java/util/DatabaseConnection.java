@@ -19,7 +19,7 @@ public class DatabaseConnection {
             ServerConfiguration serverConfig = CAB302Assignment.getConfig();
             //Class.forName("org.mariadb.jdbc.Driver");
             //System.out.println("MariaDB JDBC Driver Registered!");
-            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeService","root","");
+            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/tradeservice","root","");
 //            DriverManager.getConnection(
 //                    "jdbc:mariadb://"+ serverConfig.getAddress()
 //                            + ":" + serverConfig.getPort() +
@@ -39,6 +39,5 @@ public class DatabaseConnection {
     public static void CloseConnection() throws SQLException {
         connection.close();
     }
-
 
 }

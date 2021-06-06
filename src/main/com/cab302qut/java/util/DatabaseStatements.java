@@ -1,5 +1,7 @@
 package com.cab302qut.java.util;
 
+import com.cab302qut.java.Users.User;
+
 import java.sql.SQLException;
 
 /***
@@ -28,6 +30,13 @@ public class DatabaseStatements {
     }
     public static String GetOrganisationAssets(String usersOrg) {
         return ("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
+    }
+
+    public static String CreateUser(User user)
+    {
+        return String.format("INSERT INTO `users`(`userName`, `password`, `accountType`, `organisationName`) VALUES " +
+                "(%s,%s,%s,%s)", user.getName(), user.getPassword(), user.getUserType().toString(),
+                    user.getOrganisation().getName());
     }
 
     // helps to ensure correct table name is referenced down the code
