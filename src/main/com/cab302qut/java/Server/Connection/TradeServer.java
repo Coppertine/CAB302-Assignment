@@ -392,7 +392,7 @@ public class TradeServer implements Runnable {
         client.sendMessage(theMsg);
     }
 
-    public String GetOrgList() throws SQLException
+    public Object GetOrgList() throws SQLException
     {
         ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
         ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
@@ -526,7 +526,7 @@ public class TradeServer implements Runnable {
                 //System.out.println("Task performed on: " + new Date() + " in" + "Thread's name: " + Thread.currentThread().getName());
                 try
                 {
-                    ResultSet moneySet = DatabaseConnection.executeStatement(GetOrgList());
+                    ResultSet moneySet = DatabaseConnection.executeStatement((String) GetOrgList());
                     ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetAllTrades());
                     ArrayList<Order> buyOrders = new ArrayList<>();
                     ArrayList<Order> sellOrders = new ArrayList<>();
