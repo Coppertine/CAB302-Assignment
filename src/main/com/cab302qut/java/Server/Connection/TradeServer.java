@@ -23,6 +23,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.NoSuchElementException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TradeServer implements Runnable {
 
@@ -489,6 +491,20 @@ public class TradeServer implements Runnable {
 
         Message msg = new Message("UpdateOrgsAssetNum", updatedOrgAssetNum);
         client.sendMessage(msg);
+    }
+
+    public void RefreshData() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                System.out.println("Task performed on: " + new Date() + " in" +
+                        "Thread's name: " + Thread.currentThread().getName());
+
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 20000L;
+        timer.schedule(task, delay, delay);
     }
 
     /**
