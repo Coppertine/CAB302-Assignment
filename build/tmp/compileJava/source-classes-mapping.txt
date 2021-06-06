@@ -16,8 +16,8 @@ com/cab302qut/java/Trades/OrderType.java
  com.cab302qut.java.Trades.OrderType
 com/cab302qut/java/Organisation/OrganisationAsset.java
  com.cab302qut.java.Organisation.OrganisationAsset
-com/cab302qut/java/Controller/LoginController.java
- com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/Server/Connection/ServerThread.java
+ com.cab302qut.java.Server.Connection.ServerThread
 com/cab302qut/java/Client/TradeClient.java
  com.cab302qut.java.Client.TradeClient
 com/cab302qut/java/CAB302Assignment.java
@@ -49,8 +49,8 @@ com/cab302qut/java/Server/Connection/TradeServer.java
  com.cab302qut.java.Server.Connection.TradeServer
 com/cab302qut/java/Trades/TradeException.java
  com.cab302qut.java.Trades.TradeException
-com/cab302qut/java/Controller/MainController.java
- com.cab302qut.java.Controller.MainController
+com/cab302qut/java/Trades/Trade.java
+ com.cab302qut.java.Trades.Trade
 com/cab302qut/java/Controller/ResetController.java
  com.cab302qut.java.Controller.ResetController
 com/cab302qut/java/Organisation/Organisation.java
@@ -61,8 +61,8 @@ com/cab302qut/java/util/DatabaseConnection.java
  com.cab302qut.java.util.DatabaseConnection
 com/cab302qut/java/Trades/TradeType.java
  com.cab302qut.java.Trades.TradeType
-com/cab302qut/java/Trades/Trade.java
- com.cab302qut.java.Trades.Trade
+com/cab302qut/java/Controller/CreateOrgController.java
+ com.cab302qut.java.Controller.CreateOrgController
 com/cab302qut/java/util/Message.java
  com.cab302qut.java.util.Message
 com/cab302qut/java/util/ServerConfiguration.java
@@ -72,7 +72,7 @@ com/cab302qut/java/Users/User.java
  com.cab302qut.java.Users.User
 com/cab302qut/java/Organisation/OrganisationException.java
  com.cab302qut.java.Organisation.OrganisationException
-com/cab302qut/java/Server/Connection/ServerThread.java
- com.cab302qut.java.Server.Connection.ServerThread
-com/cab302qut/java/Controller/CreateOrgController.java
- com.cab302qut.java.Controller.CreateOrgController
+com/cab302qut/java/Controller/MainController.java
+ com.cab302qut.java.Controller.MainController
+com/cab302qut/java/Controller/LoginController.java
+ com.cab302qut.java.Controller.LoginController

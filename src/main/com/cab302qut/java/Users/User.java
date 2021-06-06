@@ -130,7 +130,7 @@ public class User implements Serializable {
      * @param unhashed the users string input password
      * @return the hashed password
      */
-    public String HashPassword(String unhashed) {
+    public static String HashPassword(String unhashed) {
         //Needs to actually hash the password
         String hashedPassword = null;
         try {
