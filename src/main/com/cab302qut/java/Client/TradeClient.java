@@ -25,6 +25,7 @@ public class TradeClient implements Runnable {
     private ClientThread thread;
 
     public final void run(final ServerConfiguration inputConfig) {
+        RefreshData();
         try {
             config = inputConfig;
             config.setSocket(new Socket(config.getAddress(), config.getPort()));
@@ -122,8 +123,7 @@ public class TradeClient implements Runnable {
     public void RefreshData() {
         TimerTask task = new TimerTask() {
             public void run() {
-                System.out.println("Task performed on: " + new Date() + " in" +
-                        "Thread's name: " + Thread.currentThread().getName());
+                //System.out.println("Task performed on: " + new Date() + " in" + "Thread's name: " + Thread.currentThread().getName());
 
             }
         };

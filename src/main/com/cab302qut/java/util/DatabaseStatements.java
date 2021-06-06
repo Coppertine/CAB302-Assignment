@@ -72,6 +72,11 @@ public class DatabaseStatements {
         return sql;
     }
 
+//    public static String GetAllTrades(){
+//        String sql = "SELECT * FROM `currenttrades`;";
+//        return sql;
+//    }
+
     // helps to ensure correct table name is referenced down the code
     // table names in db currently require no spaces
     public enum Tables {

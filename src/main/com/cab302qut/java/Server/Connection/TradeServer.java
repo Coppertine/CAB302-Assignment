@@ -2,18 +2,14 @@ package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
 
-import com.cab302qut.java.CAB302Assignment;
-
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Order;
-import com.cab302qut.java.Trades.Trade;
+import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
 import com.cab302qut.java.util.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -122,6 +118,7 @@ public class TradeServer implements Runnable {
     @Override
     public final void run()
     {
+        RefreshData();
         try
         {
             while (!exited)
@@ -395,6 +392,20 @@ public class TradeServer implements Runnable {
         client.sendMessage(theMsg);
     }
 
+    public String GetOrgList() throws SQLException
+    {
+        ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
+        while (set.next())
+        {
+            ArrayList<String> row = new ArrayList<>();
+            row.add(set.getString("organisationName"));
+            row.add(set.getString("credits"));
+            organisationsData.add(row);
+        }
+        return organisationsData;
+    }
+
     public void CreateOrg(Message msg, ServerThread client) throws SQLException
     {
         String org = ((ArrayList<String>) msg.getMessageObject()).get(0);
@@ -433,6 +444,20 @@ public class TradeServer implements Runnable {
             System.out.println(e.getMessage());
         }
         SendUpdatedCredits(client, theOrg, newCreditsAmountDouble);
+    }
+
+    public void EditOrgCredits(double newCreditsAmount, String theOrg) throws SQLException
+    {
+        try
+        {
+
+            DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='"
+                    + newCreditsAmount + "' WHERE `organisationName` = '" + theOrg + "';");
+        } catch (Exception e)
+        {
+            System.out.println("Update org ERROR");
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -493,7 +518,95 @@ public class TradeServer implements Runnable {
         client.sendMessage(msg);
     }
 
+    public void RefreshData()
+    {
+        TimerTask task = new TimerTask() {
+            public void run()
+            {
+                //System.out.println("Task performed on: " + new Date() + " in" + "Thread's name: " + Thread.currentThread().getName());
+                try
+                {
+                    ResultSet moneySet = DatabaseConnection.executeStatement(GetOrgList());
+                    ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetAllTrades());
+                    ArrayList<Order> buyOrders = new ArrayList<>();
+                    ArrayList<Order> sellOrders = new ArrayList<>();
+                    ArrayList<Organisation> organisations = new ArrayList<>();
+                    ArrayList<ArrayList<String>> trade = new ArrayList<ArrayList<String>>();
+                    while (moneySet.next())
+                    {
+                        String orgName = moneySet.getString("organisationName");
+                        double orgCredits = moneySet.getDouble("credits");
 
+                        Organisation org = new Organisation(orgName, orgCredits);
+                        organisations.add(org);
+                    }
+
+                    while (set.next())
+                    {
+
+                        OrderType type;
+                        if (set.getString("tradeType").equals("BUY"))
+                        {
+                            type = OrderType.BUY;
+                        } else
+                        {
+                            type = OrderType.SELL;
+                        }
+
+                        Asset asset = new Asset(set.getString("assetType"), 0);
+                        int quantity = set.getInt("quantity");
+                        double price = set.getDouble("price");
+
+                        User user = (User) set.getObject("userName");
+                        Date date = (Date) set.getDate("date");
+                        Order newOrder = new Order(asset, type, quantity, price, user, date);
+                        if (newOrder.getOrderType().equals(OrderType.BUY))
+                        {
+                            buyOrders.add(newOrder);
+                        } else
+                        {
+                            sellOrders.add(newOrder);
+                        }
+                    }
+
+                    for (int i = 0; i < buyOrders.size(); i++)
+                    {
+                        for (int j = 0; j < sellOrders.size(); j++)
+                        {
+                            if (sellOrders.get(i).getTradeAsset().getAssetName() == buyOrders.get(j).getTradeAsset().getAssetName()
+                                    && sellOrders.get(i).getQuantityToTrade() >= buyOrders.get(j).getQuantityToTrade()
+                                    && sellOrders.get(i).getPrice() == buyOrders.get(j).getPrice())
+                            {
+                                for (Organisation org : organisations)
+                                {
+                                    if (sellOrders.get(i).getUser().getOrganisation().getName().equals(org.getName()))
+                                    {
+                                        double creditAmount = org.getCredits();
+                                        creditAmount += buyOrders.get(j).getPrice() * buyOrders.get(j).getQuantityToTrade();
+                                        EditOrgCredits(creditAmount, sellOrders.get(i).getUser().getOrganisation().getName());
+                                    }
+                                    if (buyOrders.get(j).getUser().getOrganisation().getName().equals(org.getName()))
+                                    {
+                                        double creditAmount = org.getCredits();
+                                        creditAmount -= buyOrders.get(j).getPrice() * buyOrders.get(j).getQuantityToTrade();
+                                        EditOrgCredits(creditAmount, buyOrders.get(j).getUser().getOrganisation().getName());
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                } catch (SQLException throwables)
+                {
+                    throwables.printStackTrace();
+                }
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 20000L;
+        timer.schedule(task, delay, delay);
+    }
 
     /**
      * Returns the client with the same port as the ID.
