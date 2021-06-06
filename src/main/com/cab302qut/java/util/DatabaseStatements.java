@@ -1,7 +1,7 @@
 package com.cab302qut.java.util;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 
 /***
  * Class containing methods when performing
@@ -61,7 +61,7 @@ public class DatabaseStatements {
         return sql;
     }
     public static String CreateTrade(String userName, String orgName, String assetType, int quantity, double price, String tradeType, Date date) {
-        String sql = "INSERT INTO currenttrades VALUES (" + "'" + userName + "','" + orgName + "','" + assetType +
+        String sql = "INSERT INTO `currenttrades` (`userName`, `organisationName`, `assetType`, `quantity`, `price`, `tradeType`, `date`) VALUES (" + "'" + userName + "','" + orgName + "','" + assetType +
                 "','" + quantity + "','" + price + "','" + tradeType + "', '" + date + "');";
         return sql;
     }

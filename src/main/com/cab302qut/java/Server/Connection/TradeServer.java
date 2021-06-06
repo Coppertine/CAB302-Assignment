@@ -7,6 +7,7 @@ import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
+import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
@@ -20,12 +21,10 @@ import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.NoSuchElementException;
 
 public class TradeServer implements Runnable {
-
-    Date date = new Date();
 
     /**
      * Exited boolean to prevent thread exceptions when shutting down a server.
@@ -360,20 +359,22 @@ public class TradeServer implements Runnable {
 
     public void CreateTrade(Message msg, ServerThread client) throws SQLException
     {
-        String username = ((ArrayList<String>) msg.getMessageObject()).get(0);
-        String org = ((ArrayList<String>) msg.getMessageObject()).get(1);
-        String assetType = ((ArrayList<String>) msg.getMessageObject()).get(2);
-        int quantity = ((ArrayList<Integer>) msg.getMessageObject()).get(3);
-        double price = ((ArrayList<Double>) msg.getMessageObject()).get(4);
-        String tradeType = ((ArrayList<String>) msg.getMessageObject()).get(5);
-        Date date = ((ArrayList<Date>) msg.getMessageObject()).get(6);
-
+        String username = ((Order) msg.getMessageObject()).getUser().getUsername();
+        String org = ((Order) msg.getMessageObject()).getUser().getOrganisation().getName();
+        String assetType = ((Order) msg.getMessageObject()).getTradeAsset().getAssetName();
+        int quantity = ((Order) msg.getMessageObject()).getQuantityToTrade();
+        double price = ((Order) msg.getMessageObject()).getPrice();
+        String tradeType = ((Order) msg.getMessageObject()).getOrderType().toString();
+        Date date = ((Order) msg.getMessageObject()).getTradeDate();
+        System.out.println(username + org + assetType + quantity + price + tradeType + date);
         try
         {
             DatabaseConnection.executeStatement(DatabaseStatements.CreateTrade(username, org, assetType, quantity, price, tradeType, date));
         } catch (Exception e)
         {
+
             System.out.println("Error adding new trade into DB");
+            System.out.println(e.getMessage());
         }
     }
 

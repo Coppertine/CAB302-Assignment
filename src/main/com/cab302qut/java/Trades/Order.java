@@ -1,10 +1,11 @@
 package com.cab302qut.java.Trades;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Date;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Users.User;
 
-public class Order {
+public class Order implements Serializable {
         private Asset tradeAsset;
         private double pricePerItem;
         private int quantityToTrade;

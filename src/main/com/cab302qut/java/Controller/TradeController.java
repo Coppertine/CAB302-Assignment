@@ -1,9 +1,11 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Users.User;
+import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.StaticVariables;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -28,7 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class TradeController implements Initializable{
@@ -65,6 +67,8 @@ public class TradeController implements Initializable{
     private User testUser;
     private ObservableList<String> existingOrgAssets;
 
+    Order order;
+    boolean orderReady;
 //need to add different assets to choice box
 //then when clicked they are displayed to the user
 
@@ -109,22 +113,6 @@ public class TradeController implements Initializable{
      * checks order and then submits order to server
      */
     private void checkOrder() {
-
-        asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
-        if (asset == null){
-            //throw error
-        }
-        Date date = new Date();
-
-        if (buyButton.isSelected()) {
-            Order buyOrder = new Order(asset, OrderType.BUY, quantity, price, testUser, date);
-            System.out.println(buyOrder.getPrice() + " " + buyOrder.getTradeAsset() + buyOrder.getQuantityToTrade() + OrderType.BUY);
-        } else if (sellButton.isSelected()) {
-            Order sellOrder = new Order(asset, OrderType.SELL, quantity, price, testUser, date);
-            System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade() + OrderType.SELL);
-        } else {
-            //throw error
-        }
         try {
             quantity = Integer.parseInt(assetQuantity.getText().toString());
         } catch (NumberFormatException ex) {
@@ -134,6 +122,37 @@ public class TradeController implements Initializable{
             price = Double.parseDouble(assetPrice.getText().toString());
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
+        }
+        asset = new Asset(assetChoice.getSelectionModel().getSelectedItem().toString(), 0);
+        if (asset == null){
+            //throw error
+        }
+        Date date = new Date(System.currentTimeMillis());
+        try
+        {
+            if (buyButton.isSelected())
+            {
+                order = new Order(asset, OrderType.BUY, quantity, price, StaticVariables.user, date);
+                System.out.println(order.getPrice() + " " + order.getTradeAsset() + order.getQuantityToTrade() + OrderType.BUY);
+                orderReady = true;
+            } else if (sellButton.isSelected())
+            {
+                order = new Order(asset, OrderType.SELL, quantity, price, StaticVariables.user, date);
+                System.out.println(order.getPrice() + " " + order.getTradeAsset() + order.getQuantityToTrade() + OrderType.SELL);
+                orderReady = true;
+            } else
+            {
+                //throw error
+            }
+        }catch (ClassCastException C){
+            System.out.println(C);
+
+        }
+        if (orderReady){
+            orderReady = false;
+
+            Message msg = new Message("Order",order);
+            CAB302Assignment.tradeClient.sendMessage(msg);
         }
     }
 

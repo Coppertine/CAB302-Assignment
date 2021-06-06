@@ -7,27 +7,21 @@
     <list default="true" id="c5edfb94-433a-4533-98ac-13d592b6ceb3" name="Default Changelist" comment="Merge branch 'StephenBranch' of https://github.com/Coppertine/CAB302-Assignment into StephenBranch&#10;&#10;# Conflicts:&#10;#&#9;.gradle/6.5/executionHistory/executionHistory.bin&#10;#&#9;.gradle/6.5/executionHistory/executionHistory.lock&#10;#&#9;.gradle/6.5/fileHashes/fileHashes.bin&#10;#&#9;.gradle/6.5/fileHashes/fileHashes.lock&#10;#&#9;.gradle/6.5/javaCompile/classAnalysis.bin&#10;#&#9;.gradle/6.5/javaCompile/javaCompile.lock&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.idea/workspace.xml&#10;#&#9;build/classes/java/main/com/cab302qut/java/Controller/TradeController.class&#10;#&#9;build/classes/java/main/com/cab302qut/java/Server/Controller/ServerController.class&#10;#&#9;build/classes/java/main/com/cab302qut/java/Users/User.class&#10;#&#9;build/tmp/compileJava/source-classes-mapping.txt&#10;#&#9;src/main/com/cab302qut/java/CAB302Assignment.java&#10;#&#9;src/main/com/cab302qut/java/Controller/CreateUserController.java&#10;#&#9;src/main/com/cab302qut/java/Controller/MainController.java&#10;#&#9;src/main/com/cab302qut/java/Controller/TradeController.java&#10;#&#9;src/main/com/cab302qut/java/Server/Connection/TradeServer.java&#10;#&#9;src/main/com/cab302qut/java/Server/Controller/ServerController.java">
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/CAB302Assignment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/CAB302Assignment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/CAB302Assignment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/TradeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/TradeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements$Tables.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements$Tables.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/TradeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Items/Asset.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Items/Asset.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Trades/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Trades/Order.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/CAB302Assignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/TradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/TradeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Trade.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Trade.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Items/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Items/Asset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Trades/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/util/DatabaseStatements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/util/DatabaseStatements.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +75,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="45d5cc9b-7e89-4a1f-b66c-e7069ef01a26" name="Default Changelist" comment="" />
+      <changelist id="c5edfb94-433a-4533-98ac-13d592b6ceb3" name="Default Changelist" comment="Merge branch 'StephenBranch' of https://github.com/Coppertine/CAB302-Assignment into StephenBranch&#10;&#10;# Conflicts:&#10;#&#9;.gradle/6.5/executionHistory/executionHistory.bin&#10;#&#9;.gradle/6.5/executionHistory/executionHistory.lock&#10;#&#9;.gradle/6.5/fileHashes/fileHashes.bin&#10;#&#9;.gradle/6.5/fileHashes/fileHashes.lock&#10;#&#9;.gradle/6.5/javaCompile/classAnalysis.bin&#10;#&#9;.gradle/6.5/javaCompile/javaCompile.lock&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.idea/workspace.xml&#10;#&#9;build/classes/java/main/com/cab302qut/java/Controller/TradeController.class&#10;#&#9;build/classes/java/main/com/cab302qut/java/Server/Controller/ServerController.class&#10;#&#9;build/classes/java/main/com/cab302qut/java/Users/User.class&#10;#&#9;build/tmp/compileJava/source-classes-mapping.txt&#10;#&#9;src/main/com/cab302qut/java/CAB302Assignment.java&#10;#&#9;src/main/com/cab302qut/java/Controller/CreateUserController.java&#10;#&#9;src/main/com/cab302qut/java/Controller/MainController.java&#10;#&#9;src/main/com/cab302qut/java/Controller/TradeController.java&#10;#&#9;src/main/com/cab302qut/java/Server/Connection/TradeServer.java&#10;#&#9;src/main/com/cab302qut/java/Server/Controller/ServerController.java" />
       <created>1622932339763</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -158,18 +152,28 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
-          <line>458</line>
+          <line>459</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
-          <line>256</line>
+          <line>255</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
-          <line>273</line>
+          <line>272</line>
           <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
+          <line>301</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
+          <line>178</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

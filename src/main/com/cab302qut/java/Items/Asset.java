@@ -2,6 +2,7 @@ package com.cab302qut.java.Items;
 
 import com.cab302qut.java.Trades.Trade;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ import java.util.HashSet;
  *
  * @author Giane
  * */
-public class Asset {
+public class Asset implements Serializable {
     private String assetName;
     private int id;
 
