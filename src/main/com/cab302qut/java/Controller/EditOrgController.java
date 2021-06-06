@@ -41,6 +41,10 @@ public class EditOrgController implements Initializable {
     Label helperLabel;
     @FXML
     Label helperLabel2;
+    @FXML
+    Label currentCredits;
+    @FXML
+    Label currentAssetQuantity;
 
     @FXML
     Button btn_updateCredits;
@@ -75,7 +79,6 @@ public class EditOrgController implements Initializable {
             while (StaticVariables.orgsAssets == null) {
                 System.out.println("Waiting for orgs assets");
             }
-            orgAssets.getItems().clear();
 
             existingOrgAssets = FXCollections.observableArrayList();
             for (ArrayList<String> row: StaticVariables.orgsAssets) {
@@ -101,6 +104,14 @@ public class EditOrgController implements Initializable {
                     }
                     chosenAsset = existingOrgAssets.get(newValue.intValue());
                     helperLabel2.setText(chosenAsset);
+                    if (StaticVariables.orgsAssets != null) {
+                        for (ArrayList<String> row: StaticVariables.orgsAssets) {
+                            if (row.get(0).equals(chosenAsset)) {
+                                currentAssetQuantity.setText(row.get(1));
+                                break;
+                            }
+                        }
+                    }
                 }
             });
         } catch (Exception e) {
@@ -108,6 +119,9 @@ public class EditOrgController implements Initializable {
         }
     }
 
+    /**
+     * Sets behaviour when selection from organisation list is selected
+     */
     public void initOrgChoiceBox() {
         orgChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -119,7 +133,17 @@ public class EditOrgController implements Initializable {
                     orgAssets.setVisible(true);
                 }
                 chosenOrg = existingOrgs.get(newValue.intValue());
+                orgAssets.valueProperty().set(null);
                 helperLabel.setText(chosenOrg);
+                if (StaticVariables.organisationList != null) {
+                    // get the credits of the org selected
+                    for (ArrayList<String> row: StaticVariables.organisationList) {
+                        if (row.get(0).equals(chosenOrg)) {
+                            currentCredits.setText(row.get(1));
+                            break;
+                        }
+                    }
+                }
                 getOrgAssets();
                 setAssetChoiceBox();
             }
@@ -189,7 +213,7 @@ public class EditOrgController implements Initializable {
      * Request list of assets of the chosen organisation from server.
      */
     public void getOrgAssets() {
-        if (StaticVariables.orgsAssets == null || StaticVariables.organisationList.isEmpty()) {
+        if (StaticVariables.orgsAssets == null || StaticVariables.orgsAssets.isEmpty()) {
             StaticVariables.orgsAssets = null; //reset for new org selected
             Message msg = new Message("GetOrgsAsset", chosenOrg);
             CAB302Assignment.tradeClient.sendMessage(msg);
@@ -217,6 +241,20 @@ public class EditOrgController implements Initializable {
                 Message msg = new Message("EditOrgCreditsNum",orgCreditsUpdate);
                 CAB302Assignment.tradeClient.sendMessage(msg);
                 System.out.println("Sent edit org credits num");
+                while(StaticVariables.orgCreditsUpdateMsg == null) {
+                    System.out.println("Waiting for org credits update");
+                }
+                ArrayList<String> updatedOrgCredits = StaticVariables.orgCreditsUpdateMsg;
+                // update the organisations list in static variables class with updated org credits
+                for (ArrayList<String> row: StaticVariables.organisationList) {
+                    if (row.get(0).equals(updatedOrgCredits.get(0))) {
+                        // update the array list object of the org to reflect new credit value
+                        row.set(1,updatedOrgCredits.get(1));
+                        // show updated credits in the scene
+                        currentCredits.setText(updatedOrgCredits.get(1));
+                        break;
+                    }
+                }
             }
         } catch (Exception e) {
 
@@ -234,6 +272,18 @@ public class EditOrgController implements Initializable {
                 Message msg = new Message("EditOrgAssetNum",orgAssetUpdate);
                 CAB302Assignment.tradeClient.sendMessage(msg);
                 System.out.println("Send asset num update");
+                while(StaticVariables.orgAssetNumUpdateMsg == null) {
+                    System.out.println("Waiting for org asset num update");
+                }
+                ArrayList<String> updatedOrgAssetNum = StaticVariables.orgAssetNumUpdateMsg;
+                // update the org's current asset quantity and reflect in the scene
+                for (ArrayList<String> row: StaticVariables.orgsAssets) {
+                    if (row.get(0).equals(chosenAsset)) {
+                        row.set(1,updatedOrgAssetNum.get(2));
+                        currentAssetQuantity.setText(updatedOrgAssetNum.get(2));
+                        break;
+                    }
+                }
             }
         } catch (Exception e) {
 

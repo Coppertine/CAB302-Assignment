@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.EditOrgController">
@@ -12,34 +13,56 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="300.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="298.0" minHeight="10.0" prefHeight="274.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="298.0" minHeight="10.0" prefHeight="257.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ChoiceBox fx:id="orgChoice" prefHeight="25.0" prefWidth="244.0" value="Select Organisation" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="btn_updateAssets" layoutX="71.0" layoutY="187.0" mnemonicParsing="false" onAction="#SendAssetUpdate" prefHeight="33.0" prefWidth="164.0" text="Send Asset Update" />
-                  <TextField fx:id="editAssetNum" layoutX="63.0" layoutY="114.0" prefHeight="25.0" prefWidth="174.0" promptText="Set new quantity of the asset" />
-                  <ChoiceBox fx:id="orgAssets" layoutX="83.0" layoutY="70.0" prefHeight="25.0" prefWidth="139.0" value="Select Asset" />
-                  <Label fx:id="helperLabel2" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="23.0" text="ChosenAsset">
+                  <TextField fx:id="editAssetNum" layoutX="63.0" layoutY="151.0" prefHeight="25.0" prefWidth="174.0" promptText="Set new quantity of the asset" />
+                  <ChoiceBox fx:id="orgAssets" layoutX="81.0" layoutY="28.0" prefHeight="25.0" prefWidth="139.0" value="Select Asset" />
+                  <Label fx:id="helperLabel2" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="127.0" text="ChosenAsset">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="191.0" layoutY="23.0" text="Current Quantity" />
+                  <Line endY="232.0" startY="1.0" />
+                  <Ellipse fill="#006666" layoutX="150.0" layoutY="103.0" radiusX="45.0" radiusY="42.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label fx:id="currentAssetQuantity" layoutX="112.0" layoutY="91.0" text="Asset Num" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="editCredits" layoutX="56.0" layoutY="79.0" promptText="Set new value for credits" />
-                  <Label fx:id="helperLabel" layoutX="100.0" layoutY="28.0" text="ChosenOrg" />
+                  <TextField fx:id="editCredits" layoutX="58.0" layoutY="155.0" promptText="Set new value for credits" />
                   <Button fx:id="btn_updateCredits" layoutX="48.0" layoutY="190.0" mnemonicParsing="false" onAction="#SendCreditsUpdate" prefHeight="33.0" prefWidth="164.0" text="Send Credits Update" />
+                  <Label layoutX="63.0" layoutY="14.0" text="Current Credits">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Ellipse fill="#006666" layoutX="130.0" layoutY="103.0" radiusX="45.0" radiusY="42.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label fx:id="currentCredits" layoutX="105.0" layoutY="91.0" text="Credits" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="123.0" prefWidth="213.0">
+            <AnchorPane prefHeight="143.0" prefWidth="396.0" GridPane.columnSpan="2147483647">
                <children>
                   <Button layoutX="25.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="54.0" text="Back" />
+                  <Label fx:id="helperLabel" layoutX="270.0" layoutY="63.0" text="ChosenOrg" />
+                  <ChoiceBox fx:id="orgChoice" layoutX="178.0" layoutY="89.0" prefHeight="25.0" prefWidth="244.0" value="Select Organisation" />
+                  <Label layoutX="198.0" layoutY="18.0" text="Edit Organisation">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

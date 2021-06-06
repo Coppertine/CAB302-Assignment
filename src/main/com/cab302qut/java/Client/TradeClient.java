@@ -71,6 +71,12 @@ public class TradeClient implements Runnable {
                 System.out.println("Status found");
                 //send("status ready");
             }
+            else if (msgType.equals("UpdateOrgsCredits")) {
+                StaticVariables.orgCreditsUpdateMsg = (ArrayList<String>) theMsg.getMessageObject();
+            }
+            else if (msgType.equals("UpdateOrgsAssetNum")) {
+                StaticVariables.orgAssetNumUpdateMsg = (ArrayList<String>) theMsg.getMessageObject();
+            }
             else if (msgType.equals("OrgsList")){
                 StaticVariables.organisationList = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
             }

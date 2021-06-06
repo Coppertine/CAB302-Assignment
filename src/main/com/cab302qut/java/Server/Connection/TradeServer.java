@@ -316,8 +316,7 @@ public class TradeServer implements Runnable {
             orgDetails.add(set.getString("organisationName"));
             orgDetails.add(set.getString("credits"));
         }
-        Organisation updatedOrg = new Organisation(org,credits);
-        Message msg = new Message("UpdateOrgsCredits", updatedOrg);
+        Message msg = new Message("UpdateOrgsCredits", orgDetails);
         client.sendMessage(msg);
     }
 
@@ -327,10 +326,8 @@ public class TradeServer implements Runnable {
         String theAssetType =((ArrayList<String>) msg.getMessageObject()).get(1);
         String newAssetQuantity = ((ArrayList<String>) msg.getMessageObject()).get(2);
         Integer newAssetQuantityInt = Integer.parseInt(newAssetQuantity);
-        Integer currentAssetQuantity = 0;
-        Integer updatedQuantity = 0;
         try {
-            DatabaseConnection.executeStatement("UPDATE `currentAssets` SET `quantity`= '" + newAssetQuantity + "' WHERE `organisationName` = '" + theOrg + "' AND `assetType` = '" + theAssetType +"';");
+            DatabaseConnection.executeStatement("UPDATE `currentAssets` SET `quantity`= '" + newAssetQuantity + "' WHERE `organisationName` = '" + theOrg + "' AND `assetType` = '" + theAssetType + "';");
         } catch (Exception e) {
             System.out.println("Update org asset num ERROR");
             System.out.println(e.getMessage());
@@ -339,7 +336,7 @@ public class TradeServer implements Runnable {
     }
 
     public void SendUpdatedAssetNum(ServerThread client, String org, String assetType, Integer assetQuantity) throws SQLException {
-        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + org + "AND `assetType` = '" + assetType + "';");
+        ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgsAssetNum(org, assetType));
         ArrayList<String> orgDetails = new ArrayList<>();
         while (set.next()) {
             orgDetails.add(set.getString("organisationName"));

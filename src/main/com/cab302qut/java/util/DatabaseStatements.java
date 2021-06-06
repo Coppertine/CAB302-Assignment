@@ -30,6 +30,22 @@ public class DatabaseStatements {
         return ("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
     }
 
+    public static String EditOrgAssetNum(String org, String assetType, String quantity) {
+        String sql = "UPDATE `currentAssets`" +
+                "SET `quantity` = " +
+                "'" + quantity + "' " +
+                "WHERE `organisationName` = " +
+                "'" + org + "' " +
+                "AND `assetType` = " +
+                "'" + assetType + "';";
+        return sql;
+    }
+    public static String GetOrgsAssetNum(String org, String assetType) {
+        String sql = "SELECT * FROM `currentAssets` WHERE `organisationName` = " +
+                "'" + org + "' AND `assetType` = " +
+                "'" + assetType + "';";
+        return sql;
+    }
 
     // helps to ensure correct table name is referenced down the code
     // table names in db currently require no spaces
