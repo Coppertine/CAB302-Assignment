@@ -16,12 +16,16 @@ import com.cab302qut.java.Users.User;
 import javafx.stage.Stage;
 
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class CAB302Assignment extends Application {
     private static ServerConfiguration config;
     private static String[] Args;
-    private static final String configFile =  "C:\\Users\\Giane\\Desktop\\CAB302-Assignment\\src\\main\\resources\\defaultconfig.ini";//String.valueOf(CAB302Assignment.class.getClassLoader().getResource("defaultconfig.ini"));
+    private static final String configFile = "C:\\Users\\Giane\\Desktop\\CAB302-Assignment\\src\\main\\resources\\defaultconfig.ini";//  String.valueOf(CAB302Assignment.getClassLoader().getResource("defaultconfig.ini"));
+
+    //"C:\\Users\\Giane\\Desktop\\CAB302-Assignment\\src\\main\\resources\\defaultconfig.ini";
+
     private static User mainUser;
 
     public static TradeClient tradeClient;
