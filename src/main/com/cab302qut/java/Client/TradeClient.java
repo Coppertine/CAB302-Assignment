@@ -87,11 +87,10 @@ public class TradeClient implements Runnable {
             else if (msgType.equals("OrgsCurrentAssets")) {
                 StaticVariables.orgsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
             }
-            else if (msgType.equals("")){
-                CAB302Assignment.receivedMsg = theMsg; // the static field
-                                                       // is available for controllers to access
-                //send("status ready");
-            } else if (theMsg.getMessageType().equals("UserAccepted")) {
+            else if (msgType.equals("AssetPriceHistory")) {
+                StaticVariables.selectedAssetPriceHistory = (ArrayList<AssetTableObj>) theMsg.getMessageObject();
+            }
+            else if (theMsg.getMessageType().equals("UserAccepted")) {
                 CAB302Assignment.assetData = theMsg;
                 StaticVariables.user = (User) theMsg.getMessageObject();
                 System.out.println(StaticVariables.user.getOrganisation() + "User Organisation");

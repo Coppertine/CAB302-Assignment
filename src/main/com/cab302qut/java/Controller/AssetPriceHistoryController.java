@@ -4,10 +4,7 @@ import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Trades.TradeType;
 import com.cab302qut.java.Users.User;
-import com.cab302qut.java.util.AssetPriceHistoryObj;
-import com.cab302qut.java.util.AssetTableObj;
-import com.cab302qut.java.util.DatabaseConnection;
-import com.cab302qut.java.util.Message;
+import com.cab302qut.java.util.*;
 import com.sun.source.tree.NewArrayTree;
 import javafx.application.Application;
 import javafx.beans.Observable;
@@ -54,6 +51,9 @@ public class AssetPriceHistoryController implements Initializable{
     ObservableList<AssetPriceHistoryObj> listTrade;
 
     @FXML
+    Label chosenAsset;
+
+    @FXML
     NumberAxis xAxis;
     @FXML
     NumberAxis yAxis;
@@ -67,11 +67,10 @@ public class AssetPriceHistoryController implements Initializable{
     @FXML
     Button btn_viewGraph;
 
-    @FXML
-    ChoiceBox<String> choiceBox;
+    private String previousScene;
 
-    public void Logout() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+    public void Back() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(previousScene));
         Stage window = (Stage) btn_logout.getScene().getWindow();
         Scene scene = new Scene(root);
         window.setScene(scene);
@@ -83,9 +82,12 @@ public class AssetPriceHistoryController implements Initializable{
     public void GetPriceData(){
 
         try {
-            ArrayList<Integer> blank = new ArrayList<>();
-            Message msg = new Message("GetTrades",blank);
+            StaticVariables.selectedAssetPriceHistory = null; // reset for the current asset
+            Message msg = new Message("GetAssetPriceHistory", chosenAsset.getText());
             CAB302Assignment.tradeClient.sendMessage(msg);
+            while (StaticVariables.selectedAssetPriceHistory == null) {
+                System.out.println("Waiting for asset price history");
+            }
             Refresh();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -98,46 +100,35 @@ public class AssetPriceHistoryController implements Initializable{
     @SuppressWarnings("unchecked")
     public void Refresh() {
         try {
-            Message obj = CAB302Assignment.assetData;
             listTrade = FXCollections.observableArrayList();
-            ArrayList<AssetTableObj> data = (ArrayList<AssetTableObj>) obj.getMessageObject();
-            data.forEach((row) -> listTrade.add(new AssetPriceHistoryObj(row.getDate(),row.getPrice())));
+            ArrayList<AssetTableObj> priceHistoryData = StaticVariables.selectedAssetPriceHistory;
+            priceHistoryData.forEach((row) -> listTrade.add(new AssetPriceHistoryObj(row.getDate(),row.getPrice())));
             table_assetPriceHistory.setItems(listTrade);
-            SetGraph();
-
+            SetGraph(priceHistoryData);
         } catch (Exception e)   {
             System.out.println(e.getMessage());
         }
     }
 
-    public void SwitchView() throws SQLException {
-        if (priceChart.isVisible()) {
-            priceChart.setVisible(false);
-            table_assetPriceHistory.setVisible(true);
-            btn_viewGraph.setText("Graph view");
-        }
-        else {
-            priceChart.setVisible(true);
-            table_assetPriceHistory.setVisible(false);
-            btn_viewGraph.setText("Table view");
-        }
-    }
-
-    public void SetGraph() {
-        Message obj = CAB302Assignment.assetData;
+    public void SetGraph(ArrayList<AssetTableObj> priceHistoryData) {
         Calendar calendar = Calendar.getInstance();
         this.series1 = new XYChart.Series<>();
-        ArrayList<AssetTableObj> data = (ArrayList<AssetTableObj>) obj.getMessageObject();
 
-        for (int i = 0; i < data.size(); i++) {
-            AssetTableObj row = data.get(i);
+        for (int i = 0; i < priceHistoryData.size(); i++) {
+            AssetTableObj row = priceHistoryData.get(i);
             calendar.setTime(row.getDate());
             Number date = calendar.get(Calendar.DAY_OF_MONTH);
             this.series1.getData().add(new XYChart.Data<>(date, row.getPrice()));
         }
 
-        this.series1.setName("Past Year");
+        this.series1.setName("Price History");
         this.priceChart.getData().add(series1);
+    }
+
+    public void SetChosenAsset(String assetType, String previousScene) {
+        this.previousScene = previousScene;
+        this.chosenAsset.setText(assetType);
+        GetPriceData();
     }
 
     @Override
@@ -155,6 +146,7 @@ public class AssetPriceHistoryController implements Initializable{
             this.col_price.setCellValueFactory(new PropertyValueFactory<AssetPriceHistoryObj,Double>("price"));
 
             table_assetPriceHistory.setItems(listTrade);
+
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }

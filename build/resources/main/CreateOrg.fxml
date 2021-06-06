@@ -19,6 +19,9 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="515.0" layoutY="347.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+      <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="59.0" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -265,6 +265,17 @@ public class TradeServer implements Runnable {
                 Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
                 theClientThread.sendMessage(theMsg);
             }
+            else if (theClientMsg.getMessageType().equals("GetAssetPriceHistory")) {
+                ArrayList<AssetTableObj> priceHistory = new ArrayList<>();
+                String assetType = (String) theClientMsg.getMessageObject();
+                ResultSet set = connection.executeStatement(DatabaseStatements.GetAssetPriceHistory(assetType));
+                while (set.next()) {
+                    priceHistory.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
+                }
+                Message msg = new Message("AssetPriceHistory",priceHistory);
+                theClientThread.sendMessage(msg);
+            }
+
             else if (theClientMsg.getMessageType().equals("GetTrades")) {
                 ArrayList<AssetTableObj> tradeData = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
@@ -317,7 +328,8 @@ public class TradeServer implements Runnable {
         String newCreditAmount =((ArrayList<String>) msg.getMessageObject()).get(1);
         Double newCreditsAmountDouble = Double.parseDouble(newCreditAmount);
         try {
-            DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='" + newCreditAmount + "' WHERE `organisationName` = '" + theOrg +"';");
+            DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='"
+                    + newCreditAmount + "' WHERE `organisationName` = '" + theOrg +"';");
         } catch (Exception e) {
             System.out.println("Update org ERROR");
             System.out.println(e.getMessage());

@@ -40,6 +40,13 @@ public class DatabaseStatements {
                 "'" + assetType + "';";
         return sql;
     }
+
+    public static String GetAssetPriceHistory(String assetType) {
+        String sql = "SELECT * FROM `tradeHistory` WHERE `assetType` = '" +
+                assetType + "';";
+        return sql;
+    }
+
     public static String GetOrgsAssetNum(String org, String assetType) {
         String sql = "SELECT * FROM `currentAssets` WHERE `organisationName` = " +
                 "'" + org + "' AND `assetType` = " +

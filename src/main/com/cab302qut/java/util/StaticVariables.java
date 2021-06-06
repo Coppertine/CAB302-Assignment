@@ -5,6 +5,7 @@ import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.Users.UserType;
 
+import java.awt.event.ActionEvent;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
@@ -23,5 +24,7 @@ public class StaticVariables {
 
     public static ArrayList<String> orgCreditsUpdateMsg;
     public static ArrayList<String> orgAssetNumUpdateMsg;
+    public static ArrayList<AssetTableObj> selectedAssetPriceHistory;
+    public static String chosenAsset;
 
 }
