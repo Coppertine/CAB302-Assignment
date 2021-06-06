@@ -92,6 +92,7 @@ public class LoginController {
                         MainController mainController = loader.getController();
                         mainController.setOrganisationLabel(StaticVariables.userOrganisation.getName());
                         mainController.setUserLabel(username);
+                        mainController.SetCurrentAssets("Login.fxml");
                         stage.setScene(new Scene(root));
                         stage.show();
                     } else if (StaticVariables.user.getUserType().equals(UserType.Administrator)) {

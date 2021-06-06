@@ -206,7 +206,6 @@ public class TradeServer implements Runnable {
                     StaticVariables.login = true;
                     theClientThread.sendMessage(theMsg);
                 }
-
             }
             else if (theClientMsg.getMessageType().equals("CreateTrade")) {
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
@@ -221,7 +220,6 @@ public class TradeServer implements Runnable {
             }
             else if (theClientMsg.getMessageType().equals("Trade")) {
                 //Receive Trade Update, could be new trade or updated
-
             }
             else if (theClientMsg.getMessageType().equals("CreateOrg")) {
                 CreateOrg(theClientMsg,theClientThread);
