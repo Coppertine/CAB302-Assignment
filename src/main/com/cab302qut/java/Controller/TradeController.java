@@ -1,12 +1,17 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Users.User;
+import com.cab302qut.java.util.Message;
+import com.cab302qut.java.util.StaticVariables;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +28,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TradeController {
@@ -42,7 +48,7 @@ public class TradeController {
     @FXML
     private Button sendOrder;
 
-
+    private ObservableList<String> existingOrgAssets2;
     @FXML
     private Label assetBuyName;
     @FXML
@@ -66,83 +72,93 @@ public class TradeController {
      * @param actionEvent
      * @throws IOException
      */
-    public void sendOrder(ActionEvent actionEvent) throws IOException {
+    public void sendOrder(ActionEvent actionEvent) throws IOException
+    {
         checkOrder();
     }
 
-    public void selectAsset(ActionEvent actionEvent) throws IOException {
-//        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-//            public void changed(ObservableValue ov, Number old_val, Number new_val) {
-                assetBuyName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Buy Price");
-                assetSellName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Sale Price");
 
-                buyPrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
-                salePrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
-            }
-//        });
-
-
-    public void back(ActionEvent actionEvent) throws IOException {
-        try {
+    public void back(ActionEvent actionEvent) throws IOException
+    {
+        try
+        {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void setBuyPrice(String assetName, int assetPrice) {
+    public void setChoiceBox()
+    {
+        try
+        {
+            Message msg = new Message("CreateTrade");
+            CAB302Assignment.tradeClient.sendMessage(msg);
 
-    }
 
-    public void setSalePrice(String assetName, int assetPrice) {
+            while (StaticVariables.orgsAssets == null)
+            {
+                System.out.println("Waiting for orgs assets");
+            }
 
-    }
+            existingOrgAssets2 = FXCollections.observableArrayList();
+            for (ArrayList<String> row : StaticVariables.orgsAssets)
+            {
+                existingOrgAssets2.add(row.get(0)); // get orgName
+            }
+            assetChoice.setItems(FXCollections.observableArrayList(existingOrgAssets2));
 
-    public void setCreditAmount(String creditAmountInput) {
-        creditAmount.setText(creditAmountInput);
-    }
 
-    public void setChoiceBox(Asset[] assets) {
-        for (Asset asset : assets) {
-            assetChoice.getItems().add(asset.getAssetName());
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
     /**
      * checks order and then submits order to server
      */
-    private void checkOrder() {
+    private void checkOrder()
+    {
 
         asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
-        if (asset == null){
+        if (asset == null)
+        {
             //throw error
         }
         Date date = new Date();
 
-        if (buyButton.isSelected()) {
+        if (buyButton.isSelected())
+        {
             Order buyOrder = new Order(asset, OrderType.BUY, quantity, price, testUser, date);
             System.out.println(buyOrder.getPrice() + " " + buyOrder.getTradeAsset() + buyOrder.getQuantityToTrade() + OrderType.BUY);
-        } else if (sellButton.isSelected()) {
+        } else if (sellButton.isSelected())
+        {
             Order sellOrder = new Order(asset, OrderType.SELL, quantity, price, testUser, date);
             System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade() + OrderType.SELL);
-        } else {
+        } else
+        {
             //throw error
         }
-        try {
+        try
+        {
             quantity = Integer.parseInt(assetQuantity.getText().toString());
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex)
+        {
             ex.printStackTrace();
         }
-        try {
+        try
+        {
             price = Double.parseDouble(assetPrice.getText().toString());
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex)
+        {
             ex.printStackTrace();
         }
-
 
 
     }

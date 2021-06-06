@@ -46,7 +46,7 @@
                               <Font size="18.0" />
                            </font></Label>
                         <Pane prefHeight="45.0" prefWidth="48.0" />
-                        <ChoiceBox fx:id="assetChoice" onAction="#selectAsset" prefHeight="25.0" prefWidth="125.0" />
+                        <ChoiceBox fx:id="assetChoice" prefHeight="25.0" prefWidth="125.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="45.0" prefWidth="220.0">

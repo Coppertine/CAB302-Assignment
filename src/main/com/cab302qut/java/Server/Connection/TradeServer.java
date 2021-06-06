@@ -385,6 +385,24 @@ public class TradeServer implements Runnable {
         client.sendMessage(msg);
     }
 
+    public void CreateTrade(Message msg, ServerThread client) throws SQLException
+    {
+        String username = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String org = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        String assetType = ((ArrayList<String>) msg.getMessageObject()).get(2);
+        int quantity = ((ArrayList<Integer>) msg.getMessageObject()).get(3);
+        double price = ((ArrayList<Double>) msg.getMessageObject()).get(4);
+        String tradeType = ((ArrayList<String>) msg.getMessageObject()).get(5);
+        Date date = ((ArrayList<Date>) msg.getMessageObject()).get(6);
+
+        try
+        {
+            DatabaseConnection.executeStatement(DatabaseStatements.CreateTrade(username, org, assetType, quantity, price, tradeType, date));
+        } catch (Exception e)
+        {
+            System.out.println("Error adding new trade into DB");
+        }
+    }
     /**
      * Returns the client with the same port as the ID.
      *
