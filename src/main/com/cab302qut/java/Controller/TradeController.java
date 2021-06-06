@@ -1,9 +1,11 @@
 package com.cab302qut.java.Controller;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Users.User;
+import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.StaticVariables;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -50,10 +52,12 @@ public class TradeController implements Initializable {
 
     @FXML
     private Label creditAmount;
-    private Asset;
+    private Asset asset ;
     private int quantity;
     private double price;
     private ObservableList<String> existingOrgAssets;
+    private boolean orderCorrect;
+    Order order;
 //need to add different assets to choice box
 //then when clicked they are displayed to the user
 
@@ -112,25 +116,12 @@ public class TradeController implements Initializable {
     private void checkOrder()
     {
 
-        asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
+        asset = new Asset(assetChoice.getSelectionModel().getSelectedItem().toString(), 0);
         if (asset == null)
         {
             //throw error
         }
         Date date = new Date();
-
-        if (buyButton.isSelected())
-        {
-            Order buyOrder = new Order(asset, OrderType.BUY, quantity, price, testUser, date);
-            System.out.println(buyOrder.getPrice() + " " + buyOrder.getTradeAsset() + buyOrder.getQuantityToTrade() + OrderType.BUY);
-        } else if (sellButton.isSelected())
-        {
-            Order sellOrder = new Order(asset, OrderType.SELL, quantity, price, testUser, date);
-            System.out.println(sellOrder.getPrice() + " " + sellOrder.getTradeAsset() + sellOrder.getQuantityToTrade() + OrderType.SELL);
-        } else
-        {
-            //throw error
-        }
         try
         {
             quantity = Integer.parseInt(assetQuantity.getText().toString());
@@ -144,6 +135,33 @@ public class TradeController implements Initializable {
         } catch (NumberFormatException ex)
         {
             ex.printStackTrace();
+        }
+        if (buyButton.isSelected())
+        {
+            order = new Order(asset, OrderType.BUY, quantity, price, StaticVariables.user, date);
+            System.out.println(order.getPrice() + " " + order.getTradeAsset() + order.getQuantityToTrade() + OrderType.BUY);
+            orderCorrect = true;
+
+        } else if (sellButton.isSelected())
+        {
+            order = new Order(asset, OrderType.SELL, quantity, price, StaticVariables.user, date);
+            System.out.println(order.getPrice() + " " + order.getTradeAsset() + order.getQuantityToTrade() + OrderType.SELL);
+            orderCorrect = true;
+        } else
+        {
+            //throw error
+        }
+
+        if (orderCorrect){
+            orderCorrect = false;
+            try {
+                    Message msg = new Message("CreateTrade",order);
+                    CAB302Assignment.tradeClient.sendMessage(msg);
+
+            } catch (Exception e) {
+
+            }
+
         }
 
     }

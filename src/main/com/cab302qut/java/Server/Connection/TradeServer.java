@@ -6,6 +6,7 @@ import com.cab302qut.java.CAB302Assignment;
 
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
+import com.cab302qut.java.util.StaticVariables;
 import com.cab302qut.java.Server.Controller.ServerController;
 import com.cab302qut.java.Trades.Trade;
 import com.cab302qut.java.Users.User;
@@ -203,7 +204,7 @@ public class TradeServer implements Runnable {
                     {
                         userType = UserType.Default;
                     }
-                    ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
+                    ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetUserOrganisation(set.getString("organisationName")));
                     while (orgSet.next())
                     {
                         organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getDouble("credits"));
@@ -235,22 +236,12 @@ public class TradeServer implements Runnable {
                     theClientThread.sendMessage(theMsg);
                 }
 
-            }
-            else if (theClientMsg.getMessageType().equals("CreateTrade"))
+            } else if (theClientMsg.getMessageType().equals("CreateTrade"))
             {
-                System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
-                ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<ArrayList<String>>();
-                ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
-                while (orgSet.next())
-                {
-                    System.out.println(orgSet.getString("assetType"));
-                    System.out.println(orgSet.getString("quantity"));
-                }
-                System.out.println("asset refresh complete");
-                StaticVariables.orgsAssets = organisationsAssets;
-                StaticVariables.assetRefresh = true;
+                CreateTrade(theClientMsg, theClientThread);
             } else if (theClientMsg.getMessageType().equals("Trade"))
             {
+                System.out.println("test");
                 //Receive Trade Update, could be new trade or updated
             } else if (theClientMsg.getMessageType().equals("CreateOrg"))
             {
@@ -263,6 +254,7 @@ public class TradeServer implements Runnable {
                 EditOrgAssetNum(theClientMsg, theClientThread);
             } else if (theClientMsg.getMessageType().equals("Order"))
             {
+                System.out.println("test");
                 //Receive Trade Update, could be new trade or updated
 
             } else if (theClientMsg.getMessageType().equals("GetOrgsList"))
@@ -280,9 +272,9 @@ public class TradeServer implements Runnable {
                 theClientThread.sendMessage(theMsg);
             } else if (theClientMsg.getMessageType().equals("GetOrgsAsset"))
             {
-                String theOrg = (String) theClientMsg.getMessageObject();
+                String usersOrg = (String) theClientMsg.getMessageObject();
                 ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
-                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + theOrg + "';");
+                ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
                 while (set.next())
                 {
                     ArrayList<String> row = new ArrayList<>();
@@ -339,6 +331,25 @@ public class TradeServer implements Runnable {
         }
         // Send back to client updated list of organisations
         SendOrgsList(client);
+    }
+
+    public void CreateTrade(Message msg, ServerThread client) throws SQLException
+    {
+        String username = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String org = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        String assetType = ((ArrayList<String>) msg.getMessageObject()).get(2);
+        int quantity = ((ArrayList<Integer>) msg.getMessageObject()).get(3);
+        double price = ((ArrayList<Double>) msg.getMessageObject()).get(4);
+        String tradeType = ((ArrayList<String>) msg.getMessageObject()).get(5);
+        Date date = ((ArrayList<Date>) msg.getMessageObject()).get(6);
+
+        try
+        {
+            DatabaseConnection.executeStatement(DatabaseStatements.CreateTrade(username, org, assetType, quantity, price, tradeType, date));
+        } catch (Exception e)
+        {
+            System.out.println("Error adding new trade into DB");
+        }
     }
 
 

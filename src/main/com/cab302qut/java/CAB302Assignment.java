@@ -48,6 +48,7 @@ public class CAB302Assignment extends Application {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         Args = args;
 
@@ -58,7 +59,7 @@ public class CAB302Assignment extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        config=configTemp;
+        config = configTemp;
 
         launch(args);
     }
@@ -103,7 +104,7 @@ public class CAB302Assignment extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //System.out.println(getClass().getResource("main.fxml").getPath());
-  //      TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
+        //      TrayNotification tray = new TrayNotification("Hello World", "You got Mail!", NotificationType.INFORMATION);
 //       tray.setAnimationType(AnimationType.POPUP);
 //        tray.showAndDismiss(Duration.seconds(2));
         Parent root;
@@ -112,8 +113,6 @@ public class CAB302Assignment extends Application {
 
 
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add(getClass().getResource("styles/main.css").toExternalForm());
-
         primaryStage.setTitle("Assignment");
         primaryStage.setScene(scene);
         primaryStage.show();

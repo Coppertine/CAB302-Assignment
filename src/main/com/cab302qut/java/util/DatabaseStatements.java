@@ -1,5 +1,8 @@
 package com.cab302qut.java.util;
 
+import com.cab302qut.java.Items.Asset;
+import com.cab302qut.java.Users.User;
+
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -24,7 +27,11 @@ public class DatabaseStatements {
         return ("SELECT * FROM `users` ;");
     }
 
-    public static String GetOrganisations(String usersOrg) {
+    public static String GetAssets() {
+        return ("SELECT * FROM `assets` ;");
+    }
+
+    public static String GetUserOrganisation(String usersOrg) {
         return ("SELECT * FROM `organisations` WHERE organisationName = '" + usersOrg + "';");
     }
     public static String GetOrganisationAssets(String usersOrg) {
@@ -58,6 +65,19 @@ public class DatabaseStatements {
         String sql = "INSERT INTO `currenttrades` VALUES (" + "'" + userName + "','" + orgName + "','" + assetType +
                 "','" + quantity + "','" + price + "','" + tradeType + "', '" + date + "');";
         return sql;
+    }
+
+    public static String CreateUser(User user)
+    {
+        return String.format("INSERT INTO `users`(`userName`, `password`, `accountType`, `organisationName`) VALUES " +
+                "(%s,%s,%s,%s)", user.getName(), user.getPassword(), user.getUserType().toString(),
+                    user.getOrganisation().getName());
+    }
+
+    public static String CreateAsset(Asset asset)
+    {
+        return String.format("INSERT INTO `assets`(`assetType`) VALUES " +
+                        "(%s)", asset.getAssetName());
     }
 
     // helps to ensure correct table name is referenced down the code

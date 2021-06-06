@@ -18,11 +18,11 @@ public class ServerController implements Initializable {
     Thread thread;
     @FXML
     private TextArea consoleField;
-
     @FXML
     private Button startServerBtn;
     @FXML
     private Button stopServerBtn;
+
 
     public void StartServer(){
         try{
@@ -40,7 +40,7 @@ public class ServerController implements Initializable {
     public void StopServer(){
         startServerBtn.setDisable(false);
         stopServerBtn.setDisable(true);
-        tradeSystemServer.stop();
+        thread.stop();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ServerController implements Initializable {
 
     public void printToMessageScreen(String msg) {
         String currentMessages = consoleField.getText();
-        currentMessages = currentMessages.concat("\n"+msg);
+        currentMessages = currentMessages.concat("\n" + msg);
         consoleField.setText(currentMessages);
     }
 }

@@ -61,6 +61,7 @@ public class CreateUserController implements Initializable {
 
     private void populateOrganisation() {
         try {
+
             existingOrgs = FXCollections.observableArrayList();
             for (ArrayList<String> row: CAB302Assignment.currentOrganisations) {
                 existingOrgs.add(row.get(0)); // get orgName
@@ -71,11 +72,14 @@ public class CreateUserController implements Initializable {
         }
     }
 
+
+
+
     public void CreateUser(ActionEvent actionEvent) {
         //Verify user input
         if (verifyInput()) {
             try {
-                User tmpUser = new User(usernameField.getText(),User.HashPassword(passwordField.getText()),userTypeDropdown.getValue(),
+                User tmpUser = new User(usernameField.getText(),User.HashPassword( passwordField.getText()),userTypeDropdown.getValue(),
                         new Organisation(organisationDropDown.getValue()));
                 Message msg = new Message("CreateUser",tmpUser);
                 CAB302Assignment.tradeClient.sendMessage(msg);

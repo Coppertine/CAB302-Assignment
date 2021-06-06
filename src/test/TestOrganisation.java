@@ -90,85 +90,85 @@ public class TestOrganisation {
     // Should new users have an org at time of creation?
     // Should a user be able to join multiple organisations? or should adding a user to an organisation
     // change what organisation they are in?
-    @Test
-    public void addUserOrg() throws OrganisationException {
-        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
-        testOrg1.addUser(testUser1);
-        ArrayList<User> orgUserList = new ArrayList<>();
-        orgUserList.add(testUser1);
-        assertEquals(orgUserList, testOrg1.getUsers(), "Failed to add user to organisation");
-    }
+//    @Test
+//    public void addUserOrg() throws OrganisationException {
+//        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+//        testOrg1.addUser(testUser1);
+//        ArrayList<User> orgUserList = new ArrayList<>();
+//        orgUserList.add(testUser1);
+//        assertEquals(orgUserList, testOrg1.getUsers(), "Failed to add user to organisation");
+//    }
 
     // Get user by id, display name, username
-    @Test
-    public void getUserByField() throws OrganisationException {
-        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
-        testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
-        testUser3 = new User("newUser", testOrg1, "newUserName", "newPassword", UserType.Default);
-        testOrg1.addUser(testUser1);
-        testOrg1.addUser(testUser2);
-        testOrg1.addUser(testUser3);
-        ArrayList<User> orgDefaultUserList = new ArrayList<>();
-        orgDefaultUserList.add(testUser1);
-        orgDefaultUserList.add(testUser3);
-        assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name");
-        //assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID");
-        assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name");
-        assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type");
-    }
+//    @Test
+//    public void getUserByField() throws OrganisationException {
+//        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+//        testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
+//        testUser3 = new User("newUser", testOrg1, "newUserName", "newPassword", UserType.Default);
+//        testOrg1.addUser(testUser1);
+//        testOrg1.addUser(testUser2);
+//        testOrg1.addUser(testUser3);
+//        ArrayList<User> orgDefaultUserList = new ArrayList<>();
+//        orgDefaultUserList.add(testUser1);
+//        orgDefaultUserList.add(testUser3);
+//        assertEquals(testUser1, testOrg1.getUserByName("testUser"), "Failed to get user by name");
+//        //assertEquals(testUser2, testOrg1.getUserByID(testUser2.ID), "Failed to get user by ID");
+//        assertEquals(testUser1, testOrg1.getUserByUsername("testUserName"), "Failed to get user by user name");
+//        assertEquals(orgDefaultUserList, testOrg1.getUserByUserType(UserType.Default), "Failed to get users by user type");
+//    }
 
     // Get multiple users
-    @Test
-    public void getUserList() throws OrganisationException {
-        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
-        testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
-        testOrg1.addUser(testUser1);
-        testOrg1.addUser(testUser2);
-        ArrayList<User> orgUserList = new ArrayList<>();
-        orgUserList.add(testUser1);
-        orgUserList.add(testUser2);
-        assertEquals(orgUserList, testOrg1.getUsers(), "Failed to get organisation users");
-    }
+//    @Test
+//    public void getUserList() throws OrganisationException {
+//        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+//        testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
+//        testOrg1.addUser(testUser1);
+//        testOrg1.addUser(testUser2);
+//        ArrayList<User> orgUserList = new ArrayList<>();
+//        orgUserList.add(testUser1);
+//        orgUserList.add(testUser2);
+//        assertEquals(orgUserList, testOrg1.getUsers(), "Failed to get organisation users");
+//    }
 
     // Delete user by id, display name, username
-    @Test
-    public void deleteUser() throws OrganisationException {
-        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
-        testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
-        testOrg1.addUser(testUser1);
-        testOrg1.addUser(testUser2);
-        ArrayList<User> orgUserList1 = new ArrayList<>();
-        orgUserList1.add(testUser1);
-        ArrayList<User> orgUserList2 = new ArrayList<>();
-        orgUserList2.add(testUser1);
-
-        testOrg1.removeUser(testUser1);
-        assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user from organisation");
-
-        testOrg1.addUser(testUser1);
-        //testOrg1.removeUserByID(testUser2.ID); // TODO: implement removeUserByID
-        assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by ID");
-
-        testOrg1.addUser(testUser2);
-        testOrg1.removeUserByName("testUser"); // TODO: implement removeUserByName
-        assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user by name");
-
-        testOrg1.addUser(testUser1);
-        testOrg1.removeUserByUsername("adminUserName"); // TODO: implement removeUserByUsername
-        assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by username");
-    }
-
-    // Add duplicate user
-    // Adding the same user object to an organisation should not be possible
-    // Adding two users with identical fields should not be possible
-    @Test
-    public void addDuplicateUser() {
-        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
-        testUser2 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+//    @Test
+//    public void deleteUser() throws OrganisationException {
+//        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+//        testUser2 = new User("adminUser", testOrg1, "adminUserName", "adminPassword", UserType.Administrator);
 //        testOrg1.addUser(testUser1);
-//        assertThrows(OrganisationException.class, () -> testOrg1.addUser(testUser1));
-//        assertThrows(OrganisationException.class, () -> testOrg1.addUser(testUser2));
-    }
+//        testOrg1.addUser(testUser2);
+//        ArrayList<User> orgUserList1 = new ArrayList<>();
+//        orgUserList1.add(testUser1);
+//        ArrayList<User> orgUserList2 = new ArrayList<>();
+//        orgUserList2.add(testUser1);
+//
+//        testOrg1.removeUser(testUser1);
+//        assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user from organisation");
+//
+//        testOrg1.addUser(testUser1);
+//        //testOrg1.removeUserByID(testUser2.ID); // TODO: implement removeUserByID
+//        assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by ID");
+//
+//        testOrg1.addUser(testUser2);
+//        testOrg1.removeUserByName("testUser"); // TODO: implement removeUserByName
+//        assertEquals(orgUserList2, testOrg1.getUsers(), "Failed to delete user by name");
+//
+//        testOrg1.addUser(testUser1);
+//        testOrg1.removeUserByUsername("adminUserName"); // TODO: implement removeUserByUsername
+//        assertEquals(orgUserList1, testOrg1.getUsers(), "Failed to delete user by username");
+//    }
+//
+//    // Add duplicate user
+//    // Adding the same user object to an organisation should not be possible
+//    // Adding two users with identical fields should not be possible
+//    @Test
+//    public void addDuplicateUser() {
+//        testUser1 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+//        testUser2 = new User("testUser", testOrg1, "testUserName", "testPassword", UserType.Default);
+////        testOrg1.addUser(testUser1);
+////        assertThrows(OrganisationException.class, () -> testOrg1.addUser(testUser1));
+////        assertThrows(OrganisationException.class, () -> testOrg1.addUser(testUser2));
+//    }
 
     // Add organisation asset (must be one from Asset)
     @Test
