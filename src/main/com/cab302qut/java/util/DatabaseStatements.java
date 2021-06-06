@@ -25,7 +25,11 @@ public class DatabaseStatements {
         return ("SELECT * FROM `users` ;");
     }
 
-    public static String GetOrganisations(String usersOrg) {
+    public static String GetAssets() {
+        return ("SELECT * FROM `assets` ;");
+    }
+
+    public static String GetUserOrganisation(String usersOrg) {
         return ("SELECT * FROM `organisations` WHERE organisationName = '" + usersOrg + "';");
     }
     public static String GetOrganisationAssets(String usersOrg) {

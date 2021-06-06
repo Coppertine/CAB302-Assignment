@@ -24,10 +24,10 @@ public class ServerController implements Initializable {
     private Button stopServerBtn;
 
 
-    public void StartServer(){
-        try{
+    public void StartServer() {
+        try {
             ServerConfiguration theServerConfig = CAB302Assignment.getConfig();
-            tradeSystemServer = new TradeServer(theServerConfig,this);
+            tradeSystemServer = new TradeServer(theServerConfig, this);
             Thread thread = new Thread(tradeSystemServer, "serverThread");
             thread.start();
             startServerBtn.disableProperty().setValue(true);
@@ -46,12 +46,11 @@ public class ServerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     public void printToMessageScreen(String msg) {
         String currentMessages = consoleField.getText();
-        currentMessages = currentMessages.concat("\n"+msg);
+        currentMessages = currentMessages.concat("\n" + msg);
         consoleField.setText(currentMessages);
     }
 }

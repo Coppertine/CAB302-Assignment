@@ -71,16 +71,13 @@ public class TradeController {
     }
 
     public void selectAsset(ActionEvent actionEvent) throws IOException {
-//        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-//            public void changed(ObservableValue ov, Number old_val, Number new_val) {
-                assetBuyName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Buy Price");
-                assetSellName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Sale Price");
 
-                buyPrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
-                salePrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
-            }
-//        });
+        assetBuyName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Buy Price");
+        assetSellName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Sale Price");
 
+        buyPrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
+        salePrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
+    }
 
     public void back(ActionEvent actionEvent) throws IOException {
         try {
@@ -118,7 +115,7 @@ public class TradeController {
     private void checkOrder() {
 
         asset = (Asset) assetChoice.getSelectionModel().getSelectedItem();
-        if (asset == null){
+        if (asset == null) {
             //throw error
         }
         Date date = new Date();
@@ -142,7 +139,6 @@ public class TradeController {
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
-
 
 
     }

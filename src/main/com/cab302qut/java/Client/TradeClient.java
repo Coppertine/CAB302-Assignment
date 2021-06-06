@@ -2,6 +2,7 @@ package com.cab302qut.java.Client;
 
 import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Controller.MainController;
+import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Debug;
 import com.cab302qut.java.util.ServerConfiguration;
@@ -10,6 +11,10 @@ import com.cab302qut.java.util.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.ArrayList;
 
 public class TradeClient implements Runnable {
@@ -25,6 +30,7 @@ public class TradeClient implements Runnable {
     private MainController controller;
 
     public final void run(final ServerConfiguration inputConfig) {
+        RefreshData();
         try {
             config = inputConfig;
             config.setSocket(new Socket(config.getAddress(), config.getPort()));
@@ -42,6 +48,21 @@ public class TradeClient implements Runnable {
     }
 
 
+
+    public void RefreshData() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                System.out.println("Task performed on: " + new Date() + " in" +
+                        "Thread's name: " + Thread.currentThread().getName());
+
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 20000L;
+        timer.schedule(task, delay, delay);
+    }
+
     /**
      * Handles all incoming messages from the server instance.
      * @param msg The type of message as well as the object payload.
@@ -51,40 +72,55 @@ public class TradeClient implements Runnable {
             System.out.println("REC from Server: " + msg.getMessageType());
             //CAB302Assignment.receivedMsg = theMsg; // the static field
             // is available for controllers to access
-            switch (msg.getMessageType()) {
-                case "id" -> {
-                    clientID = (Integer) msg.getMessageObject();
+
+            if (msg instanceof Message) {
+                Message theMsg = (Message) msg;
+                System.out.println("REC from Server: " + theMsg.getMessageType());
+                if (theMsg.getMessageType().equals("id")) {
+                    clientID = (Integer) theMsg.getMessageObject();
                     System.out.println("ClientID: " + clientID);
-                }
-                case "exit" -> thread.stopped = true;
-                case "StatusCheck" -> {
+                } else if (theMsg.getMessageType().equals("exit")) {
+                    thread.stopped = true;
+                } else if (theMsg.getMessageType().equals("StatusCheck")) {
                     System.out.println("Status found");
                     send("status ready");
-                }
-                case "UserAccepted" -> {
-                    CAB302Assignment.assetData = msg;
-                    StaticVariables.user = (User) msg.getMessageObject();
+                } else if (theMsg.getMessageType().equals("UserAccepted")) {
+                    CAB302Assignment.assetData = theMsg;
+                    StaticVariables.user = (User) theMsg.getMessageObject();
                     System.out.println(StaticVariables.user.getOrganisation() + "User Organisation");
                     StaticVariables.loginSuccessful = true;
                     StaticVariables.login = true;
-                    StaticVariables.userOrganisation = ((User) msg.getMessageObject()).getOrganisation();
+                    StaticVariables.userOrganisation = ((User) theMsg.getMessageObject()).getOrganisation();
                     System.out.println("user Agree");
                     send("status ready");
-                }
-                case "UserDenied" -> {
+                } else if (theMsg.getMessageType().equals("UserDenied")) {
                     StaticVariables.loginSuccessful = false;
                     StaticVariables.login = true;
                     System.out.println("user Agree");
                     send("status ready");
-                }
-                case "OrgsList" -> {
-                    //noinspection unchecked
-                    StaticVariables.organisationList = (ArrayList<ArrayList<String>>)msg.getMessageObject();
-                }
+                    //TODO add all of the different trade server commands to allow for each return to assign static variables correctly.
+                } else if (theMsg.getMessageType().equals("Trades")) {
 
-                default -> {
-                    CAB302Assignment.assetData = msg;
-                    System.out.println(msg.getMessageObject().getClass());
+                    send("status ready");
+                } else if (theMsg.getMessageType().equals("OrgsCurrentAssets")) {
+                    StaticVariables.organisationsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+                    send("status ready");
+                } else if (theMsg.getMessageType().equals("OrgsList")) {
+                    StaticVariables.organisations = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+
+                    send("status ready");
+                } else if (theMsg.getMessageType().equals("Assets")) {
+                    StaticVariables.assets = (Asset[]) theMsg.getMessageObject();
+                    send("status ready");
+                } else if (theMsg.getMessageType().equals("UserOrg")) {
+                    //StaticVariables.organisationsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+
+                    send("status ready");
+                } else {
+                    //CAB302Assignment.receivedMsg = theMsg; // the static field
+                    // is available for controllers to access
+                    CAB302Assignment.assetData = theMsg;
+                    System.out.println(theMsg.getMessageObject().getClass());
                 }
             }
         }

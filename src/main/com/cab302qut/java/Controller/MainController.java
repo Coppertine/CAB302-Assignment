@@ -57,9 +57,7 @@ public class MainController implements Initializable {
         try {
             Message msg = new Message("CreateTrade");
             CAB302Assignment.tradeClient.sendMessage(msg);
-            while(!StaticVariables.assetRefresh){
 
-            }
             for ( int i = 0; i < StaticVariables.assets.length-1;i++) {
                 assetList[i] = StaticVariables.assets[i];
             }
