@@ -207,6 +207,44 @@ public class TradeServer implements Runnable {
                     theClientThread.sendMessage(theMsg);
                 }
             }
+            else if (theClientMsg.getMessageType().equals("GetOrgPendingTrades")) {
+                String org = (String) theClientMsg.getMessageObject();
+                ArrayList<ArrayList<String>> pendingTradesEntry = new ArrayList<>();
+                ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgPendingTrades(org));
+                while (set.next()) {
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(set.getString("tradeID"));
+                    row.add(set.getString("assetType"));
+                    row.add(set.getString("quantity"));
+                    row.add(set.getString("price"));
+                    row.add(set.getString("tradeType"));
+                    row.add(set.getString("date"));
+                    pendingTradesEntry.add(row);
+                }
+                Message msg = new Message("OrgsPendingTrades",pendingTradesEntry);
+                theClientThread.sendMessage(msg);
+            }
+            else if (theClientMsg.getMessageType().equals("RemoveOffer")) {
+                String tradeID = (String) ((ArrayList<String>) theClientMsg.getMessageObject()).get(0);
+                String org = (String) ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
+                DatabaseConnection.executeStatement("DELETE FROM `currentTrades` WHERE `tradeID` = '" + tradeID + "';");
+                ArrayList<ArrayList<String>> pendingTradesEntry = new ArrayList<>();
+                ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgPendingTrades(org));
+                while (set.next()) {
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(set.getString("tradeID"));
+                    row.add(set.getString("assetType"));
+                    row.add(set.getString("quantity"));
+                    row.add(set.getString("price"));
+                    row.add(set.getString("tradeType"));
+                    row.add(set.getString("date"));
+                    pendingTradesEntry.add(row);
+                }
+                // SEND THE UPDATED LIST OF CURRENT TRADES
+                Message msg = new Message("OrgsPendingTrades",pendingTradesEntry);
+                theClientThread.sendMessage(msg);
+            }
+
             else if (theClientMsg.getMessageType().equals("CreateTrade")) {
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
 
@@ -250,6 +288,7 @@ public class TradeServer implements Runnable {
                 Message theMsg = new Message("OrgsList", organisationsData);
                 theClientThread.sendMessage(theMsg);
             }
+            // Returns all the assets belonging to an organisation
             else if (theClientMsg.getMessageType().equals("GetOrgsAsset")) {
                 String theOrg = (String) theClientMsg.getMessageObject();
                 ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();

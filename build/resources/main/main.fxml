@@ -88,12 +88,14 @@
                </children></Pane>
             <Pane prefHeight="235.0" prefWidth="469.0">
                <children>
-                  <TableView fx:id="table_assets" prefHeight="200.0" prefWidth="411.0">
+                  <TableView fx:id="table_assets" prefHeight="124.0" prefWidth="411.0">
                     <columns>
                       <TableColumn fx:id="col_assetType" prefWidth="306.0" text="Asset Type" />
                       <TableColumn fx:id="col_quantity" prefWidth="104.0" text="Quantity Held" />
                     </columns>
                   </TableView>
+                  <ChoiceBox fx:id="pendingTrades" layoutX="-1.0" layoutY="145.0" prefHeight="25.0" prefWidth="470.0" />
+                  <Button layoutY="181.0" mnemonicParsing="false" onAction="#RemoveOffer" text="Remove Offer" />
                </children>
             </Pane>
          </children>

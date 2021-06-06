@@ -30,6 +30,12 @@ public class DatabaseStatements {
         return ("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
     }
 
+    public static String GetOrgPendingTrades(String org) {
+        String sql = "SELECT * FROM `currentTrades` WHERE `organisationName` = '" +
+                org + "';";
+        return sql;
+    }
+
     public static String EditOrgAssetNum(String org, String assetType, String quantity) {
         String sql = "UPDATE `currentAssets`" +
                 "SET `quantity` = " +

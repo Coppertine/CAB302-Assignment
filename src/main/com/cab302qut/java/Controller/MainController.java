@@ -6,6 +6,8 @@ import com.cab302qut.java.util.AssetPriceHistoryObj;
 import com.cab302qut.java.util.AssetQuantityObj;
 import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.StaticVariables;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -31,6 +30,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    @FXML
+    ChoiceBox<String> pendingTrades;
     @FXML
     private TableView<AssetQuantityObj> table_assets;
     @FXML
@@ -52,9 +53,13 @@ public class MainController implements Initializable {
     @FXML
     private Button tradeButton;
 
+    private String chosenOfferTradeID;
+
     Asset[] assetList = new Asset[5];
 
     private String previousScene;
+
+    ObservableList<String> pendingTradesList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,12 +68,80 @@ public class MainController implements Initializable {
         this.col_quantity.setCellValueFactory(new PropertyValueFactory<AssetQuantityObj,Integer>("quantity"));
 
         table_assets.setItems(existingOrgAssets);
+        initAssetChoiceBox();
 
     }
+
+    public void initAssetChoiceBox() {
+        try {
+            pendingTrades.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    chosenOfferTradeID = StaticVariables.pendingTradesData.get(newValue.intValue()).get(0);
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void RemoveOffer() {
+        if (chosenOfferTradeID != null) {
+            ArrayList<String> tradeIDPlusOrg = new ArrayList<>();
+            tradeIDPlusOrg.add(chosenOfferTradeID);
+            tradeIDPlusOrg.add(StaticVariables.user.getOrganisation().getName());
+            Message msg = new Message("RemoveOffer",tradeIDPlusOrg);
+            StaticVariables.pendingTradesData = null;
+            CAB302Assignment.tradeClient.sendMessage(msg);
+            while (StaticVariables.pendingTradesData == null) {
+                System.out.println("Waiting for delete offer update");
+            }
+            pendingTradesList.clear();//FXCollections.observableArrayList();
+            if (StaticVariables.pendingTradesData.size() > 0) {
+                String rowEntry = "";
+                for(ArrayList<String> row : StaticVariables.pendingTradesData) {
+                    rowEntry = "ID*" + row.get(0) + "*ASSET*" + row.get(1) + "*QTY*" + row.get(2) + "*PRICE_P/UNIT*"
+                            + row.get(3) + "*ORDERTYPE*"+ row.get(4) + "*DATE*" + row.get(5);
+                    pendingTradesList.add(rowEntry);
+                }
+            }
+        }
+    }
+
+    public void setPendingTrades() {
+        try {
+            Message msg = new Message("GetOrgPendingTrades",StaticVariables.user.getOrganisation().getName());
+            CAB302Assignment.tradeClient.sendMessage(msg);
+
+            while (StaticVariables.pendingTradesData == null) {
+                System.out.println("Waiting for orgs assets");
+            }
+
+            pendingTradesList = FXCollections.observableArrayList();
+            String rowEntry = "";
+            for(ArrayList<String> row : StaticVariables.pendingTradesData) {
+                rowEntry = "ID*" + row.get(0) + "*ASSET*" + row.get(1) + "*QTY*" + row.get(2) + "*PRICE_P/UNIT*"
+                        + row.get(3) + "*ORDERTYPE*"+ row.get(4) + "*DATE*" + row.get(5);
+                pendingTradesList.add(rowEntry);
+            }
+            pendingTrades.setItems(FXCollections.observableArrayList(pendingTradesList));
+
+//            existingOrgAssets = FXCollections.observableArrayList();
+//            for (ArrayList<String> row: StaticVariables.orgsAssets) {
+//                existingOrgAssets.add(row.get(0)); // get orgName
+//            }
+//            orgAssets.setItems(FXCollections.observableArrayList(existingOrgAssets));
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     public void SetCurrentAssets(String previousScene) {
         this.previousScene = previousScene;
         GetCurrentAssetsData();
+        setPendingTrades();
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
@@ -117,18 +190,18 @@ public class MainController implements Initializable {
                 }
             }
 
-            ArrayList<String> updatedOrgCredits = StaticVariables.orgCreditsUpdateMsg;
-
-            // update the organisations list in static variables class with updated org credits
-            for (ArrayList<String> row: StaticVariables.organisationList) {
-                if (row.get(0).equals(updatedOrgCredits.get(0))) {
-                    // update the array list object of the org to reflect new credit value
-                    row.set(1,updatedOrgCredits.get(1));
-                    // show updated credits in the scene
-                    currentCredits.setText(updatedOrgCredits.get(1));
-                    break;
-                }
-            }
+//            ArrayList<String> updatedOrgCredits = StaticVariables.orgCreditsUpdateMsg;
+//
+//            // update the organisations list in static variables class with updated org credits
+//            for (ArrayList<String> row: StaticVariables.organisationList) {
+//                if (row.get(0).equals(updatedOrgCredits.get(0))) {
+//                    // update the array list object of the org to reflect new credit value
+//                    row.set(1,updatedOrgCredits.get(1));
+//                    // show updated credits in the scene
+//                    currentCredits.setText(updatedOrgCredits.get(1));
+//                    break;
+//                }
+//            }
 
             //Refresh();
         } catch (Exception e) {

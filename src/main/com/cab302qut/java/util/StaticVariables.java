@@ -25,6 +25,9 @@ public class StaticVariables {
     public static ArrayList<String> orgCreditsUpdateMsg;
     public static ArrayList<String> orgAssetNumUpdateMsg;
     public static ArrayList<AssetTableObj> selectedAssetPriceHistory;
-    public static String chosenAsset;
+
+    public static ArrayList<ArrayList<String>> pendingTradesData;
+
+
 
 }

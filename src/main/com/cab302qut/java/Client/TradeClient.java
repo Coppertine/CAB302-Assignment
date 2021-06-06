@@ -71,6 +71,10 @@ public class TradeClient implements Runnable {
                 System.out.println("Status found");
                 //send("status ready");
             }
+            else if (msgType.equals("OrgsPendingTrades")) {
+                StaticVariables.pendingTradesData = null; // reset as a controller may have already assigned it in previous call
+                StaticVariables.pendingTradesData = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
+            }
             else if (msgType.equals("UpdateOrgsCredits")) {
                 StaticVariables.orgCreditsUpdateMsg = null;
                 StaticVariables.orgCreditsUpdateMsg = (ArrayList<String>) theMsg.getMessageObject();
