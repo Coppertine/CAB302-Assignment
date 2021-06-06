@@ -4,6 +4,7 @@ import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
+import com.cab302qut.java.Trades.TradeException;
 import com.cab302qut.java.Users.User;
 import com.cab302qut.java.util.Message;
 import com.cab302qut.java.util.StaticVariables;
@@ -114,19 +115,17 @@ public class TradeController implements Initializable{
      */
     private void checkOrder() {
         try {
-            quantity = Integer.parseInt(assetQuantity.getText().toString());
+            quantity = Integer.parseInt(assetQuantity.getText());
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
         try {
-            price = Double.parseDouble(assetPrice.getText().toString());
+            price = Double.parseDouble(assetPrice.getText());
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
         asset = new Asset(assetChoice.getSelectionModel().getSelectedItem().toString(), 0);
-        if (asset == null){
-            //throw error
-        }
+
         Date date = new Date(System.currentTimeMillis());
         try
         {
@@ -142,9 +141,9 @@ public class TradeController implements Initializable{
                 orderReady = true;
             } else
             {
-                //throw error
+                throw new TradeException("Trade type not selected.");
             }
-        }catch (ClassCastException C){
+        }catch (ClassCastException | TradeException C){
             System.out.println(C);
 
         }
@@ -160,5 +159,18 @@ public class TradeController implements Initializable{
     public void initialize(URL location, ResourceBundle resources)
     {
         setChoiceBox();
+        Message newMsg = new Message("GetOrgsList");
+        CAB302Assignment.tradeClient.sendMessage(newMsg);
+        while (StaticVariables.organisationList == null) {
+            System.out.println("Waiting for orgs credits");
+        }
+        // get the credits of the org selected
+        for (ArrayList<String> row: StaticVariables.organisationList) {
+            if (row.get(0).equals(StaticVariables.userOrganisation.getName())) {
+                StaticVariables.organisationCredits = Integer.parseInt(row.get(1));
+                creditAmount.setText(row.get(1));
+                break;
+            }
+        }
     }
 }
