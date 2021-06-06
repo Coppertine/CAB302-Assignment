@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.CreateOrgController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.CreateAssetController">
    <children>
       <MenuBar maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="600.0" styleClass="menuBar">
          <menus>
@@ -26,8 +26,9 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Button layoutX="275.0" layoutY="238.0" mnemonicParsing="false" onAction="#CheckDetails" text="Create" />
-      <TextField layoutX="226.0" layoutY="174.0" promptText="Item Name" />
+      <Button layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="54.0" text="Back" />
+      <Button layoutX="275.0" layoutY="238.0" mnemonicParsing="false" onAction="#CreateItem" text="Create" />
+      <TextField fx:id="nameField" layoutX="226.0" layoutY="174.0" promptText="Item Name" />
       <Label layoutX="201.0" layoutY="93.0" text="Create Asset">
          <font>
             <Font size="36.0" />

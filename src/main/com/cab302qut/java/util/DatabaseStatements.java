@@ -1,5 +1,6 @@
 package com.cab302qut.java.util;
 
+import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Users.User;
 
 import java.sql.SQLException;
@@ -65,6 +66,12 @@ public class DatabaseStatements {
         return String.format("INSERT INTO `users`(`userName`, `password`, `accountType`, `organisationName`) VALUES " +
                 "(%s,%s,%s,%s)", user.getName(), user.getPassword(), user.getUserType().toString(),
                     user.getOrganisation().getName());
+    }
+
+    public static String CreateAsset(Asset asset)
+    {
+        return String.format("INSERT INTO `assets`(`assetType`) VALUES " +
+                        "(%s)", asset.getAssetName());
     }
 
     // helps to ensure correct table name is referenced down the code

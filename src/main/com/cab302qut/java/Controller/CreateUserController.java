@@ -61,6 +61,7 @@ public class CreateUserController implements Initializable {
 
     private void populateOrganisation() {
         try {
+
             existingOrgs = FXCollections.observableArrayList();
             for (ArrayList<String> row: CAB302Assignment.currentOrganisations) {
                 existingOrgs.add(row.get(0)); // get orgName
@@ -70,6 +71,8 @@ public class CreateUserController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+
+
 
 
     public void CreateUser(ActionEvent actionEvent) {

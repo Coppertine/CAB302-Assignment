@@ -1,5 +1,6 @@
 package com.cab302qut.java.util;
 
+import com.cab302qut.java.CAB302Assignment;
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Users.User;
@@ -28,5 +29,15 @@ public class StaticVariables {
     public static ArrayList<String> orgCreditsUpdateMsg;
     public static ArrayList<String> orgAssetNumUpdateMsg;
 
-    public static ArrayList<ArrayList<String>> organisationList;
+
+
+    /**
+     * Request list of existing organisations from server.
+     */
+    public static void getOrgsList() {
+        if (CAB302Assignment.currentOrganisations == null || CAB302Assignment.currentOrganisations.isEmpty()) {
+            Message msg = new Message("GetOrgsList");
+            CAB302Assignment.tradeClient.sendMessage(msg);
+        }
+    }
 }

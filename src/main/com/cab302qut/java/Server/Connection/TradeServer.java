@@ -214,6 +214,10 @@ public class TradeServer implements Runnable {
                     DatabaseConnection.executeStatement(DatabaseStatements.CreateUser((User) theClientMsg.getMessageObject()));
                     break;
                 }
+                case "CreateAsset": {
+                    DatabaseConnection.executeStatement(DatabaseStatements.CreateAsset((Asset) theClientMsg.getMessageObject()));
+                    break;
+                }
             }
 
         } catch (NoSuchElementException e) {
@@ -365,8 +369,8 @@ public class TradeServer implements Runnable {
                 }
                 ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetUserOrganisation(set.getString("organisationName")));
                 while (orgSet.next()) {
-                    organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getInt("credits"));
-                    break;
+                    organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getDouble("credits"));
+
                 }
                 users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
             }
@@ -388,7 +392,7 @@ public class TradeServer implements Runnable {
                 StaticVariables.loginSuccessful = false;
                 StaticVariables.login = true;
                 System.out.println("executed statement");
-                boolean finish = false;
+                finish = true;
 
 
             } else if (theClientMsg.getMessageType().equals("CreateOrg")) {
