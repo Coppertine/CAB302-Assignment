@@ -223,6 +223,9 @@ public class TradeServer implements Runnable {
                 //Receive Trade Update, could be new trade or updated
 
             }
+            else if (theClientMsg.getMessageType().equals("CreateOrg")) {
+                CreateOrg(theClientMsg,theClientThread);
+            }
             else if (theClientMsg.getMessageType().equals("EditOrgCreditsNum")) {
                 EditOrgCredits(theClientMsg,theClientThread);
             }
@@ -276,6 +279,33 @@ public class TradeServer implements Runnable {
         }
     }
 
+
+    public void SendOrgsList(ServerThread client) throws SQLException {
+        ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
+        while (set.next()) {
+            ArrayList<String> row = new ArrayList<>();
+            row.add(set.getString("organisationName"));
+            row.add(set.getString("credits"));
+            organisationsData.add(row);
+        }
+        Message theMsg = new Message("OrgsList", organisationsData);
+        client.sendMessage(theMsg);
+    }
+
+    public void CreateOrg(Message msg, ServerThread client) throws SQLException {
+        String org = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String credits = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        try {
+            DatabaseConnection.executeStatement(DatabaseStatements.CreateOrg(org,credits));
+        } catch (Exception e) {
+            System.out.println("Error adding new org into DB");
+        }
+        // Send back to client updated list of organisations
+        SendOrgsList(client);
+    }
+
+
     /**
      * Updates an org's credits and calls the SendUpdatedCredits
      * @param msg
@@ -286,14 +316,7 @@ public class TradeServer implements Runnable {
         String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
         String newCreditAmount =((ArrayList<String>) msg.getMessageObject()).get(1);
         Double newCreditsAmountDouble = Double.parseDouble(newCreditAmount);
-        Double currentCredits = 0.0;
-        Double updatedCredits = 0.0;
         try {
-//            ResultSet set = DatabaseConnection.executeStatement("SELECT `credits` FROM `organisations` WHERE `organisationName` = '" + theOrg + "';");
-//            while (set.next()) {
-//                currentCredits = set.getDouble("credits");
-//            }
-//            updatedCredits = currentCredits + newCredits;
             DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='" + newCreditAmount + "' WHERE `organisationName` = '" + theOrg +"';");
         } catch (Exception e) {
             System.out.println("Update org ERROR");

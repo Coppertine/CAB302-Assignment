@@ -72,12 +72,16 @@ public class TradeClient implements Runnable {
                 //send("status ready");
             }
             else if (msgType.equals("UpdateOrgsCredits")) {
+                StaticVariables.orgCreditsUpdateMsg = null;
                 StaticVariables.orgCreditsUpdateMsg = (ArrayList<String>) theMsg.getMessageObject();
             }
             else if (msgType.equals("UpdateOrgsAssetNum")) {
+                StaticVariables.orgAssetNumUpdateMsg = null;
                 StaticVariables.orgAssetNumUpdateMsg = (ArrayList<String>) theMsg.getMessageObject();
             }
             else if (msgType.equals("OrgsList")){
+                StaticVariables.organisationList = null; // reset orgs list as controllers
+                                                         // using while loops wont recognise new list
                 StaticVariables.organisationList = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
             }
             else if (msgType.equals("OrgsCurrentAssets")) {

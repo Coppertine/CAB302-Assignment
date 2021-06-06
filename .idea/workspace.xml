@@ -4,23 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45d5cc9b-7e89-4a1f-b66c-e7069ef01a26" name="Default Changelist" comment="">
+    <list default="true" id="45d5cc9b-7e89-4a1f-b66c-e7069ef01a26" name="Default Changelist" comment="Edit org details functionality improvement">
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/CreateOrgController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/CreateOrgController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/EditOrgController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/EditOrgController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/EditOrgController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/EditOrgController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/EditOrgController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Controller/EditOrgController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/Server/Connection/TradeServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements$Tables.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements$Tables.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cab302qut/java/util/DatabaseStatements.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/EditOrg.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/EditOrg.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/TradeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Client/TradeClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/EditOrgController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/EditOrgController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/CreateOrgController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Controller/CreateOrgController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/util/DatabaseStatements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/util/DatabaseStatements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/com/cab302qut/java/util/StaticVariables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/com/cab302qut/java/util/StaticVariables.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/EditOrg.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/EditOrg.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +73,14 @@
       <option name="presentableId" value="Default" />
       <updated>1622932339763</updated>
     </task>
+    <task id="LOCAL-00001" summary="Edit org details functionality improvement">
+      <created>1622942745995</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622942745996</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -82,33 +95,32 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Edit org details functionality improvement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit org details functionality improvement" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
-          <line>285</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Client/TradeClient.java</url>
-          <line>74</line>
+          <line>75</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
-          <line>324</line>
+          <line>347</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/util/DatabaseStatements.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Client/TradeClient.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Client/TradeClient.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/main/com/cab302qut/java/Server/Connection/TradeServer.java</url>
+          <line>296</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

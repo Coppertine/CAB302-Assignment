@@ -47,6 +47,13 @@ public class DatabaseStatements {
         return sql;
     }
 
+    public static String CreateOrg(String orgName, String credits) {
+        String sql = "INSERT INTO `organisations` VALUES (" +
+                "'" + orgName + "', '" +
+                credits + "');";
+        return sql;
+    }
+
     // helps to ensure correct table name is referenced down the code
     // table names in db currently require no spaces
     public enum Tables {
