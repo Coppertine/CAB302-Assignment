@@ -9,7 +9,10 @@ import com.cab302qut.java.util.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TradeClient implements Runnable {
     private int clientID;
@@ -116,7 +119,20 @@ public class TradeClient implements Runnable {
             }
         }
     }
+    public void RefreshData() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                System.out.println("Task performed on: " + new Date() + " in" +
+                        "Thread's name: " + Thread.currentThread().getName());
 
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 20000L;
+        timer.schedule(task, delay, delay);
+    }
+    
     @Override
     public final void run() {
         config = CAB302Assignment.getConfig();

@@ -493,19 +493,7 @@ public class TradeServer implements Runnable {
         client.sendMessage(msg);
     }
 
-    public void RefreshData() {
-        TimerTask task = new TimerTask() {
-            public void run() {
-                System.out.println("Task performed on: " + new Date() + " in" +
-                        "Thread's name: " + Thread.currentThread().getName());
 
-            }
-        };
-        Timer timer = new Timer("Timer");
-
-        long delay = 20000L;
-        timer.schedule(task, delay, delay);
-    }
 
     /**
      * Returns the client with the same port as the ID.
