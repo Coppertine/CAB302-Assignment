@@ -4,9 +4,11 @@ import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Trades.Order;
 import com.cab302qut.java.Trades.OrderType;
 import com.cab302qut.java.Users.User;
+import com.cab302qut.java.util.StaticVariables;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,10 +25,13 @@ import com.cab302qut.java.Trades.Trade;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.ResourceBundle;
 
-public class TradeController {
+public class TradeController implements Initializable{
 
     @FXML
     private ChoiceBox assetChoice;
@@ -42,7 +47,6 @@ public class TradeController {
     private Button backButton;
     @FXML
     private Button sendOrder;
-
 
     @FXML
     private Label assetBuyName;
@@ -90,10 +94,15 @@ public class TradeController {
         creditAmount.setText(creditAmountInput);
     }
 
-    public void setChoiceBox(Asset[] assets) {
-        for (Asset asset : assets) {
-            assetChoice.getItems().add(asset.getAssetName());
+    public void setChoiceBox() {
+
+        existingOrgAssets = FXCollections.observableArrayList();
+        for (ArrayList<String> row : StaticVariables.orgsAssets)
+        {
+            System.out.println(row.get(0));
+            existingOrgAssets.add(row.get(0)); // get orgName
         }
+        assetChoice.setItems(FXCollections.observableArrayList(existingOrgAssets));
     }
 
     /**
@@ -126,9 +135,11 @@ public class TradeController {
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
-
-
-
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        setChoiceBox();
+    }
 }
