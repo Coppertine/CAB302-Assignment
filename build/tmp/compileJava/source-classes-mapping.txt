@@ -50,8 +50,8 @@ com/cab302qut/java/util/DatabaseConnection.java
  com.cab302qut.java.util.DatabaseConnection
 com/cab302qut/java/Controller/ResetController.java
  com.cab302qut.java.Controller.ResetController
-com/cab302qut/java/Controller/TradeController.java
- com.cab302qut.java.Controller.TradeController
+com/cab302qut/java/CAB302Assignment.java
+ com.cab302qut.java.CAB302Assignment
 com/cab302qut/java/Controller/AssetPriceHistoryController.java
  com.cab302qut.java.Controller.AssetPriceHistoryController
 com/cab302qut/java/Controller/CreateOrgController.java
@@ -64,16 +64,16 @@ com/cab302qut/java/Client/ClientThread.java
  com.cab302qut.java.Client.ClientThread
 com/cab302qut/java/Controller/CreateAssetController.java
  com.cab302qut.java.Controller.CreateAssetController
-com/cab302qut/java/Controller/MainController.java
- com.cab302qut.java.Controller.MainController
-com/cab302qut/java/Controller/LoginController.java
- com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/util/StaticVariables.java
+ com.cab302qut.java.util.StaticVariables
+com/cab302qut/java/Controller/CreateUserController.java
+ com.cab302qut.java.Controller.CreateUserController
 com/cab302qut/java/Client/TradeClient.java
  com.cab302qut.java.Client.TradeClient
  com.cab302qut.java.Client.TradeClient$1
-com/cab302qut/java/CAB302Assignment.java
- com.cab302qut.java.CAB302Assignment
-com/cab302qut/java/Controller/CreateUserController.java
- com.cab302qut.java.Controller.CreateUserController
-com/cab302qut/java/util/StaticVariables.java
- com.cab302qut.java.util.StaticVariables
+com/cab302qut/java/Controller/LoginController.java
+ com.cab302qut.java.Controller.LoginController
+com/cab302qut/java/Controller/MainController.java
+ com.cab302qut.java.Controller.MainController
+com/cab302qut/java/Controller/TradeController.java
+ com.cab302qut.java.Controller.TradeController

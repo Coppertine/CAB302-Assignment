@@ -89,6 +89,16 @@ public class TradeController implements Initializable {
 
     public void setChoiceBox()
     {
+        String orgName = StaticVariables.user.getOrganisation().getName();
+//        Message msg = new Message("GetOrgsAsset", orgName);
+//        CAB302Assignment.tradeClient.sendMessage(msg);
+//        System.out.println("Sent edit org credits num");
+
+        if (StaticVariables.orgsAssets == null || StaticVariables.orgsAssets.isEmpty()) {
+            StaticVariables.orgsAssets = null; //reset for new org selected
+            Message msg = new Message("GetOrgsAsset", orgName);
+            CAB302Assignment.tradeClient.sendMessage(msg);
+        }
         try
         {
             while (StaticVariables.orgsAssets == null)

@@ -40,10 +40,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        System.out.println(StaticVariables.user.getName() +" Name " + StaticVariables.user.getOrganisation().getName() + "User org name");
-        Message msg = new Message("GetOrgsAsset", StaticVariables.user.getOrganisation().getName());
-        CAB302Assignment.tradeClient.sendMessage(msg);
-        System.out.println("Sent edit org credits num");
+
         // organisationLabel = new TextFlow(new Text("Testing"));
     }
 
@@ -69,14 +66,14 @@ public class MainController implements Initializable {
         try
         {
 
-            while (StaticVariables.orgsAssets == null)
-            {
-                System.out.println("Waiting for orgs assets main controller");
-            }
-            for (ArrayList<String> row : StaticVariables.orgsAssets)
-            {
-                assetList.add(row.get(0));
-            }
+//            while (StaticVariables.orgsAssets == null)
+//            {
+//                System.out.println("Waiting for orgs assets main controller");
+//            }
+//            for (ArrayList<String> row : StaticVariables.orgsAssets)
+//            {
+//                assetList.add(row.get(0));
+//            }
 
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Trade.fxml"));
             Parent root = loader.load();

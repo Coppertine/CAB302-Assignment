@@ -114,7 +114,6 @@ public class TradeClient implements Runnable {
                     StaticVariables.loginSuccessful = true;
                     StaticVariables.login = true;
                     StaticVariables.userOrganisation = ((User) theMsg.getMessageObject()).getOrganisation();
-
                     System.out.println(StaticVariables.user );
                     System.out.println(StaticVariables.userOrganisation);
                     System.out.println("user Agree");
