@@ -3,6 +3,7 @@ package com.cab302qut.java.Server.Connection;
 //import com.cab302qut.java.Client.Connection.ClientThread;
 
 import com.cab302qut.java.CAB302Assignment;
+
 import com.cab302qut.java.Items.Asset;
 import com.cab302qut.java.Organisation.Organisation;
 import com.cab302qut.java.Server.Controller.ServerController;
@@ -45,7 +46,7 @@ public class TradeServer implements Runnable {
     /**
      * Database connection used to keep track of all database input and output.
      */
-    private DatabaseConnection connection = new DatabaseConnection();
+    private DatabaseConnection connection;
 
     /**
      * The Constructor of the Trade Server.
@@ -64,6 +65,7 @@ public class TradeServer implements Runnable {
             server = new ServerSocket(config.getPort());
             System.out.println(server);
             System.out.println("Attempting to connect to database");
+            this.connection = new DatabaseConnection();
             connection.establishConnection();
         } catch (IOException e) {
             Debug.log(e.toString());
@@ -257,18 +259,18 @@ public class TradeServer implements Runnable {
     }
 
     private void RefreshData(ServerThread theClientThread, Message theClientMsg) {
-            ArrayList<String> assets = new ArrayList<>();
-            GetOrgsList(theClientThread, theClientMsg);
-            GetUserOrg(theClientThread, theClientMsg);
-            GetOrgsAsset(theClientThread, theClientMsg);
-            assets = GetAssets();
+        ArrayList<String> assets = new ArrayList<>();
+        GetOrgsList(theClientThread, theClientMsg);
+        GetUserOrg(theClientThread, theClientMsg);
+        GetOrgsAsset(theClientThread, theClientMsg);
+        assets = GetAssets();
 
-            Message theMsg = new Message("Assets", assets);
-            theClientThread.sendMessage(theMsg);
+        Message theMsg = new Message("Assets", assets);
+        theClientThread.sendMessage(theMsg);
 
-            //user organisation info
-            //user organisation assets
-            //list of assets
+        //user organisation info
+        //user organisation assets
+        //list of assets
     }
 
     private void GetOrgsList(ServerThread theClientThread, Message theClientMsg) {
@@ -385,12 +387,119 @@ public class TradeServer implements Runnable {
                 Message theMsg = new Message("UserDenied");
                 StaticVariables.loginSuccessful = false;
                 StaticVariables.login = true;
-                theClientThread.sendMessage(theMsg);
+                System.out.println("executed statement");
+                boolean finish = false;
+
+
+            } else if (theClientMsg.getMessageType().equals("CreateOrg")) {
+                CreateOrg(theClientMsg, theClientThread);
+            } else if (theClientMsg.getMessageType().equals("EditOrgCreditsNum")) {
+                EditOrgCredits(theClientMsg, theClientThread);
+            } else if (theClientMsg.getMessageType().equals("EditOrgAssetNum")) {
+                EditOrgAssetNum(theClientMsg, theClientThread);
             }
 
         } catch (NoSuchElementException | SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    public void SendOrgsList(ServerThread client) throws SQLException {
+        ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
+        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
+        while (set.next()) {
+            ArrayList<String> row = new ArrayList<>();
+            row.add(set.getString("organisationName"));
+            row.add(set.getString("credits"));
+            organisationsData.add(row);
+        }
+        Message theMsg = new Message("OrgsList", organisationsData);
+        client.sendMessage(theMsg);
+    }
+
+    public void CreateOrg(Message msg, ServerThread client) throws SQLException {
+        String org = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String credits = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        try {
+            DatabaseConnection.executeStatement(DatabaseStatements.CreateOrg(org, credits));
+        } catch (Exception e) {
+            System.out.println("Error adding new org into DB");
+        }
+        // Send back to client updated list of organisations
+        SendOrgsList(client);
+    }
+
+
+    /**
+     * Updates an org's credits and calls the SendUpdatedCredits
+     *
+     * @param msg
+     * @param client
+     * @throws SQLException
+     */
+    public void EditOrgCredits(Message msg, ServerThread client) throws SQLException {
+        String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String newCreditAmount = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        Double newCreditsAmountDouble = Double.parseDouble(newCreditAmount);
+        try {
+            DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='" + newCreditAmount + "' WHERE `organisationName` = '" + theOrg + "';");
+        } catch (Exception e) {
+            System.out.println("Update org ERROR");
+            System.out.println(e.getMessage());
+        }
+        SendUpdatedCredits(client, theOrg, newCreditsAmountDouble);
+    }
+
+    /**
+     * Given an org send the org's updated client back to client.
+     *
+     * @param client
+     * @param org
+     * @param credits
+     * @throws SQLException
+     */
+    public void SendUpdatedCredits(ServerThread client, String org, Double credits) throws SQLException {
+        ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations` WHERE `organisationName` = '" + org + "';");
+        ArrayList<String> orgDetails = new ArrayList<>();
+        while (set.next()) {
+            orgDetails.add(set.getString("organisationName"));
+            orgDetails.add(set.getString("credits"));
+        }
+        Message msg = new Message("UpdateOrgsCredits", orgDetails);
+        client.sendMessage(msg);
+    }
+
+
+    public void EditOrgAssetNum(Message msg, ServerThread client) throws SQLException {
+        String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String theAssetType = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        String newAssetQuantity = ((ArrayList<String>) msg.getMessageObject()).get(2);
+        Integer newAssetQuantityInt = Integer.parseInt(newAssetQuantity);
+        try {
+            DatabaseConnection.executeStatement("UPDATE `currentAssets` SET `quantity`= '" + newAssetQuantity + "' WHERE `organisationName` = '" + theOrg + "' AND `assetType` = '" + theAssetType + "';");
+        } catch (Exception e) {
+            System.out.println("Update org asset num ERROR");
+            System.out.println(e.getMessage());
+        }
+        SendUpdatedAssetNum(client, theOrg, theAssetType, newAssetQuantityInt);
+    }
+
+    public void SendUpdatedAssetNum(ServerThread client, String org, String assetType, Integer assetQuantity) throws SQLException {
+        ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgsAssetNum(org, assetType));
+        ArrayList<String> orgDetails = new ArrayList<>();
+        while (set.next()) {
+            orgDetails.add(set.getString("organisationName"));
+            orgDetails.add(set.getString("assetType"));
+            orgDetails.add(set.getString("quantity"));
+        }
+        ArrayList<String> updatedOrgAssetNum = new ArrayList<>();
+        updatedOrgAssetNum.add(org);
+        updatedOrgAssetNum.add(assetType);
+        updatedOrgAssetNum.add(assetQuantity.toString());
+
+        Message msg = new Message("UpdateOrgsAssetNum", updatedOrgAssetNum);
+        client.sendMessage(msg);
     }
 
     /**

@@ -3,8 +3,8 @@
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-15" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="com.cab302qut.java.CAB302Assignment" />
-    <module name="CAB302.main" />
-    <option name="VM_PARAMETERS" value="--add-modules javafx.controls,javafx.fxml --module-path &quot;E:\Uni 2021\CAB302\lib\javafx-sdk-16\lib&quot;" />
+    <module name="CAB302-Assignment.main" />
+    <option name="VM_PARAMETERS" value="--add-modules javafx.controls,javafx.fxml --module-path &quot;C:\Users\Giane\Desktop\openjfx-16_windows-x64_bin-sdk\javafx-sdk-16\lib&quot;" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.cab302qut.java.*" />

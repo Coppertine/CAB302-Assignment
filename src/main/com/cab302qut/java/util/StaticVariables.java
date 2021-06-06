@@ -7,6 +7,9 @@ import com.cab302qut.java.Users.UserType;
 
 import java.util.ArrayList;
 
+import java.security.PublicKey;
+import java.util.ArrayList;
+
 public class StaticVariables {
     public static boolean loginSuccessful;
     public static boolean login;
@@ -18,6 +21,12 @@ public class StaticVariables {
     public static Asset[] assets;
     public static ArrayList<ArrayList<String>> organisationsAssets;// assets and credits for the organisation
     public static ArrayList<ArrayList<String>> organisations;
+    public static ArrayList<ArrayList<String>> organisationList;
+    public static ArrayList<ArrayList<String>> orgsAssets;
+
+
+    public static ArrayList<String> orgCreditsUpdateMsg;
+    public static ArrayList<String> orgAssetNumUpdateMsg;
 
     public static ArrayList<ArrayList<String>> organisationList;
 }

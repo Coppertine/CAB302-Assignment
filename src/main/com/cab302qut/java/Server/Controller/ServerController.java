@@ -46,6 +46,7 @@ public class ServerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     public void printToMessageScreen(String msg) {

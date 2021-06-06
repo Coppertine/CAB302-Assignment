@@ -69,7 +69,7 @@ public class CAB302Assignment extends Application {
             for (int j = 0; j < buyOrders.size(); j++) {
                 if (sellOrders.get(i).getTradeAsset().getAssetName() == buyOrders.get(j).getTradeAsset().getAssetName() && sellOrders.get(i).getQuantityToTrade() >= buyOrders.get(j).getQuantityToTrade() && sellOrders.get(i).getPrice() == buyOrders.get(j).getPrice()) {
 
-                    int buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
+                    Double buyOrganisationCredits = buyOrders.get(j).getUser().getOrganisation().getCredits();
                     double tradePrice;
 
                     tradePrice = buyOrders.get(j).getPrice() * buyOrders.get(j).getQuantityToTrade();

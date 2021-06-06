@@ -36,6 +36,30 @@ public class DatabaseStatements {
         return ("SELECT * FROM `currentassets` WHERE organisationName = '" + usersOrg + "';");
     }
 
+    public static String EditOrgAssetNum(String org, String assetType, String quantity) {
+        String sql = "UPDATE `currentAssets`" +
+                "SET `quantity` = " +
+                "'" + quantity + "' " +
+                "WHERE `organisationName` = " +
+                "'" + org + "' " +
+                "AND `assetType` = " +
+                "'" + assetType + "';";
+        return sql;
+    }
+    public static String GetOrgsAssetNum(String org, String assetType) {
+        String sql = "SELECT * FROM `currentAssets` WHERE `organisationName` = " +
+                "'" + org + "' AND `assetType` = " +
+                "'" + assetType + "';";
+        return sql;
+    }
+
+    public static String CreateOrg(String orgName, String credits) {
+        String sql = "INSERT INTO `organisations` VALUES (" +
+                "'" + orgName + "', '" +
+                credits + "');";
+        return sql;
+    }
+
     public static String CreateUser(User user)
     {
         return String.format("INSERT INTO `users`(`userName`, `password`, `accountType`, `organisationName`) VALUES " +

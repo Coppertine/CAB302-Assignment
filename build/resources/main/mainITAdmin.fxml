@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cab302qut.java.Controller.MainITAdminController">
+   <children>
+      <Button fx:id="btn_createOrg" layoutX="94.0" layoutY="142.0" mnemonicParsing="false" onAction="#OpenCreateOrg" prefHeight="45.0" prefWidth="138.0" text="Create Organisation" />
+      <Button layoutX="364.0" layoutY="142.0" mnemonicParsing="false" onAction="#OpenEditOrg" prefHeight="45.0" prefWidth="138.0" text="Edit an Organisation" />
+      <Button layoutX="94.0" layoutY="241.0" mnemonicParsing="false" onAction="#OpenAddAsset" prefHeight="45.0" prefWidth="138.0" text="Add new asset" />
+      <Button layoutX="364.0" layoutY="241.0" mnemonicParsing="false" onAction="#OpenNewUser" prefHeight="45.0" prefWidth="138.0" text="Add new users" />
+   </children>
+</AnchorPane>
