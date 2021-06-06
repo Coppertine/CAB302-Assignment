@@ -1,6 +1,7 @@
 package com.cab302qut.java.util;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 /***
  * Class containing methods when performing
@@ -59,7 +60,11 @@ public class DatabaseStatements {
                 "'" + assetType + "';";
         return sql;
     }
-
+    public static String CreateTrade(String userName, String orgName, String assetType, int quantity, double price, String tradeType, Date date) {
+        String sql = "INSERT INTO currenttrades VALUES (" + "'" + userName + "','" + orgName + "','" + assetType +
+                "','" + quantity + "','" + price + "','" + tradeType + "', '" + date + "');";
+        return sql;
+    }
     public static String CreateOrg(String orgName, String credits) {
         String sql = "INSERT INTO `organisations` VALUES (" +
                 "'" + orgName + "', '" +

@@ -7,6 +7,7 @@ import com.cab302qut.java.Users.User;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,7 @@ public class TradeController {
     private int quantity;
     private double price;
     private User testUser;
+    private ObservableList<String> existingOrgAssets;
 
 //need to add different assets to choice box
 //then when clicked they are displayed to the user
@@ -69,17 +71,6 @@ public class TradeController {
     public void sendOrder(ActionEvent actionEvent) throws IOException {
         checkOrder();
     }
-
-    public void selectAsset(ActionEvent actionEvent) throws IOException {
-//        assetChoice.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-//            public void changed(ObservableValue ov, Number old_val, Number new_val) {
-                assetBuyName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Buy Price");
-                assetSellName.setText(assetChoice.getSelectionModel().getSelectedItem().toString() + " Sale Price");
-
-                buyPrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
-                salePrice.setText(assetChoice.getSelectionModel().getSelectedItem().toString());
-            }
-//        });
 
 
     public void back(ActionEvent actionEvent) throws IOException {
@@ -94,13 +85,6 @@ public class TradeController {
         }
     }
 
-    public void setBuyPrice(String assetName, int assetPrice) {
-
-    }
-
-    public void setSalePrice(String assetName, int assetPrice) {
-
-    }
 
     public void setCreditAmount(String creditAmountInput) {
         creditAmount.setText(creditAmountInput);

@@ -1,6 +1,7 @@
 package com.cab302qut.java.Server.Connection;
 
 //import com.cab302qut.java.Client.Connection.ClientThread;
+
 import com.cab302qut.java.CAB302Assignment;
 
 import com.cab302qut.java.Items.Asset;
@@ -60,8 +61,10 @@ public class TradeServer implements Runnable {
      */
     public TradeServer(
             final ServerConfiguration inputConfig,
-            final ServerController controllerInput) {
-        try {
+            final ServerController controllerInput)
+    {
+        try
+        {
             System.out.println(
                     "Starting server at: " + inputConfig.getPort());
             this.config = inputConfig;
@@ -71,7 +74,8 @@ public class TradeServer implements Runnable {
             System.out.println("Attempting to connect to database");
             this.connection = new DatabaseConnection();
             connection.establishConnection();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             Debug.log(e.toString());
         }
     }
@@ -79,11 +83,14 @@ public class TradeServer implements Runnable {
     /**
      * Attempts to stop the Trade Server.
      */
-    public final void stop() {
+    public final void stop()
+    {
         exited = true;
-        try {
+        try
+        {
             connection.CloseConnection();
-        } catch (SQLException throwables) {
+        } catch (SQLException throwables)
+        {
             Debug.log(throwables.toString());
         }
     }
@@ -93,31 +100,38 @@ public class TradeServer implements Runnable {
      *
      * @param socket The client socket that connects to the server.
      */
-    public final void addThread(final Socket socket) {
+    public final void addThread(final Socket socket)
+    {
         Debug.log("Client Accepted: " + socket);
         ServerThread client = new ServerThread(this, socket, clients.size() + 1);
         clients.add(client);
-        try {
+        try
+        {
             client.open();
             client.start();
             //client.send("id: " + clients.indexOf(client));
             Message msg = new Message("id", clients.indexOf(client));
             client.sendMessage(msg);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             Debug.log(e.toString());
         }
     }
 
     @Override
-    public final void run() {
-        try {
-            while (!exited) {
+    public final void run()
+    {
+        try
+        {
+            while (!exited)
+            {
 
-                    addThread(server.accept());
-                    //Thread.sleep(1000);
+                addThread(server.accept());
+                //Thread.sleep(1000);
 
             }
-        } catch (IOException ignored) {
+        } catch (IOException ignored)
+        {
 
         }
         Debug.log("Server is stopped.");
@@ -129,9 +143,11 @@ public class TradeServer implements Runnable {
      * @param Id    The location ID of the client.
      * @param input The message from the client.
      */
-    public final synchronized void handle(final int Id, final Object input) {
+    public final synchronized void handle(final int Id, final Object input)
+    {
         Message clientMsg = (Message) input;
-        switch (clientMsg.getMessageType()) {
+        switch (clientMsg.getMessageType())
+        {
             case "exit" -> {
                 findClient(Id).send("exit");
                 remove(Id);
@@ -155,14 +171,17 @@ public class TradeServer implements Runnable {
      * @param input The string input in CSV format starting with
      *              {@code Traffic: }
      */
-    private void handleCommands(final int ID, final Object input) {
-        try {
+    private void handleCommands(final int ID, final Object input)
+    {
+        try
+        {
             // Get the client
             ServerThread theClientThread = findClient(ID);
             Message theClientMsg = (Message) input;
 
             //login Messaging
-            if (theClientMsg.getMessageType().equals("Login")) {
+            if (theClientMsg.getMessageType().equals("Login"))
+            {
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
                 //TODO: validate database records of details
                 ArrayList<User> users = new ArrayList<>();
@@ -170,29 +189,37 @@ public class TradeServer implements Runnable {
 
                 System.out.println("executed statement");
                 boolean finish = false;
-                while (set.next()) {
+                while (set.next())
+                {
                     UserType userType;
                     Organisation organisation = null;
-                    if (set.getString("accountType").equals("Default")) {
+                    if (set.getString("accountType").equals("Default"))
+                    {
                         userType = UserType.Default;
-                    } else if (set.getString("accountType").equals("Administrator")) {
+                    } else if (set.getString("accountType").equals("Administrator"))
+                    {
                         userType = UserType.Administrator;
-                    } else {
+                    } else
+                    {
                         userType = UserType.Default;
                     }
                     ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisations(set.getString("organisationName")));
-                    while (orgSet.next()) {
+                    while (orgSet.next())
+                    {
                         organisation = new Organisation(orgSet.getString("organisationName"), orgSet.getDouble("credits"));
                         break;
                     }
                     users.add(new User(set.getString("userName"), set.getString("password"), userType, organisation));
                 }
-                for (User user : users) {
+                for (User user : users)
+                {
                     String inputPassword = ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
                     User test = new User(((ArrayList<String>) theClientMsg.getMessageObject()).get(0), inputPassword);
                     test.setPassword(test.getPassword());
-                    if (user.getUsername().equals(test.getUsername())) {
-                        if (user.getPassword().equals(test.getPassword())) {
+                    if (user.getUsername().equals(test.getUsername()))
+                    {
+                        if (user.getPassword().equals(test.getPassword()))
+                        {
                             Message theMsg = new Message("UserAccepted", user);
                             finish = true;
                             theClientThread.sendMessage(theMsg);
@@ -200,18 +227,20 @@ public class TradeServer implements Runnable {
                         }
                     }
                 }
-                if (!finish) {
+                if (!finish)
+                {
                     Message theMsg = new Message("UserDenied");
                     StaticVariables.loginSuccessful = false;
                     StaticVariables.login = true;
                     theClientThread.sendMessage(theMsg);
                 }
-            }
-            else if (theClientMsg.getMessageType().equals("GetOrgPendingTrades")) {
+            } else if (theClientMsg.getMessageType().equals("GetOrgPendingTrades"))
+            {
                 String org = (String) theClientMsg.getMessageObject();
                 ArrayList<ArrayList<String>> pendingTradesEntry = new ArrayList<>();
                 ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgPendingTrades(org));
-                while (set.next()) {
+                while (set.next())
+                {
                     ArrayList<String> row = new ArrayList<>();
                     row.add(set.getString("tradeID"));
                     row.add(set.getString("assetType"));
@@ -221,16 +250,17 @@ public class TradeServer implements Runnable {
                     row.add(set.getString("date"));
                     pendingTradesEntry.add(row);
                 }
-                Message msg = new Message("OrgsPendingTrades",pendingTradesEntry);
+                Message msg = new Message("OrgsPendingTrades", pendingTradesEntry);
                 theClientThread.sendMessage(msg);
-            }
-            else if (theClientMsg.getMessageType().equals("RemoveOffer")) {
+            } else if (theClientMsg.getMessageType().equals("RemoveOffer"))
+            {
                 String tradeID = (String) ((ArrayList<String>) theClientMsg.getMessageObject()).get(0);
                 String org = (String) ((ArrayList<String>) theClientMsg.getMessageObject()).get(1);
                 DatabaseConnection.executeStatement("DELETE FROM `currentTrades` WHERE `tradeID` = '" + tradeID + "';");
                 ArrayList<ArrayList<String>> pendingTradesEntry = new ArrayList<>();
                 ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgPendingTrades(org));
-                while (set.next()) {
+                while (set.next())
+                {
                     ArrayList<String> row = new ArrayList<>();
                     row.add(set.getString("tradeID"));
                     row.add(set.getString("assetType"));
@@ -241,45 +271,42 @@ public class TradeServer implements Runnable {
                     pendingTradesEntry.add(row);
                 }
                 // SEND THE UPDATED LIST OF CURRENT TRADES
-                Message msg = new Message("OrgsPendingTrades",pendingTradesEntry);
+                Message msg = new Message("OrgsPendingTrades", pendingTradesEntry);
                 theClientThread.sendMessage(msg);
-            }
-
-            else if (theClientMsg.getMessageType().equals("CreateTrade")) {
+            } else if (theClientMsg.getMessageType().equals("CreateTrade"))
+            {
                 System.out.println("Received Login details:" + ((ArrayList<String>) theClientMsg.getMessageObject()).get(0) + " " + ((ArrayList<String>) theClientMsg.getMessageObject()).get(1));
 
                 ResultSet orgSet = connection.executeStatement(DatabaseStatements.GetOrganisationAssets(StaticVariables.userOrganisation.getName()));
-                while (orgSet.next()) {
+                while (orgSet.next())
+                {
                     System.out.println(orgSet.getString("assetType"));
                     System.out.println(orgSet.getString("quantity"));
                 }
                 System.out.println("asset refresh complete");
                 StaticVariables.assetRefresh = true;
-            }
-            else if (theClientMsg.getMessageType().equals("Trade")) {
+            } else if (theClientMsg.getMessageType().equals("Trade"))
+            {
                 //Receive Trade Update, could be new trade or updated
-            }
-            else if (theClientMsg.getMessageType().equals("CreateOrg")) {
-                CreateOrg(theClientMsg,theClientThread);
-            }
-            else if (theClientMsg.getMessageType().equals("EditOrgCreditsNum")) {
-                EditOrgCredits(theClientMsg,theClientThread);
-            }
-            else if (theClientMsg.getMessageType().equals("EditOrgAssetNum")) {
-                EditOrgAssetNum(theClientMsg,theClientThread);
-            }
-            else if (theClientMsg.getMessageType().equals("SellOrder")) {
+            } else if (theClientMsg.getMessageType().equals("CreateOrg"))
+            {
+                CreateOrg(theClientMsg, theClientThread);
+            } else if (theClientMsg.getMessageType().equals("EditOrgCreditsNum"))
+            {
+                EditOrgCredits(theClientMsg, theClientThread);
+            } else if (theClientMsg.getMessageType().equals("EditOrgAssetNum"))
+            {
+                EditOrgAssetNum(theClientMsg, theClientThread);
+            } else if (theClientMsg.getMessageType().equals("Order"))
+            {
                 //Receive Trade Update, could be new trade or updated
-
-            }
-            else if (theClientMsg.getMessageType().equals("Order")) {
-                //Receive Trade Update, could be new trade or updated
-
-            }
-            else if (theClientMsg.getMessageType().equals("GetOrgsList")) {
+                CreateTrade(theClientMsg, theClientThread);
+            } else if (theClientMsg.getMessageType().equals("GetOrgsList"))
+            {
                 ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
                 ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
-                while (set.next()) {
+                while (set.next())
+                {
                     ArrayList<String> row = new ArrayList<>();
                     row.add(set.getString("organisationName"));
                     row.add(set.getString("credits"));
@@ -289,11 +316,13 @@ public class TradeServer implements Runnable {
                 theClientThread.sendMessage(theMsg);
             }
             // Returns all the assets belonging to an organisation
-            else if (theClientMsg.getMessageType().equals("GetOrgsAsset")) {
+            else if (theClientMsg.getMessageType().equals("GetOrgsAsset"))
+            {
                 String theOrg = (String) theClientMsg.getMessageObject();
                 ArrayList<ArrayList<String>> organisationsAssets = new ArrayList<>();
                 ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `currentAssets` WHERE `organisationName` = '" + theOrg + "';");
-                while (set.next()) {
+                while (set.next())
+                {
                     ArrayList<String> row = new ArrayList<>();
                     row.add(set.getString("assetType"));
                     row.add(set.getString("quantity"));
@@ -301,37 +330,59 @@ public class TradeServer implements Runnable {
                 }
                 Message theMsg = new Message("OrgsCurrentAssets", organisationsAssets);
                 theClientThread.sendMessage(theMsg);
-            }
-            else if (theClientMsg.getMessageType().equals("GetAssetPriceHistory")) {
+            } else if (theClientMsg.getMessageType().equals("GetAssetPriceHistory"))
+            {
                 ArrayList<AssetTableObj> priceHistory = new ArrayList<>();
                 String assetType = (String) theClientMsg.getMessageObject();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetAssetPriceHistory(assetType));
-                while (set.next()) {
-                    priceHistory.add(new AssetTableObj(set.getDate("date"),set.getDouble("price")));
+                while (set.next())
+                {
+                    priceHistory.add(new AssetTableObj(set.getDate("date"), set.getDouble("price")));
                 }
-                Message msg = new Message("AssetPriceHistory",priceHistory);
+                Message msg = new Message("AssetPriceHistory", priceHistory);
                 theClientThread.sendMessage(msg);
-            }
-
-            else if (theClientMsg.getMessageType().equals("GetTrades")) {
+            } else if (theClientMsg.getMessageType().equals("GetTrades"))
+            {
                 ArrayList<AssetTableObj> tradeData = new ArrayList<>();
                 ResultSet set = connection.executeStatement(DatabaseStatements.GetYearTrades());
-                while (set.next()) {
+                while (set.next())
+                {
                     tradeData.add(new AssetTableObj(set.getDate("date"), set.getDouble("price")));
                 }
                 Message theMsg = new Message("Trades", tradeData);
                 theClientThread.sendMessage(theMsg);
             }
-        } catch (NoSuchElementException | SQLException e) {
+        } catch (NoSuchElementException | SQLException e)
+        {
             System.out.println(e.getMessage());
         }
     }
 
+    public void CreateTrade(Message msg, ServerThread client) throws SQLException
+    {
+        String username = ((ArrayList<String>) msg.getMessageObject()).get(0);
+        String org = ((ArrayList<String>) msg.getMessageObject()).get(1);
+        String assetType = ((ArrayList<String>) msg.getMessageObject()).get(2);
+        int quantity = ((ArrayList<Integer>) msg.getMessageObject()).get(3);
+        double price = ((ArrayList<Double>) msg.getMessageObject()).get(4);
+        String tradeType = ((ArrayList<String>) msg.getMessageObject()).get(5);
+        Date date = ((ArrayList<Date>) msg.getMessageObject()).get(6);
 
-    public void SendOrgsList(ServerThread client) throws SQLException {
+        try
+        {
+            DatabaseConnection.executeStatement(DatabaseStatements.CreateTrade(username, org, assetType, quantity, price, tradeType, date));
+        } catch (Exception e)
+        {
+            System.out.println("Error adding new trade into DB");
+        }
+    }
+
+    public void SendOrgsList(ServerThread client) throws SQLException
+    {
         ArrayList<ArrayList<String>> organisationsData = new ArrayList<>();
         ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations`;");
-        while (set.next()) {
+        while (set.next())
+        {
             ArrayList<String> row = new ArrayList<>();
             row.add(set.getString("organisationName"));
             row.add(set.getString("credits"));
@@ -341,12 +392,15 @@ public class TradeServer implements Runnable {
         client.sendMessage(theMsg);
     }
 
-    public void CreateOrg(Message msg, ServerThread client) throws SQLException {
+    public void CreateOrg(Message msg, ServerThread client) throws SQLException
+    {
         String org = ((ArrayList<String>) msg.getMessageObject()).get(0);
         String credits = ((ArrayList<String>) msg.getMessageObject()).get(1);
-        try {
-            DatabaseConnection.executeStatement(DatabaseStatements.CreateOrg(org,credits));
-        } catch (Exception e) {
+        try
+        {
+            DatabaseConnection.executeStatement(DatabaseStatements.CreateOrg(org, credits));
+        } catch (Exception e)
+        {
             System.out.println("Error adding new org into DB");
         }
         // Send back to client updated list of organisations
@@ -356,35 +410,42 @@ public class TradeServer implements Runnable {
 
     /**
      * Updates an org's credits and calls the SendUpdatedCredits
+     *
      * @param msg
      * @param client
      * @throws SQLException
      */
-    public void EditOrgCredits(Message msg, ServerThread client) throws SQLException {
+    public void EditOrgCredits(Message msg, ServerThread client) throws SQLException
+    {
         String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
-        String newCreditAmount =((ArrayList<String>) msg.getMessageObject()).get(1);
+        String newCreditAmount = ((ArrayList<String>) msg.getMessageObject()).get(1);
         Double newCreditsAmountDouble = Double.parseDouble(newCreditAmount);
-        try {
+        try
+        {
             DatabaseConnection.executeStatement("UPDATE `organisations` SET `credits`='"
-                    + newCreditAmount + "' WHERE `organisationName` = '" + theOrg +"';");
-        } catch (Exception e) {
+                    + newCreditAmount + "' WHERE `organisationName` = '" + theOrg + "';");
+        } catch (Exception e)
+        {
             System.out.println("Update org ERROR");
             System.out.println(e.getMessage());
         }
-        SendUpdatedCredits(client,theOrg,newCreditsAmountDouble);
+        SendUpdatedCredits(client, theOrg, newCreditsAmountDouble);
     }
 
     /**
      * Given an org send the org's updated client back to client.
+     *
      * @param client
      * @param org
      * @param credits
      * @throws SQLException
      */
-    public void SendUpdatedCredits(ServerThread client, String org, Double credits) throws SQLException {
+    public void SendUpdatedCredits(ServerThread client, String org, Double credits) throws SQLException
+    {
         ResultSet set = DatabaseConnection.executeStatement("SELECT * FROM `organisations` WHERE `organisationName` = '" + org + "';");
         ArrayList<String> orgDetails = new ArrayList<>();
-        while (set.next()) {
+        while (set.next())
+        {
             orgDetails.add(set.getString("organisationName"));
             orgDetails.add(set.getString("credits"));
         }
@@ -393,24 +454,29 @@ public class TradeServer implements Runnable {
     }
 
 
-    public void EditOrgAssetNum(Message msg, ServerThread client) throws SQLException {
+    public void EditOrgAssetNum(Message msg, ServerThread client) throws SQLException
+    {
         String theOrg = ((ArrayList<String>) msg.getMessageObject()).get(0);
-        String theAssetType =((ArrayList<String>) msg.getMessageObject()).get(1);
+        String theAssetType = ((ArrayList<String>) msg.getMessageObject()).get(1);
         String newAssetQuantity = ((ArrayList<String>) msg.getMessageObject()).get(2);
         Integer newAssetQuantityInt = Integer.parseInt(newAssetQuantity);
-        try {
+        try
+        {
             DatabaseConnection.executeStatement("UPDATE `currentAssets` SET `quantity`= '" + newAssetQuantity + "' WHERE `organisationName` = '" + theOrg + "' AND `assetType` = '" + theAssetType + "';");
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println("Update org asset num ERROR");
             System.out.println(e.getMessage());
         }
-        SendUpdatedAssetNum(client,theOrg,theAssetType,newAssetQuantityInt);
+        SendUpdatedAssetNum(client, theOrg, theAssetType, newAssetQuantityInt);
     }
 
-    public void SendUpdatedAssetNum(ServerThread client, String org, String assetType, Integer assetQuantity) throws SQLException {
+    public void SendUpdatedAssetNum(ServerThread client, String org, String assetType, Integer assetQuantity) throws SQLException
+    {
         ResultSet set = DatabaseConnection.executeStatement(DatabaseStatements.GetOrgsAssetNum(org, assetType));
         ArrayList<String> orgDetails = new ArrayList<>();
-        while (set.next()) {
+        while (set.next())
+        {
             orgDetails.add(set.getString("organisationName"));
             orgDetails.add(set.getString("assetType"));
             orgDetails.add(set.getString("quantity"));
@@ -431,7 +497,8 @@ public class TradeServer implements Runnable {
      * @return The OfficeThread of the Client, if present.
      * @throws NoSuchElementException When no element is found of the same ID.
      */
-    public final ServerThread findClient(final int clientID) throws NoSuchElementException {
+    public final ServerThread findClient(final int clientID) throws NoSuchElementException
+    {
         return clients.stream()
                 .filter(c -> c.getClientID() == clientID)
                 .findFirst()
@@ -443,12 +510,15 @@ public class TradeServer implements Runnable {
      *
      * @param clientID The client location id.
      */
-    public final void remove(final int clientID) {
+    public final void remove(final int clientID)
+    {
         ServerThread toRemove;
-        try {
+        try
+        {
             toRemove = findClient(clientID);
             clients.remove(toRemove);
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e)
+        {
             System.out.println(e.toString());
         }
     }
@@ -456,7 +526,8 @@ public class TradeServer implements Runnable {
     /**
      * Sends a status check to all clients of the server.
      */
-    public final void statusCheck() {
+    public final void statusCheck()
+    {
         clients.forEach((thread) -> {
             Message msg = new Message("StatusCheck");
             thread.sendMessage(msg);
