@@ -62,7 +62,7 @@ public class MainController implements Initializable {
 
     public void createTrade(ActionEvent actionEvent) throws IOException
     {
-
+        System.out.println("Waiting for orgs assets main controller");
         try
         {
 
@@ -75,13 +75,10 @@ public class MainController implements Initializable {
 //                assetList.add(row.get(0));
 //            }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Trade.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            //TradeController tradeController = loader.getController();
-            //tradeController.setChoiceBox(assetList);
-            stage.setScene(new Scene(root));
-            stage.show();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Trade.fxml"));
+            Stage window = (Stage) logoutButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            window.setScene(scene);
         } catch (Exception e)
         {
             e.printStackTrace();

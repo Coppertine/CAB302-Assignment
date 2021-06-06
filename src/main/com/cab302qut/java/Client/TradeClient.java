@@ -101,7 +101,7 @@ public class TradeClient implements Runnable {
                     // using while loops wont recognise new list
                     StaticVariables.organisationList = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
                 } else if (msgType.equals("OrgsCurrentAssets")) {
-                    StaticVariables.orgsAssets = null;
+                    //StaticVariables.orgsAssets = null;
                     StaticVariables.orgsAssets = (ArrayList<ArrayList<String>>) theMsg.getMessageObject();
                 } else if (msgType.equals("")) {
                     CAB302Assignment.receivedMsg = theMsg; // the static field
@@ -139,20 +139,20 @@ public class TradeClient implements Runnable {
             run(config);
         }
 
-        /**
-         * Sends a specific message to the thread in question.
-         *
-         * @param msg The string representation of the message from the client
-         */
-        public final void send ( final String msg){
-            try {
-                System.out.println("Sending to server: " + msg);
-                outputStream.writeUTF(msg);
-                outputStream.close();
-            } catch (IOException e) {
-                Debug.log(e.toString());
-            }
-        }
+//        /**
+//         * Sends a specific message to the thread in question.
+//         *
+//         * @param msg The string representation of the message from the client
+//         */
+//        public final void send ( final String msg){
+//            try {
+//                System.out.println("Sending to server: " + msg);
+//                outputStream.writeUTF(msg);
+//                outputStream.close();
+//            } catch (IOException e) {
+//                Debug.log(e.toString());
+//            }
+//        }
 
         public final void sendMessage (Message obj){
             try {

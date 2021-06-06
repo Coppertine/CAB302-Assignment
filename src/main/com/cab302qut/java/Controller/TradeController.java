@@ -52,7 +52,7 @@ public class TradeController implements Initializable {
 
     @FXML
     private Label creditAmount;
-    private Asset asset ;
+    private Asset asset;
     private int quantity;
     private double price;
     private ObservableList<String> existingOrgAssets;
@@ -92,19 +92,19 @@ public class TradeController implements Initializable {
         String orgName = StaticVariables.user.getOrganisation().getName();
 //        Message msg = new Message("GetOrgsAsset", orgName);
 //        CAB302Assignment.tradeClient.sendMessage(msg);
-//        System.out.println("Sent edit org credits num");
 
-        if (StaticVariables.orgsAssets == null || StaticVariables.orgsAssets.isEmpty()) {
-            StaticVariables.orgsAssets = null; //reset for new org selected
-            Message msg = new Message("GetOrgsAsset", orgName);
-            CAB302Assignment.tradeClient.sendMessage(msg);
-        }
+        Message msg = new Message("GetOrgsList", orgName);
+        CAB302Assignment.tradeClient.sendMessage(msg);
+
         try
         {
-            while (StaticVariables.orgsAssets == null)
-            {
-                System.out.println("Waiting for orgs assets on trade controller");
-            }
+            int i = 0;
+//            while (StaticVariables.orgsAssets == null)
+//            {
+//                i++;
+//
+//            }
+            System.out.println(i);
 
             existingOrgAssets = FXCollections.observableArrayList();
             for (ArrayList<String> row : StaticVariables.orgsAssets)
@@ -162,13 +162,16 @@ public class TradeController implements Initializable {
             //throw error
         }
 
-        if (orderCorrect){
+        if (orderCorrect)
+        {
             orderCorrect = false;
-            try {
-                    Message msg = new Message("CreateTrade",order);
-                    CAB302Assignment.tradeClient.sendMessage(msg);
+            try
+            {
+                Message msg = new Message("CreateTrade", order);
+                CAB302Assignment.tradeClient.sendMessage(msg);
 
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
 
             }
 
